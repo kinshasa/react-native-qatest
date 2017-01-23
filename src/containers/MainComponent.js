@@ -1,8 +1,8 @@
 /**
  * @Author: liushaobo2005@163.com
- * @Date: 2017.1.23 下午 6:58
- * @Todo: 公共组件 - 渲染的入口
- * @NAME: MainScreen
+ * @Date: 2017.1.23 下午 7:04
+ * @Todo: 公共组件 - 公共Component
+ * @NAME: MainComponent
  */
 
 import React, {Component, PropTypes} from 'react';
@@ -11,9 +11,8 @@ import {
     View,
     Text,
 } from 'react-native';
-import TitleBar from "../components/bar/TitleBar"
 
-export default class MainScreen extends Component {
+export default class MainComponent extends Component {
 
     static propTypes = {
         style: View.propTypes.style,
@@ -51,14 +50,14 @@ export default class MainScreen extends Component {
 
     render() {
         return (
-            <View style={MainScreenStyles.container}>
-                <TitleBar title="首页" style={{height:45}}/>
+            <View style={MainComponentStyles.container}>
+
             </View>
         );
     }
 }
 
-const MainScreenStyles = StyleSheet.create({
+const MainComponentStyles = StyleSheet.create({
     container: {
         flex: 1,
     },

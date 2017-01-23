@@ -1,7 +1,7 @@
 /**
  * @Author: liushaobo2005@163.com
  * @Date: 2017.1.23 下午 4:02
- * @Todo: App首页.
+ * @Todo: App入口
  */
 import React, {Component} from 'react';
 import {

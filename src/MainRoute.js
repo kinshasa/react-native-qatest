@@ -1,7 +1,7 @@
 /**
  * @Author: liushaobo2005@163.com
  * @Date: 2017.1.23 下午 6:57
- * @Todo: 公共组件 - 主路由
+ * @Todo: 公共组件 - App主路由
  * @NAME: MainRoute
  */
 
