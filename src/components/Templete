@@ -1,0 +1,65 @@
+/**
+ * @Author: liushaobo2005@163.com
+ * @Date: ${DATE} ${TIME}
+ * @Todo: 公共组件 - TitleBar
+ * @NAME: ${NAME}
+ */
+
+import React, {Component, PropTypes} from 'react';
+import {
+    StyleSheet,
+    View,
+    Text,
+} from 'react-native';
+
+export default class ${NAME} extends Component {
+
+    static propTypes = {
+        style: View.propTypes.style,
+        number: PropTypes.number,
+        string: PropTypes.string,
+        bool: PropTypes.bool,
+        func: PropTypes.func,
+    };
+
+    static defaultProps = {
+    };
+
+    constructor(props, context){
+        super(props, context);
+        this.state = {};
+    }
+
+    componentWillMount() {
+
+    }
+
+    componentDidMount() {
+
+    }
+
+    componentWillReceiveProps(newProps) {
+
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+    }
+
+    componentDidUnMount() {
+
+    }
+
+    render() {
+        return (
+            <View style={${NAME}Styles.container}>
+
+            </View>
+        );
+    }
+}
+
+const ${NAME}Styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+});
