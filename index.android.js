@@ -11,13 +11,13 @@ import {
     View
 } from 'react-native';
 
-import Index from './src/index';
+import QATest from './src/QATest';
 
-export default class QATest extends Component {
+export default class Index extends Component {
 
     render() {
         return (
-            <Index/>
+            <QATest/>
         );
     }
 }

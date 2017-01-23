@@ -11,7 +11,7 @@ import {
     View
 } from 'react-native';
 
-import TitleBar from "./components/bar/TitleBar"
+import MainRoute from "./MainRoute"
 export default class QATest extends Component {
 
 
@@ -35,20 +35,9 @@ export default class QATest extends Component {
 
     render() {
         return (
-            <View style={IndexStyles.container}>
-                {
-                    <TitleBar style={{}} />
-                }
-
-            </View>
+            <MainRoute />
         );
     }
 }
-
-const IndexStyles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-});
 
 AppRegistry.registerComponent('QATest', () => QATest);

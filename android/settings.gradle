@@ -1,6 +1,9 @@
 rootProject.name = 'QATest'
-include ':app'
-include ':react-native-vector-icons'
+include ':android-qa-test'
+include ':react-native-icons'
 
 
-project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vector-icons/android')
+project(':react-native-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-icons/android')
+
+
+
