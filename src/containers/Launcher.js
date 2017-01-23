@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import TitleBar from "../components/bar/TitleBar"
 
-export default class MainScreen extends Component {
+export default class Launcher extends Component {
 
     static propTypes = {
         style: View.propTypes.style,
@@ -51,14 +51,14 @@ export default class MainScreen extends Component {
 
     render() {
         return (
-            <View style={MainScreenStyles.container}>
+            <View style={LauncherStyles.container}>
                 <TitleBar title="首页" style={{height:45}}/>
             </View>
         );
     }
 }
 
-const MainScreenStyles = StyleSheet.create({
+const LauncherStyles = StyleSheet.create({
     container: {
         flex: 1,
     },

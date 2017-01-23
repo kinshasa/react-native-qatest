@@ -11,6 +11,7 @@ import {
     View,
     Text,
 } from 'react-native';
+import TitleBar from "../../components/bar/TitleBar"
 
 export default class HomePage extends Component {
 
@@ -51,7 +52,7 @@ export default class HomePage extends Component {
     render() {
         return (
             <View style={HomePageStyles.container}>
-
+                <TitleBar title="首页" style={{height:45}}/>
             </View>
         );
     }

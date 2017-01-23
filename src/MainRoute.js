@@ -5,61 +5,71 @@
  * @NAME: MainRoute
  */
 
-import React, {Component, PropTypes} from 'react';
+// reducers/index.js
+import { reducer as router } from 'react-native-router-redux';
+
+export {
+    router, // the key must be 'router'
+};
+
+// hook up the reducers
+import * as reducers from '../reducers';
+const reducer = combineReducers(reducers);
+
+// import react-native-router-redux
 import {
-    StyleSheet,
-    View,
-    Text,
-} from 'react-native';
-import MainScreen from "./containers/MainScreen"
+    actions as routerActions,
+    NavBar,
+    Route,
+    Router,
+    Schema,
+    TabBar,
+    TabRoute
+} from 'react-native-router-redux';
 
-export default class MainRoute extends Component {
+// connect your state and actions (using react-redux)
+const mapStateToProps = state => ({
+    router: state.router,
+});
 
-    static propTypes = {
-        style: View.propTypes.style,
-        number: PropTypes.number,
-        string: PropTypes.string,
-        bool: PropTypes.bool,
-        func: PropTypes.func,
-    };
+const mapDispatchToProps = (dispatch) => ({
+    actions: bindActionCreators({
+        ...routerActions,
+    }, dispatch),
+    dispatch,
+});
 
-    static defaultProps = {};
+// define your routes
+const defaultSchema = {
+    navBar: NavBar,
+    navLeftColor: '#FFFFFF',
+    navTint: '#224655',
+    navTitleColor: '#FFFFFF',
+    navTitleStyle: {
+        fontFamily: 'Avenir Next',
+        fontSize: 18,
+    },
+    statusStyle: 'light-content',
+    tabBar: TabBar,
+};
 
-    constructor(props, context) {
-        super(props, context);
-        this.state = {};
-    }
-
-    componentWillMount() {
-
-    }
-
-    componentDidMount() {
-
-    }
-
-    componentWillReceiveProps(newProps) {
-
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-    }
-
-    componentDidUnMount() {
-
-    }
-
+class Application extends Component {
     render() {
         return (
-            <MainScreen style={MainRouteStyles.container}>
+            <Router {...this.props} assets={assets} initial="signIn">
+                <Schema name="default" {...defaultSchema} />
 
-            </MainScreen>
+                <Route name="signIn" component={SignIn} type="reset" hideNavBar={true} />
+                <Route name="detail" component={Detail} />
+                <TabRoute name="tabBar" barTint='#FFFFFF' tint="#32DEAF">
+                    <Route name="tab1" component={Master('#111')} title="Home" tabItem={{icon: assets['home'], title: 'Home'}} />
+                    <Route name="tab2" component={Master('#222')} title="Calendar" tabItem={{icon: assets['calendar'], title: 'Calendar'}} />
+                    <Route name="tab3" component={Master('#333')} title="Video" tabItem={{icon: assets['video'], title: 'Video'}} />
+                    <Route name="tab4" component={Master('#444')} title="Profile" tabItem={{icon: assets['profile'], title: 'Profile'}} />
+                </TabRoute>
+            </Router>
         );
     }
 }
 
-const MainRouteStyles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-});
+export default connect(mapStateToProps, mapDispatchToProps)(Application);
