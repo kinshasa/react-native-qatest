@@ -1,7 +1,7 @@
 /**
  * @Author: liushaobo2005@163.com
  * @Date: 2017.1.23 下午 7:04
- * @Todo: 公共组件 - 公共Component
+ * @Desc: 公共组件 - 公共Component
  * @NAME: MainComponent
  */
 

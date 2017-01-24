@@ -1,20 +1,18 @@
 /**
  * @Author: liushaobo2005@163.com
  * @Date: 2017.1.23 下午 4:02
- * @Todo: App入口
+ * @Desc: App入口
  */
 import React, {Component} from 'react';
 import {
-    AppRegistry,
     StyleSheet,
     Text,
     View
 } from 'react-native';
-
-import scenes from "./scenes"
 import {Actions, Scene, Router} from 'react-native-router-flux';
+import scenes from './scenes';
 
-export default class QATest extends Component {
+export default class MainRouter extends Component {
 
 
     constructor(props) {
@@ -37,12 +35,8 @@ export default class QATest extends Component {
 
     render() {
         return (
-            <Router
-                scenes={scenes}
+                <Router scenes={scenes}/>
 
-            />
         );
     }
 }
-
-AppRegistry.registerComponent('QATest', () => QATest);

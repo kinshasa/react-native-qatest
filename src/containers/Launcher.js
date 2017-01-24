@@ -1,7 +1,7 @@
 /**
  * @Author: liushaobo2005@163.com
  * @Date: 2017.1.23 下午 6:58
- * @Todo: 公共组件 - 渲染的入口
+ * @Desc: 公共组件 - 渲染的入口
  * @NAME: MainScreen
  */
 

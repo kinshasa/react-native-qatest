@@ -1,7 +1,7 @@
 /**
  * @Author: liushaobo2005@163.com
  * @Date: 2017.1.24 下午 6:10
- * @Todo: 公共组件 - UserCenter
+ * @Desc: 公共组件 - UserCenter
  * @NAME: UserCenter
  * @LIFECYCLE：http://www.tuicool.com/articles/nu6zInB
  */
