@@ -12,6 +12,8 @@ import {
 } from 'react-native';
 
 import MainRoute from "./MainRoute"
+import {Actions, Scene, Router} from 'react-native-router-flux';
+
 export default class QATest extends Component {
 
 
@@ -35,7 +37,10 @@ export default class QATest extends Component {
 
     render() {
         return (
-            <MainRoute />
+            <Router
+                scenes={MainRoute}
+
+            />
         );
     }
 }
