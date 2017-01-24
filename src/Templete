@@ -3,6 +3,7 @@
  * @Date: ${DATE} ${TIME}
  * @Todo: 公共组件 - ${NAME}
  * @NAME: ${NAME}
+ * @LIFECYCLE：http://www.tuicool.com/articles/nu6zInB
  */
 
 import React, {Component, PropTypes} from 'react';
@@ -25,31 +26,44 @@ export default class ${NAME} extends Component {
     static defaultProps = {
     };
 
-    constructor(props, context){
+    constructor(props, context) {
+        console.log("${NAME}","constructor()");
         super(props, context);
         this.state = {};
     }
 
     componentWillMount() {
-
+        console.log("${NAME}","componentWillMount()");
     }
 
     componentDidMount() {
-
+        console.log("${NAME}","componentDidMount()");
     }
 
     componentWillReceiveProps(newProps) {
+        console.log("${NAME}","componentWillReceiveProps()");
+    }
 
+    shouldComponentUpdate(nextProps, nextState){
+        console.log("${NAME}", "shouldComponentUpdate()");
+        return false;
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        console.log("${NAME}", "componentWillUpdate()");
     }
 
     componentDidUpdate(prevProps, prevState) {
+        console.log("${NAME}","componentDidUpdate()");
     }
 
     componentDidUnMount() {
+        console.log("${NAME}","componentDidUnMount()");
 
     }
 
     render() {
+        console.log("${NAME}","render()");
         return (
             <View style={${NAME}Styles.container}>
 

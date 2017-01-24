@@ -11,6 +11,7 @@ import {
     View,
     Text,
 } from 'react-native';
+import TitleBar from "../components/bar/TitleBar"
 
 export default class MainComponent extends Component {
 
@@ -25,33 +26,48 @@ export default class MainComponent extends Component {
     static defaultProps = {};
 
     constructor(props, context) {
+        console.log("MainComponent", "constructor()");
         super(props, context);
         this.state = {};
     }
 
     componentWillMount() {
-
+        console.log("MainComponent", "componentWillMount()");
     }
 
     componentDidMount() {
-
+        console.log("MainComponent", "componentDidMount()");
     }
 
     componentWillReceiveProps(newProps) {
+        console.log("MainComponent", "componentWillReceiveProps()");
+    }
 
+    shouldComponentUpdate() {
+        console.log("MainComponent", "shouldComponentUpdate()");
+        return false;
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        console.log("MainComponent", "componentWillUpdate()");
     }
 
     componentDidUpdate(prevProps, prevState) {
+        console.log("MainComponent", "componentDidUpdate()");
+        return false;
     }
 
     componentDidUnMount() {
+        console.log("MainComponent", "componentDidUnMount()");
 
     }
 
     render() {
+        console.log("MainComponent", "render()");
         return (
             <View style={MainComponentStyles.container}>
-
+                <TitleBar title="12323" style={{height:45}}/>
+                <Text>123455</Text>
             </View>
         );
     }
