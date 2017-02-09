@@ -11,9 +11,9 @@ import {
     View
 } from 'react-native';
 
-import QATest from './src/App';
+import App from './src/App';
 
-export default class Index extends Component {
+export default class index extends Component {
 
   render() {
     return (
