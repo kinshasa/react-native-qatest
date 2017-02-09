@@ -19,23 +19,21 @@ import TabNavigator from 'react-native-tab-navigator';
 
 import HomePage from "../containers/home/HomePage"
 import UserCenter from "../containers/user/UserCenter"
+import Icon from 'react-native-vector-icons/Ionicons';
 
-const LAUNCHER_IMG_HOME = require("../assets/home.png");
-const LAUNCHER_IMG_USER = require("../assets/home.png");
+const LAUNCHER_IMG_HOME = ()=><Icon name="ios-home-outline" size={30} color="#4F8EF7" />;
+const LAUNCHER_IMG_HOME_SELECT = ()=><Icon name="ios-home" size={30} color="#4F8EF7" />;
+const LAUNCHER_IMG_USER = ()=><Icon name="ios-people-outline" size={30} color="#4F8EF7" />;
+const LAUNCHER_IMG_USER_SELECT = ()=><Icon name="ios-people" size={30} color="#4F8EF7" />;
 
+var time1 = new Date();
 export default class Launcher extends Component {
 
     /**
      * 父组件传入的属性值
      * @type {{style: *, account: *, name: *, isTrue: *, callback: *}}
      */
-    static propTypes = {
-        style: View.propTypes.style,
-        account: PropTypes.number,
-        name: PropTypes.string,
-        isTrue: PropTypes.bool,
-        callback: PropTypes.func,
-    };
+    static propTypes = {};
 
     /**
      * 父组件传入的数据
@@ -51,7 +49,9 @@ export default class Launcher extends Component {
      * @param context
      */
     constructor(props, context) {
-        console.log("Launcher", "constructor()");
+        console.log("Launcher", "constructor() :" + time1);
+        time1 = new Date();
+        console.log("Launcher", "constructor() :" + time1);
         super(props, context);
         this.state = {
             selectedTab: "T1"
@@ -69,7 +69,8 @@ export default class Launcher extends Component {
      * 生命周期中仅被调用1次，可以使用SetState
      */
     componentWillMount() {
-        console.log("Launcher", "componentWillMount()");
+        time1 = new Date();
+        console.log("Launcher", "componentWillMount()" + time1);
     }
 
     /**
@@ -126,7 +127,8 @@ export default class Launcher extends Component {
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
     componentDidUnMount() {
-        console.log("Launcher", "componentDidUnMount()");
+        time1 = new Date();
+        console.log("Launcher", "componentDidUnMount()" + time1);
 
     }
 
@@ -158,8 +160,14 @@ export default class Launcher extends Component {
             <TabNavigator.Item
                 selected={this.state.selectedTab === tag}
                 title={title}
-                renderIcon={() => <Image style={LauncherStyles.tabIcon} source={img} />}
-                renderSelectedIcon={() => <Image style={LauncherStyles.tabIcon} source={selectedImg} />}
+                renderIcon={
+                        img
+                        /*<Image style={LauncherStyles.tabIcon} source={selectedImg} />*/
+                    }
+                renderSelectedIcon={
+                        selectedImg
+                        /*<Image style={LauncherStyles.tabIcon} source={selectedImg} />*/
+                    }
                 badgeText="1"
                 onPress={() => this.setState({ selectedTab: tag})}>
                 {childView}
@@ -177,8 +185,9 @@ export default class Launcher extends Component {
                 tabBarStyle={LauncherStyles.tab}
                 hidesTabTouch={true}
             >
-                {this.renderTabItem("T1", "首页", LAUNCHER_IMG_HOME, LAUNCHER_IMG_HOME, <HomePage style={{backgroundColor:"#fff"}}/>)}
-                {this.renderTabItem("T2", "用户中心", LAUNCHER_IMG_USER, LAUNCHER_IMG_USER, <UserCenter />)}
+                {this.renderTabItem("T1", "首页", LAUNCHER_IMG_HOME, LAUNCHER_IMG_HOME_SELECT, <HomePage
+                    style={{backgroundColor:"#fff"}}/>)}
+                {this.renderTabItem("T2", "用户中心", LAUNCHER_IMG_USER, LAUNCHER_IMG_USER_SELECT, <UserCenter />)}
             </TabNavigator>
         );
     }
@@ -210,13 +219,13 @@ const LauncherStyles = StyleSheet.create({
         flex: 1,
     },
     tab: {
-        height: 49,
+        height: 55,
         backgroundColor: 'white',
         alignItems: 'center',
     },
     tabIcon: {
         width: 30,
-        height: 35,
+        height: 30,
         resizeMode: 'stretch',
         marginTop: 7
     }
