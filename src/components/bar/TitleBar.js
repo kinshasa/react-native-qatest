@@ -43,6 +43,11 @@ export default class TitleBar extends Component {
         this.state = {};
     }
 
+    /**
+     * 当前组件渲染次数
+     * @type {number}
+     */
+    renderCount = 0;
 
     componentWillMount() {
 
@@ -64,6 +69,9 @@ export default class TitleBar extends Component {
     }
 
     render() {
+        this.renderCount++;
+        console.log("TitleBar", "render() renderCount:" + this.renderCount);
+        console.log("TitleBar",this._reactInternalInstance._currentElement.type.displayName);
         var {style, ...other} = this.props;
         let styles = [TitleBarStyles.container, style];
         return (

@@ -124,7 +124,7 @@ export default class ${NAME} extends Component {
      */
     render() {
         this.renderCount++;
-        console.log("${NAME}", "render():"+this.renderCount);
+        console.log("${NAME}", "render() renderCount:"+this.renderCount);
         return (
             <View style={${NAME}Styles.container}>
 

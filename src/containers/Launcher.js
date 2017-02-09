@@ -97,7 +97,7 @@ export default class Launcher extends Component {
      * @returns {boolean} 默认true, 返回值决定是否需要更新组件，如果 true 表示需要更新，继续走后面的更新流程。
      */
     shouldComponentUpdate(nextProps, nextState) {
-        let isUpdate = (this.props != nextProps) || (this.state != nextState);
+        let isUpdate = (this.state != nextState);
         console.log("Launcher", "shouldComponentUpdate():" + isUpdate);
         return isUpdate;
     }
@@ -136,7 +136,7 @@ export default class Launcher extends Component {
      */
     render() {
         this.renderCount++;
-        console.log("Launcher", "render():" + this.renderCount);
+        console.log("Launcher", "render() renderCount:" + this.renderCount);
         return (
             <View style={LauncherStyles.container}>
                 {this.renderTable()}
@@ -177,7 +177,7 @@ export default class Launcher extends Component {
                 tabBarStyle={LauncherStyles.tab}
                 hidesTabTouch={true}
             >
-                {this.renderTabItem("T1", "首页", LAUNCHER_IMG_HOME, LAUNCHER_IMG_HOME, <HomePage />)}
+                {this.renderTabItem("T1", "首页", LAUNCHER_IMG_HOME, LAUNCHER_IMG_HOME, <HomePage style={{backgroundColor:"#fff"}}/>)}
                 {this.renderTabItem("T2", "用户中心", LAUNCHER_IMG_USER, LAUNCHER_IMG_USER, <UserCenter />)}
             </TabNavigator>
         );

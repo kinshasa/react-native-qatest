@@ -32,7 +32,13 @@ export default class UserCenter extends Component {
         super(props, context);
         this.state = {};
     }
-
+    
+    /**
+     * 当前组件渲染次数
+     * @type {number}
+     */
+    renderCount = 0;
+    
     componentWillMount() {
         console.log("UserCenter", "componentWillMount()");
     }
@@ -46,8 +52,9 @@ export default class UserCenter extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        console.log("UserCenter", "shouldComponentUpdate()");
-        return false;
+        let isUpdate = (this.state != nextState);
+        console.log("UserCenter", "shouldComponentUpdate() :" + isUpdate);
+        return isUpdate;
     }
 
     componentWillUpdate(nextProps, nextState) {
@@ -64,7 +71,8 @@ export default class UserCenter extends Component {
     }
 
     render() {
-        console.log("UserCenter", "render()");
+        this.renderCount++;
+        console.log("UserCenter", "render() renderCount:" + this.renderCount);
         return (
             <View style={UserCenterStyles.container}>
                 <TitleBar title="用户中心" style={{height:45}}/>

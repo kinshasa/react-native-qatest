@@ -16,20 +16,24 @@ import TitleBar from "../../components/bar/TitleBar"
 export default class HomePage extends Component {
 
     static propTypes = {
-        style: View.propTypes.style,
-        number: PropTypes.number,
-        string: PropTypes.string,
-        bool: PropTypes.bool,
-        func: PropTypes.func,
+
     };
 
-    static defaultProps = {};
+    static defaultProps = {
+        
+    };
 
     constructor(props, context) {
         console.log("HomePage", "constructor()");
         super(props, context);
         this.state = {};
     }
+
+    /**
+     * 当前组件渲染次数
+     * @type {number}
+     */
+    renderCount = 0;
 
     componentWillMount() {
         console.log("HomePage", "componentWillMount()");
@@ -44,8 +48,8 @@ export default class HomePage extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        let isUpdate = (this.props != nextProps) || (this.state != nextState);
-        console.log("Launcher", "shouldComponentUpdate():" + isUpdate);
+        let isUpdate = (this.state != nextState);
+        console.log("HomePage", "shouldComponentUpdate():" + isUpdate);
         return isUpdate;
     }
 
@@ -63,7 +67,8 @@ export default class HomePage extends Component {
     }
 
     render() {
-        console.log("HomePage", "render()");
+        this.renderCount++;
+        console.log("HomePage", "render() renderCount:" + this.renderCount);
         return (
             <View style={HomePageStyles.container}>
                 <TitleBar title="首页" style={{height:45}}/>
