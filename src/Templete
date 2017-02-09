@@ -1,7 +1,7 @@
 /**
  * @Author: liushaobo2005@163.com
  * @Date: ${DATE} ${TIME}
- * @Todo: 公共组件 - ${NAME}
+ * @Desc: 公共组件 - ${NAME}
  * @NAME: ${NAME}.js
  * @LIFECYCLE：http://www.tuicool.com/articles/nu6zInB
  */
@@ -100,20 +100,6 @@ export default class ${NAME} extends Component {
     }
 
     /**
-     * 组件更新
-     * @returns {XML}
-     */
-    render() {
-        this.renderCount++;
-        console.log("${NAME}", "render():"+this.renderCount);
-        return (
-            <View style={${NAME}Styles.container}>
-
-            </View>
-        );
-    }
-
-    /**
      * 更新完成界面之后通知
      * @param prevProps 更新之前的属性
      * @param prevState 更新之前的状态
@@ -130,6 +116,20 @@ export default class ${NAME} extends Component {
     componentDidUnMount() {
         console.log("${NAME}","componentDidUnMount()");
 
+    }
+
+    /**
+     * 组件更新
+     * @returns {XML}
+     */
+    render() {
+        this.renderCount++;
+        console.log("${NAME}", "render():"+this.renderCount);
+        return (
+            <View style={${NAME}Styles.container}>
+
+            </View>
+        );
     }
 
  }
