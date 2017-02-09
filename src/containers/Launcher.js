@@ -20,8 +20,8 @@ import TabNavigator from 'react-native-tab-navigator';
 import HomePage from "../containers/home/HomePage"
 import UserCenter from "../containers/user/UserCenter"
 
-const LANCHER_IMG_HOME = require("../assets/home.png");
-const LANCHER_IMG_USERCENTER = require("../assets/home.png");
+const LAUNCHER_IMG_HOME = require("../assets/home.png");
+const LAUNCHER_IMG_USER = require("../assets/home.png");
 
 export default class Launcher extends Component {
 
@@ -177,8 +177,8 @@ export default class Launcher extends Component {
                 tabBarStyle={LauncherStyles.tab}
                 hidesTabTouch={true}
             >
-                {this.renderTabItem("T1", "首页", LANCHER_IMG_HOME, LANCHER_IMG_HOME, <HomePage />)}
-                {this.renderTabItem("T2", "用户中心", LANCHER_IMG_USERCENTER, LANCHER_IMG_USERCENTER, <UserCenter />)}
+                {this.renderTabItem("T1", "首页", LAUNCHER_IMG_HOME, LAUNCHER_IMG_HOME, <HomePage />)}
+                {this.renderTabItem("T2", "用户中心", LAUNCHER_IMG_USER, LAUNCHER_IMG_USER, <UserCenter />)}
             </TabNavigator>
         );
     }
