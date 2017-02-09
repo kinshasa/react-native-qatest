@@ -41,7 +41,6 @@ export default class TitleBar extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {};
-        console.log("1");
     }
 
 

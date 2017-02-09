@@ -44,8 +44,9 @@ export default class HomePage extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        console.log("HomePage", "shouldComponentUpdate()");
-        return false;
+        let isUpdate = (this.props != nextProps) || (this.state != nextState);
+        console.log("Launcher", "shouldComponentUpdate():" + isUpdate);
+        return isUpdate;
     }
 
     componentWillUpdate(nextProps, nextState) {
