@@ -21,10 +21,10 @@ import HomePage from "../containers/home/HomePage"
 import UserCenter from "../containers/user/UserCenter"
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const LAUNCHER_IMG_HOME = ()=><Icon name="ios-home-outline" size={30} color="#4F8EF7" />;
-const LAUNCHER_IMG_HOME_SELECT = ()=><Icon name="ios-home" size={30} color="#4F8EF7" />;
-const LAUNCHER_IMG_USER = ()=><Icon name="ios-people-outline" size={30} color="#4F8EF7" />;
-const LAUNCHER_IMG_USER_SELECT = ()=><Icon name="ios-people" size={30} color="#4F8EF7" />;
+const LAUNCHER_IMG_HOME = ()=><Icon name="ios-home-outline" size={30} color="#4F8EF7"/>;
+const LAUNCHER_IMG_HOME_SELECT = ()=><Icon name="ios-home" size={30} color="#4F8EF7"/>;
+const LAUNCHER_IMG_USER = ()=><Icon name="ios-people-outline" size={30} color="#4F8EF7"/>;
+const LAUNCHER_IMG_USER_SELECT = ()=><Icon name="ios-people" size={30} color="#4F8EF7"/>;
 
 var time1 = new Date();
 export default class Launcher extends Component {
@@ -185,8 +185,8 @@ export default class Launcher extends Component {
                 tabBarStyle={LauncherStyles.tab}
                 hidesTabTouch={true}
             >
-                {this.renderTabItem("T1", "首页", LAUNCHER_IMG_HOME, LAUNCHER_IMG_HOME_SELECT, <HomePage
-                    style={{backgroundColor:"#fff"}}/>)}
+                {this.renderTabItem("T1", "首页", LAUNCHER_IMG_HOME, LAUNCHER_IMG_HOME_SELECT,
+                    <HomePage style={{backgroundColor:"#fff"}}/>)}
                 {this.renderTabItem("T2", "用户中心", LAUNCHER_IMG_USER, LAUNCHER_IMG_USER_SELECT, <UserCenter />)}
             </TabNavigator>
         );

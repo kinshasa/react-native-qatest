@@ -8,10 +8,21 @@
 import React, {Component} from 'react';
 import {Actions, Scene, Router} from 'react-native-router-flux';
 
+/**
+ * 启动页
+ */
 import Launcher from './containers/Launcher';
+/**
+ * 购物车
+ */
+import CartAnimation from './containers/home/CartAnimation';
+import AnimationDemo from './containers/home/AnimationDemo';
+
 
 export default  scenes = Actions.create(
     <Scene key="root">
-        <Scene key="login" component={Launcher} hideNavBar={true}/>
+        <Scene key="Launcher" component={Launcher} hideNavBar={true}/>
+        <Scene key="CartAnimation" component={CartAnimation} hideNavBar={false}/>
+        <Scene key="AnimationDemo" component={AnimationDemo} hideNavBar={false}/>
     </Scene>
 );

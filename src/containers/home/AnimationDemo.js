@@ -1,19 +1,19 @@
 /**
  * @Author: liushaobo2005@163.com
- * @Date: ${DATE} ${TIME}
- * @Desc: 公共组件 - ${NAME}
- * @Name: ${NAME}.js
+ * @Date: 2017.2.10 下午 3:21
+ * @Desc: 公共组件 - AnimationDemo
+ * @Name: AnimationDemo.js
  * @LifeCycle：http://www.tuicool.com/articles/nu6zInB
  */
 
 import React, {Component, PropTypes} from 'react';
 import {
     StyleSheet,
-    View,
-    Text,
 } from 'react-native';
 
-export default class ${NAME} extends Component {
+import {createAnimatableComponent, View, Text} from 'react-native-animatable';
+
+export default class AnimationDemo extends Component {
 
     /**
      * 父组件传入的属性值
@@ -32,7 +32,7 @@ export default class ${NAME} extends Component {
      * @type {{data: {}}}
      */
     static defaultProps = {
-        data:{}
+        data: {}
     };
 
     /**
@@ -41,7 +41,7 @@ export default class ${NAME} extends Component {
      * @param context
      */
     constructor(props, context) {
-        console.log("${NAME}","constructor()");
+        console.log("AnimationDemo", "constructor()");
         super(props, context);
         this.state = {};
     }
@@ -57,7 +57,7 @@ export default class ${NAME} extends Component {
      * 生命周期中仅被调用1次，可以使用SetState
      */
     componentWillMount() {
-        console.log("${NAME}","componentWillMount()");
+        console.log("AnimationDemo", "componentWillMount()");
     }
 
     /**
@@ -66,7 +66,7 @@ export default class ${NAME} extends Component {
      * 用于网络请求和页面渲染
      */
     componentDidMount() {
-        console.log("${NAME}","componentDidMount()");
+        console.log("AnimationDemo", "componentDidMount()");
     }
 
     /**
@@ -75,7 +75,7 @@ export default class ${NAME} extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("${NAME}","componentWillReceiveProps():"+newProps);
+        console.log("AnimationDemo", "componentWillReceiveProps():" + newProps);
     }
 
     /**
@@ -84,9 +84,9 @@ export default class ${NAME} extends Component {
      * @param nextState 表示组件即将更新的状态值。
      * @returns {boolean} 默认true, 返回值决定是否需要更新组件，如果 true 表示需要更新，继续走后面的更新流程。
      */
-    shouldComponentUpdate(nextProps, nextState){
-        let isUpdate = (this.props != nextProps)||(this.state != nextState);
-        console.log("${NAME}", "shouldComponentUpdate():"+isUpdate);
+    shouldComponentUpdate(nextProps, nextState) {
+        let isUpdate = (this.props != nextProps) || (this.state != nextState);
+        console.log("AnimationDemo", "shouldComponentUpdate():" + isUpdate);
         return isUpdate;
     }
 
@@ -96,7 +96,7 @@ export default class ${NAME} extends Component {
      * @param nextState 更新之后的状态
      */
     componentWillUpdate(nextProps, nextState) {
-        console.log("${NAME}", "componentWillUpdate()");
+        console.log("AnimationDemo", "componentWillUpdate()");
     }
 
     /**
@@ -106,7 +106,7 @@ export default class ${NAME} extends Component {
      * @returns {boolean}
      */
     componentDidUpdate(prevProps, prevState) {
-        console.log("${NAME}","componentDidUpdate()");
+        console.log("AnimationDemo", "componentDidUpdate()");
     }
 
     /**
@@ -114,7 +114,7 @@ export default class ${NAME} extends Component {
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
     componentDidUnMount() {
-        console.log("${NAME}","componentDidUnMount()");
+        console.log("AnimationDemo", "componentDidUnMount()");
 
     }
 
@@ -124,18 +124,25 @@ export default class ${NAME} extends Component {
      */
     render() {
         this.renderCount++;
-        console.log("${NAME}", "render() renderCount:"+this.renderCount);
+        console.log("AnimationDemo", "render() renderCount:" + this.renderCount);
         return (
-            <View style={${NAME}Styles.container}>
-
+            <View animation="zoomIn" style={AnimationDemoStyles.container}>
+                <View animation="zoomOutLeft" animation="fadeInLeftBig" delay={1000} style={AnimationDemoStyles.view}/>
             </View>
         );
     }
 
- }
+}
 
-const ${NAME}Styles = StyleSheet.create({
+const AnimationDemoStyles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: "#333",
+    },
+    view: {
+        height: 30,
+        margin: 10,
+        backgroundColor: "red",
+        marginTop:100
     },
 });

@@ -11,10 +11,12 @@ import {
     View,
     Text,
 } from 'react-native';
+
+import {Actions} from 'react-native-router-flux'
+
 import TitleBar from "../../components/bar/TitleBar"
 import Icon from 'react-native-vector-icons/FontAwesome';
-
-import Icon2 from 'react-native-vector-icons/Ionicons';
+import IonIcons from 'react-native-vector-icons/Ionicons';
 
 export default class HomePage extends Component {
 
@@ -75,16 +77,29 @@ export default class HomePage extends Component {
         return (
             <View style={HomePageStyles.container}>
                 <TitleBar title="首页" style={{height:45}}/>
+                <View style={HomePageStyles.btnList}>
+                    <Icon.Button name="star" backgroundColor="#aaa"onPress={()=>{Actions.CartAnimation()}}>
+                        <Text style={{fontFamily: 'Arial', fontSize: 15}}>购物车动画</Text>
+                    </Icon.Button>
+                </View>
+
+                <View style={HomePageStyles.btnList}>
+                    <Icon.Button name="star" backgroundColor="#aaa" onPress={()=>{Actions.AnimationDemo()}}>
+                        <Text style={{fontFamily: 'Arial', fontSize: 15}}>动画Demo</Text>
+                    </Icon.Button>
+                </View>
+
+                <View style={HomePageStyles.btnList}>
+                    <Icon.Button name="star" backgroundColor="#aaa" onPress={()=>{alert("test")}}>
+                        <Text style={{fontFamily: 'Arial', fontSize: 15}}>图标库</Text>
+                    </Icon.Button>
+                </View>
+
+                <View style={{height:100}}></View>
                 <Icon name="home" size={50} color="#900" />
                 <Icon name="home" size={100} color="#999" />
-                <Icon.Button name="facebook" backgroundColor="#3b5998" onPress={()=>{alert("test")}}>
-                    Login with Facebook
-                </Icon.Button>
-                <Icon.Button name="facebook" backgroundColor="#3b5998" onPress={()=>{alert("test")}}>
-                    <Text style={{fontFamily: 'Arial', fontSize: 15}}>Login with Facebook</Text>
-                </Icon.Button>
-                <Icon2 name="ios-home" size={30} color="#4F8EF7" />
-                <Icon2 name="ios-home-outline" size={30} color="#4F8EF7" />
+                <IonIcons name="ios-home" size={30} color="#4F8EF7" />
+                <IonIcons name="ios-home-outline" size={30} color="#4F8EF7" />
             </View>
         );
     }
@@ -94,4 +109,7 @@ const HomePageStyles = StyleSheet.create({
     container: {
         flex: 1,
     },
+    btnList:{
+        margin:3,
+    }
 });
