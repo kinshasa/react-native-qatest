@@ -18,10 +18,10 @@ import {
     Slider
 } from 'react-native';
 
-//import {createAnimatableComponent, View, Text} from 'react-native-animatable';
 import Parabola from 'react-native-smart-parabola'
 import Button from 'react-native-smart-button'
 import image_cart from '../../assets/home.png'
+
 let {width: deviceWidth, height: deviceHeight} = Dimensions.get('window');
 let contentTop = Platform.OS == 'ios' ? 64 : 56;
 
@@ -57,8 +57,14 @@ export default class CartAnimation extends Component {
         super(props, context);
         this.state = {
             isTrigger: false,
-            start: null,
-            end: null,
+            start: {
+                x:0,
+                y:0,
+            },
+            end: {
+                x:0,
+                y:0,
+            },
         }
         this._startPositions = {}
         this._endPositions = {}
@@ -145,13 +151,12 @@ export default class CartAnimation extends Component {
         console.log("CartAnimation", "render() renderCount:" + this.renderCount);
         return (
 
-            <View animation="zoomIn" style={CartAnimationStyles.container}>
-                {/*<View animation="zoomOutLeft" animation="fadeInLeftBig" delay={2000} style={CartAnimationStyles.view}/>*/}
+            <View style={CartAnimationStyles.container}>
                 <View style={{marginTop: contentTop, flex: 1, }}>
                     <Button
                         onLayout={ this._onLayout1.bind(this, 'key-1') }
                         onPress={this._onPressHandler_1.bind(this, 'key-1')}
-                        touchableType={'blur'}
+                        touchableType={3}
                         style={{position: 'absolute', left: 10, top: 10, justifyContent: 'center', width: 20, height: 20, backgroundColor: 'red', borderRadius: 10,  justifyContent: 'center',}}
                         textStyle={{position: 'relative', bottom: 1, fontSize: 17,  color: 'white'}}
 
@@ -161,7 +166,7 @@ export default class CartAnimation extends Component {
                     <Button
                         onLayout={ this._onLayout1.bind(this, 'key-2') }
                         onPress={this._onPressHandler_1.bind(this, 'key-2')}
-                        touchableType={'blur'}
+                        touchableType={3}
                         style={{position: 'absolute', left: 10, top: 210, justifyContent: 'center', width: 20, height: 20, backgroundColor: 'red', borderRadius: 10,  justifyContent: 'center',}}
                         textStyle={{position: 'relative', bottom: 1, fontSize: 17,  color: 'white'}}
 
@@ -171,7 +176,7 @@ export default class CartAnimation extends Component {
                     <Button
                         onLayout={ this._onLayout1.bind(this, 'key-3') }
                         onPress={this._onPressHandler_1.bind(this, 'key-3')}
-                        touchableType={'blur'}
+                        touchableType={3}
                         style={{position: 'absolute', left: 10, top: 410, justifyContent: 'center', width: 20, height: 20, backgroundColor: 'red', borderRadius: 10,  justifyContent: 'center',}}
                         textStyle={{position: 'relative', bottom: 1, fontSize: 17,  color: 'white'}}
 
@@ -183,7 +188,7 @@ export default class CartAnimation extends Component {
                     <Button
                         onLayout={ this._onLayout1.bind(this, 'key-4') }
                         onPress={this._onPressHandler_1.bind(this, 'key-4')}
-                        touchableType={'blur'}
+                        touchableType={3}
                         style={{position: 'absolute', left: 10, top: deviceHeight - 160, justifyContent: 'center', width: 20, height: 20, backgroundColor: 'red', borderRadius: 10,  justifyContent: 'center',}}
                         textStyle={{position: 'relative', bottom: 1, fontSize: 17,  color: 'white'}}
 
@@ -195,7 +200,7 @@ export default class CartAnimation extends Component {
                     <Button
                         onLayout={ this._onLayout2.bind(this, 'key-5') }
                         onPress={this._onPressHandler_2.bind(this, 'key-5')}
-                        touchableType={'blur'}
+                        touchableType={3}
                         style={{position: 'absolute', right: 10, top: 10, justifyContent: 'center', width: 20, height: 20, backgroundColor: '#00AAEF', borderRadius: 10,  justifyContent: 'center',}}
                         textStyle={{position: 'relative', bottom: 1, fontSize: 17,  color: 'white'}}
 
@@ -205,7 +210,7 @@ export default class CartAnimation extends Component {
                     <Button
                         onLayout={ this._onLayout2.bind(this, 'key-6') }
                         onPress={this._onPressHandler_2.bind(this, 'key-6')}
-                        touchableType={'blur'}
+                        touchableType={3}
                         style={{position: 'absolute', right: 10, top: 210, justifyContent: 'center', width: 20, height: 20, backgroundColor: '#00AAEF', borderRadius: 10,  justifyContent: 'center',}}
                         textStyle={{position: 'relative', bottom: 1, fontSize: 17,  color: 'white'}}
 
@@ -215,7 +220,7 @@ export default class CartAnimation extends Component {
                     <Button
                         onLayout={ this._onLayout2.bind(this, 'key-7') }
                         onPress={this._onPressHandler_2.bind(this, 'key-7')}
-                        touchableType={'blur'}
+                        touchableType={3}
                         style={{position: 'absolute', right: 10, top: 410, justifyContent: 'center', width: 20, height: 20, backgroundColor: '#00AAEF', borderRadius: 10,  justifyContent: 'center',}}
                         textStyle={{position: 'relative', bottom: 1, fontSize: 17,  color: 'white'}}
 
@@ -225,7 +230,7 @@ export default class CartAnimation extends Component {
                     <Button
                         onLayout={ this._onLayout2.bind(this, 'key-8') }
                         onPress={this._onPressHandler_2.bind(this, 'key-8')}
-                        touchableType={'blur'}
+                        touchableType={3}
                         style={{position: 'absolute', right: 10, top: deviceHeight - 150, justifyContent: 'center', width: 20, height: 20, backgroundColor: '#00AAEF', borderRadius: 10,  justifyContent: 'center',}}
                         textStyle={{position: 'relative', bottom: 1, fontSize: 17,  color: 'white'}}
 
