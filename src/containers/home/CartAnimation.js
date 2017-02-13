@@ -22,6 +22,7 @@ import Parabola from 'react-native-smart-parabola'
 import Button from 'react-native-smart-button'
 import image_cart from '../../assets/home.png'
 
+import img_logo from '../../assets/img_logo.png'
 let {width: deviceWidth, height: deviceHeight} = Dimensions.get('window');
 let contentTop = Platform.OS == 'ios' ? 64 : 56;
 
@@ -58,12 +59,12 @@ export default class CartAnimation extends Component {
         this.state = {
             isTrigger: false,
             start: {
-                x:0,
-                y:0,
+                x: 0,
+                y: 0,
             },
             end: {
-                x:0,
-                y:0,
+                x: 0,
+                y: 0,
             },
         }
         this._startPositions = {}
@@ -137,7 +138,7 @@ export default class CartAnimation extends Component {
      * 组件即将卸载前调用
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
-    componentDidUnMount() {
+    componentWillUnmount() {
         console.log("CartAnimation", "componentDidUnMount()");
 
     }
@@ -154,20 +155,24 @@ export default class CartAnimation extends Component {
             <View style={CartAnimationStyles.container}>
                 <View style={{marginTop: contentTop, flex: 1, }}>
                     <Button
-                        onLayout={ this._onLayout1.bind(this, 'key-1') }
-                        onPress={this._onPressHandler_1.bind(this, 'key-1')}
-                        touchableType={3}
-                        style={{position: 'absolute', left: 10, top: 10, justifyContent: 'center', width: 20, height: 20, backgroundColor: 'red', borderRadius: 10,  justifyContent: 'center',}}
-                        textStyle={{position: 'relative', bottom: 1, fontSize: 17,  color: 'white'}}
 
+                        onLayout={ this._onLayout3.bind(this, 'key-1') }
+                        onPress={this._onPressHandler_3.bind(this, 'key-1')}
+                        touchableType={Button.constants.touchableTypes.highlight}
+                        style={{position: 'absolute', left: 10, top: 30, justifyContent: 'center',  justifyContent: 'center', backgroundColor: 'blue', borderRadius: 10,}}
+                        textStyle={{position: 'relative', bottom: 1, fontSize: 17,  color: 'white'}}
                     >
-                        +
+                        <Image
+                            ref={(ref)=>{this.btn3 = ref}}
+                            resizeMode={"center"}
+                            style={{width: 80, height: 50, justifyContent: 'center', borderRadius: 10,}}
+                            source={img_logo}/>
                     </Button>
                     <Button
                         onLayout={ this._onLayout1.bind(this, 'key-2') }
-                        onPress={this._onPressHandler_1.bind(this, 'key-2')}
-                        touchableType={3}
-                        style={{position: 'absolute', left: 10, top: 210, justifyContent: 'center', width: 20, height: 20, backgroundColor: 'red', borderRadius: 10,  justifyContent: 'center',}}
+                        onPress={()=>{this._onPressHandler_1('key-2')}}
+                        touchableType={Button.constants.touchableTypes.highlight}
+                        style={{position: 'absolute', left: 10, top: 210, justifyContent: 'center', width: 50, height: 50, backgroundColor: 'red', borderRadius: 10,  justifyContent: 'center',}}
                         textStyle={{position: 'relative', bottom: 1, fontSize: 17,  color: 'white'}}
 
                     >
@@ -176,7 +181,7 @@ export default class CartAnimation extends Component {
                     <Button
                         onLayout={ this._onLayout1.bind(this, 'key-3') }
                         onPress={this._onPressHandler_1.bind(this, 'key-3')}
-                        touchableType={3}
+                        touchableType={Button.constants.touchableTypes.highlight}
                         style={{position: 'absolute', left: 10, top: 410, justifyContent: 'center', width: 20, height: 20, backgroundColor: 'red', borderRadius: 10,  justifyContent: 'center',}}
                         textStyle={{position: 'relative', bottom: 1, fontSize: 17,  color: 'white'}}
 
@@ -188,7 +193,7 @@ export default class CartAnimation extends Component {
                     <Button
                         onLayout={ this._onLayout1.bind(this, 'key-4') }
                         onPress={this._onPressHandler_1.bind(this, 'key-4')}
-                        touchableType={3}
+                        touchableType={Button.constants.touchableTypes.fade}
                         style={{position: 'absolute', left: 10, top: deviceHeight - 160, justifyContent: 'center', width: 20, height: 20, backgroundColor: 'red', borderRadius: 10,  justifyContent: 'center',}}
                         textStyle={{position: 'relative', bottom: 1, fontSize: 17,  color: 'white'}}
 
@@ -200,7 +205,7 @@ export default class CartAnimation extends Component {
                     <Button
                         onLayout={ this._onLayout2.bind(this, 'key-5') }
                         onPress={this._onPressHandler_2.bind(this, 'key-5')}
-                        touchableType={3}
+                        touchableType={Button.constants.touchableTypes.fade}
                         style={{position: 'absolute', right: 10, top: 10, justifyContent: 'center', width: 20, height: 20, backgroundColor: '#00AAEF', borderRadius: 10,  justifyContent: 'center',}}
                         textStyle={{position: 'relative', bottom: 1, fontSize: 17,  color: 'white'}}
 
@@ -210,7 +215,7 @@ export default class CartAnimation extends Component {
                     <Button
                         onLayout={ this._onLayout2.bind(this, 'key-6') }
                         onPress={this._onPressHandler_2.bind(this, 'key-6')}
-                        touchableType={3}
+                        touchableType={Button.constants.touchableTypes.fade}
                         style={{position: 'absolute', right: 10, top: 210, justifyContent: 'center', width: 20, height: 20, backgroundColor: '#00AAEF', borderRadius: 10,  justifyContent: 'center',}}
                         textStyle={{position: 'relative', bottom: 1, fontSize: 17,  color: 'white'}}
 
@@ -220,7 +225,7 @@ export default class CartAnimation extends Component {
                     <Button
                         onLayout={ this._onLayout2.bind(this, 'key-7') }
                         onPress={this._onPressHandler_2.bind(this, 'key-7')}
-                        touchableType={3}
+                        touchableType={Button.constants.touchableTypes.fade}
                         style={{position: 'absolute', right: 10, top: 410, justifyContent: 'center', width: 20, height: 20, backgroundColor: '#00AAEF', borderRadius: 10,  justifyContent: 'center',}}
                         textStyle={{position: 'relative', bottom: 1, fontSize: 17,  color: 'white'}}
 
@@ -230,7 +235,7 @@ export default class CartAnimation extends Component {
                     <Button
                         onLayout={ this._onLayout2.bind(this, 'key-8') }
                         onPress={this._onPressHandler_2.bind(this, 'key-8')}
-                        touchableType={3}
+                        touchableType={Button.constants.touchableTypes.fade}
                         style={{position: 'absolute', right: 10, top: deviceHeight - 150, justifyContent: 'center', width: 20, height: 20, backgroundColor: '#00AAEF', borderRadius: 10,  justifyContent: 'center',}}
                         textStyle={{position: 'relative', bottom: 1, fontSize: 17,  color: 'white'}}
 
@@ -297,6 +302,21 @@ export default class CartAnimation extends Component {
         }
     }
 
+    _onLayout3 = (key, e) => {
+        let {x, y} = e.nativeEvent.layout
+        console.log(`x: ${x}, y: ${y}, dw: ${deviceWidth}, dh: ${deviceHeight}, contentTop: ${contentTop}`)
+        this._startPositions[key] = {
+            start: {
+                x,
+                y: y + contentTop,
+            },
+            //end: {
+            //    x: deviceWidth - 5,
+            //    y: deviceHeight - 20 - 5
+            //},
+        }
+    }
+
     _onLayoutCart1 = (e) => {
         let {x, y} = e.nativeEvent.layout
         this._endPositions['cart-1'] = {
@@ -341,7 +361,43 @@ export default class CartAnimation extends Component {
         })
     }
 
+    _onPressHandler_3(key, e) {
+
+        this.btn3.measure((x, y, width, height, pageX, pageY) => {
+            console.log("CartAnimation", `${x}, ${y}, ${width}, ${height}, ${pageX}, ${pageY}`)
+            let startPositions = this._startPositions[key]
+
+            startPositions.end = this._endPositions['cart-1']
+            let {start, end} = startPositions
+            start = {
+                x: pageX,
+                y: pageY,
+            }
+            this.setState({
+                isTrigger: true,
+                start,
+                end,
+            })
+
+        });
+
+
+    }
+
     _renderParabola = ({index, translateX, translateY}) => {
+        if (true) {
+            return (
+                <Image
+                    key={`'img-parabola-ball-'${index}`}
+                    resizeMode={"center"}
+                    style={[
+                        {position: 'absolute',},    //Don't forget to set this
+                        {width: 80, height: 50, justifyContent: 'center', borderRadius: 10,},
+                        {transform: [{translateX}, {translateY}]},
+                    ]}
+                    source={img_logo}/>
+            );
+        }
         return (
             <View
                 key={`'parabola-ball-'${index}`}
@@ -350,7 +406,8 @@ export default class CartAnimation extends Component {
                 {width: 20, height: 20, borderRadius: 10, backgroundColor: 'red',},
                 {transform: [{translateX}, {translateY}]},
            ]}
-            />
+            >
+            </View>
         )
     }
 
