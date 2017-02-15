@@ -16,7 +16,6 @@ import {Actions} from 'react-native-router-flux'
 
 import TitleBar from "../../components/bar/TitleBar"
 import Icon from 'react-native-vector-icons/FontAwesome';
-import IonIcons from 'react-native-vector-icons/Ionicons';
 
 export default class HomePage extends Component {
 
@@ -90,16 +89,16 @@ export default class HomePage extends Component {
                 </View>
 
                 <View style={HomePageStyles.btnList}>
-                    <Icon.Button name="star" backgroundColor="#aaa" onPress={()=>{alert("test")}}>
+                    <Icon.Button name="star" backgroundColor="#aaa" onPress={()=>{Actions.PicStore()}}>
                         <Text style={{fontFamily: 'Arial', fontSize: 15}}>图标库</Text>
                     </Icon.Button>
                 </View>
 
-                <View style={{height:100}}></View>
-                <Icon name="home" size={50} color="#900" />
-                <Icon name="home" size={100} color="#999" />
-                <IonIcons name="ios-home" size={30} color="#4F8EF7" />
-                <IonIcons name="ios-home-outline" size={30} color="#4F8EF7" />
+                <View style={HomePageStyles.btnList}>
+                    <Icon.Button name="star" backgroundColor="#aaa" onPress={()=>{Actions.LayoutXYDemo()}}>
+                        <Text style={{fontFamily: 'Arial', fontSize: 15}}>LayoutXY</Text>
+                    </Icon.Button>
+                </View>
             </View>
         );
     }

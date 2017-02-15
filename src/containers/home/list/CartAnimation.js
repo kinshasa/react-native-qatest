@@ -20,9 +20,9 @@ import {
 
 import Parabola from 'react-native-smart-parabola'
 import Button from 'react-native-smart-button'
-import image_cart from '../../assets/home.png'
+import image_cart from '../../../assets/home.png'
 
-import img_logo from '../../assets/img_logo.png'
+import img_logo from '../../../assets/img_logo.png'
 let {width: deviceWidth, height: deviceHeight} = Dimensions.get('window');
 let contentTop = Platform.OS == 'ios' ? 64 : 56;
 

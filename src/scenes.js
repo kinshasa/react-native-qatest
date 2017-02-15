@@ -13,10 +13,12 @@ import {Actions, Scene, Router} from 'react-native-router-flux';
  */
 import Launcher from './containers/Launcher';
 /**
- * 购物车
+ * HomeList
  */
-import CartAnimation from './containers/home/CartAnimation';
-import AnimationDemo from './containers/home/AnimationDemo';
+import CartAnimation from './containers/home/list/CartAnimation';
+import AnimationDemo from './containers/home/list/AnimationDemo';
+import LayoutXYDemo from './containers/home/list/LayoutXYDemo';
+import PicStore from './containers/home/list/PicStore';
 
 
 export default  scenes = Actions.create(
@@ -24,5 +26,8 @@ export default  scenes = Actions.create(
         <Scene key="Launcher" component={Launcher} hideNavBar={true}/>
         <Scene key="CartAnimation" component={CartAnimation} hideNavBar={false}/>
         <Scene key="AnimationDemo" component={AnimationDemo} hideNavBar={false}/>
+        <Scene key="LayoutXYDemo" component={LayoutXYDemo} hideNavBar={true}/>
+        <Scene key="PicStore" component={PicStore} hideNavBar={false}/>
+
     </Scene>
 );
