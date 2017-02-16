@@ -1,7 +1,7 @@
 /**
  * @Author: liushaobo2005@163.com
  * @Date: 2017.2.9 下午 4:33
- * @Desc: 公共组件 - 渲染的入口
+ * @Desc: 启动器
  * @NAME: Launcher.js
  * @LIFECYCLE：http://www.tuicool.com/articles/nu6zInB
  */
