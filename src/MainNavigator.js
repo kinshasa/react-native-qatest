@@ -60,12 +60,11 @@ class MainNavigator extends Component {
     }
 
     render() {
-        var _this = this;
         return (
             <Navigator
-                initialRoute={_this.initialRoute}
-                configureScene={_this.configureScene.bind(_this)}
-                renderScene={_this.renderScene.bind(_this)}/>
+                initialRoute={this.initialRoute}
+                configureScene={()=>this.configureScene()}
+                renderScene={(route, navigator)=>this.renderScene(route, navigator)}/>
         );
     }
 }
