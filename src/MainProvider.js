@@ -1,7 +1,9 @@
 /**
  * @Author: liushaobo2005@163.com
  * @Date: 2017.1.23 下午 4:02
- * @Desc: App入口
+ * @Desc: Provider Redux存储提供者
+ * @NAME: MainProvider.js
+ * @LIFECYCLE：http://www.tuicool.com/articles/nu6zInB
  */
 import React, {Component} from 'react';
 import {
