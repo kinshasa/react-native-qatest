@@ -9,11 +9,12 @@
 import React, {Component, PropTypes} from 'react';
 import {
     StyleSheet,
+    View,
+    Text,
 } from 'react-native';
 
 import * as Animatable from 'react-native-animatable';
-import ZoomAnimBadge from './ZoomAnimBadge';
-
+import Badge from './Badge'
 export default class AnimationDemo extends Component {
 
     /**
@@ -44,7 +45,7 @@ export default class AnimationDemo extends Component {
     constructor(props, context) {
         console.log("AnimationDemo", "constructor()");
         super(props, context);
-        this.state = {};
+        this.state = {count:0};
     }
 
     /**
@@ -130,10 +131,24 @@ export default class AnimationDemo extends Component {
             <Animatable.View animation="zoomIn" style={AnimationDemoStyles.container}>
                 <Animatable.View animation="zoomOutLeft" animation="fadeInLeftBig" delay={1000} style={AnimationDemoStyles.view}/>
                 <Animatable.View style={{marginTop:10,alignSelf:"center",height:100,width:100}}>
-                    <ZoomAnimBadge />
+                    <Animatable.View
+                        animation="pulse" easing="ease-out" delay={0} iterationCount={1} style={AnimationDemoStyles.pulseView}>
+                        <Badge
+                            extraPaddingHorizontal={10}
+                            ref={(ref)=>{this.badgeView = ref}}
+                            minWidth={10} minHeight={10} textStyle={{color: '#fff',fontSize:8}} style={{position:'absolute',right:0,bottom:0}}>
+                            {this.state.count}
+                        </Badge>
+                        <Text onPress={()=>{this.setAnim()}}>teqw</Text>
+                    </Animatable.View>
                 </Animatable.View>
             </Animatable.View>
         );
+    }
+
+    setAnim(){
+        this.badgeView && this.badgeView._container.pulse();
+        this.badgeView.setNativeState(++this.state.count);
     }
 
 }
@@ -148,5 +163,10 @@ const AnimationDemoStyles = StyleSheet.create({
         margin: 10,
         backgroundColor: "red",
         marginTop:100
+    },
+    pulseView: {
+        flex: 1,
+        backgroundColor:"yellow",
+        flexDirection:"column"
     },
 });
