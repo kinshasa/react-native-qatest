@@ -1,27 +1,42 @@
 /**
  * @Author: liushaobo2005@163.com
- * @Date: 2017.2.10 下午 3:21
- * @Desc: 公共组件 - AnimationDemo
- * @Name: AnimationDemo.js
+ * @Date: 2017.2.20 下午 5:51
+ * @Desc: 公共组件 - ZoomAnimBadge
+ * @Name: ZoomAnimBadge.js
  * @LifeCycle：http://www.tuicool.com/articles/nu6zInB
  */
 
 import React, {Component, PropTypes} from 'react';
 import {
     StyleSheet,
+    View,
+    Text,
 } from 'react-native';
-
+import Badge from './Badge'
 import * as Animatable from 'react-native-animatable';
-import ZoomAnimBadge from './ZoomAnimBadge';
+const zoomOut = {
+    0: {
+        opacity: 1,
+        scale: 1,
+    },
+    0.5: {
+        opacity: 1,
+        scale: 0.3,
+    },
+    1: {
+        opacity: 0,
+        scale: 0,
+    },
+};
 
-export default class AnimationDemo extends Component {
+export default class ZoomAnimBadge extends Component {
 
     /**
      * 父组件传入的属性值
      * @type {{style: *, account: *, name: *, isTrue: *, callback: *}}
      */
     static propTypes = {
-        style: Animatable.View.propTypes.style,
+        style: View.propTypes.style,
         account: PropTypes.number,
         name: PropTypes.string,
         isTrue: PropTypes.bool,
@@ -42,9 +57,9 @@ export default class AnimationDemo extends Component {
      * @param context
      */
     constructor(props, context) {
-        console.log("AnimationDemo", "constructor()");
+        console.log("ZoomAnimBadge", "constructor()");
         super(props, context);
-        this.state = {};
+        this.state = {count:0};
     }
 
     /**
@@ -58,7 +73,8 @@ export default class AnimationDemo extends Component {
      * 生命周期中仅被调用1次，可以使用SetState
      */
     componentWillMount() {
-        console.log("AnimationDemo", "componentWillMount()");
+        console.log("ZoomAnimBadge", "componentWillMount()");
+
     }
 
     /**
@@ -67,7 +83,10 @@ export default class AnimationDemo extends Component {
      * 用于网络请求和页面渲染
      */
     componentDidMount() {
-        console.log("AnimationDemo", "componentDidMount()");
+        console.log("ZoomAnimBadge", "componentDidMount()");
+        /*this.badgeView && this.badgeView.setNativeProps({
+            animation:"wobble"
+        })*/
     }
 
     /**
@@ -76,7 +95,7 @@ export default class AnimationDemo extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("AnimationDemo", "componentWillReceiveProps():" + newProps);
+        console.log("ZoomAnimBadge", "componentWillReceiveProps():" + newProps);
     }
 
     /**
@@ -87,7 +106,7 @@ export default class AnimationDemo extends Component {
      */
     shouldComponentUpdate(nextProps, nextState) {
         let isUpdate = (this.props != nextProps) || (this.state != nextState);
-        console.log("AnimationDemo", "shouldComponentUpdate():" + isUpdate);
+        console.log("ZoomAnimBadge", "shouldComponentUpdate():" + isUpdate);
         return isUpdate;
     }
 
@@ -97,7 +116,7 @@ export default class AnimationDemo extends Component {
      * @param nextState 更新之后的状态
      */
     componentWillUpdate(nextProps, nextState) {
-        console.log("AnimationDemo", "componentWillUpdate()");
+        console.log("ZoomAnimBadge", "componentWillUpdate()");
     }
 
     /**
@@ -107,15 +126,15 @@ export default class AnimationDemo extends Component {
      * @returns {boolean}
      */
     componentDidUpdate(prevProps, prevState) {
-        console.log("AnimationDemo", "componentDidUpdate()");
+        console.log("ZoomAnimBadge", "componentDidUpdate()");
     }
 
     /**
      * 组件即将卸载前调用
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
-    componentDidUnMount() {
-        console.log("AnimationDemo", "componentDidUnMount()");
+    componentWillUnmount() {
+        console.log("ZoomAnimBadge", "componentDidUnMount()");
 
     }
 
@@ -125,28 +144,32 @@ export default class AnimationDemo extends Component {
      */
     render() {
         this.renderCount++;
-        console.log("AnimationDemo", "render() renderCount:" + this.renderCount);
+        console.log("ZoomAnimBadge", "render() renderCount:" + this.renderCount);
         return (
-            <Animatable.View animation="zoomIn" style={AnimationDemoStyles.container}>
-                <Animatable.View animation="zoomOutLeft" animation="fadeInLeftBig" delay={1000} style={AnimationDemoStyles.view}/>
-                <Animatable.View style={{marginTop:10,alignSelf:"center",height:100,width:100}}>
-                    <ZoomAnimBadge />
-                </Animatable.View>
+            <Animatable.View
+                animation="pulse" easing="ease-out" delay={0} iterationCount={1} style={ZoomAnimBadgeStyles.container}>
+                <Badge
+                    extraPaddingHorizontal={10}
+                    ref={(ref)=>{this.badgeView = ref}}
+                    minWidth={10} minHeight={10} textStyle={{color: '#fff',fontSize:8}} style={{position:'absolute',right:0,bottom:0}}>
+                    {this.state.count}
+                </Badge>
+                <Text onPress={()=>{this.setAnim()}}>teqw</Text>
             </Animatable.View>
         );
     }
 
+    setAnim(){
+        this.badgeView && this.badgeView._container.pulse();
+        this.badgeView.setNativeState(++this.state.count);
+    }
+
 }
 
-const AnimationDemoStyles = StyleSheet.create({
+const ZoomAnimBadgeStyles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#333",
-    },
-    view: {
-        height: 30,
-        margin: 10,
-        backgroundColor: "red",
-        marginTop:100
+        backgroundColor:"yellow",
+        flexDirection:"column"
     },
 });
