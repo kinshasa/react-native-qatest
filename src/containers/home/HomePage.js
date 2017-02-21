@@ -10,6 +10,7 @@ import {
     StyleSheet,
     View,
     Text,
+    ListView
 } from 'react-native';
 
 import {Actions} from 'react-native-router-flux'
@@ -19,13 +20,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class HomePage extends Component {
 
-    static propTypes = {
+    static propTypes = {};
 
-    };
-
-    static defaultProps = {
-        
-    };
+    static defaultProps = {};
 
     constructor(props, context) {
         console.log("HomePage", "constructor()");
@@ -67,48 +64,55 @@ export default class HomePage extends Component {
 
     componentDidUnMount() {
         console.log("HomePage", "componentDidUnMount()");
+    }
 
+    getDataSource() {
+
+        return {
+            '购物车动画': 'CartAnimation',
+            '动画Demo': 'AnimationDemo',
+            '图标库': 'PicStore',
+            'LayoutXY': 'LayoutXYDemo',
+        };
+    }
+
+    renderRow(rowData, sectionId, rowId) {
+
+        return (
+            <View style={HomePageStyles.btnList}>
+                <Icon.Button name="star" backgroundColor="#aaa" onPress={()=>{Actions[rowData]()}}>
+                    <Text style={{fontFamily: 'Arial', fontSize: 15}}>{rowId}:{rowData}</Text>
+                </Icon.Button>
+            </View>
+        )
     }
 
     render() {
+        var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        this.dataSource = ds.cloneWithRows(this.getDataSource());
+
         this.renderCount++;
         console.log("HomePage", "render() renderCount:" + this.renderCount);
         return (
             <View style={HomePageStyles.container}>
                 <TitleBar title="首页" style={{height:45}}/>
-                <View style={HomePageStyles.btnList}>
-                    <Icon.Button name="star" backgroundColor="#aaa"onPress={()=>{Actions.CartAnimation()}}>
-                        <Text style={{fontFamily: 'Arial', fontSize: 15}}>购物车动画</Text>
-                    </Icon.Button>
-                </View>
 
-                <View style={HomePageStyles.btnList}>
-                    <Icon.Button name="star" backgroundColor="#aaa" onPress={()=>{Actions.AnimationDemo()}}>
-                        <Text style={{fontFamily: 'Arial', fontSize: 15}}>动画Demo</Text>
-                    </Icon.Button>
-                </View>
-
-                <View style={HomePageStyles.btnList}>
-                    <Icon.Button name="star" backgroundColor="#aaa" onPress={()=>{Actions.PicStore()}}>
-                        <Text style={{fontFamily: 'Arial', fontSize: 15}}>图标库</Text>
-                    </Icon.Button>
-                </View>
-
-                <View style={HomePageStyles.btnList}>
-                    <Icon.Button name="star" backgroundColor="#aaa" onPress={()=>{Actions.LayoutXYDemo()}}>
-                        <Text style={{fontFamily: 'Arial', fontSize: 15}}>LayoutXY</Text>
-                    </Icon.Button>
-                </View>
+                <ListView
+                    dataSource={this.dataSource}
+                    renderRow={this.renderRow}
+                />
             </View>
         );
     }
+
+
 }
 
 const HomePageStyles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    btnList:{
-        margin:3,
+    btnList: {
+        margin: 3,
     }
 });
