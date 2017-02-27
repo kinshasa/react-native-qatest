@@ -11,6 +11,7 @@ import {
     StyleSheet,
     View,
     Text,
+    Animated
 } from 'react-native';
 
 import * as Animatable from 'react-native-animatable';
@@ -45,7 +46,9 @@ export default class AnimationDemo extends Component {
     constructor(props, context) {
         console.log("AnimationDemo", "constructor()");
         super(props, context);
-        this.state = {};
+        this.state = {
+            fadeAnim: new Animated.Value(0), // init opacity 0
+        };
         this.badge = {count:0};
     }
 
@@ -70,6 +73,10 @@ export default class AnimationDemo extends Component {
      */
     componentDidMount() {
         console.log("AnimationDemo", "componentDidMount()");
+        Animated.timing(          // Uses easing functions
+            this.state.fadeAnim,    // The value to drive
+            {toValue: 1},           // Configuration
+        ).start();                // Don't forget start!
     }
 
     /**
@@ -129,23 +136,36 @@ export default class AnimationDemo extends Component {
         this.renderCount++;
         console.log("AnimationDemo", "render() renderCount:" + this.renderCount);
         return (
-            <Animatable.View animation="zoomIn" style={AnimationDemoStyles.container}>
-                <Animatable.View animation="zoomOutLeft" delay={1000} style={AnimationDemoStyles.view}/>
-                <Animatable.View style={{marginTop:10,alignSelf:"center",height:100,width:100}}>
-                    <Animatable.View
-                        animation="pulse" easing="ease-out" delay={0} iterationCount={1} style={AnimationDemoStyles.pulseView}>
-                        <Badge
-                            extraPaddingHorizontal={10}
-                            ref={(ref)=>{this.badgeView = ref}}
-                            minWidth={10} minHeight={10} textStyle={{color: '#fff',fontSize:8}} style={{position:'absolute',right:0,bottom:0}}>
-                            {this.badge.count}
-                        </Badge>
-                        <Text onPress={()=>{this.setAnim()}}>teqw</Text>
+            <View style={AnimationDemoStyles.container}>
+                <Animatable.View animation="zoomIn" style={{}}>
+                    <Animatable.View animation="zoomOutLeft" delay={1000} style={AnimationDemoStyles.view}/>
+                    <Animatable.View style={{marginTop:10,alignSelf:"center",height:100,width:100}}>
+                        <Animatable.View
+                            animation="pulse" easing="ease-out" delay={0} iterationCount={1} style={AnimationDemoStyles.pulseView}>
+                            <Badge
+                                extraPaddingHorizontal={10}
+                                ref={(ref)=>{this.badgeView = ref}}
+                                minWidth={10} minHeight={10} textStyle={{color: '#fff',fontSize:8}} style={{position:'absolute',right:0,bottom:0}}>
+                                {this.badge.count}
+                            </Badge>
+                            <Text onPress={()=>{this.setAnim()}}>teqw</Text>
+                        </Animatable.View>
                     </Animatable.View>
+
+
                 </Animatable.View>
-
-
-            </Animatable.View>
+                <Animated.View
+                    style={{marginTop:20,
+                        opacity: this.state.fadeAnim,
+                        transform: [{
+                        translateY: this.state.fadeAnim.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [150, 0]  // 0 : 150, 0.5 : 75, 1 : 0
+                    }),
+                    }]}}>
+                    <Text style={{backgroundColor:"white"}}>dawdawdawd</Text>
+                </Animated.View>
+            </View>
         );
     }
 
