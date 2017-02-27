@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 
 import * as Animatable from 'react-native-animatable';
-import Badge from './Badge'
+import Badge from '../../../components/badge/Badge'
 export default class AnimationDemo extends Component {
 
     /**
@@ -45,7 +45,8 @@ export default class AnimationDemo extends Component {
     constructor(props, context) {
         console.log("AnimationDemo", "constructor()");
         super(props, context);
-        this.state = {count:0};
+        this.state = {};
+        this.badge = {count:0};
     }
 
     /**
@@ -137,18 +138,20 @@ export default class AnimationDemo extends Component {
                             extraPaddingHorizontal={10}
                             ref={(ref)=>{this.badgeView = ref}}
                             minWidth={10} minHeight={10} textStyle={{color: '#fff',fontSize:8}} style={{position:'absolute',right:0,bottom:0}}>
-                            {this.state.count}
+                            {this.badge.count}
                         </Badge>
                         <Text onPress={()=>{this.setAnim()}}>teqw</Text>
                     </Animatable.View>
                 </Animatable.View>
+
+
             </Animatable.View>
         );
     }
 
     setAnim(){
         this.badgeView && this.badgeView._container.pulse();
-        this.badgeView.setNativeState(++this.state.count);
+        this.badgeView.setNativeState(++this.badge.count);
     }
 
 }

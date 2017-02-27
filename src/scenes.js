@@ -20,6 +20,7 @@ import AnimationDemo from './containers/home/list/AnimationDemo';
 import LayoutXYDemo from './containers/home/list/LayoutXYDemo';
 import PicStore from './containers/home/list/PicStore';
 import SwipeList from './containers/home/list/SwipeList';
+import RCTComponents from './containers/home/list/RCTComponents';
 
 
 export default  scenes = Actions.create(
@@ -29,7 +30,8 @@ export default  scenes = Actions.create(
         <Scene key="AnimationDemo" component={AnimationDemo} hideNavBar={false}/>
         <Scene key="LayoutXYDemo" component={LayoutXYDemo} hideNavBar={true}/>
         <Scene key="PicStore" component={PicStore} hideNavBar={false}/>
-        <Scene key="SwipeList" component={SwipeList} hideNavBar={true}/>
+            <Scene key="SwipeList" component={SwipeList} hideNavBar={true}/>
+            <Scene key="RCTComponents" component={RCTComponents} hideNavBar={true}/>
 
     </Scene>
 );

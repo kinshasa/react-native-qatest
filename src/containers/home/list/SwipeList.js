@@ -159,6 +159,7 @@ export default class SwipeList extends Component {
                     dot={<View style={{backgroundColor:'rgb(0,0,0)', width: 0, height: 0,}} />}
                     activeDot={<View style={{backgroundColor: 'rgb(0,0,0)', width: 0, height: 0}} />}
                     height={200}
+                    autoplayTimeout={2}
                     showsButtons={false}
                     horizontal={false}
                     autoplay={false}
