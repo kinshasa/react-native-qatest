@@ -126,9 +126,9 @@ export default class Launcher extends Component {
      * 组件即将卸载前调用
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
-    componentDidUnMount() {
+    componentWillUnmount() {
         time1 = new Date();
-        console.log("Launcher", "componentDidUnMount()" + time1);
+        console.log("Launcher", "componentWillUnmount()" + time1);
 
     }
 

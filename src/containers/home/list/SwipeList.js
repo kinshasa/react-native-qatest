@@ -1,8 +1,8 @@
 /**
  * @Author: liushaobo2005@163.com
  * @Date: 2017.2.21 下午 2:09
- * @Desc: 公共组件 - SwiperList
- * @Name: SwiperList.js
+ * @Desc: 公共组件 - SwipeList
+ * @Name: SwipeList.js
  * @LifeCycle：http://www.tuicool.com/articles/nu6zInB
  */
 
@@ -11,20 +11,24 @@ import {
     StyleSheet,
     View,
     Text,
-    Dimensions
+    Dimensions,
+    Image
 } from 'react-native';
 
-import Swiper from 'react-native-swiper';
+import Swiper from 'react-native-swiper2';
+import SwiperForLoop from './SwiperForLoop';
 
-const img=[
+import TitleBar from "../../../components/bar/TitleBar"
+
+const img = [
     'https://img1.360buyimg.com/da/jfs/t4084/59/2247792254/86559/ee5be533/58a56e3cNbaa1847d.jpg',
     'https://img13.360buyimg.com/da/jfs/t3223/241/6483791921/296507/a1d0c64d/58a6929aNc5ecfb45.jpg',
     'https://img10.360buyimg.com/da/jfs/t3931/208/2276755577/133306/f5d624e3/58a66bffNb50c7944.jpg',
     'https://img10.360buyimg.com/da/jfs/t3988/348/2287615533/169453/28f664/58a66baeNa6b9e317.jpg'
 ];
-const { width } = Dimensions.get('window')
+const {width} = Dimensions.get('window');
 
-export default class SwiperList extends Component {
+export default class SwipeList extends Component {
 
     /**
      * 父组件传入的属性值
@@ -52,7 +56,7 @@ export default class SwiperList extends Component {
      * @param context
      */
     constructor(props, context) {
-        console.log("SwiperList", "constructor()");
+        console.log("SwipeList", "constructor()");
         super(props, context);
         this.state = {};
     }
@@ -68,7 +72,7 @@ export default class SwiperList extends Component {
      * 生命周期中仅被调用1次，可以使用SetState
      */
     componentWillMount() {
-        console.log("SwiperList", "componentWillMount()");
+        console.log("SwipeList", "componentWillMount()");
     }
 
     /**
@@ -77,7 +81,7 @@ export default class SwiperList extends Component {
      * 用于网络请求和页面渲染
      */
     componentDidMount() {
-        console.log("SwiperList", "componentDidMount()");
+        console.log("SwipeList", "componentDidMount()");
     }
 
     /**
@@ -86,7 +90,7 @@ export default class SwiperList extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("SwiperList", "componentWillReceiveProps():" + newProps);
+        console.log("SwipeList", "componentWillReceiveProps():" + newProps);
     }
 
     /**
@@ -97,7 +101,7 @@ export default class SwiperList extends Component {
      */
     shouldComponentUpdate(nextProps, nextState) {
         let isUpdate = (this.props != nextProps) || (this.state != nextState);
-        console.log("SwiperList", "shouldComponentUpdate():" + isUpdate);
+        console.log("SwipeList", "shouldComponentUpdate():" + isUpdate);
         return isUpdate;
     }
 
@@ -107,7 +111,7 @@ export default class SwiperList extends Component {
      * @param nextState 更新之后的状态
      */
     componentWillUpdate(nextProps, nextState) {
-        console.log("SwiperList", "componentWillUpdate()");
+        console.log("SwipeList", "componentWillUpdate()");
     }
 
     /**
@@ -117,15 +121,15 @@ export default class SwiperList extends Component {
      * @returns {boolean}
      */
     componentDidUpdate(prevProps, prevState) {
-        console.log("SwiperList", "componentDidUpdate()");
+        console.log("SwipeList", "componentDidUpdate()");
     }
 
     /**
      * 组件即将卸载前调用
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
-    componentDidUnMount() {
-        console.log("SwiperList", "componentDidUnMount()");
+    componentWillUnmount() {
+        console.log("SwipeList", "componentWillUnmount()");
 
     }
 
@@ -135,55 +139,58 @@ export default class SwiperList extends Component {
      */
     render() {
         this.renderCount++;
-        console.log("SwiperList", "render() renderCount:" + this.renderCount);
+        console.log("SwipeList", "render() renderCount:" + this.renderCount);
         return (
-            <View style={SwiperListStyles.container}>
-                <Swiper style={styles.wrapper} height={200} horizontal={false} autoplay>
-                    <View style={styles.slide1}>
-                        <Text style={styles.text}>Hello Swiper</Text>
+            <View style={SwipeListStyles.container}>
+                <TitleBar title="首页" style={{height:45}}/>
+                <Swiper style={SwipeListStyles.wrapper} height={200} bounces autoplayDirection horizontal={false} autoplay>
+                    <View style={SwipeListStyles.slide1}>
+                        <Text style={SwipeListStyles.text}>Hello Swiper</Text>
                     </View>
-                    <View style={styles.slide2}>
-                        <Text style={styles.text}>Beautiful</Text>
+                    <View style={SwipeListStyles.slide2}>
+                        <Text style={SwipeListStyles.text}>Beautiful</Text>
                     </View>
-                    <View style={styles.slide3}>
-                        <Text style={styles.text}>And simple</Text>
+                    <View style={SwipeListStyles.slide3}>
+                        <Text style={SwipeListStyles.text}>And simple</Text>
                     </View>
                 </Swiper>
 
-                <Swiper
-                    style={styles.wrapper} height={240}
-                        onMomentumScrollEnd={(e, state, context) => console.log('index:', state.index)}
-                        dot={<View style={{backgroundColor: 'rgba(0,0,0,.2)', width: 5, height: 5, borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3}} />}
-                        activeDot={<View style={{backgroundColor: '#000', width: 8, height: 8, borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3}} />}
-                        paginationStyle={{
-                        bottom: -23, left: null, right: 10
-                    }}
-                loop>
-                    <View style={styles.slide} title={<Text numberOfLines={1}>Aussie tourist dies at Bali hotel</Text>}>
-                        <Image resizeMode='stretch' style={styles.image} source={{uri:img[0]}} />
+                <SwiperForLoop
+                    dot={<View style={{backgroundColor:'rgb(0,0,0)', width: 0, height: 0,}} />}
+                    activeDot={<View style={{backgroundColor: 'rgb(0,0,0)', width: 0, height: 0}} />}
+                    height={200}
+                    showsButtons={false}
+                    horizontal={false}
+                    autoplay={false}
+                    >
+                    <View style={SwipeListStyles.slide}
+                          title={<Text numberOfLines={1}>Aussie tourist dies at Bali hotel</Text>}>
+                        <Image resizeMode='stretch' style={SwipeListStyles.image} source={{uri:img[0]}}/>
                     </View>
-                    <View style={styles.slide} title={<Text numberOfLines={1}>Big lie behind Nine’s new show</Text>}>
-                        <Image resizeMode='stretch' style={styles.image} source={{uri:img[1]}} />
+                    <View style={SwipeListStyles.slide}
+                          title={<Text numberOfLines={1}>Big lie behind Nine’s new show</Text>}>
+                        <Image resizeMode='stretch' style={SwipeListStyles.image} source={{uri:img[1]}}/>
                     </View>
-                    <View style={styles.slide} title={<Text numberOfLines={1}>Why Stone split from Garfield</Text>}>
-                        <Image resizeMode='stretch' style={styles.image} source={{uri:img[2]}} />
+                    <View style={SwipeListStyles.slide}
+                          title={<Text numberOfLines={1}>Why Stone split from Garfield</Text>}>
+                        <Image resizeMode='stretch' style={SwipeListStyles.image} source={{uri:img[2]}}/>
                     </View>
-                    <View style={styles.slide} title={<Text numberOfLines={1}>Learn from Kim K to land that job</Text>}>
-                        <Image resizeMode='stretch' style={styles.image} source={{uri:img[3]}} />
+                    <View style={SwipeListStyles.slide}
+                          title={<Text numberOfLines={1}>Learn from Kim K to land that job</Text>}>
+                        <Image resizeMode='stretch' style={SwipeListStyles.image} source={{uri:img[3]}}/>
                     </View>
-                </Swiper>
+                </SwiperForLoop>
             </View>
         );
     }
 
 }
 
-const SwiperListStyles = StyleSheet.create({
+const SwipeListStyles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    wrapper: {
-    },
+    wrapper: {},
 
     slide: {
         flex: 1,

@@ -39,7 +39,7 @@ class MainNavigator extends Component {
 
     }
 
-    componentDidUnMount() {
+    componentWillUnmount() {
 
     }
 

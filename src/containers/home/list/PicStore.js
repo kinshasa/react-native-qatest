@@ -115,8 +115,8 @@ export default class PicStore extends Component {
      * 组件即将卸载前调用
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
-    componentDidUnMount() {
-        console.log("PicStore", "componentDidUnMount()");
+    componentWillUnmount() {
+        console.log("PicStore", "componentWillUnmount()");
 
     }
 

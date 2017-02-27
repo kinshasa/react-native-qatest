@@ -62,8 +62,8 @@ export default class HomePage extends Component {
         console.log("HomePage", "componentDidUpdate()");
     }
 
-    componentDidUnMount() {
-        console.log("HomePage", "componentDidUnMount()");
+    componentWillUnmount() {
+        console.log("HomePage", "componentWillUnmount()");
     }
 
     getDataSource() {
@@ -73,6 +73,7 @@ export default class HomePage extends Component {
             '动画Demo': 'AnimationDemo',
             '图标库': 'PicStore',
             'LayoutXY': 'LayoutXYDemo',
+            'Swipe': 'SwipeList',
         };
     }
 
@@ -89,7 +90,7 @@ export default class HomePage extends Component {
 
     render() {
         var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-        this.dataSource = ds.cloneWithRows(this.getDataSource());
+        //this.dataSource = ds.cloneWithRows(this.getDataSource());
 
         this.renderCount++;
         console.log("HomePage", "render() renderCount:" + this.renderCount);
@@ -98,7 +99,7 @@ export default class HomePage extends Component {
                 <TitleBar title="首页" style={{height:45}}/>
 
                 <ListView
-                    dataSource={this.dataSource}
+                    dataSource={ds.cloneWithRows(this.getDataSource())}
                     renderRow={this.renderRow}
                 />
             </View>

@@ -12,8 +12,7 @@ import {
     Text,
     View
 } from 'react-native';
-//var {Icon,} = require('react-native-icons');
-//https://github.com/corymsmith/react-native-icons
+import {Actions} from 'react-native-router-flux'
 
 export default class TitleBar extends Component {
 
@@ -89,7 +88,7 @@ export default class TitleBar extends Component {
     renderLeftView() {
         let titleLeft = [TitleBarStyles.titleLeft, this.props.titleLeft];
         return (
-            <Text style={titleLeft}> {"返回"} </Text>
+            <Text style={titleLeft} onPress={()=>{try{Actions.pop()}catch(e){alert(e.message)}}}> {"返回"} </Text>
         );
     }
 
@@ -111,7 +110,7 @@ export default class TitleBar extends Component {
     renderRightView() {
         let titleRight = [TitleBarStyles.titleRight, this.props.titleRight];
         return (
-            <Text style={titleRight}> {"菜单"} </Text>
+            <Text style={titleRight} onPress={()=>{alert("菜单")}}> {"菜单"} </Text>
         );
     }
 }

@@ -57,8 +57,8 @@ export default class MainComponent extends Component {
         return false;
     }
 
-    componentDidUnMount() {
-        console.log("MainComponent", "componentDidUnMount()");
+    componentWillUnmount() {
+        console.log("MainComponent", "componentWillUnmount()");
 
     }
 

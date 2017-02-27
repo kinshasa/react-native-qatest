@@ -115,8 +115,8 @@ export default class AnimationDemo extends Component {
      * 组件即将卸载前调用
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
-    componentDidUnMount() {
-        console.log("AnimationDemo", "componentDidUnMount()");
+    componentWillUnmount() {
+        console.log("AnimationDemo", "componentWillUnmount()");
 
     }
 
@@ -129,7 +129,7 @@ export default class AnimationDemo extends Component {
         console.log("AnimationDemo", "render() renderCount:" + this.renderCount);
         return (
             <Animatable.View animation="zoomIn" style={AnimationDemoStyles.container}>
-                <Animatable.View animation="zoomOutLeft" animation="fadeInLeftBig" delay={1000} style={AnimationDemoStyles.view}/>
+                <Animatable.View animation="zoomOutLeft" delay={1000} style={AnimationDemoStyles.view}/>
                 <Animatable.View style={{marginTop:10,alignSelf:"center",height:100,width:100}}>
                     <Animatable.View
                         animation="pulse" easing="ease-out" delay={0} iterationCount={1} style={AnimationDemoStyles.pulseView}>

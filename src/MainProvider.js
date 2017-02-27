@@ -40,7 +40,7 @@ export default class MainProvider extends Component {
 
     }
 
-    componentDidUnMount() {
+    componentWillUnmount() {
 
     }
 

@@ -19,7 +19,7 @@ import CartAnimation from './containers/home/list/CartAnimation';
 import AnimationDemo from './containers/home/list/AnimationDemo';
 import LayoutXYDemo from './containers/home/list/LayoutXYDemo';
 import PicStore from './containers/home/list/PicStore';
-import SwiperList from './containers/home/list/SwiperList';
+import SwipeList from './containers/home/list/SwipeList';
 
 
 export default  scenes = Actions.create(
@@ -29,7 +29,7 @@ export default  scenes = Actions.create(
         <Scene key="AnimationDemo" component={AnimationDemo} hideNavBar={false}/>
         <Scene key="LayoutXYDemo" component={LayoutXYDemo} hideNavBar={true}/>
         <Scene key="PicStore" component={PicStore} hideNavBar={false}/>
-        <Scene key="SwiperList" component={SwiperList} hideNavBar={false}/>
+        <Scene key="SwipeList" component={SwipeList} hideNavBar={true}/>
 
     </Scene>
 );
