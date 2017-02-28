@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 
 import {Actions} from 'react-native-router-flux'
+import scenes from '../../scenes';
 
 import TitleBar from "../../components/bar/TitleBar"
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -67,33 +68,29 @@ export default class HomePage extends Component {
     }
 
     getDataSource() {
-
-        return {
-            '购物车动画': 'CartAnimation',
-            '动画Demo': 'AnimationDemo',
-            '图标库': 'PicStore',
-            'LayoutXY': 'LayoutXYDemo',
-            'Swipe': 'SwipeList',
-        };
+        let list = {};
+        Object.keys(scenes).map((item,i)=>{
+            list[item] = scenes[item].des||item;
+        });
+        console.log('HomePage list',list);
+        return  list;
     }
 
     renderRow(rowData, sectionId, rowId) {
 
         return (
             <View style={HomePageStyles.btnList}>
-                <Icon.Button name="star" backgroundColor="#aaa" onPress={()=>{Actions[rowData]()}}>
-                    <Text style={{fontFamily: 'Arial', fontSize: 15}}>{rowId}:{rowData}</Text>
+                <Icon.Button name="star" backgroundColor="#aaa" onPress={()=>{try{Actions[rowId]()}catch(e){alert(e.message)} }}>
+                    <Text style={{fontFamily: 'Arial', fontSize: 15}}>{rowData}</Text>
                 </Icon.Button>
             </View>
         )
     }
 
     render() {
-        var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-        //this.dataSource = ds.cloneWithRows(this.getDataSource());
-
         this.renderCount++;
         console.log("HomePage", "render() renderCount:" + this.renderCount);
+        var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         return (
             <View style={HomePageStyles.container}>
                 <TitleBar title="首页" style={{height:45}}/>

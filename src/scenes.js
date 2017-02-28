@@ -25,13 +25,13 @@ import RCTComponents from './containers/home/list/RCTComponents';
 
 export default  scenes = Actions.create(
     <Scene key="root">
-        <Scene key="Launcher" component={Launcher} hideNavBar={true}/>
-        <Scene key="CartAnimation" component={CartAnimation} hideNavBar={false}/>
-        <Scene key="AnimationDemo" component={AnimationDemo} hideNavBar={false}/>
-        <Scene key="LayoutXYDemo" component={LayoutXYDemo} hideNavBar={true}/>
-        <Scene key="PicStore" component={PicStore} hideNavBar={false}/>
-            <Scene key="SwipeList" component={SwipeList} hideNavBar={true}/>
-            <Scene key="RCTComponents" component={RCTComponents} hideNavBar={true}/>
+        <Scene key="Launcher" component={Launcher} des={"启动器"} hideNavBar={true}/>
+        <Scene key="CartAnimation" component={CartAnimation} des={"购物车动画"} hideNavBar={false}/>
+        <Scene key="AnimationDemo" component={AnimationDemo} des={"动画Demo"} hideNavBar={false}/>
+        <Scene key="LayoutXYDemo" component={LayoutXYDemo} des={"Layout布局"} hideNavBar={true}/>
+        <Scene key="PicStore" component={PicStore} des={"图标库"} hideNavBar={false}/>
+        <Scene key="SwipeList" component={SwipeList} des={"Swipe组件"} hideNavBar={true}/>
+        <Scene key="RCTComponents" component={RCTComponents} des={"原生组件"} hideNavBar={true}/>
 
     </Scene>
 );
