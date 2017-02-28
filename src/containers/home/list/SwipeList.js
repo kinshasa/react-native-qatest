@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 
 import Swiper from 'react-native-swiper2';
-import SwiperForLoop from './SwiperForLoop';
+import SwipeForLoop from '../../../components/swipe/SwipeForLoop';
 
 import TitleBar from "../../../components/bar/TitleBar"
 
@@ -155,7 +155,7 @@ export default class SwipeList extends Component {
                     </View>
                 </Swiper>
 
-                <SwiperForLoop
+                <SwipeForLoop
                     dot={<View style={{backgroundColor:'rgb(0,0,0)', width: 0, height: 0,}} />}
                     activeDot={<View style={{backgroundColor: 'rgb(0,0,0)', width: 0, height: 0}} />}
                     height={200}
@@ -180,7 +180,7 @@ export default class SwipeList extends Component {
                           title={<Text numberOfLines={1}>Learn from Kim K to land that job</Text>}>
                         <Image resizeMode='stretch' style={SwipeListStyles.image} source={{uri:img[3]}}/>
                     </View>
-                </SwiperForLoop>
+                </SwipeForLoop>
             </View>
         );
     }
