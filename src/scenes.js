@@ -21,6 +21,7 @@ import LayoutXYDemo from './containers/home/list/LayoutXYDemo';
 import PicStore from './containers/home/list/PicStore';
 import SwipeList from './containers/home/list/SwipeList';
 import RCTComponents from './containers/home/list/RCTComponents';
+import VerticalViewPager from './containers/home/list/VerticalViewPager';
 
 
 export default  scenes = Actions.create(
@@ -32,6 +33,6 @@ export default  scenes = Actions.create(
         <Scene key="PicStore" component={PicStore} des={"图标库"} hideNavBar={false}/>
         <Scene key="SwipeList" component={SwipeList} des={"Swipe组件"} hideNavBar={true}/>
         <Scene key="RCTComponents" component={RCTComponents} des={"原生组件"} hideNavBar={true}/>
-
+        <Scene key="VerticalViewPager" component={VerticalViewPager} des={"竖向轮播"} hideNavBar={true}/>
     </Scene>
 );
