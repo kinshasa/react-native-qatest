@@ -11,11 +11,20 @@ import {
     StyleSheet,
     View,
     Text,
-    Animated
+    Animated,
+    Dimensions,
+    ScrollView,
+    LayoutAnimation,
+    UIManager,
+    TouchableOpacity,
+    Easing
 } from 'react-native';
 
 import * as Animatable from 'react-native-animatable';
 import Badge from '../../../components/badge/Badge'
+
+const {height, width} = Dimensions.get('window');
+UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
 export default class AnimationDemo extends Component {
 
     /**
@@ -48,8 +57,18 @@ export default class AnimationDemo extends Component {
         super(props, context);
         this.state = {
             fadeAnim: new Animated.Value(0), // init opacity 0
+            w: 100,
+            h: 100,
+            fadeInOpacity: new Animated.Value(0),
+            rotation: new Animated.Value(0),
+            fontSize: new Animated.Value(0)
         };
-        this.badge = {count:0};
+        this.badge = {count: 0};
+
+        this.animFade = Animated.timing( // Uses easing functions
+            this.state.fadeAnim,    // The value to drive
+            {toValue: 1},           // Configuration
+        );
     }
 
     /**
@@ -58,12 +77,14 @@ export default class AnimationDemo extends Component {
      */
     renderCount = 0;
 
+
     /**
      * 组件加载前
      * 生命周期中仅被调用1次，可以使用SetState
      */
     componentWillMount() {
         console.log("AnimationDemo", "componentWillMount()");
+        LayoutAnimation.spring();
     }
 
     /**
@@ -73,10 +94,6 @@ export default class AnimationDemo extends Component {
      */
     componentDidMount() {
         console.log("AnimationDemo", "componentDidMount()");
-        Animated.timing(          // Uses easing functions
-            this.state.fadeAnim,    // The value to drive
-            {toValue: 1},           // Configuration
-        ).start();                // Don't forget start!
     }
 
     /**
@@ -128,6 +145,22 @@ export default class AnimationDemo extends Component {
 
     }
 
+    onPress() {
+        // 让视图的尺寸变化以动画形式展现
+        LayoutAnimation.spring();
+        this.setState({w: this.state.w + 15, h: this.state.h + 15});
+    }
+
+    onPress1(){
+        Animated.parallel(['fadeInOpacity', 'rotation', 'fontSize'].map(property => {
+            return Animated.timing(this.state[property], {
+                toValue: 1,
+                duration: 1000,
+                easing: Easing.linear
+            });
+        })).start();
+    }
+
     /**
      * 组件更新
      * @returns {XML}
@@ -136,40 +169,94 @@ export default class AnimationDemo extends Component {
         this.renderCount++;
         console.log("AnimationDemo", "render() renderCount:" + this.renderCount);
         return (
-            <View style={AnimationDemoStyles.container}>
-                <Animatable.View animation="zoomIn" style={{}}>
-                    <Animatable.View animation="zoomOutLeft" delay={1000} style={AnimationDemoStyles.view}/>
-                    <Animatable.View style={{marginTop:10,alignSelf:"center",height:100,width:100}}>
-                        <Animatable.View
-                            animation="pulse" easing="ease-out" delay={0} iterationCount={1} style={AnimationDemoStyles.pulseView}>
-                            <Badge
-                                extraPaddingHorizontal={10}
-                                ref={(ref)=>{this.badgeView = ref}}
-                                minWidth={10} minHeight={10} textStyle={{color: '#fff',fontSize:8}} style={{position:'absolute',right:0,bottom:0}}>
-                                {this.badge.count}
-                            </Badge>
-                            <Text onPress={()=>{this.setAnim()}}>teqw</Text>
-                        </Animatable.View>
+            <ScrollView  style={AnimationDemoStyles.container}>
+                <Animatable.View animation="zoomIn">
+                    <Text style={AnimationDemoStyles.textBtn} onPress={() => {
+                        this.setAnim()
+                    }}>
+                        zoomIn动画
+                    </Text>
+                    <View style={[AnimationDemoStyles.views]}>
+                        <Text style={AnimationDemoStyles.textBtn} onPress={() => {
+                            this.refZoom && this.refZoom.zoomOutLeft();
+                        }}>
+                            zoomOutLeft动画
+                        </Text>
+                        <Animatable.View  ref={(ref)=>{this.refZoom = ref}} style={AnimationDemoStyles.zoomOut}/>
+                    </View>
+                    <Animatable.View style={AnimationDemoStyles.views}>
+                        <Text style={AnimationDemoStyles.textBtn} onPress={() => {
+                            this.setAnim()
+                        }}>
+                            冒泡动画
+                        </Text>
+                        <Badge
+                            extraPaddingHorizontal={10}
+                            ref={(ref) => {
+                                this.badgeView = ref
+                            }}
+                            minWidth={10} minHeight={10} textStyle={{color: '#fff', fontSize: 8}}
+                            style={{position: 'absolute', right: 200, top: 20}}>
+                            {this.badge.count}
+                        </Badge>
                     </Animatable.View>
 
+                    {/*举个例子，你可能希望你的Animated.Value从0变化到1时，把组件的位置从150px移动到0px，不透明度从0到1。
+                     可以通过以下的方法修改style属性来实现：*/}
+                    <View style={[AnimationDemoStyles.views,{height: 200}]}>
+                        <Text style={AnimationDemoStyles.textBtn} onPress={()=>{this.animFade.start()}}>
+                            位移动画
+                        </Text>
+                        <Animated.View
+                            style={{
+                                margin: 10, opacity: this.state.fadeAnim, width: 200,
+                                transform: [{
+                                    //interpolate 在更新属性之前对值进行插值。譬如：把0-1映射到0-10。
+                                    translateY: this.state.fadeAnim.interpolate({
+                                        inputRange: [0, 1],
+                                        outputRange: [150, 0]  // 0 : 150, 0.5 : 75, 1 : 0
+                                    })
+                                }]
+                            }}>
+                            <Text onPress={() => {
+                            }} style={{backgroundColor: "white"}}>自定义动画</Text>
+                        </Animated.View>
+                    </View>
+                    <View style={AnimationDemoStyles.views}>
+
+                        <View style={[{width: this.state.w, height: this.state.h,backgroundColor:"red"}]} />
+                        <Text style={[AnimationDemoStyles.textBtn,{backgroundColor:"white",width:200,marginTop:10}]} onPress={()=>{this.onPress()}}>
+                            位移动画
+                        </Text>
+                    </View>
+                    <View style={[AnimationDemoStyles.views,{height: 150}]}>
+                        <Text style={AnimationDemoStyles.textBtn} onPress={()=>{this.onPress1()}}>
+                            插值动画
+                        </Text>
+                        <Animated.View style={[ {
+                            opacity: this.state.fadeInOpacity,
+                            transform: [{
+                                rotateZ: this.state.rotation.interpolate({
+                                    inputRange: [0,1],
+                                    outputRange: ['0deg', '360deg']
+                                })
+                            }]
+                        }]}><Animated.Text style={{
+                            fontSize: this.state.fontSize.interpolate({
+                                inputRange: [0,1],
+                                outputRange: [12,26]
+                            })
+                        }}>Parallel并行渲染，interpolate插值实现数值转换</Animated.Text>
+                        </Animated.View>
+                    </View>
 
                 </Animatable.View>
-                <Animated.View
-                    style={{marginTop:20,
-                        opacity: this.state.fadeAnim,
-                        transform: [{
-                        translateY: this.state.fadeAnim.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [150, 0]  // 0 : 150, 0.5 : 75, 1 : 0
-                    }),
-                    }]}}>
-                    <Text style={{backgroundColor:"white"}}>dawdawdawd</Text>
-                </Animated.View>
-            </View>
+            </ScrollView>
+
         );
     }
 
-    setAnim(){
+    setAnim() {
         this.badgeView && this.badgeView._container.pulse();
         this.badgeView.setNativeState(++this.badge.count);
     }
@@ -180,16 +267,25 @@ const AnimationDemoStyles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#333",
+        padding: 5,
     },
-    view: {
+    views: {
+        marginTop: 10,
+        width: width,
+        padding: 10,
+        backgroundColor: "#999",alignSelf: "center",
+    },
+    animZoomoutLeft: {
+        width: width,
+        backgroundColor: "#aaa",
+    },
+    zoomOut: {
         height: 30,
-        margin: 10,
+        padding: 10,
         backgroundColor: "red",
-        marginTop:100
+        marginTop: 10
     },
-    pulseView: {
-        flex: 1,
-        backgroundColor:"yellow",
-        flexDirection:"column"
+    textBtn: {
+        fontSize: 26
     },
 });
