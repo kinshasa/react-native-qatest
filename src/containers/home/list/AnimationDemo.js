@@ -226,7 +226,7 @@ export default class AnimationDemo extends Component {
 
                         <View style={[{width: this.state.w, height: this.state.h,backgroundColor:"red"}]} />
                         <Text style={[AnimationDemoStyles.textBtn,{backgroundColor:"white",width:200,marginTop:10}]} onPress={()=>{this.onPress()}}>
-                            位移动画
+                            LayoutAnimation
                         </Text>
                     </View>
                     <View style={[AnimationDemoStyles.views,{height: 150}]}>
@@ -273,7 +273,8 @@ const AnimationDemoStyles = StyleSheet.create({
         marginTop: 10,
         width: width,
         padding: 10,
-        backgroundColor: "#999",alignSelf: "center",
+        backgroundColor: "#999",
+        alignSelf: "center",
     },
     animZoomoutLeft: {
         width: width,

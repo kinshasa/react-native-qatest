@@ -18,7 +18,7 @@ import {
     Slider
 } from 'react-native';
 
-import Parabola from 'react-native-smart-parabola'
+import Parabola from '../../../components/animation/parabola'
 import Button from 'react-native-smart-button'
 import image_cart from '../../../assets/home.png'
 
