@@ -27,8 +27,8 @@ import VerticalViewPager from './containers/home/list/VerticalViewPager';
 export default  scenes = Actions.create(
     <Scene key="root">
         <Scene key="Launcher" component={Launcher} des={"启动器"} hideNavBar={true}/>
-        <Scene key="CartAnimation" component={CartAnimation} des={"购物车动画"} hideNavBar={false}/>
-        <Scene key="AnimationDemo" component={AnimationDemo} des={"动画Demo"} hideNavBar={false}/>
+        <Scene key="CartAnimation" component={CartAnimation} des={"购物车动画"} hideNavBar={true}/>
+        <Scene key="AnimationDemo" component={AnimationDemo} des={"动画Demo"} hideNavBar={true}/>
         <Scene key="LayoutXYDemo" component={LayoutXYDemo} des={"Layout布局"} hideNavBar={true}/>
         <Scene key="PicStore" component={PicStore} des={"图标库"} hideNavBar={false}/>
         <Scene key="SwipeList" component={SwipeList} des={"Swipe组件"} hideNavBar={true}/>
