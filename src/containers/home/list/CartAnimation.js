@@ -385,30 +385,17 @@ export default class CartAnimation extends Component {
     }
 
     _renderParabola = ({index, translateX, translateY}) => {
-        if (true) {
-            return (
-                <Image
-                    key={`'img-parabola-ball-'${index}`}
-                    resizeMode={"center"}
-                    style={[
-                        {position: 'absolute',},    //Don't forget to set this
-                        {width: 80, height: 50, justifyContent: 'center', borderRadius: 10,},
-                        {transform: [{translateX}, {translateY}]},
-                    ]}
-                    source={img_logo}/>
-            );
-        }
         return (
-            <View
-                key={`'parabola-ball-'${index}`}
+            <Image
+                key={`'img-parabola-ball-'${index}`}
+                resizeMode={"center"}
                 style={[
-                {position: 'absolute',},    //Don't forget to set this
-                {width: 20, height: 20, borderRadius: 10, backgroundColor: 'red',},
-                {transform: [{translateX}, {translateY}]},
-           ]}
-            >
-            </View>
-        )
+                    {position: 'absolute',},    //Don't forget to set this
+                    {width: 80, height: 50, justifyContent: 'center', borderRadius: 10,},
+                    {transform: [{translateX}, {translateY}]},
+                ]}
+                source={img_logo}/>
+        );
     }
 
 }

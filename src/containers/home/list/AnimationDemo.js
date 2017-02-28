@@ -216,6 +216,12 @@ export default class AnimationDemo extends Component {
                                         inputRange: [0, 1],
                                         outputRange: [150, 0]  // 0 : 150, 0.5 : 75, 1 : 0
                                     })
+                                }, {
+                                    //interpolate 在更新属性之前对值进行插值。譬如：把0-1映射到0-10。
+                                    translateX: this.state.fadeAnim.interpolate({
+                                        inputRange: [0, 1],
+                                        outputRange: [150, 0]  // 0 : 150, 0.5 : 75, 1 : 0
+                                    })
                                 }]
                             }}>
                             <Text onPress={() => {
