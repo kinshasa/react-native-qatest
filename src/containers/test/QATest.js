@@ -130,7 +130,7 @@ export default class QATest extends Component {
         return (
             <View style={QATestStyles.container}>
                 <TitleBar
-                    label="性能测试"
+                    label="品质测试"
                     labelStyle={{backgroundColor:"transparent",color:"black"}}
                     leftView={<Icon.Button name="list-ul" size={25} color="#166AF6" backgroundColor="transparent"
                                            onPress={()=>{alert("click android logo")}}/>}

@@ -149,13 +149,15 @@ export default class AnimationDemo extends Component {
     }
 
     onPress() {
-        // 让视图的尺寸变化以动画形式展现
+        // 在setState之前调用，让视图的尺寸变化以动画形式展现
         LayoutAnimation.spring();
         this.setState({w: this.state.w + 15, h: this.state.h + 15});
     }
 
     onPress1(){
+        //并行渲染 透明度，视图旋转，字体大小
         Animated.parallel(['fadeInOpacity', 'rotation', 'fontSize'].map(property => {
+            //timing 渐变动画
             return Animated.timing(this.state[property], {
                 toValue: 1,
                 duration: 1000,
@@ -165,6 +167,7 @@ export default class AnimationDemo extends Component {
     }
 
     onPress3(){
+        //spring弹性动画
         this.state.bounceValue.setValue(1.5);     // 设置一个较大的初始值
         Animated.spring(                          // 可选的基本动画类型: spring, decay, timing
             this.state.bounceValue,                 // 将`bounceValue`值动画化
@@ -199,8 +202,8 @@ export default class AnimationDemo extends Component {
                         <Badge
                             extraPaddingHorizontal={10}
                             ref={(ref) => {this.badgeView = ref}}
-                            minWidth={10} minHeight={10} textStyle={{color: '#fff', fontSize: 8}}
-                            style={{position: 'absolute', right: 200, top: 20}}>
+                            minWidth={10} minHeight={10} textStyle={{color: '#fff', fontSize: 18}}
+                            style={{position: 'absolute', right: 200, top: 13}}>
                             {this.badge.count}
                         </Badge>
                     </Animatable.View>

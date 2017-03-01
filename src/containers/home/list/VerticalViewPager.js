@@ -11,7 +11,10 @@ import {
     StyleSheet,
     View,
     Text,
+    Dimensions
 } from 'react-native';
+
+const {height, width} = Dimensions.get('window');
 
 export default class VerticalViewPager extends Component {
 
@@ -127,7 +130,8 @@ export default class VerticalViewPager extends Component {
         console.log("VerticalViewPager", "render() renderCount:" + this.renderCount);
         return (
             <View style={VerticalViewPagerStyles.container}>
-
+                <View style={VerticalViewPagerStyles.topView}></View>
+                <View style={VerticalViewPagerStyles.bottomView}></View>
             </View>
         );
     }
@@ -138,4 +142,14 @@ const VerticalViewPagerStyles = StyleSheet.create({
     container: {
         flex: 1,
     },
+    topView:{
+        width:width,
+        height:500,
+        backgroundColor:"#aaa"
+    },
+    bottomView:{
+        width:width,
+        height:500,
+        backgroundColor:"#999"
+    }
 });

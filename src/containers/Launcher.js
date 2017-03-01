@@ -189,7 +189,7 @@ export default class Launcher extends Component {
                 hidesTabTouch={true}
             >
                 {this.renderTabItem("T1", "组件开发", LAUNCHER_IMG_HOME, LAUNCHER_IMG_HOME_SELECT,<HomePage/>,0)}
-                {this.renderTabItem("T2", "性能测试", LAUNCHER_IMG_TEST, LAUNCHER_IMG_TEST_SELECT, <QATest />,0)}
+                {this.renderTabItem("T2", "品质测试", LAUNCHER_IMG_TEST, LAUNCHER_IMG_TEST_SELECT, <QATest />,0)}
                 {this.renderTabItem("T3", "其他设置", LAUNCHER_IMG_SETTING, LAUNCHER_IMG_SETTING_SELECT, <Setting />,1)}
             </TabNavigator>
         );
