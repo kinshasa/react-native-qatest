@@ -21,10 +21,12 @@ import HomePage from "../containers/home/HomePage"
 import UserCenter from "../containers/user/UserCenter"
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const LAUNCHER_IMG_HOME = ()=><Icon name="ios-home-outline" size={30} color="#4F8EF7"/>;
-const LAUNCHER_IMG_HOME_SELECT = ()=><Icon name="ios-home" size={30} color="#4F8EF7"/>;
-const LAUNCHER_IMG_USER = ()=><Icon name="ios-people-outline" size={30} color="#4F8EF7"/>;
-const LAUNCHER_IMG_USER_SELECT = ()=><Icon name="ios-people" size={30} color="#4F8EF7"/>;
+const LAUNCHER_IMG_HOME = ()=><Icon name="ios-home-outline" size={30} color="black"/>;
+const LAUNCHER_IMG_HOME_SELECT = ()=><Icon name="ios-home" size={30} color="#166AF6"/>;
+const LAUNCHER_IMG_TEST = ()=><Icon name="ios-cloud-upload-outline" size={30} color="black"/>;
+const LAUNCHER_IMG_TEST_SELECT = ()=><Icon name="ios-cloud-upload" size={30} color="#166AF6"/>;
+const LAUNCHER_IMG_USER = ()=><Icon name="ios-settings-outline" size={30} color="black"/>;
+const LAUNCHER_IMG_USER_SELECT = ()=><Icon name="ios-settings" size={30} color="#4F8EF7"/>;
 
 var time1 = new Date();
 export default class Launcher extends Component {
@@ -155,20 +157,18 @@ export default class Launcher extends Component {
      * @param childView TableItem中的View
      * @returns {XML}
      */
-    renderTabItem(tag, title, img, selectedImg, childView) {
+    renderTabItem(tag, title, img, selectedImg, childView,badgeNum) {
         return (
             <TabNavigator.Item
                 selected={this.state.selectedTab === tag}
                 title={title}
-                renderIcon={
-                        img
-                        /*<Image style={LauncherStyles.tabIcon} source={selectedImg} />*/
-                    }
-                renderSelectedIcon={
-                        selectedImg
-                        /*<Image style={LauncherStyles.tabIcon} source={selectedImg} />*/
-                    }
-                badgeText="1"
+                titleStyle={{color:"black"}}
+                selectedTitleStyle={{color:"#166AF6"}}
+                renderIcon={img}
+                renderSelectedIcon={selectedImg}
+                badgeText={badgeNum}
+                tabStyle={LauncherStyles.tabStyle}
+                allowFontScaling={false}
                 onPress={() => this.setState({ selectedTab: tag})}>
                 {childView}
             </TabNavigator.Item>
@@ -182,12 +182,14 @@ export default class Launcher extends Component {
     renderTable() {
         return (
             <TabNavigator
-                tabBarStyle={LauncherStyles.tab}
+                tabBarShadowStyle={{backgroundColor:"black"}}
+                sceneStyle={LauncherStyles.sceneStyle}
+                tabBarStyle={LauncherStyles.tabBarStyle}
                 hidesTabTouch={true}
             >
-                {this.renderTabItem("T1", "首页", LAUNCHER_IMG_HOME, LAUNCHER_IMG_HOME_SELECT,
-                    <HomePage style={{backgroundColor:"#fff"}}/>)}
-                {this.renderTabItem("T2", "用户中心", LAUNCHER_IMG_USER, LAUNCHER_IMG_USER_SELECT, <UserCenter />)}
+                {this.renderTabItem("T1", "组件开发", LAUNCHER_IMG_HOME, LAUNCHER_IMG_HOME_SELECT,<HomePage/>,0)}
+                {this.renderTabItem("T2", "性能测试", LAUNCHER_IMG_TEST, LAUNCHER_IMG_TEST_SELECT, <UserCenter />,0)}
+                {this.renderTabItem("T3", "其他设置", LAUNCHER_IMG_USER, LAUNCHER_IMG_USER_SELECT, <UserCenter />,1)}
             </TabNavigator>
         );
     }
@@ -218,11 +220,15 @@ const LauncherStyles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    tab: {
-        height: 55,
-        backgroundColor: 'white',
+    sceneStyle:{
+        backgroundColor: '#fff',
+    },
+    tabBarStyle: {
+        height: 60,
+        backgroundColor: '#eee',
         alignItems: 'center',
     },
+    tabStyle:{height:60, backgroundColor:"#eee"},
     tabIcon: {
         width: 30,
         height: 30,
