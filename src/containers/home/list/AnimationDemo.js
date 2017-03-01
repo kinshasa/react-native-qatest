@@ -24,7 +24,9 @@ import * as Animatable from 'react-native-animatable';
 import Badge from '../../../components/badge/Badge'
 
 const {height, width} = Dimensions.get('window');
+
 UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+
 export default class AnimationDemo extends Component {
 
     /**
@@ -61,7 +63,8 @@ export default class AnimationDemo extends Component {
             h: 100,
             fadeInOpacity: new Animated.Value(0),
             rotation: new Animated.Value(0),
-            fontSize: new Animated.Value(0)
+            fontSize: new Animated.Value(0),
+            bounceValue:new Animated.Value(0)
         };
         this.badge = {count: 0};
 
@@ -161,6 +164,17 @@ export default class AnimationDemo extends Component {
         })).start();
     }
 
+    onPress3(){
+        this.state.bounceValue.setValue(1.5);     // 设置一个较大的初始值
+        Animated.spring(                          // 可选的基本动画类型: spring, decay, timing
+            this.state.bounceValue,                 // 将`bounceValue`值动画化
+            {
+                toValue: 0.8,                         // 将其值以动画的形式改到一个较小值
+                friction: 1,                          // Bouncier spring
+            }
+        ).start();                                // 开始执行动画
+    }
+
     /**
      * 组件更新
      * @returns {XML}
@@ -171,30 +185,20 @@ export default class AnimationDemo extends Component {
         return (
             <ScrollView  style={AnimationDemoStyles.container}>
                 <Animatable.View animation="zoomIn">
-                    <Text style={AnimationDemoStyles.textBtn} onPress={() => {
-                        this.setAnim()
-                    }}>
-                        zoomIn动画
-                    </Text>
+                    <Text style={AnimationDemoStyles.textBtn}>{'zoomIn动画'}</Text>
                     <View style={[AnimationDemoStyles.views]}>
-                        <Text style={AnimationDemoStyles.textBtn} onPress={() => {
-                            this.refZoom && this.refZoom.zoomOutLeft();
-                        }}>
-                            zoomOutLeft动画
+                        <Text style={AnimationDemoStyles.textBtn} onPress={() => {this.refZoom && this.refZoom.zoomOutLeft();}}>
+                            {'zoomOutLeft动画'}
                         </Text>
                         <Animatable.View  ref={(ref)=>{this.refZoom = ref}} style={AnimationDemoStyles.zoomOut}/>
                     </View>
                     <Animatable.View style={AnimationDemoStyles.views}>
-                        <Text style={AnimationDemoStyles.textBtn} onPress={() => {
-                            this.setAnim()
-                        }}>
-                            冒泡动画
+                        <Text style={AnimationDemoStyles.textBtn} onPress={() => {this.setAnim() }}>
+                            {'冒泡动画'}
                         </Text>
                         <Badge
                             extraPaddingHorizontal={10}
-                            ref={(ref) => {
-                                this.badgeView = ref
-                            }}
+                            ref={(ref) => {this.badgeView = ref}}
                             minWidth={10} minHeight={10} textStyle={{color: '#fff', fontSize: 8}}
                             style={{position: 'absolute', right: 200, top: 20}}>
                             {this.badge.count}
@@ -211,21 +215,20 @@ export default class AnimationDemo extends Component {
                             style={{
                                 margin: 10, opacity: this.state.fadeAnim, width: 200,
                                 transform: [{
-                                    //interpolate 在更新属性之前对值进行插值。譬如：把0-1映射到0-10。
+                                    //interpolate 在更新属性之前对值进行插值。把该组件从150位置Y轴移动到0
                                     translateY: this.state.fadeAnim.interpolate({
                                         inputRange: [0, 1],
-                                        outputRange: [150, 0]  // 0 : 150, 0.5 : 75, 1 : 0
+                                        outputRange: [150, 0]
                                     })
                                 }, {
-                                    //interpolate 在更新属性之前对值进行插值。譬如：把0-1映射到0-10。
+                                    //interpolate 在更新属性之前对值进行插值。
                                     translateX: this.state.fadeAnim.interpolate({
                                         inputRange: [0, 1],
-                                        outputRange: [150, 0]  // 0 : 150, 0.5 : 75, 1 : 0
+                                        outputRange: [150, 0]
                                     })
                                 }]
                             }}>
-                            <Text onPress={() => {
-                            }} style={{backgroundColor: "white"}}>自定义动画</Text>
+                            <Text style={{backgroundColor: "white"}}>自定义动画</Text>
                         </Animated.View>
                     </View>
                     <View style={AnimationDemoStyles.views}>
@@ -237,7 +240,7 @@ export default class AnimationDemo extends Component {
                     </View>
                     <View style={[AnimationDemoStyles.views,{height: 150}]}>
                         <Text style={AnimationDemoStyles.textBtn} onPress={()=>{this.onPress1()}}>
-                            插值动画
+                            插值并行动画
                         </Text>
                         <Animated.View style={[ {
                             opacity: this.state.fadeInOpacity,
@@ -247,14 +250,30 @@ export default class AnimationDemo extends Component {
                                     outputRange: ['0deg', '360deg']
                                 })
                             }]
-                        }]}><Animated.Text style={{
-                            fontSize: this.state.fontSize.interpolate({
-                                inputRange: [0,1],
-                                outputRange: [12,26]
-                            })
-                        }}>Parallel并行渲染，interpolate插值实现数值转换</Animated.Text>
+                        }]}>
+                            <Animated.Text style={{
+                                fontSize: this.state.fontSize.interpolate({
+                                    inputRange: [0, 1],
+                                    outputRange: [12, 26]
+                                })
+                            }}>Parallel并行渲染，interpolate插值实现数值转换</Animated.Text>
                         </Animated.View>
                     </View>
+                    <View style={[AnimationDemoStyles.views,{height: 150}]}>
+                        <Text style={AnimationDemoStyles.textBtn} onPress={()=>{this.onPress3()}}>
+                            弹跳
+                        </Text>
+                        <Animated.Image                         // 可选的基本组件类型: Image, Text, View
+                            source={{uri: 'http://i.imgur.com/XMKOH81.jpg'}}
+                            style={{
+                                flex: 1,
+                                transform: [                        // `transform`是一个有序数组（动画按顺序执行）
+                                    {scale: this.state.bounceValue},  // 将`bounceValue`赋值给 `scale`
+                                ]
+                            }}
+                        />
+                    </View>
+
 
                 </Animatable.View>
             </ScrollView>
