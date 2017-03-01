@@ -18,15 +18,16 @@ import ScrollableTabView, {ScrollableTabBar,} from 'react-native-scrollable-tab-
 import TabNavigator from 'react-native-tab-navigator';
 
 import HomePage from "../containers/home/HomePage"
-import UserCenter from "../containers/user/UserCenter"
+import Setting from "./set/Setting"
+import QATest from "./test/QATest"
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const LAUNCHER_IMG_HOME = ()=><Icon name="ios-compass-outline" size={25} color="black"/>;
 const LAUNCHER_IMG_HOME_SELECT = ()=><Icon name="ios-compass" size={25} color="#166AF6"/>;
 const LAUNCHER_IMG_TEST = ()=><Icon name="ios-cloud-circle-outline" size={25} color="black"/>;
 const LAUNCHER_IMG_TEST_SELECT = ()=><Icon name="ios-cloud-circle" size={25} color="#166AF6"/>;
-const LAUNCHER_IMG_USER = ()=><Icon name="ios-contact-outline" size={25} color="black"/>;
-const LAUNCHER_IMG_USER_SELECT = ()=><Icon name="ios-contact" size={25} color="#4F8EF7"/>;
+const LAUNCHER_IMG_SETTING = ()=><Icon name="ios-contact-outline" size={25} color="black"/>;
+const LAUNCHER_IMG_SETTING_SELECT = ()=><Icon name="ios-contact" size={25} color="#4F8EF7"/>;
 
 var time1 = new Date();
 export default class Launcher extends Component {
@@ -188,8 +189,8 @@ export default class Launcher extends Component {
                 hidesTabTouch={true}
             >
                 {this.renderTabItem("T1", "组件开发", LAUNCHER_IMG_HOME, LAUNCHER_IMG_HOME_SELECT,<HomePage/>,0)}
-                {this.renderTabItem("T2", "性能测试", LAUNCHER_IMG_TEST, LAUNCHER_IMG_TEST_SELECT, <UserCenter />,0)}
-                {this.renderTabItem("T3", "其他设置", LAUNCHER_IMG_USER, LAUNCHER_IMG_USER_SELECT, <UserCenter />,1)}
+                {this.renderTabItem("T2", "性能测试", LAUNCHER_IMG_TEST, LAUNCHER_IMG_TEST_SELECT, <QATest />,0)}
+                {this.renderTabItem("T3", "其他设置", LAUNCHER_IMG_SETTING, LAUNCHER_IMG_SETTING_SELECT, <Setting />,1)}
             </TabNavigator>
         );
     }

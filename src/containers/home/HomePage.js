@@ -90,7 +90,7 @@ export default class HomePage extends Component {
     render() {
         this.renderCount++;
         console.log("HomePage", "render() renderCount:" + this.renderCount);
-        var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         return (
             <View style={HomePageStyles.container}>
                 <TitleBar
