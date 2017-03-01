@@ -63,7 +63,7 @@ export default class TitleBar extends Component {
     componentDidUpdate(prevProps, prevState) {
     }
 
-    componentDidUnMount() {
+    componentWillUnMount() {
 
     }
 
@@ -71,7 +71,7 @@ export default class TitleBar extends Component {
         this.renderCount++;
         console.log("TitleBar", "render() renderCount:" + this.renderCount);
         console.log("TitleBar",this._reactInternalInstance._currentElement.type.displayName);
-        var {style, ...other} = this.props;
+        let {style, ...other} = this.props;
         let styles = [TitleBarStyles.container, style];
         return (
             <View{...other} style={styles}>
@@ -86,29 +86,35 @@ export default class TitleBar extends Component {
     }
 
     renderLeftView() {
-        let titleLeft = [TitleBarStyles.titleLeft, this.props.titleLeft];
+        if(this.props.leftView){
+            return this.props.leftView;
+        }
+        let titleLeft = [TitleBarStyles.leftStyle, this.props.leftStyle];
         return (
             <Text style={titleLeft} onPress={()=>{try{Actions.pop()}catch(e){alert(e.message)}}}> {"返回"} </Text>
         );
     }
 
     renderCenterView() {
-        let titleCenter = [TitleBarStyles.titleCenter, this.props.titleCenter];
-        let titleLabelCenter = [TitleBarStyles.titleLabelCenter, this.props.titleLabelCenter];
-        let titleLabel = this.props.title || "标题";
-
         if (this.props.centerView) {
             return this.props.centerView;
         }
+        let titleStyle = [TitleBarStyles.centerStyle, this.props.centerStyle];
+        let labelStyle = [TitleBarStyles.labelStyle, this.props.labelStyle];
+        let label = this.props.label || "标题";
+
         return (
-            <View style={titleCenter}>
-                <Text style={titleLabelCenter}> {titleLabel} </Text>
+            <View style={titleStyle}>
+                <Text style={labelStyle}> {label} </Text>
             </View>
         );
     }
 
     renderRightView() {
-        let titleRight = [TitleBarStyles.titleRight, this.props.titleRight];
+        if(this.props.rightView){
+            return this.props.rightView;
+        }
+        let titleRight = [TitleBarStyles.rightStyle, this.props.rightStyle];
         return (
             <Text style={titleRight} onPress={()=>{alert("菜单")}}> {"菜单"} </Text>
         );
@@ -123,8 +129,8 @@ const TitleBarStyles = StyleSheet.create({
         backgroundColor: '#EEEEEE',
         flexDirection: "row"
     },
-    titleLeft: {marginLeft: 10},
-    titleRight: {marginRight: 10},
-    titleCenter: {flex: 1, alignSelf: "center", alignItems: "center"},
-    titleLabelCenter: {backgroundColor: "#AAAAAA",},
+    leftStyle: {marginLeft: 10},
+    centerStyle: {flex: 1, alignSelf: "center", alignItems: "center"},
+    rightStyle: {marginRight: 10},
+    labelStyle: {backgroundColor: "transparent",},
 });

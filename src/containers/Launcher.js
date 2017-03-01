@@ -21,12 +21,12 @@ import HomePage from "../containers/home/HomePage"
 import UserCenter from "../containers/user/UserCenter"
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const LAUNCHER_IMG_HOME = ()=><Icon name="ios-home-outline" size={30} color="black"/>;
-const LAUNCHER_IMG_HOME_SELECT = ()=><Icon name="ios-home" size={30} color="#166AF6"/>;
-const LAUNCHER_IMG_TEST = ()=><Icon name="ios-cloud-upload-outline" size={30} color="black"/>;
-const LAUNCHER_IMG_TEST_SELECT = ()=><Icon name="ios-cloud-upload" size={30} color="#166AF6"/>;
-const LAUNCHER_IMG_USER = ()=><Icon name="ios-settings-outline" size={30} color="black"/>;
-const LAUNCHER_IMG_USER_SELECT = ()=><Icon name="ios-settings" size={30} color="#4F8EF7"/>;
+const LAUNCHER_IMG_HOME = ()=><Icon name="ios-compass-outline" size={25} color="black"/>;
+const LAUNCHER_IMG_HOME_SELECT = ()=><Icon name="ios-compass" size={25} color="#166AF6"/>;
+const LAUNCHER_IMG_TEST = ()=><Icon name="ios-cloud-circle-outline" size={25} color="black"/>;
+const LAUNCHER_IMG_TEST_SELECT = ()=><Icon name="ios-cloud-circle" size={25} color="#166AF6"/>;
+const LAUNCHER_IMG_USER = ()=><Icon name="ios-contact-outline" size={25} color="black"/>;
+const LAUNCHER_IMG_USER_SELECT = ()=><Icon name="ios-contact" size={25} color="#4F8EF7"/>;
 
 var time1 = new Date();
 export default class Launcher extends Component {
@@ -224,11 +224,11 @@ const LauncherStyles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     tabBarStyle: {
-        height: 60,
+        height: 50,
         backgroundColor: '#eee',
         alignItems: 'center',
     },
-    tabStyle:{height:60, backgroundColor:"#eee"},
+    tabStyle:{height:50, backgroundColor:"#eee"},
     tabIcon: {
         width: 30,
         height: 30,
