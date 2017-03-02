@@ -190,10 +190,10 @@ export default class AnimationDemo extends Component {
                 <Animatable.View animation="zoomIn">
                     <Text style={AnimationDemoStyles.textBtn}>{'zoomIn动画'}</Text>
                     <View style={[AnimationDemoStyles.views]}>
-                        <Text style={AnimationDemoStyles.textBtn} onPress={() => {this.refZoom && this.refZoom.zoomOutLeft();}}>
+                        <Text style={AnimationDemoStyles.textBtn} onPress={() => {this.refZoom && this.refZoom.zoomOutRight();}}>
                             {'zoomOutLeft动画'}
                         </Text>
-                        <Animatable.View  ref={(ref)=>{this.refZoom = ref}} style={AnimationDemoStyles.zoomOut}/>
+                        <Animatable.View animation="zoomOutLeft" delay={3000} ref={(ref)=>{this.refZoom = ref}} style={AnimationDemoStyles.zoomOut}/>
                     </View>
                     <Animatable.View style={AnimationDemoStyles.views}>
                         <Text style={AnimationDemoStyles.textBtn} onPress={() => {this.setAnim() }}>
@@ -210,7 +210,7 @@ export default class AnimationDemo extends Component {
 
                     {/*举个例子，你可能希望你的Animated.Value从0变化到1时，把组件的位置从150px移动到0px，不透明度从0到1。
                      可以通过以下的方法修改style属性来实现：*/}
-                    <View style={[AnimationDemoStyles.views,{height: 200}]}>
+                    <View style={[AnimationDemoStyles.views,{height: 100}]}>
                         <Text style={AnimationDemoStyles.textBtn} onPress={()=>{this.animFade.start()}}>
                             位移动画
                         </Text>
@@ -220,8 +220,8 @@ export default class AnimationDemo extends Component {
                                 transform: [{
                                     //interpolate 在更新属性之前对值进行插值。把该组件从150位置Y轴移动到0
                                     translateY: this.state.fadeAnim.interpolate({
-                                        inputRange: [0, 1],
-                                        outputRange: [150, 0]
+                                        inputRange: [0, 0.5,1],
+                                        outputRange: [150, 100,0]
                                     })
                                 }, {
                                     //interpolate 在更新属性之前对值进行插值。
@@ -229,7 +229,7 @@ export default class AnimationDemo extends Component {
                                         inputRange: [0, 1],
                                         outputRange: [150, 0]
                                     })
-                                }]
+                                },]
                             }}>
                             <Text style={{backgroundColor: "white"}}>自定义动画</Text>
                         </Animated.View>

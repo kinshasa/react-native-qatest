@@ -11,7 +11,9 @@ import {
     StyleSheet,
     View,
     Text,
-    Dimensions
+    Dimensions,
+    TouchableNativeFeedback,
+    ScrollView
 } from 'react-native';
 
 const {height, width} = Dimensions.get('window');
@@ -126,13 +128,18 @@ export default class VerticalViewPager extends Component {
      * @returns {XML}
      */
     render() {
+        console.log(height);
         this.renderCount++;
         console.log("VerticalViewPager", "render() renderCount:" + this.renderCount);
         return (
-            <View style={VerticalViewPagerStyles.container}>
-                <View style={VerticalViewPagerStyles.topView}></View>
-                <View style={VerticalViewPagerStyles.bottomView}></View>
-            </View>
+            <ScrollView style={VerticalViewPagerStyles.container}>
+                <View style={VerticalViewPagerStyles.topView}>
+                    <Text> 上拉加载更多</Text>
+                </View>
+                <View style={VerticalViewPagerStyles.bottomView}>
+                    <Text> 下拉返回商品</Text>
+                </View>
+            </ScrollView>
         );
     }
 
@@ -144,12 +151,14 @@ const VerticalViewPagerStyles = StyleSheet.create({
     },
     topView:{
         width:width,
-        height:500,
-        backgroundColor:"#aaa"
+        height:height-20,
+        backgroundColor:"#aaa",
+        justifyContent:"flex-end",
+        alignItems:"center"
     },
     bottomView:{
         width:width,
-        height:500,
+        height:height,
         backgroundColor:"#999"
     }
 });
