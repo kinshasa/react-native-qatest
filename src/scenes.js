@@ -22,7 +22,8 @@ import PicStore from './containers/home/list/PicStore';
 import SwipeList from './containers/home/list/SwipeList';
 import RCTComponents from './containers/home/list/RCTComponents';
 import VerticalViewPager from './containers/home/list/VerticalViewPager';
-
+import TabView from './containers/home/list/TabView';
+import SCrollPageView from './containers/home/list/SCrollPageView';
 
 export default  scenes = Actions.create(
     <Scene key="root">
@@ -33,6 +34,9 @@ export default  scenes = Actions.create(
         <Scene key="PicStore" component={PicStore} des={"图标库"} hideNavBar={false}/>
         <Scene key="SwipeList" component={SwipeList} des={"Swipe组件"} hideNavBar={true}/>
         <Scene key="RCTComponents" component={RCTComponents} des={"原生组件"} hideNavBar={true}/>
-        <Scene key="VerticalViewPager" component={VerticalViewPager} des={"竖向轮播"} hideNavBar={true}/>
+        <Scene key="VerticalViewPager" component={VerticalViewPager} des={"VerticalViewPager"} hideNavBar={true}/>
+        <Scene key="TabView" component={TabView} des={"TableView"} hideNavBar={true}/>
+        <Scene key="SCrollPageView" component={SCrollPageView} des={"SCrollPageView"} hideNavBar={true}/>
+
     </Scene>
 );

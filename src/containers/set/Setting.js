@@ -92,6 +92,7 @@ export default class Setting extends Component {
 
 const SettingStyles = StyleSheet.create({
     container: {
-        flex: 1,
+        height:200,
+        backgroundColor:"#aaa"
     },
 });

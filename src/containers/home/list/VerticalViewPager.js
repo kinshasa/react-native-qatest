@@ -17,6 +17,13 @@ import {
 } from 'react-native';
 
 const {height, width} = Dimensions.get('window');
+import HomePage from '../HomePage'
+import Settings from '../../set/Setting'
+import QATest from '../../test/QATest'
+
+import AddPaging from 'react-native-paged-scroll-view/index'
+var PagedScrollView = AddPaging(ScrollView)
+
 
 export default class VerticalViewPager extends Component {
 
@@ -132,14 +139,11 @@ export default class VerticalViewPager extends Component {
         this.renderCount++;
         console.log("VerticalViewPager", "render() renderCount:" + this.renderCount);
         return (
-            <ScrollView style={VerticalViewPagerStyles.container}>
-                <View style={VerticalViewPagerStyles.topView}>
-                    <Text> 上拉加载更多</Text>
-                </View>
-                <View style={VerticalViewPagerStyles.bottomView}>
-                    <Text> 下拉返回商品</Text>
-                </View>
-            </ScrollView>
+            <PagedScrollView style={VerticalViewPagerStyles.container}>
+                <HomePage tabLabel="HomePage"/>
+                <Settings tabLabel="Settings"/>
+                <QATest tabLabel="QATest"/>
+            </PagedScrollView>
         );
     }
 
@@ -149,16 +153,16 @@ const VerticalViewPagerStyles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    topView:{
-        width:width,
-        height:height-20,
-        backgroundColor:"#aaa",
-        justifyContent:"flex-end",
-        alignItems:"center"
+    topView: {
+        width: width,
+        height: height - 20,
+        backgroundColor: "#aaa",
+        justifyContent: "flex-end",
+        alignItems: "center"
     },
-    bottomView:{
-        width:width,
-        height:height,
-        backgroundColor:"#999"
+    bottomView: {
+        width: width,
+        height: height,
+        backgroundColor: "#999"
     }
 });

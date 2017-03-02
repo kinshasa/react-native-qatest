@@ -1,8 +1,8 @@
 /**
  * @Author: liushaobo2005@163.com
- * @Date: 2017.3.1 下午 3:33
- * @Desc: 公共组件 - QATest
- * @Name: QATest.js
+ * @Date: 2017.3.2 上午 11:17
+ * @Desc: 公共组件 - TabView
+ * @Name: TabView.js
  * @LifeCycle：http://www.tuicool.com/articles/nu6zInB
  */
 
@@ -12,10 +12,13 @@ import {
     View,
     Text,
 } from 'react-native';
-import TitleBar from "../../components/bar/TitleBar"
-import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default class QATest extends Component {
+import ScrollableTabView from'react-native-scrollable-tab-view';
+import HomePage from '../HomePage'
+import Settings from '../../set/Setting'
+import QATest from '../../test/QATest'
+
+export default class TabView extends Component {
 
     /**
      * 父组件传入的属性值
@@ -43,7 +46,7 @@ export default class QATest extends Component {
      * @param context
      */
     constructor(props, context) {
-        console.log("QATest", "constructor()");
+        console.log("TabView", "constructor()");
         super(props, context);
         this.state = {};
     }
@@ -59,7 +62,7 @@ export default class QATest extends Component {
      * 生命周期中仅被调用1次，可以使用SetState
      */
     componentWillMount() {
-        console.log("QATest", "componentWillMount()");
+        console.log("TabView", "componentWillMount()");
     }
 
     /**
@@ -68,7 +71,7 @@ export default class QATest extends Component {
      * 用于网络请求和页面渲染
      */
     componentDidMount() {
-        console.log("QATest", "componentDidMount()");
+        console.log("TabView", "componentDidMount()");
     }
 
     /**
@@ -77,7 +80,7 @@ export default class QATest extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("QATest", "componentWillReceiveProps():" + newProps);
+        console.log("TabView", "componentWillReceiveProps():" + newProps);
     }
 
     /**
@@ -88,7 +91,7 @@ export default class QATest extends Component {
      */
     shouldComponentUpdate(nextProps, nextState) {
         let isUpdate = (this.props != nextProps) || (this.state != nextState);
-        console.log("QATest", "shouldComponentUpdate():" + isUpdate);
+        console.log("TabView", "shouldComponentUpdate():" + isUpdate);
         return isUpdate;
     }
 
@@ -98,7 +101,7 @@ export default class QATest extends Component {
      * @param nextState 更新之后的状态
      */
     componentWillUpdate(nextProps, nextState) {
-        console.log("QATest", "componentWillUpdate()");
+        console.log("TabView", "componentWillUpdate()");
     }
 
     /**
@@ -108,7 +111,7 @@ export default class QATest extends Component {
      * @returns {boolean}
      */
     componentDidUpdate(prevProps, prevState) {
-        console.log("QATest", "componentDidUpdate()");
+        console.log("TabView", "componentDidUpdate()");
     }
 
     /**
@@ -116,7 +119,7 @@ export default class QATest extends Component {
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
     componentDidUnMount() {
-        console.log("QATest", "componentDidUnMount()");
+        console.log("TabView", "componentDidUnMount()");
 
     }
 
@@ -126,26 +129,20 @@ export default class QATest extends Component {
      */
     render() {
         this.renderCount++;
-        console.log("QATest", "render() renderCount:" + this.renderCount);
+        console.log("TabView", "render() renderCount:" + this.renderCount);
         return (
-            <View style={QATestStyles.container}>
-                <TitleBar
-                    label="品质测试"
-                    labelStyle={{backgroundColor:"transparent",color:"black"}}
-                    leftView={<Icon.Button name="list-ul" size={25} color="#166AF6" backgroundColor="transparent"
-                                           onPress={()=>{alert("click android logo")}}/>}
-                    rightView={<Icon.Button name="undo" size={25} color="#999" backgroundColor="transparent"
-                                            onPress={()=>{alert("click share icon")}}/>}
-                    style={{height: 45}}/>
-                <Text>性能测试</Text>
-            </View>
+            <ScrollableTabView style={TabViewStyles.container}>
+                <HomePage tabLabel="HomePage"/>
+                <Settings tabLabel="Settings"/>
+                <QATest tabLabel="QATest"/>
+            </ScrollableTabView>
         );
     }
 
 }
 
-const QATestStyles = StyleSheet.create({
+const TabViewStyles = StyleSheet.create({
     container: {
-        height:200,
+        flex: 1,
     },
 });
