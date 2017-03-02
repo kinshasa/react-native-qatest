@@ -169,7 +169,7 @@ export default class VerticalViewPager extends Component {
         });
     }
 
-    scrollAction(e){
+    scrollAction(e) {
         this.layoutH = e.nativeEvent.layoutMeasurement.height;
         this.contentSizeH = e.nativeEvent.contentSize.height;
         this.contentOffsetH = e.nativeEvent.contentOffset.y;
@@ -206,23 +206,23 @@ export default class VerticalViewPager extends Component {
                 transform: [{
                     translateY: this.state.fadeDownAnim.interpolate({
                         inputRange: [0, 1],
-                        outputRange: [0,height]  // 0 : 150, 0.5 : 75, 1 : 0
+                        outputRange: [0, height]  // 0 : 150, 0.5 : 75, 1 : 0
                     }),
                 }],
             }, {}
         ];
 
         return (
-            <ScrollView
-                onScroll={(e) => {}}
+            <ScrollView onScroll={(e) => {}}
                 style={VerticalViewPagerStyles.container}>
-                <View style={{width: width, height: height, backgroundColor: "yellow"}}/>
+                <Text style={{padding: 10, backgroundColor: "#999", margin: 5}}>下拉</Text>
                 <Animated.View
-                    style={[animatedPull,{width: width, height: height, backgroundColor: "red"}]}/>
+                    style={[animatedPull, {width: width, height: height, backgroundColor: "red"}]}/>
+                <Text style={{padding: 10, backgroundColor: "#999", margin: 5}}>上拉</Text>
                 <Animated.View
-                    style={[animatedPush,{width: width, height: height, backgroundColor: "blue"}]}/>
+                    style={[animatedPush, {width: width, height: height, backgroundColor: "green"}]}/>
                 {/*<Animated.View
-                    style={[{width: width, height: height, backgroundColor: "#aaa"}]}/>*/}
+                 style={[{width: width, height: height, backgroundColor: "#aaa"}]}/>*/}
                 {/*<HomePage tabLabel="HomePage"/>*/}
                 {/*<Settings tabLabel="Settings"/>*/}
                 {/*<QATest tabLabel="QATest"/>*/}
@@ -234,9 +234,9 @@ export default class VerticalViewPager extends Component {
 
 const VerticalViewPagerStyles = StyleSheet.create({
     container: {
-        width:width,
+        width: width,
         backgroundColor: "#aaa",
-        flex:1
+        flex: 1
     },
     topView: {
         width: width,
