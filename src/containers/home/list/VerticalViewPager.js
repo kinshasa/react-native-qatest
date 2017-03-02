@@ -20,6 +20,7 @@ const {height, width} = Dimensions.get('window');
 import HomePage from '../HomePage'
 import Settings from '../../set/Setting'
 import QATest from '../../test/QATest'
+import InvertibleScrollView from 'react-native-invertible-scroll-view';
 
 import AddPaging from 'react-native-paged-scroll-view/index'
 var PagedScrollView = AddPaging(ScrollView)
@@ -125,8 +126,8 @@ export default class VerticalViewPager extends Component {
      * 组件即将卸载前调用
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
-    componentDidUnMount() {
-        console.log("VerticalViewPager", "componentDidUnMount()");
+    componentWillUnmount() {
+        console.log("VerticalViewPager", `componentWillUnmount()this.refs["test"]:${this.refs["test"]}`);
 
     }
 
@@ -139,11 +140,11 @@ export default class VerticalViewPager extends Component {
         this.renderCount++;
         console.log("VerticalViewPager", "render() renderCount:" + this.renderCount);
         return (
-            <PagedScrollView style={VerticalViewPagerStyles.container}>
+            <ScrollView horizontal={true} ref="test" style={VerticalViewPagerStyles.container}>
                 <HomePage tabLabel="HomePage"/>
                 <Settings tabLabel="Settings"/>
                 <QATest tabLabel="QATest"/>
-            </PagedScrollView>
+            </ScrollView>
         );
     }
 
