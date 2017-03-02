@@ -13,7 +13,9 @@ import {
     Text,
     Dimensions,
     TouchableNativeFeedback,
-    ScrollView
+    ScrollView,
+    Animated,
+    InteractionManager
 } from 'react-native';
 
 const {height, width} = Dimensions.get('window');
@@ -56,7 +58,10 @@ export default class VerticalViewPager extends Component {
     constructor(props, context) {
         console.log("VerticalViewPager", "constructor()");
         super(props, context);
-        this.state = {};
+        this.state = {
+            fadeUpAnim: new Animated.Value(0),
+            fadeDownAnim: new Animated.Value(0),
+        };
     }
 
     /**
@@ -131,19 +136,96 @@ export default class VerticalViewPager extends Component {
 
     }
 
+    //安卓下滚动画
+    pullDown() {
+        InteractionManager.runAfterInteractions(async() => {
+            Animated.spring(this.state.fadeDownAnim, {
+                toValue: 1,   // Returns to the start
+                //velocity: 1,  // Velocity makes it move
+                tension: -10, // Slow
+            }).start();
+            Animated.spring(this.state.fadeUpAnim, {
+                toValue: 1,   // Returns to the start
+                //velocity: 1,  // Velocity makes it move
+                tension: -10, // Slow
+            }).start();
+        });
+
+    }
+
+    //安卓滚上动画
+    pushUp() {
+        InteractionManager.runAfterInteractions(async() => {
+            Animated.spring(this.state.fadeDownAnim, {
+                toValue: 0,   // Returns to the start
+                //velocity: 1,  // Velocity makes it move
+                tension: -10, // Slow
+            }).start();
+            Animated.spring(this.state.fadeUpAnim, {
+                toValue: 0,   // Returns to the start
+                //velocity: 1,  // Velocity makes it move
+                tension: -10, // Slow
+            }).start();
+        });
+    }
+
+    scrollAction(e){
+        this.layoutH = e.nativeEvent.layoutMeasurement.height;
+        this.contentSizeH = e.nativeEvent.contentSize.height;
+        this.contentOffsetH = e.nativeEvent.contentOffset.y;
+        let count = this.contentSizeH - this.contentOffsetH - this.layoutH;
+
+        if (count < 5) {
+            this.pullDown()
+        }
+    }
+
     /**
      * 组件更新
      * @returns {XML}
      */
     render() {
-        console.log(height);
         this.renderCount++;
         console.log("VerticalViewPager", "render() renderCount:" + this.renderCount);
+
+        let animatedPull = [
+            {
+                opacity: 1,
+                transform: [{
+                    translateY: this.state.fadeUpAnim.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [0, height]  // 0 : 150, 0.5 : 75, 1 : 0
+                    }),
+                }],
+            }, {}
+        ];
+
+        let animatedPush = [
+            {
+                opacity: 1,
+                transform: [{
+                    translateY: this.state.fadeDownAnim.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [0,height]  // 0 : 150, 0.5 : 75, 1 : 0
+                    }),
+                }],
+            }, {}
+        ];
+
         return (
-            <ScrollView style={VerticalViewPagerStyles.container}>
-                <HomePage tabLabel="HomePage"/>
-                <Settings tabLabel="Settings"/>
-                <QATest tabLabel="QATest"/>
+            <ScrollView
+                onScroll={(e) => {}}
+                style={VerticalViewPagerStyles.container}>
+                <View style={{width: width, height: height, backgroundColor: "yellow"}}/>
+                <Animated.View
+                    style={[animatedPull,{width: width, height: height, backgroundColor: "red"}]}/>
+                <Animated.View
+                    style={[animatedPush,{width: width, height: height, backgroundColor: "blue"}]}/>
+                {/*<Animated.View
+                    style={[{width: width, height: height, backgroundColor: "#aaa"}]}/>*/}
+                {/*<HomePage tabLabel="HomePage"/>*/}
+                {/*<Settings tabLabel="Settings"/>*/}
+                {/*<QATest tabLabel="QATest"/>*/}
             </ScrollView>
         );
     }
@@ -152,7 +234,9 @@ export default class VerticalViewPager extends Component {
 
 const VerticalViewPagerStyles = StyleSheet.create({
     container: {
-        flex: 1,
+        width:width,
+        backgroundColor: "#aaa",
+        flex:1
     },
     topView: {
         width: width,
