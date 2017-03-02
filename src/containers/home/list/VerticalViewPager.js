@@ -140,7 +140,7 @@ export default class VerticalViewPager extends Component {
         this.renderCount++;
         console.log("VerticalViewPager", "render() renderCount:" + this.renderCount);
         return (
-            <ScrollView horizontal={true} ref="test" style={VerticalViewPagerStyles.container}>
+            <ScrollView style={VerticalViewPagerStyles.container}>
                 <HomePage tabLabel="HomePage"/>
                 <Settings tabLabel="Settings"/>
                 <QATest tabLabel="QATest"/>
