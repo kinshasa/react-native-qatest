@@ -24,6 +24,7 @@ import RCTComponents from './containers/home/list/RCTComponents';
 import VerticalViewPager from './containers/home/list/VerticalViewPager';
 import TabView from './containers/home/list/TabView';
 import ScrollPageView from './containers/home/list/ScrollPageView';
+import DataBindingRedux from './containers/home/list/DataBindingRedux';
 
 export default  scenes = Actions.create(
     <Scene key="root">
@@ -37,6 +38,7 @@ export default  scenes = Actions.create(
         <Scene key="VerticalViewPager" component={VerticalViewPager} des={"VerticalViewPager"} hideNavBar={true}/>
         <Scene key="TabView" component={TabView} des={"TableView"} hideNavBar={true}/>
         <Scene key="ScrollPageView" component={ScrollPageView} des={"ScrollPageView"} hideNavBar={true}/>
+        <Scene key="DataBindingRedux" component={DataBindingRedux} des={"DataBindingRedux"} hideNavBar={true}/>
 
     </Scene>
 );

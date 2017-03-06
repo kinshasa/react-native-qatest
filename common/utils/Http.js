@@ -3,7 +3,7 @@
  * @Date: 2017.3.6 下午 5:44
  * @Desc: 工具类 - 网络请求
  * @Name: Http.js
- * @LifeCycle：http://www.tuicool.com/articles/nu6zInB
+ * @Refer：https://github.com/yangjiayu/react-native-fetch/blob/master/fetch.js
  */
 
 /**
@@ -150,13 +150,13 @@ class Http {
      */
     get(url, success, fail, params, data_type = HTTP_DATA_TYPE.JSON) {
 
-        let option = {
+        let headers = {
             method: HTTP_METHOD.GET,
-            headers: data_type==HTTP_DATA_TYPE.JSON?HTTP_HEADERS.JSON:HTTP_HEADERS.FORM,
+            headers: data_type == HTTP_DATA_TYPE.JSON ? HTTP_HEADERS.JSON : HTTP_HEADERS.FORM,
             body: {}
         };
         url = url + (url.indexOf("?") >= 0 ? "&" : "?") + this.JsonToRows(params);
-        this.send(url, this.option, success, fail)
+        this.send(url, headers, success, fail);
     }
 
     /**
@@ -167,16 +167,22 @@ class Http {
      * @param fail
      * @return Json
      */
-    post(url, success, fail, json, type) {
+    post(url, success, fail, params, data_type = HTTP_DATA_TYPE.JSON) {
 
-        this.send(url, 'post_json', json, success, fail);
+        let option = {
+            method: HTTP_METHOD.POST,
+            headers: data_type == HTTP_DATA_TYPE.JSON ? HTTP_HEADERS.JSON : HTTP_HEADERS.FORM,
+            body: params
+        };
+        url = url + (url.indexOf("?") >= 0 ? "&" : "?") + this.JsonToRows(params);
+        this.send(url, option, success, fail);
     }
 
 
     /**
      * 发送请求
      */
-    send(url, headers, success, fail) {
+    send(url, headers, success, fail,catcher) {
 
         try {
             //根据URL判断，如果是本地文件，则直接读取并返回
@@ -199,22 +205,21 @@ class Http {
                 })
                 /*处理数据*/
                 .then((object) => {
-                    /*如果返回成功且回调函数被定义*/
                     if (object.code === '0000') {
+                        /*如果返回成功且回调函数被定义*/
                         success && success(object);
-                    }
-                    /*如果返回失败且回调函数被定义*/
-                    else {
+                    } else {
+                        /*如果返回失败且回调函数被定义*/
                         success && success(object);
                     }
                 })
-                /*如果解析失败且回调函数被定义*/
                 .catch((error) => {
-                    fail && fail(error);
+                    /*如果解析失败且回调函数被定义*/
+                    catcher && catcher(error);
                 });
         }
         catch (error) {
-            fail && fail(error);
+            catcher && catcher(error);
         }
     }
 

@@ -13,7 +13,10 @@ import {
     View
 } from 'react-native';
 
+
 import MainProvider from "./MainProvider"
+
+import Http from "../common/utils/Http"
 
 export default class App extends Component {
 
@@ -22,6 +25,7 @@ export default class App extends Component {
         super(props);
         // 初始状态
         this.state = {};
+        global.Http = Http;
     }
 
     componentWillMount() {
