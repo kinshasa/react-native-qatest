@@ -90,6 +90,7 @@ export default class VerticalViewPager extends Component {
         console.log("VerticalViewPager", "constructor()");
         super(props, context);
         this.state = {
+            lazyStatus:false,//BottomView的懒加载
         };
         this.layout = {
             scrollViewLayout:{},//ScrollView的布局
@@ -236,6 +237,13 @@ export default class VerticalViewPager extends Component {
     onScrollDown(type){
         console.log("VerticalViewPager", `onScrollDown(${type}) ${JSON.stringify(this.layout.bottomViewLayout)}`);
         this.refs['scrollView'] && this.refs['scrollView'].scrollTo({y:this.layout.bottomViewLayout.y,animated:true});
+
+        //如果当前视图在BottomView中且第一次加载，则懒加载BottomView
+        setTimeout(()=>{
+            if(this.state.lazyStatus == false){
+                this.setState({lazyStatus:true});
+            }
+        },500);
     }
 
     /**
@@ -269,6 +277,7 @@ export default class VerticalViewPager extends Component {
             //其他特殊情况
             this.scrollOffset.pos = 2;
         }
+
         console.log("VerticalViewPager", `getCurrentViewPos() pos: ${this.scrollOffset.pos}`);
 
         return this.scrollOffset.pos;
@@ -390,7 +399,7 @@ export default class VerticalViewPager extends Component {
                 <View
                     onLayout={(e)=>{this.layout.topViewLayout = e.nativeEvent.layout}}
                     style={{width, height: height+400, backgroundColor: "red",justifyContent:"flex-end"}}>
-                    
+                    <HomePage tabLabel="HomePage"/>
                     <Text
                         onPress={()=>{this.onScrollDown()}}
                         style={VerticalViewPagerStyles.criticalView}>下拉</Text>
@@ -399,6 +408,10 @@ export default class VerticalViewPager extends Component {
                 <View
                     onLayout={(e)=>{this.layout.bottomViewLayout = e.nativeEvent.layout}}
                     style={{width, height: height+500, backgroundColor: "green"}}>
+                    {
+                        this.state.lazyStatus &&
+                        <QATest tabLabel="QATest"/>
+                    }
                     <Text
                         onPress={()=>{this.onScrollTop()}}
                         style={VerticalViewPagerStyles.criticalView}>上拉</Text>
