@@ -26,7 +26,7 @@ const HTTP_DATA_TYPE = {
 
 const HTTP_HELPER = {
     TIMEOUT: 10 * 1000,
-    VERSION:"1.0"
+    VERSION: "1.0"
 };
 const HTTP_HEADERS = {
     FORM: {
@@ -40,7 +40,6 @@ const HTTP_HEADERS = {
 
 
 class Http {
-    static propTypes = {};
 
     constructor(props) {
 
@@ -85,20 +84,9 @@ class Http {
      */
     option = {
         method: this.method,
-        headers: this.headers
+        headers: this.headers,
+        body: this.params
     };
-
-    /**
-     *最简单的GET请求
-     * @param url 请求的URL,可以使用@getParamsToString()方法拼接成URL
-     * @param success
-     * @param fail
-     * @return Json
-     */
-    get(url, success, fail) {
-
-        this.send(url,success,fail)
-    }
 
     /**
      * 特殊情况下，额外传入覆盖默认字段时请求使用(exp:api_version)
@@ -110,8 +98,8 @@ class Http {
      */
     getWithParams(url, json, success, fail) {
         //根据json数据组装URL
-        var resUrl = url + (url.indexOf("?") >= 0 ? "&" : "?") + this.JsonToRows(json);
-        this.get(resUrl, success, fail);
+        let reqUrl = url + (url.indexOf("?") >= 0 ? "&" : "?") + this.JsonToRows(json);
+        this.get(reqUrl, success, fail);
     }
 
     /**
@@ -122,24 +110,7 @@ class Http {
      * @return String
      */
     getRow(url, success, fail) {
-        this.setUrl(url);
-        this.setOption(this.const.METHOD_GET, null, null);
-        //TODO:添加Row解析方法
     }
-
-    /**
-     * 普通POST请求，默认头为@link HEADERS_JSON
-     * @param url
-     * @param json 必须为JSON对象，可以使用@addParamsToJson(key,value):React.PropTypes.object
-     * @param success
-     * @param fail
-     * @return Json
-     */
-    post(url, json, success, fail) {
-
-        this.send(url, 'post_json', json, success, fail);
-    }
-
 
     /**
      * 表单POST请求
@@ -153,7 +124,6 @@ class Http {
     postForm(url, json, success, fail) {
 
     }
-
 
     /**
      * 表单的POST请求，返回为Row数据
@@ -171,12 +141,42 @@ class Http {
     }
 
     /**
+     *
+     * @param url
+     * @param success
+     * @param fail
+     * @param data
+     * @param type data数据类型
+     */
+    get(url, success, fail, params, data_type = HTTP_DATA_TYPE.JSON) {
+
+        let option = {
+            method: HTTP_METHOD.GET,
+            headers: data_type==HTTP_DATA_TYPE.JSON?HTTP_HEADERS.JSON:HTTP_HEADERS.FORM,
+            body: {}
+        };
+        url = url + (url.indexOf("?") >= 0 ? "&" : "?") + this.JsonToRows(params);
+        this.send(url, this.option, success, fail)
+    }
+
+    /**
+     * 普通POST请求，默认头为@link HEADERS_JSON
+     * @param url
+     * @param json 必须为JSON对象，可以使用@addParamsToJson(key,value):React.PropTypes.object
+     * @param success
+     * @param fail
+     * @return Json
+     */
+    post(url, success, fail, json, type) {
+
+        this.send(url, 'post_json', json, success, fail);
+    }
+
+
+    /**
      * 发送请求
      */
-    send(success, fail) {
-
-        let url = this.state.URL;
-        let isOk;
+    send(url, headers, success, fail) {
 
         try {
             //根据URL判断，如果是本地文件，则直接读取并返回
@@ -190,7 +190,7 @@ class Http {
                 fail("[HTTP NETWORK ERROR!]" + "网络请求失败！");
                 return;
             }
-            fetch(url, this.state.OPTION)
+            fetch(url, headers)
             /*返回请求数据*/
                 .then((response) => {
                     if (response.ok) {
@@ -199,17 +199,13 @@ class Http {
                 })
                 /*处理数据*/
                 .then((object) => {
-                    if (isOk) {
-                        /*如果返回成功且回调函数被定义*/
-                        if (object.code === '0000') {
-                            success && success(object);
-                        }
-                        /*如果返回失败且回调函数被定义*/
-                        else {
-                            success && success(object);
-                        }
-                    } else {
-                        fail && fail(object);
+                    /*如果返回成功且回调函数被定义*/
+                    if (object.code === '0000') {
+                        success && success(object);
+                    }
+                    /*如果返回失败且回调函数被定义*/
+                    else {
+                        success && success(object);
                     }
                 })
                 /*如果解析失败且回调函数被定义*/
