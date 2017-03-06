@@ -15,7 +15,8 @@ import {
     TouchableNativeFeedback,
     ScrollView,
     Animated,
-    InteractionManager
+    InteractionManager,
+    ActivityIndicator
 } from 'react-native';
 
 const {height, width} = Dimensions.get('window');
@@ -243,7 +244,7 @@ export default class VerticalViewPager extends Component {
             if(this.state.lazyStatus == false){
                 this.setState({lazyStatus:true});
             }
-        },500);
+        },1000);
     }
 
     /**
@@ -398,24 +399,39 @@ export default class VerticalViewPager extends Component {
                 style={VerticalViewPagerStyles.container}>
                 <View
                     onLayout={(e)=>{this.layout.topViewLayout = e.nativeEvent.layout}}
-                    style={{width, height: height+400, backgroundColor: "red",justifyContent:"flex-end"}}>
+                    style={{width, minHeight: height+400, backgroundColor: "red",justifyContent:"flex-end"}}>
                     <HomePage tabLabel="HomePage"/>
                     <Text
                         onPress={()=>{this.onScrollDown()}}
                         style={VerticalViewPagerStyles.criticalView}>下拉</Text>
 
                 </View>
-                <View
-                    onLayout={(e)=>{this.layout.bottomViewLayout = e.nativeEvent.layout}}
-                    style={{width, height: height+500, backgroundColor: "green"}}>
-                    {
-                        this.state.lazyStatus &&
-                        <QATest tabLabel="QATest"/>
-                    }
-                    <Text
-                        onPress={()=>{this.onScrollTop()}}
-                        style={VerticalViewPagerStyles.criticalView}>上拉</Text>
-                </View>
+                {
+                    this.state.lazyStatus &&
+                    <View
+                        onLayout={(e)=>{this.layout.bottomViewLayout = e.nativeEvent.layout}}
+                        style={{width, minHeight: height,backgroundColor: "green"}}>
+                        {
+
+                            <QATest tabLabel="QATest"/>
+                        }
+                    </View>
+                }
+                {
+                    !this.state.lazyStatus &&
+                    <View
+                        onLayout={(e)=>{this.layout.bottomViewLayout = e.nativeEvent.layout}}
+                        style={{width, minHeight: height, backgroundColor: "green"}}>
+                        <Text
+                            onPress={()=>{this.onScrollTop()}}
+                            style={VerticalViewPagerStyles.criticalView}>上拉</Text>
+                        <ActivityIndicator
+                            animating={true}
+                            style={{alignItems: 'center',justifyContent: 'center',padding: 8,height: 80}}
+                            size="large"
+                        />
+                    </View>
+                }
                 {/*<HomePage tabLabel="HomePage"/>*/}
                 {/*<Settings tabLabel="Settings"/>*/}
                 {/*<QATest tabLabel="QATest"/>*/}
