@@ -19,7 +19,7 @@
     "react-native-swiper2": "^2.0.7",//第三方图片轮播图
     "react-native-tab-navigator": "^0.3.3",//第三方TabNavigator导航组件
     "react-native-vector-icons": "^4.0.0",//第三方矢量图标库
-    "react-redux": "^5.0.2",
+    "react-redux": "^5.0.2",//第三方数据流框架
     "redux": "^3.6.0",//第三方数据流框架
     "redux-thunk": "^2.2.0"//第三方数据流框架中间件
   },
