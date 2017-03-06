@@ -9,21 +9,19 @@
   "dependencies": {
     "react": "15.4.2",
     "react-native": "0.40.0",
-    "react-native-animatable": "^1.1.0",
-    "react-native-icons": "^0.7.1",
-    "react-native-invertible-scroll-view": "^1.0.0",
-    "react-native-paged-scroll-view": "^2.0.4",
-    "react-native-router-flux": "^3.37.0",
-    "react-native-scrollable-tab-view": "^0.7.1",
-    "react-native-smart-button": "^1.5.0",
-    "react-native-smart-parabola": "^1.0.2",
-    "react-native-swiper": "^1.5.4",
-    "react-native-swiper2": "^2.0.7",
-    "react-native-tab-navigator": "^0.3.3",
-    "react-native-vector-icons": "^4.0.0",
+    "react-native-animatable": "^1.1.0",//第三方动画库
+    "react-native-invertible-scroll-view": "^1.0.0",//第三方可循环ScrollView，用于日历组件
+    "react-native-router-flux": "^3.37.0",//第三方路由跳转
+    "react-native-scrollable-tab-view": "^0.7.1",//第三方TableView
+    "react-native-smart-button": "^1.5.0",//第三方按钮组件
+    "react-native-smart-parabola": "^1.0.2",//第三方购物车抛物线动画
+    "react-native-swiper": "^1.5.4",//第三方图片轮播图
+    "react-native-swiper2": "^2.0.7",//第三方图片轮播图
+    "react-native-tab-navigator": "^0.3.3",//第三方TabNavigator导航组件
+    "react-native-vector-icons": "^4.0.0",//第三方矢量图标库
     "react-redux": "^5.0.2",
-    "redux": "^3.6.0",
-    "redux-thunk": "^2.2.0"
+    "redux": "^3.6.0",//第三方数据流框架
+    "redux-thunk": "^2.2.0"//第三方数据流框架中间件
   },
   "devDependencies": {
     "babel-jest": "18.0.0",

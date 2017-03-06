@@ -23,11 +23,6 @@ const {height, width} = Dimensions.get('window');
 import HomePage from '../HomePage'
 import Settings from '../../set/Setting'
 import QATest from '../../test/QATest'
-import InvertibleScrollView from 'react-native-invertible-scroll-view';
-
-import AddPaging from 'react-native-paged-scroll-view/index'
-var PagedScrollView = AddPaging(ScrollView)
-
 
 // var console = function (tag,msg) {
 //     console.log(tag,msg);

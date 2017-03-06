@@ -12,16 +12,16 @@ import {
     View
 } from 'react-native';
 
-import {Actions, Scene, Router} from 'react-native-router-flux';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware, combineReducers} from 'redux';
 import thunk from 'redux-thunk';
 import * as reducers from '../common/reducers';
+import MainNavigator from "./MainNavigator"
+
 //apply thunk
 const createStoreWithThunk = applyMiddleware(thunk)(createStore);
 const reducer = combineReducers(reducers);
 const store = createStoreWithThunk(reducer);
-import MainNavigator from "./MainNavigator"
 
 export default class MainProvider extends Component {
 
