@@ -400,7 +400,7 @@ export default class VerticalViewPager extends Component {
                 <View
                     onLayout={(e)=>{this.layout.topViewLayout = e.nativeEvent.layout}}
                     style={{width, minHeight: height+400, backgroundColor: "red",justifyContent:"flex-end"}}>
-                    <HomePage tabLabel="HomePage"/>
+                    <Settings style={{backgroundColor: "red"}} tabLabel="Settings"/>
                     <Text
                         onPress={()=>{this.onScrollDown()}}
                         style={VerticalViewPagerStyles.criticalView}>下拉</Text>
@@ -413,7 +413,7 @@ export default class VerticalViewPager extends Component {
                         style={{width, minHeight: height,backgroundColor: "green"}}>
                         {
 
-                            <QATest tabLabel="QATest"/>
+                            <QATest style={{height:height+400}} tabLabel="QATest"/>
                         }
                     </View>
                 }

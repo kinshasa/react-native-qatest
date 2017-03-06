@@ -75,7 +75,7 @@ export default class Setting extends Component {
         this.renderCount++;
         console.log("Setting", "render() renderCount:" + this.renderCount);
         return (
-            <View style={SettingStyles.container}>
+            <View style={[SettingStyles.container,this.props.style]}>
                 <TitleBar
                     label="其他设置"
                     labelStyle={{backgroundColor:"transparent",color:"black"}}
@@ -92,7 +92,7 @@ export default class Setting extends Component {
 
 const SettingStyles = StyleSheet.create({
     container: {
-        height:200,
+        flex:1,
         backgroundColor:"#aaa"
     },
 });

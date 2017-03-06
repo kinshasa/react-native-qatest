@@ -128,7 +128,7 @@ export default class QATest extends Component {
         this.renderCount++;
         console.log("QATest", "render() renderCount:" + this.renderCount);
         return (
-            <View style={QATestStyles.container}>
+            <View style={[QATestStyles.container,this.props.style]}>
                 <TitleBar
                     label="品质测试"
                     labelStyle={{backgroundColor:"transparent",color:"black"}}
@@ -146,6 +146,6 @@ export default class QATest extends Component {
 
 const QATestStyles = StyleSheet.create({
     container: {
-        height:200,
+        flex:1,
     },
 });
