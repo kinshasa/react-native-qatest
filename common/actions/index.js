@@ -6,9 +6,11 @@
  * @LifeCycle：http://www.tuicool.com/articles/nu6zInB
  */
 
-import user_info from './user_info';
+import * as user_info from './user_info';
+import * as home from './home';
+import * as qa from './qa';
 
 
-var actions = {user_info,};
-actions = Object.assign(actions, {});
+var actions = {...user_info,...home,...qa};
+
 module.exports = actions;

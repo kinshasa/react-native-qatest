@@ -1,7 +1,7 @@
 /**
  * @Author: liushaobo2005@163.com
  * @Date: 2017.1.23 下午 4:02
- * @Desc: Provider Redux存储提供者
+ * @Desc: Provider 存储state,
  * @NAME: MainProvider.js
  * @LIFECYCLE：http://www.tuicool.com/articles/nu6zInB
  */
@@ -21,23 +21,6 @@ const store = createStoreWithThunk(reducer);
 export default class MainProvider extends Component {
 
 
-    constructor(props) {
-        super(props);
-        // 初始状态
-        this.state = {};
-    }
-
-    componentWillMount() {
-
-    }
-
-    componentDidMount() {
-
-    }
-
-    componentWillUnmount() {
-
-    }
 
     render() {
         //我们现在通过Provider把Store递交给了真正的App入口，也就是开始渲染界面的东西MainNavigator

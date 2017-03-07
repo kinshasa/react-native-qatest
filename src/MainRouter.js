@@ -32,20 +32,13 @@ class MainRouter extends Component {
     }
 
     render() {
-        /**
-         * 把this.props.store绑定到当前组件的this.props中，store包含state, dispatch
-         * 通过bindActionCreators把actions通过dispatch的参数（action.type）来关联到reducer的返回,也就是state
-         * 把actions,state绑定到this.props.state
-         */
-        // const {state, dispatch} = this.props;
-        // const action = bindActionCreators(actions.DBUserInfo, dispatch);
-        console.log("MainRouter render() state:",this.props.state);
+
+        console.log("MainRouter render() state:", this.props.state);
         return (
             <Router
                 state={this.props.state}
                 actions={this.props.actions}
                 scenes={scenes}/>
-
         );
     }
 }
@@ -61,16 +54,31 @@ function selector(state) {
         state: state
     }
 }
-function mapStateToProps(state){
+
+/**
+ * 把this.state关联到this.props.state
+ * @param state
+ * @returns {{state: *}}
+ */
+function mapStateToProps(state) {
     return {
         state: state
     }
 }
 
-function mapDispatchToProps(dispatch){
+/**
+ * 把actions.user_info, dispatch通过type关联到一起
+ * @param dispatch
+ * @returns {{actions: (A|B|M|N)}}
+ */
+function mapDispatchToProps(dispatch) {
+    console.log("MainRouter actions:", actions);
     return {
-        actions: bindActionCreators(actions.user_info, dispatch),
+        actions: bindActionCreators(actions, dispatch),
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(MainRouter);
+/**
+ * 把mapStateToProps, mapDispatchToProps绑定到MainRouter组件上
+ */
+export default connect(mapStateToProps, mapDispatchToProps)(MainRouter);

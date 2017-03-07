@@ -13,7 +13,7 @@ const USER_GET_INFO = 'USER_GET_INFO';
 const USER_UPDATE_INFO = 'USER_UPDATE_INFO';
 
 
-function register(obj){
+export function register(obj){
     console.log("user_info", `register(${JSON.stringify(obj)})`);
     return (dispatch) => {
         setTimeout(() => {
@@ -24,14 +24,14 @@ function register(obj){
     }
 }
 
-function login(obj){
+export function login(obj){
     return {
         type: USER_LOGIN,
         user: { obj }
     }
 }
 
-function logout(obj,callback){
+export function logout(obj,callback){
     return {
         type: USER_LOGOUT,
         user: { obj },
@@ -39,7 +39,7 @@ function logout(obj,callback){
     }
 }
 
-function getInfo(obj,callback){
+export function getInfo(obj,callback){
 
     callback && callback();
     return {
@@ -48,7 +48,7 @@ function getInfo(obj,callback){
     }
 }
 
-function updateInfo(text){
+export function updateInfo(text){
 
     return (dispatch) => {
         setTimeout(() => {
@@ -56,12 +56,4 @@ function updateInfo(text){
         }, 1000);
         // fetch().then() => dispatch in promise
     }
-}
-
-module.exports = {
-	register,
-	login,
-	logout,
-	getInfo,
-	updateInfo
 }
