@@ -14,9 +14,13 @@ const USER_UPDATE_INFO = 'USER_UPDATE_INFO';
 
 
 function register(obj){
-    return {
-        type: USER_REGISTER,
-        user: { obj }
+    console.log("user_info", `register(${JSON.stringify(obj)})`);
+    return (dispatch) => {
+        setTimeout(() => {
+            dispatch({ type: USER_REGISTER });
+        }, 1000);
+
+        // fetch().then() => dispatch in promise
     }
 }
 

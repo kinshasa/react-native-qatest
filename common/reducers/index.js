@@ -1,7 +1,7 @@
+import user_info from './user_info';
 
-import DBUserInfo from './DBUserInfo';
 
+var reducers = {user_info,};
 
-var reducers = {DBUserInfo,};
-//reducers = Object.assign(reducers, {});
+reducers = Object.assign(reducers, {});
 module.exports = reducers;

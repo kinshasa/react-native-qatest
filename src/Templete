@@ -3,7 +3,7 @@
  * @Date: ${DATE} ${TIME}
  * @Desc: 公共组件 - ${NAME}
  * @Name: ${NAME}.js
- * @LifeCycle：http://www.tuicool.com/articles/nu6zInB
+ * @LifeCycle：https://github.com/kinshasa/react-native-qatest
  */
 
 import React, {Component, PropTypes} from 'react';
@@ -15,10 +15,6 @@ import {
 
 export default class ${NAME} extends Component {
 
-    /**
-     * 父组件传入的属性值
-     * @type {{style: *, account: *, name: *, isTrue: *, callback: *}}
-     */
     static propTypes = {
         style: View.propTypes.style,
         account: PropTypes.number,
@@ -27,19 +23,10 @@ export default class ${NAME} extends Component {
         callback: PropTypes.func,
     };
 
-    /**
-     * 父组件传入的数据
-     * @type {{data: {}}}
-     */
     static defaultProps = {
         data:{}
     };
 
-    /**
-     * 构造函数
-     * @param props
-     * @param context
-     */
     constructor(props, context) {
         console.log("${NAME}",`constructor()`);
         super(props, context);
@@ -50,23 +37,14 @@ export default class ${NAME} extends Component {
      * 当前组件渲染次数
      * @type {number}
      */
-    renderCount = 0;
+    count = 0;
 
-    /**
-     * 组件加载前
-     * 生命周期中仅被调用1次，可以使用SetState
-     */
     componentWillMount() {
-        console.log("${NAME}",`componentWillMount()`);
+        console.log("${NAME} componentWillMount()",``);
     }
 
-    /**
-     * 组件加载后
-     * 生命周期中仅被调用1次，可以使用SetState
-     * 用于网络请求和页面渲染
-     */
     componentDidMount() {
-        console.log("${NAME}",`componentDidMount()`);
+        console.log("${NAME} componentDidMount()",``);
     }
 
     /**
@@ -75,7 +53,7 @@ export default class ${NAME} extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("${NAME}",`componentWillReceiveProps():${newProps}`);
+        console.log("${NAME} componentWillReceiveProps()",newProps);
     }
 
     /**
@@ -86,7 +64,7 @@ export default class ${NAME} extends Component {
      */
     shouldComponentUpdate(nextProps, nextState){
         let isUpdate = (this.props != nextProps)||(this.state != nextState);
-        console.log("${NAME}", `shouldComponentUpdate():${isUpdate}`);
+        console.log("${NAME} shouldComponentUpdate()", `${isUpdate}`);
         return isUpdate;
     }
 
@@ -96,7 +74,7 @@ export default class ${NAME} extends Component {
      * @param nextState 更新之后的状态
      */
     componentWillUpdate(nextProps, nextState) {
-        console.log("${NAME}", `componentWillUpdate()`);
+        console.log("${NAME} componentWillUpdate()", ``);
     }
 
     /**
@@ -106,7 +84,7 @@ export default class ${NAME} extends Component {
      * @returns {boolean}
      */
     componentDidUpdate(prevProps, prevState) {
-        console.log("${NAME}",`componentDidUpdate()`);
+        console.log("${NAME} componentDidUpdate()",``);
     }
 
     /**
@@ -114,17 +92,13 @@ export default class ${NAME} extends Component {
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
     componentWillUnmount() {
-        console.log("${NAME}",`componentWillUnmount()`);
+        console.log("${NAME} componentWillUnmount()",``);
 
     }
 
-    /**
-     * 组件更新
-     * @returns {XML}
-     */
     render() {
-        this.renderCount++;
-        console.log("${NAME}", `render() renderCount:${this.renderCount}`);
+        this.count++;
+        console.log("${NAME} render() count:", `${this.count}`);
         return (
             <View style={${NAME}Styles.container}>
 

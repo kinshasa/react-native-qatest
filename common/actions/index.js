@@ -6,9 +6,9 @@
  * @LifeCycle：http://www.tuicool.com/articles/nu6zInB
  */
 
-import DBUserInfo from './DBUserInfo';
+import user_info from './user_info';
 
 
-var actions = {DBUserInfo,};
+var actions = {user_info,};
 actions = Object.assign(actions, {});
 module.exports = actions;

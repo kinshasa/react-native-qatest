@@ -142,6 +142,7 @@ export default class Launcher extends Component {
     render() {
         this.renderCount++;
         console.log("Launcher", "render() renderCount:" + this.renderCount);
+
         return (
             <View style={LauncherStyles.container}>
                 {this.renderTable()}

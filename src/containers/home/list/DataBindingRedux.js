@@ -1,9 +1,9 @@
 /**
  * @Author: liushaobo2005@163.com
- * @Date: 2017.3.6 下午 5:09
- * @Desc: Redux的数据流绑定 - DataBindingRedux
+ * @Date: 2017.3.7 下午 2:48
+ * @Desc: 公共组件 - DataBindingRedux
  * @Name: DataBindingRedux.js
- * @LifeCycle：http://www.tuicool.com/articles/nu6zInB
+ * @LifeCycle：https://github.com/kinshasa/react-native-qatest
  */
 
 import React, {Component, PropTypes} from 'react';
@@ -15,10 +15,6 @@ import {
 
 export default class DataBindingRedux extends Component {
 
-    /**
-     * 父组件传入的属性值
-     * @type {{style: *, account: *, name: *, isTrue: *, callback: *}}
-     */
     static propTypes = {
         style: View.propTypes.style,
         account: PropTypes.number,
@@ -27,19 +23,10 @@ export default class DataBindingRedux extends Component {
         callback: PropTypes.func,
     };
 
-    /**
-     * 父组件传入的数据
-     * @type {{data: {}}}
-     */
     static defaultProps = {
         data: {}
     };
 
-    /**
-     * 构造函数
-     * @param props
-     * @param context
-     */
     constructor(props, context) {
         console.log("DataBindingRedux", `constructor()`);
         super(props, context);
@@ -50,23 +37,14 @@ export default class DataBindingRedux extends Component {
      * 当前组件渲染次数
      * @type {number}
      */
-    renderCount = 0;
+    count = 0;
 
-    /**
-     * 组件加载前
-     * 生命周期中仅被调用1次，可以使用SetState
-     */
     componentWillMount() {
-        console.log("DataBindingRedux", `componentWillMount()`);
+        console.log("DataBindingRedux componentWillMount()", ``);
     }
 
-    /**
-     * 组件加载后
-     * 生命周期中仅被调用1次，可以使用SetState
-     * 用于网络请求和页面渲染
-     */
     componentDidMount() {
-        console.log("DataBindingRedux", `componentDidMount()`);
+        console.log("DataBindingRedux componentDidMount()", ``);
     }
 
     /**
@@ -75,7 +53,7 @@ export default class DataBindingRedux extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("DataBindingRedux", `componentWillReceiveProps():`);
+        console.log("DataBindingRedux componentWillReceiveProps()", newProps);
     }
 
     /**
@@ -86,7 +64,7 @@ export default class DataBindingRedux extends Component {
      */
     shouldComponentUpdate(nextProps, nextState) {
         let isUpdate = (this.props != nextProps) || (this.state != nextState);
-        console.log("DataBindingRedux", `shouldComponentUpdate():`);
+        console.log("DataBindingRedux shouldComponentUpdate()", ``);
         return isUpdate;
     }
 
@@ -96,7 +74,7 @@ export default class DataBindingRedux extends Component {
      * @param nextState 更新之后的状态
      */
     componentWillUpdate(nextProps, nextState) {
-        console.log("DataBindingRedux", `componentWillUpdate()`);
+        console.log("DataBindingRedux componentWillUpdate()", ``);
     }
 
     /**
@@ -106,7 +84,7 @@ export default class DataBindingRedux extends Component {
      * @returns {boolean}
      */
     componentDidUpdate(prevProps, prevState) {
-        console.log("DataBindingRedux", `componentDidUpdate()`);
+        console.log("DataBindingRedux componentDidUpdate()", ``);
     }
 
     /**
@@ -114,19 +92,14 @@ export default class DataBindingRedux extends Component {
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
     componentWillUnmount() {
-        console.log("DataBindingRedux", `componentWillUnmount()`);
+        console.log("DataBindingRedux componentWillUnmount()", ``);
 
     }
 
-    /**
-     * 组件更新
-     * @returns {XML}
-     */
     render() {
-        this.renderCount++;
-        console.log("DataBindingRedux", `render() renderCount:${this.renderCount}`);
-
-
+        this.count++;
+        console.log("DataBindingRedux render() count:", `${this.count}`);
+        console.log("DataBindingRedux render() this.state", this.props.state);
         return (
             <View style={DataBindingReduxStyles.container}>
 

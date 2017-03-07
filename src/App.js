@@ -8,13 +8,9 @@
 import React, {Component} from 'react';
 import {
     AppRegistry,
-    StyleSheet,
-    Text,
-    View
 } from 'react-native';
 
 import MainProvider from "./MainProvider"
-
 import Http from "../common/utils/Http"
 
 export default class App extends Component {
