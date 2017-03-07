@@ -16,21 +16,21 @@ const USER_UPDATE_INFO = 'USER_UPDATE_INFO';
 function register(obj){
     return {
         type: USER_REGISTER,
-        user: { text }
+        user: { obj }
     }
 }
 
 function login(obj){
     return {
         type: USER_LOGIN,
-        user: { text }
+        user: { obj }
     }
 }
 
 function logout(obj,callback){
     return {
         type: USER_LOGOUT,
-        user: { text },
+        user: { obj },
         callback:callback
     }
 }
@@ -40,7 +40,7 @@ function getInfo(obj,callback){
     callback && callback();
     return {
         type: USER_GET_INFO,
-        user: { text }
+        user: { obj }
     }
 }
 

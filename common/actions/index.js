@@ -10,5 +10,5 @@ import DBUserInfo from './DBUserInfo';
 
 
 var actions = {DBUserInfo,};
-Object.assign(actions, {});
+actions = Object.assign(actions, {});
 module.exports = actions;

@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import {Actions, Scene, Router} from 'react-native-router-flux';
 import scenes from './scenes';
+import DataBindingRedux from './containers/home/list/DataBindingRedux';
 
 export default class MainRouter extends Component {
 
@@ -28,13 +29,25 @@ export default class MainRouter extends Component {
     }
 
     componentDidMount() {
+        /*setTimeout(()=>{
+            this.props.navigator.push({
+                name: 'DataBindingRedux',
+                params: {
+                    mobile: this.state.mobile
+                },
+                component: DataBindingRedux
+            });
+        },2000)*/
     }
 
-    componentDidUnMount() {
+    componentWillUnmount() {
 
     }
 
     render() {
+
+        //let data = this.props.actions.DBUserInfo.register({'dw':123});
+        //console.log("MainRouter", `render()register ${JSON.stringify(this.props.actions)}`);
         return (
                 <Router scenes={scenes}/>
 

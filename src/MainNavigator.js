@@ -1,7 +1,7 @@
 /**
  * @Author: liushaobo2005@163.com
  * @Date: 2017.1.23 下午 4:02
- * @Desc: 导航器 
+ * @Desc: 导航器
  * @NAME: MainNavigator.js
  * @LIFECYCLE：http://www.tuicool.com/articles/nu6zInB
  */
@@ -36,7 +36,6 @@ class MainNavigator extends Component {
     }
 
     componentDidMount() {
-
     }
 
     componentWillUnmount() {
@@ -62,11 +61,16 @@ class MainNavigator extends Component {
     }
 
     render() {
+        //let fun = Object.keys(actions.DBUserInfo);
+        //let data = actions.DBUserInfo.register({'dw':123});
+        // console.log("MainNavigator", `render()register ${JSON.stringify(data)}`);
+
+        //console.log("MainNavigator", `render()reducers:${JSON.stringify(this.props.state.reducers)}`);
         return (
             <Navigator
                 initialRoute={this.initialRoute}
-                configureScene={()=>this.configureScene()}
-                renderScene={(route, navigator)=>this.renderScene(route, navigator)}/>
+                configureScene={() => this.configureScene()}
+                renderScene={(route, navigator) => this.renderScene(route, navigator)}/>
         );
     }
 }

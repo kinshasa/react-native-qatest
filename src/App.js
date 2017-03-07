@@ -13,7 +13,6 @@ import {
     View
 } from 'react-native';
 
-
 import MainProvider from "./MainProvider"
 
 import Http from "../common/utils/Http"
@@ -43,7 +42,6 @@ export default class App extends Component {
     render() {
         return (
             <MainProvider />
-
         );
     }
 }

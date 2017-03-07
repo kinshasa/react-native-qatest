@@ -126,8 +126,7 @@ export default class DataBindingRedux extends Component {
         this.renderCount++;
         console.log("DataBindingRedux", `render() renderCount:${this.renderCount}`);
 
-        let actions = this.props.actions;
-        console.log("DataBindingRedux", `render() actions:${actions}`);
+
         return (
             <View style={DataBindingReduxStyles.container}>
 
