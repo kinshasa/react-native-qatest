@@ -6,3 +6,24 @@
  * @LifeCycle：https://github.com/kinshasa/react-native-qatest
  */
 
+module.exports = function (state, action) {
+    state = state || {
+            type: 'USER_INITIAL',
+            data: [],
+        };
+    console.log("home", `action:${JSON.stringify(action)}`);
+    switch (action.type) {
+
+        case 'HOME_INFO': {
+            return {
+                ...state,
+                ...action,
+                data: "HOME_INFO",
+            }
+        }
+    }
+
+    return {
+        ...state
+    }
+}
