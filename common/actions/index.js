@@ -8,9 +8,9 @@
 
 import * as user_info from './user_info';
 import * as home from './home';
-import * as qa from './qa';
+import * as test from './test';
 
 
-var actions = {...user_info,...home,...qa};
+var actions = {...user_info,...home,...test};
 
 module.exports = actions;
