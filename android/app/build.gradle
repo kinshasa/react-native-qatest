@@ -89,10 +89,10 @@ android {
         applicationId "com.android.qatest"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 1
-        versionName "1.0"
+        versionCode 4
+        versionName "4.0"
         ndk {
-            abiFilters "armeabi-v7a", "x86"
+            abiFilters 'armeabi' , 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
         }
     }
     splits {
@@ -100,15 +100,33 @@ android {
             reset()
             enable enableSeparateBuildPerCPUArchitecture
             universalApk false  // If true, also generate a universal APK
-            include "armeabi-v7a", "x86"
+            include 'armeabi' , 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
+    }
+     signingConfigs {
+
+        release {
+            storeFile file(MYAPP_RELEASE_STORE_FILE)
+            keyAlias MYAPP_RELEASE_KEY_ALIAS
+            storePassword MYAPP_RELEASE_STORE_PASSWORD
+            keyPassword MYAPP_RELEASE_KEY_PASSWORD
+        }
+
+        debug {
+            storeFile file(MYAPP_DEBUG_STORE_FILE)
+            keyAlias MYAPP_DEBUG_KEY_ALIAS
+            storePassword MYAPP_DEBUG_STORE_PASSWORD
+            keyPassword MYAPP_DEBUG_KEY_PASSWORD
         }
     }
     buildTypes {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
         }
     }
+
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
@@ -135,9 +153,10 @@ apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 dependencies {
     compile fileTree(dir: "libs", include: ["*.jar"])
-    compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:+"  // From node_modules
     compile project(':react-native-vector-icons')
+
+    compile project(':android-upgrade-module')
     compile 'me.kaelaela:verticalviewpager:1.0.0@aar'
 }
 
