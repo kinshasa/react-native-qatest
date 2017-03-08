@@ -24,5 +24,8 @@ public class MainActivity extends ReactActivity {
 //        Intent intent = new Intent();
 //        intent.setClass(this, VerticalViewPagerActivity.class);
 //        context.startActivity(intent);
+
+        //bugly自动升级初始化
+        //Bugly.init(getApplicationContext(), "f130c8d4d9", false);
     }
 }
