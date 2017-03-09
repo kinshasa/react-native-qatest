@@ -12,6 +12,8 @@ import {
 
 import MainProvider from "./MainProvider"
 import Http from "../common/utils/Http"
+import config from "../common/config"
+
 
 export default class App extends Component {
 
