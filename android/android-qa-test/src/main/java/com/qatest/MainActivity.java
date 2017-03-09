@@ -31,6 +31,6 @@ public class MainActivity extends ReactActivity {
         //bugly自动升级初始化
         //Bugly.init(getApplicationContext(), "f130c8d4d9", false);
 
-        Toast.makeText(this,"测试",Toast.LENGTH_LONG).show();
+        //Toast.makeText(this,"测试",Toast.LENGTH_LONG).show();
     }
 }

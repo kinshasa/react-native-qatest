@@ -5,8 +5,7 @@
  * @Name: VerticalViewPager.js
  * @LifeCycle：http://www.tuicool.com/articles/nu6zInB
  */
-
-import React, {Component, PropTypes} from 'react';
+import React, {Component, PropTypes} from "react";
 import {
     StyleSheet,
     View,
@@ -17,16 +16,12 @@ import {
     Animated,
     InteractionManager,
     ActivityIndicator
-} from 'react-native';
-
-const {height, width} = Dimensions.get('window');
-import HomePage from '../HomePage'
-import Settings from '../../set/Setting'
-import QATest from '../../test/QATest'
+} from "react-native";
 
 // var console = function (tag,msg) {
 //     console.log(tag,msg);
 // }
+const {height, width} = Dimensions.get('window');
 
 /**
  * 防止计算误差，拉伸到多于5的距离才起作用
@@ -351,6 +346,67 @@ export default class VerticalViewPager extends Component {
         console.log("VerticalViewPager", `pullToPos(${type})scrollOffset: ${JSON.stringify(this.scrollOffset)}`);
         console.log("VerticalViewPager", `pullToPos(${type})layout: ${JSON.stringify(this.layout)}`);
     }
+
+    _children(children = this.props.children) {
+        return React.Children.map(children, (child) => child);
+    };
+
+    renderTopView(){
+        return this._children().map((child, idx) => {
+            if(idx == 1)
+              return <View onLayout={(e)=>{this.layout.topViewLayout = e.nativeEvent.layout}} key={idx}>{child}</View>;
+        });
+    }
+    renderSimpleTopView(){
+        return (
+            <View
+                onLayout={(e)=>{this.layout.topViewLayout = e.nativeEvent.layout}}
+                style={{width, minHeight: height+400, backgroundColor: "red",justifyContent:"flex-end"}}>
+                <Text style={{backgroundColor: "red"}} tabLabel="Settings"/>
+                <Text
+                    onPress={()=>{this.onScrollDown()}}
+                    style={VerticalViewPagerStyles.criticalView}>下拉</Text>
+
+            </View>
+        );
+    }
+
+    renderSimpleBottomView(){
+        return (
+            <View
+                onLayout={(e)=>{this.layout.bottomViewLayout = e.nativeEvent.layout}}
+                style={{width, minHeight: height,backgroundColor: "green"}}>
+                {
+
+                    <Text style={{height:height+400}} tabLabel="QATest"/>
+                }
+            </View>
+        );
+    }
+
+    renderBottomView(){
+        return this._children().map((child, idx) => {
+            if(idx == 0)
+                return <View onLayout={(e)=>{this.layout.bottomViewLayout = e.nativeEvent.layout}} key={child.key}>{child}</View>;
+        });
+    }
+
+    renderLazyView(){
+        return(
+            <View
+                onLayout={(e)=>{this.layout.bottomViewLayout = e.nativeEvent.layout}}
+                style={{width, minHeight: height, backgroundColor: "green"}}>
+                <Text
+                    onPress={()=>{this.onScrollTop()}}
+                    style={VerticalViewPagerStyles.criticalView}>上拉</Text>
+                <ActivityIndicator
+                    animating={true}
+                    style={{alignItems: 'center',justifyContent: 'center',padding: 8,height: 80}}
+                    size="large"
+                />
+            </View>
+        );
+    }
     /**
      * 组件更新
      * @returns {XML}
@@ -392,44 +448,15 @@ export default class VerticalViewPager extends Component {
                     this.pullToPos('onMomentumScrollEnd');
                 }}
                 style={VerticalViewPagerStyles.container}>
-                <View
-                    onLayout={(e)=>{this.layout.topViewLayout = e.nativeEvent.layout}}
-                    style={{width, minHeight: height+400, backgroundColor: "red",justifyContent:"flex-end"}}>
-                    <Settings style={{backgroundColor: "red"}} tabLabel="Settings"/>
-                    <Text
-                        onPress={()=>{this.onScrollDown()}}
-                        style={VerticalViewPagerStyles.criticalView}>下拉</Text>
 
-                </View>
-                {
-                    this.state.lazyStatus &&
-                    <View
-                        onLayout={(e)=>{this.layout.bottomViewLayout = e.nativeEvent.layout}}
-                        style={{width, minHeight: height,backgroundColor: "green"}}>
-                        {
+                {/*TopView*/}
+                {this.renderTopView()}
 
-                            <QATest style={{height:height+400}} tabLabel="QATest"/>
-                        }
-                    </View>
-                }
-                {
-                    !this.state.lazyStatus &&
-                    <View
-                        onLayout={(e)=>{this.layout.bottomViewLayout = e.nativeEvent.layout}}
-                        style={{width, minHeight: height, backgroundColor: "green"}}>
-                        <Text
-                            onPress={()=>{this.onScrollTop()}}
-                            style={VerticalViewPagerStyles.criticalView}>上拉</Text>
-                        <ActivityIndicator
-                            animating={true}
-                            style={{alignItems: 'center',justifyContent: 'center',padding: 8,height: 80}}
-                            size="large"
-                        />
-                    </View>
-                }
-                {/*<HomePage tabLabel="HomePage"/>*/}
-                {/*<Settings tabLabel="Settings"/>*/}
-                {/*<QATest tabLabel="QATest"/>*/}
+                {/*BottomView*/}
+                {this.state.lazyStatus && this.renderBottomView()}
+
+                {/*LazyView*/}
+                {!this.state.lazyStatus && this.renderLazyView()}
             </ScrollView>
         );
     }

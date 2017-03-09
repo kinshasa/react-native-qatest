@@ -5,26 +5,24 @@
  * @NAME: scenes.js
  * Source : https://github.com/Qwikly/react-native-router-redux
  */
-import React, {Component} from 'react';
-import {Actions, Scene, Router} from 'react-native-router-flux';
-
+import React, {Component} from "react";
+import {Actions, Scene} from "react-native-router-flux";
 /**
  * 启动页
  */
-import Launcher from './containers/Launcher';
+import Launcher from "./containers/Launcher";
 /**
  * HomeList
  */
-import CartAnimation from './containers/home/list/CartAnimation';
-import AnimationDemo from './containers/home/list/AnimationDemo';
-import LayoutXYDemo from './containers/home/list/LayoutXYDemo';
-import PicStore from './containers/home/list/PicStore';
-import SwipeList from './containers/home/list/SwipeList';
-import RCTComponents from './containers/home/list/RCTComponents';
-import VerticalViewPager from './containers/home/list/VerticalViewPager';
-import TabView from './containers/home/list/TabView';
-import ScrollPageView from './containers/home/list/ScrollPageView';
-import DataBindingRedux from './containers/home/list/DataBindingRedux';
+import CartAnimation from "./containers/home/list/CartAnimation";
+import AnimationDemo from "./containers/home/list/AnimationDemo";
+import LayoutXYDemo from "./containers/home/list/LayoutXYDemo";
+import PicStore from "./containers/home/list/PicStore";
+import SwipeList from "./containers/home/list/SwipeList";
+import RCTComponents from "./containers/home/list/RCTComponents";
+import VerticalViewPager from "./components/viewpager/VerticalViewPager";
+import TabView from "./containers/home/list/TabView";
+import DataBindingRedux from "./containers/home/list/DataBindingRedux";
 
 export default  scenes = Actions.create(
     <Scene key="root">
@@ -37,7 +35,6 @@ export default  scenes = Actions.create(
         <Scene key="RCTComponents" component={RCTComponents} des={"原生组件"} hideNavBar={true}/>
         <Scene key="VerticalViewPager" component={VerticalViewPager} des={"VerticalViewPager"} hideNavBar={true}/>
         <Scene key="TabView" component={TabView} des={"TableView"} hideNavBar={true}/>
-        <Scene key="ScrollPageView" component={ScrollPageView} des={"ScrollPageView"} hideNavBar={true}/>
         <Scene key="DataBindingRedux" component={DataBindingRedux} des={"DataBindingRedux"} hideNavBar={true}/>
 
     </Scene>
