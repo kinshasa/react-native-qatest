@@ -19,8 +19,7 @@ import AnimationDemo from "./containers/home/list/AnimationDemo";
 import LayoutXYDemo from "./containers/home/list/LayoutXYDemo";
 import PicStore from "./containers/home/list/PicStore";
 import SwipeList from "./containers/home/list/SwipeList";
-import RCTComponents from "./containers/home/list/RCTComponents";
-import VerticalViewPager from "./components/viewpager/VerticalViewPager";
+import VerticalViewPagerSimple from "./containers/home/list/VerticalViewPagerSimple";
 import TabView from "./containers/home/list/TabView";
 import DataBindingRedux from "./containers/home/list/DataBindingRedux";
 
@@ -32,8 +31,7 @@ export default  scenes = Actions.create(
         <Scene key="LayoutXYDemo" component={LayoutXYDemo} des={"Layout布局"} hideNavBar={true}/>
         <Scene key="PicStore" component={PicStore} des={"图标库"} hideNavBar={false}/>
         <Scene key="SwipeList" component={SwipeList} des={"Swipe组件"} hideNavBar={true}/>
-        <Scene key="RCTComponents" component={RCTComponents} des={"原生组件"} hideNavBar={true}/>
-        <Scene key="VerticalViewPager" component={VerticalViewPager} des={"VerticalViewPager"} hideNavBar={true}/>
+        <Scene key="VerticalViewPagerSimple" component={VerticalViewPagerSimple} des={"垂直ViewPager"} hideNavBar={true}/>
         <Scene key="TabView" component={TabView} des={"TableView"} hideNavBar={true}/>
         <Scene key="DataBindingRedux" component={DataBindingRedux} des={"DataBindingRedux"} hideNavBar={true}/>
 

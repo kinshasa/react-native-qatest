@@ -2,7 +2,7 @@
  * @Author: liushaobo2005@163.com
  * @Date: 2017.2.27 下午 3:13
  * @Desc: 公共组件 - RCTComponents
- * @Name: RCTComponents.js
+ * @Name: VerticalViewPagerSimple.js
  * @LifeCycle：http://www.tuicool.com/articles/nu6zInB
  */
 
@@ -14,7 +14,7 @@ import {
     Dimensions
 } from 'react-native';
 
-import VerticalViewPager from '../../../components/viewpager/VerticalViewPager'
+import VerticalViewPager from 'react-native-vertical-viewpager'
 import QATest from '../../test/QATest'
 import Settings from '../../set/Setting'
 
