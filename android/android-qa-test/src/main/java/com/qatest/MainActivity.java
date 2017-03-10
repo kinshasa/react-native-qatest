@@ -31,6 +31,13 @@ public class MainActivity extends ReactActivity {
         //bugly自动升级初始化
         //Bugly.init(getApplicationContext(), "f130c8d4d9", false);
 
-        //Toast.makeText(this,"测试",Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"onCreate",Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        Toast.makeText(getApplicationContext(),"onDestroy",Toast.LENGTH_LONG).show();
     }
 }

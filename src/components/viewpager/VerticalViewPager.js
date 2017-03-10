@@ -283,6 +283,9 @@ export default class VerticalViewPager extends Component {
             }
         }, 1000);
         this.refs['pullView'] && this.refs['pullView'].setIconDown();
+        /*this.refs['scrollView'].setNativeProps({
+            scrollEnabled :false
+        })*/
     }
 
     /**
@@ -517,6 +520,7 @@ export default class VerticalViewPager extends Component {
                 alwaysBounceVertical
                 scrollsToTop
                 scrollEventThrottle={200}
+                overScrollMode="auto"
                 ref="scrollView"
                 onScroll={(e)=>{{this.onScroll(e.nativeEvent.contentOffset)}}}
                 onLayout={(e)=>{this.layout.scrollViewLayout = e.nativeEvent.layout}}

@@ -11,10 +11,12 @@ import {
     StyleSheet,
     View,
     Text,
+    Dimensions
 } from 'react-native';
 
 import TitleBar from "../../components/bar/TitleBar"
 import Icon from 'react-native-vector-icons/FontAwesome';
+const {height, width} = Dimensions.get('window');
 
 export default class Setting extends Component {
 
@@ -92,7 +94,7 @@ export default class Setting extends Component {
 
 const SettingStyles = StyleSheet.create({
     container: {
-        flex:1,
+        width,minHeight:height,
         backgroundColor:"#aaa"
     },
 });

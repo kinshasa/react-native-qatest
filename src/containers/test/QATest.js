@@ -11,10 +11,12 @@ import {
     StyleSheet,
     View,
     Text,
+    Dimensions,
+    ScrollView
 } from 'react-native';
 import TitleBar from "../../components/bar/TitleBar"
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+const {height, width} = Dimensions.get('window');
 export default class QATest extends Component {
 
     /**
@@ -137,7 +139,10 @@ export default class QATest extends Component {
                     rightView={<Icon.Button name="undo" size={25} color="#999" backgroundColor="transparent"
                                             onPress={()=>{alert("click share icon")}}/>}
                     style={{height: 45}}/>
-                <Text>性能测试</Text>
+                <ScrollView style={QATestStyles.scrollView}>
+                    <Text>{JSON.stringify(config)}</Text>
+
+                </ScrollView>
             </View>
         );
     }
@@ -147,5 +152,9 @@ export default class QATest extends Component {
 const QATestStyles = StyleSheet.create({
     container: {
         flex:1,
+    },
+    scrollView: {
+        width:width,
+        height:height*2
     },
 });

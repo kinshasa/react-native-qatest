@@ -8,6 +8,7 @@
 import React, {Component} from 'react';
 import {
     AppRegistry,
+    Platform
 } from 'react-native';
 
 import MainProvider from "./MainProvider"
@@ -30,7 +31,6 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-
     }
 
     componentWillUnmount() {
@@ -38,6 +38,7 @@ export default class App extends Component {
     }
 
     render() {
+        console.log('App render() config:',config);
         return (
             <MainProvider />
         );

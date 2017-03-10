@@ -11,12 +11,18 @@ import {
     StyleSheet,
     View,
     Text,
+    Dimensions
 } from 'react-native';
 
 import ScrollableTabView from'react-native-scrollable-tab-view';
+import DefaultTabBar from'react-native-scrollable-tab-view/DefaultTabBar';
+
+
 import HomePage from '../HomePage'
 import Settings from '../../set/Setting'
 import QATest from '../../test/QATest'
+
+const {height, width} = Dimensions.get('window');
 
 export default class TabView extends Component {
 
@@ -48,7 +54,7 @@ export default class TabView extends Component {
     constructor(props, context) {
         console.log("TabView", "constructor()");
         super(props, context);
-        this.state = {};
+        this.state = {child:null};
     }
 
     /**
@@ -123,18 +129,25 @@ export default class TabView extends Component {
 
     }
 
+    getRef(){
+        return this.ref;
+    }
+
     /**
      * 组件更新
      * @returns {XML}
      */
     render() {
         this.renderCount++;
-        console.log("TabView", "render() renderCount:" + this.renderCount);
+        console.log("TabView render() renderCount:",this.renderCount);
         return (
-            <ScrollableTabView style={TabViewStyles.container}>
+            <ScrollableTabView
+                ref={(ref)=>{this.ref = ref}}
+                contentContainerStyle={[TabViewStyles.container,this.props.contentContainerStyle]}>
                 <HomePage tabLabel="HomePage"/>
                 <Settings tabLabel="Settings"/>
                 <QATest tabLabel="QATest"/>
+                {this.state.child}
             </ScrollableTabView>
         );
     }
@@ -143,6 +156,7 @@ export default class TabView extends Component {
 
 const TabViewStyles = StyleSheet.create({
     container: {
-        flex: 1,
+        width,
+        minHeight:height,
     },
 });

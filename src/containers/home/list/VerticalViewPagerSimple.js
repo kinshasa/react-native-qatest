@@ -1,7 +1,7 @@
 /**
  * @Author: liushaobo2005@163.com
  * @Date: 2017.2.27 下午 3:13
- * @Desc: 公共组件 - RCTComponents
+ * @Desc: 公共组件 - VerticalViewPagerSimple
  * @Name: VerticalViewPagerSimple.js
  * @LifeCycle：http://www.tuicool.com/articles/nu6zInB
  */
@@ -11,30 +11,36 @@ import {
     StyleSheet,
     View,
     Text,
-    Dimensions
+    Dimensions,
+    ScrollView
 } from 'react-native';
 
-import VerticalViewPager from 'react-native-vertical-viewpager'
-import QATest from '../../test/QATest'
+import VerticalViewPager from '../../../components/viewpager/VerticalViewPager'
 import Settings from '../../set/Setting'
+import TabView from './TabView'
 
 const {height, width} = Dimensions.get('window');
-export default class RCTComponents extends Component {
+export default class VerticalViewPagerSimple extends Component {
 
+    componentDidMount() {
+        console.log("VerticalViewPagerSimple render() tabView:", this.tabView);
+    }
     render() {
         return (
-            <View style={RCTComponentsStyles.container}>
+            <View style={VerticalViewPagerSimpleStyles.container}>
                 <VerticalViewPager>
                     <Settings style={{backgroundColor: "red",height:height+400}} tabLabel="Settings"/>
-                    <QATest style={{height:height+400}} tabLabel="QATest"/>
+                    <TabView contentContainerStyle={{minHeight:height+400}} ref={(ref)=>{this.tabView = ref}}/>
                 </VerticalViewPager>
+                {/*<DefaultTabBar />*/}
+                <Text style={{position:'absolute',top:0,fontSize:28}}>TESTTESTTESTTEST</Text>
             </View>
         );
     }
 
 }
 
-const RCTComponentsStyles = StyleSheet.create({
+const VerticalViewPagerSimpleStyles = StyleSheet.create({
     container: {
         flex: 1,
     },

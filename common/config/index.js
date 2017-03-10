@@ -5,6 +5,18 @@
  * @Name: index.js
  * @LifeCycle：https://github.com/kinshasa/react-native-qatest
  */
+
+
+import {Dimensions, Platform} from 'react-native';
+const window = Dimensions.get('window');
+
+global.config={
+    log:false,
+    OS:Platform.OS,
+    window
+};
+
+//disable console.log
 if (!__DEV__) {
     global.console = {
         info: () => {},
@@ -14,6 +26,4 @@ if (!__DEV__) {
     };
 }
 
-global.config={
-    log:false
-};
+export default global.config;
