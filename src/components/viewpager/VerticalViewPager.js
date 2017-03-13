@@ -115,6 +115,8 @@ export default class VerticalViewPager extends Component {
         onLazyViewLoadComplete:null,
         onScrollDownComplete:null,
         onScrollTopComplete:null,
+        getLocation:null,
+        onScroll:null,
     };
 
     /**
@@ -235,7 +237,7 @@ export default class VerticalViewPager extends Component {
      */
     onScroll(offset) {
         //console.log("VerticalViewPager", `onScroll() offset:${offset.y}；status:${this.scrollOffset.status};pos:${this.scrollOffset.pos}`);
-
+        this.props.onScroll && this.props.onScroll(offset);
         //释放触摸后不是"自动滑动中"，则不需要计算
         if (this.scrollOffset.status != TOUCH_STATUS.STATUS_SCROLL_BEGIN) {
             return;
@@ -341,6 +343,7 @@ export default class VerticalViewPager extends Component {
         }
 
         //console.log("VerticalViewPager", `getCurrentViewPos() pos: ${this.scrollOffset.pos}`);
+        this.props.getLocation && this.props.getLocation(this.scrollOffset.pos);
 
         return this.scrollOffset.pos;
     }
@@ -546,6 +549,7 @@ export default class VerticalViewPager extends Component {
         console.log("VerticalViewPager render() renderCount:", this.renderCount);
         return (
             <ScrollView
+                {...this.props}
                 pagingEnabled
                 alwaysBounceVertical
                 scrollsToTop

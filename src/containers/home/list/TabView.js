@@ -138,6 +138,8 @@ export default class TabView extends Component {
         console.log("TabView render() renderCount:",this.renderCount);
         return (
             <ScrollableTabView
+                {...this.props}
+                onLayout={}
                 ref='scrollView'
                 contentContainerStyle={TabViewStyles.container}>
                 <HomePage tabLabel="HomePage"/>

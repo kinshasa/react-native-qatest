@@ -65,7 +65,9 @@ export default class VerticalViewPagerSimple extends Component {
 
     renderTabBar() {
         return (
-            <View ref={(ref)=>{this.tabBar = ref}} style={{backgroundColor:"yellow",zIndex:2}}>
+            <View onLayout={(e)=>{console.log("VerticalViewPagerSimple renderTabBar layout",e.nativeEvent.layout.y)}}
+                  ref={(ref)=>{this.tabBar = ref}}
+                  style={{width,backgroundColor:"yellow",position:'absolute',zIndex:2}}>
                 {this.state.refresh && this.refView[0]}
             </View>
         )
@@ -73,14 +75,16 @@ export default class VerticalViewPagerSimple extends Component {
     render() {
         return (
             <View style={VerticalViewPagerSimpleStyles.container}>
-                {this.renderTabBar()}
+
                 <VerticalViewPager
+                    onScroll={(offset)=>{console.log("VerticalViewPagerSimple render offset",offset.y)}}
                     onScrollDownComplete={()=>{this.onScrollDownComplete()}}
                     onScrollTopComplete={()=>{this.onScrollTopComplete()}}
                     onLazyViewLoadComplete={()=>{this.onLazyViewLoadComplete()}}>
                     <Settings style={{backgroundColor: "red",height:height+400}} tabLabel="Settings"/>
                     <TabView ref={(ref)=>{this.tabView = ref}} contentContainerStyle={{minHeight:height+400}}/>
                 </VerticalViewPager>
+                {this.renderTabBar()}
             </View>
         );
     }
@@ -89,6 +93,5 @@ export default class VerticalViewPagerSimple extends Component {
 const VerticalViewPagerSimpleStyles = StyleSheet.create({
     container: {
         flex:1,
-        backgroundColor:"green"
     },
 });
