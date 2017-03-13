@@ -94,7 +94,7 @@ export default class HomePage extends Component {
         return (
             <View style={HomePageStyles.container}>
                 <TitleBar
-                    label="首页"
+                    label="首页(热修复更新成功)"
                     labelStyle={{backgroundColor:"transparent",color:"black"}}
                     leftView={<Icon.Button name="android" size={30} color="#166AF6" backgroundColor="transparent"
                                            onPress={()=>{alert("click android logo")}}/>}
