@@ -55,22 +55,6 @@ export default class NestScrollView extends Component {
 
     componentDidMount() {
         //console.log("NestScrollView componentDidMount() this.refs['view'].props.children[0]", this.refs['view'].props.children[0]);
-        console.log("NestScrollView componentDidMount() this.refs['vertical']", this.refs['vertical']);
-
-        this.refs['view'].props.children.map((child,index)=>{
-            if (React.isValidElement(child)) {
-                console.log("NestScrollView componentDidMount() child right!:", index);
-                this.refs['text'] = child;
-            }else{
-                console.log("NestScrollView componentDidMount() ！React.isValidElement(child)", index);
-            }
-        });
-
-        if(React.isValidElement(this.refs['text'])){
-            this.setState({
-                refresh:true
-            })
-        }
     }
 
     /**
@@ -126,16 +110,18 @@ export default class NestScrollView extends Component {
         this.count++;
         console.log("NestScrollView render() count:", `${this.count}`);
         return (
-            <View
-                style={NestScrollViewStyles.container}>
-                <View
-                    ref="view"
-                    style={NestScrollViewStyles.nestScrollView}>
-                    <Text ref="text" onPress={()=>{alert('test')}} style={{width,height:100}}>test2222222222</Text>
-                    {this.state.refresh && this.refs['text']}
-                </View>
+            <View>
                 <Text style={{width,height:100,position:'absolute',zIndex:1}}>adawwd</Text>
+                <ScrollView
+                    style={NestScrollViewStyles.container}>
+                    <View
+                        ref="view"
+                        style={NestScrollViewStyles.nestScrollView}>
+                        <Text ref="text" onPress={()=>{alert('test')}} style={{width,height:100}}>test2222222222</Text>
+                        {this.state.refresh && this.refs['text']}
+                    </View>
 
+                </ScrollView>
             </View>
         );
     }
@@ -144,12 +130,12 @@ export default class NestScrollView extends Component {
 
 const NestScrollViewStyles = StyleSheet.create({
     container: {
-        flex: 1,
+        width,height:height*2
     },
     nestScrollView: {
         backgroundColor:"blue",
         width,
-        minHeight:height*2
+        minHeight:height*2,
 
     },
 });

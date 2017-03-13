@@ -65,7 +65,7 @@ export default class VerticalViewPagerSimple extends Component {
 
     renderTabBar() {
         return (
-            <View ref={(ref)=>{this.tabBar = ref}} style={{backgroundColor:"yellow"/*,position:'absolute'*/,zIndex:2}}>
+            <View ref={(ref)=>{this.tabBar = ref}} style={{backgroundColor:"yellow",zIndex:2}}>
                 {this.state.refresh && this.refView[0]}
             </View>
         )
@@ -88,7 +88,7 @@ export default class VerticalViewPagerSimple extends Component {
 
 const VerticalViewPagerSimpleStyles = StyleSheet.create({
     container: {
-        flex: 1,
-        zIndex: 1
+        flex:1,
+        backgroundColor:"green"
     },
 });

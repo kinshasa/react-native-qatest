@@ -245,7 +245,7 @@ export default class VerticalViewPager extends Component {
         if (this.scrollOffset.pos == 0) {
 
             //下拉可以看到bottomView的距离
-            this.scrollOffset.threshold = this.layout.topViewLayout.height - this.layout.scrollViewLayout.height + this.layout.topViewLayout.y - PULL_TO_SCROLL_MAX;
+            this.scrollOffset.threshold = this.layout.topViewLayout.height + this.layout.topViewLayout.y - this.layout.scrollViewLayout.height - PULL_TO_SCROLL_MAX;
             //console.log("VerticalViewPager", `onScroll() threshold:${ this.scrollOffset.threshold}；offset.y:${offset.y};state:${this.scrollOffset.state}`);
             //如果滑动中的距离大于threshold的高度，则不需要让它继续滑动，需要停止到onScrollTop()
             if (offset.y >= this.scrollOffset.threshold) {
@@ -308,7 +308,7 @@ export default class VerticalViewPager extends Component {
      */
     onScrollTop(type) {
         console.log("VerticalViewPager", `onScrollTop()`);
-        this.refs['scrollView'] && this.refs['scrollView'].scrollTo({y: this.scrollOffset.threshold, animated: true});
+        this.refs['scrollView'] && this.refs['scrollView'].scrollTo({y: this.scrollOffset.threshold - this.layout.scrollViewLayout.y, animated: true});
         this.refs['pullView'] && this.refs['pullView'].setIconUp();
         setTimeout(()=>{
             this.props.LazyViewLoadComplete && this.props.LazyViewLoadComplete();
@@ -366,7 +366,7 @@ export default class VerticalViewPager extends Component {
             this.scrollOffset.type = 1;
         }
         //下拉可以看到bottomView的距离
-        this.scrollOffset.threshold = this.layout.topViewLayout.height - this.layout.scrollViewLayout.height + this.layout.topViewLayout.y;
+        this.scrollOffset.threshold = this.layout.topViewLayout.height + this.layout.topViewLayout.y - this.layout.scrollViewLayout.height;
 
         //获取触摸前视图所在的上/下视图中：this.scrollOffset.pos
         this.getCurrentViewPos();
@@ -577,7 +577,7 @@ export default class VerticalViewPager extends Component {
                     this.scrollOffset.status = TOUCH_STATUS.STATUS_SCROLL_END;
                     this.pullToPos('onMomentumScrollEnd');
                 }}
-                style={VerticalViewPagerStyles.container}>
+                contentContainerStyle={VerticalViewPagerStyles.container}>
 
                 {/*TopView*/}
                 {this.renderTopView()}
@@ -597,7 +597,6 @@ const VerticalViewPagerStyles = StyleSheet.create({
     container: {
         width: width,
         backgroundColor: "#aaa",
-        flex: 1
     },
     pullView: {
         margin: 5, alignSelf: "center"
