@@ -54,7 +54,7 @@ export default class TabView extends Component {
     constructor(props, context) {
         console.log("TabView", "constructor()");
         super(props, context);
-        this.state = {child:null};
+        this.state = {refresh:false};
     }
 
     /**
@@ -77,7 +77,7 @@ export default class TabView extends Component {
      * 用于网络请求和页面渲染
      */
     componentDidMount() {
-        console.log("TabView", "componentDidMount()");
+        console.log("TabView", "componentDidMount() this.props.children",this.refs['scrollView'].props.children.length);
     }
 
     /**
@@ -130,7 +130,7 @@ export default class TabView extends Component {
     }
 
     getRef(){
-        return this.ref;
+        return this.refs['scrollView'];
     }
 
     /**
@@ -142,12 +142,13 @@ export default class TabView extends Component {
         console.log("TabView render() renderCount:",this.renderCount);
         return (
             <ScrollableTabView
-                ref={(ref)=>{this.ref = ref}}
+                {...this.props}
+                ref='scrollView'
                 contentContainerStyle={[TabViewStyles.container,this.props.contentContainerStyle]}>
                 <HomePage tabLabel="HomePage"/>
                 <Settings tabLabel="Settings"/>
                 <QATest tabLabel="QATest"/>
-                {this.state.child}
+                {this.refView}
             </ScrollableTabView>
         );
     }

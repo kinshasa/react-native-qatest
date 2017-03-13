@@ -47,7 +47,7 @@ export default class Setting extends Component {
     }
 
     componentDidMount() {
-        console.log("Setting", "componentDidMount()");
+        //console.log("Setting", "componentDidMount() children",this.refs['view'].props.children);
     }
 
     componentWillReceiveProps(newProps) {
@@ -73,11 +73,15 @@ export default class Setting extends Component {
 
     }
 
+    getRef(){
+        return this.refs['view']
+    }
+
     render() {
         this.renderCount++;
         console.log("Setting", "render() renderCount:" + this.renderCount);
         return (
-            <View style={[SettingStyles.container,this.props.style]}>
+            <View {...this.props} ref="view" style={[SettingStyles.container,this.props.style]}>
                 <TitleBar
                     label="其他设置"
                     labelStyle={{backgroundColor:"transparent",color:"black"}}

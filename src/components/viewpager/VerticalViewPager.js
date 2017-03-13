@@ -141,6 +141,11 @@ export default class VerticalViewPager extends Component {
             state: SCROLL_CALC_STATE.STATE_CALC_DISABLE,//表示是否在滚动计算中
             status: TOUCH_STATUS.STATUS_TOUCH_NO,//0没有滑动，1开始触摸滑动，2结束触摸，3释放手后自动滑动，4释放手后自动滑动停止(没有自动滑动即2，有即4)
         };
+        this.refView = {
+            topView:{},
+            bottomView:{},
+            lazyView:{},
+        }
     }
 
     /**
@@ -167,6 +172,7 @@ export default class VerticalViewPager extends Component {
         /*this.refs['pullLabel'] && this.refs['pullLabel'].setNativeProps({
             name:'angle-down'
         })*/
+        console.log("VerticalViewPager", "componentDidMount()");
     }
 
     /**
@@ -419,6 +425,8 @@ export default class VerticalViewPager extends Component {
             if (idx == 0 && child)
                 return (
                     <View
+                        ref={(ref)=>{this.refView.topView = ref}}
+                        style={{width,minHeight:height}}
                         onLayout={(e)=>{this.layout.topViewLayout = e.nativeEvent.layout}} key={child.key}>
                         {child}
                         {/*上拉查看/下拉收起图文详情*/}
@@ -454,7 +462,9 @@ export default class VerticalViewPager extends Component {
     renderBottomView() {
         return this._children().map((child, idx) => {
             if (idx == 1 && child)
-                return <View style={{minHeight:height}} onLayout={(e)=>{this.layout.bottomViewLayout = e.nativeEvent.layout}}
+                return <View
+                    style={{width,minHeight:height}}
+                    onLayout={(e)=>{this.layout.bottomViewLayout = e.nativeEvent.layout}}
                              key={child.key}>{child}</View>;
         });
     }

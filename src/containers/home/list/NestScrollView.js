@@ -14,7 +14,11 @@ import {
     ScrollView,
     Dimensions
 } from 'react-native';
+import VerticalViewPagerSimple from './VerticalViewPagerSimple'
+
+
 const {height, width} = Dimensions.get('window');
+
 export default class NestScrollView extends Component {
 
     static propTypes = {
@@ -32,7 +36,11 @@ export default class NestScrollView extends Component {
     constructor(props, context) {
         console.log("NestScrollView", `constructor()`);
         super(props, context);
-        this.state = {};
+        this.state = {refresh:false};
+        this.refView = {
+            scrollView:{},
+            text:{}
+        }
     }
 
     /**
@@ -46,7 +54,23 @@ export default class NestScrollView extends Component {
     }
 
     componentDidMount() {
-        console.log("NestScrollView componentDidMount()", ``);
+        //console.log("NestScrollView componentDidMount() this.refs['view'].props.children[0]", this.refs['view'].props.children[0]);
+        console.log("NestScrollView componentDidMount() this.refs['vertical']", this.refs['vertical']);
+
+        this.refs['view'].props.children.map((child,index)=>{
+            if (React.isValidElement(child)) {
+                console.log("NestScrollView componentDidMount() child right!:", index);
+                this.refs['text'] = child;
+            }else{
+                console.log("NestScrollView componentDidMount() ！React.isValidElement(child)", index);
+            }
+        });
+
+        if(React.isValidElement(this.refs['text'])){
+            this.setState({
+                refresh:true
+            })
+        }
     }
 
     /**
@@ -103,20 +127,15 @@ export default class NestScrollView extends Component {
         console.log("NestScrollView render() count:", `${this.count}`);
         return (
             <ScrollView
-                scrollEventThrottle={1000}
-                onScroll={(e)=>{console.log('ScrollView');}}
                 style={NestScrollViewStyles.container}>
-                <Text>test</Text>
-                <ScrollView
-                    onScroll={(e)=>{console.log('nestScrollView');}}
-                    scrollEventThrottle={1000}
-                    scrollEnabled={false}
+                <Text style={{width,height:100}}>test1111111111</Text>
+                <View
+                    ref="view"
                     style={NestScrollViewStyles.nestScrollView}>
-                    <Text>test</Text>
-                    <View style={{position:'absolute',left:100,bottom:10,backgroundColor:"white"}}>
-                        <Text >END</Text>
-                    </View>
-                </ScrollView>
+                    <Text ref="text" onPress={()=>{alert('test')}} style={{width,height:100}}>test2222222222</Text>
+                    {this.state.refresh && this.refs['text']}
+                </View>
+                <VerticalViewPagerSimple ref="vertical"/>
             </ScrollView>
         );
     }

@@ -22,20 +22,51 @@ import TabView from './TabView'
 const {height, width} = Dimensions.get('window');
 export default class VerticalViewPagerSimple extends Component {
 
+    constructor(props, context){
+        super(props, context);
+        this.state = {
+            refresh: false
+        }
+    }
+    refView = {};
+
     componentDidMount() {
-        //console.log("VerticalViewPagerSimple render() tabView:", this.tabView);
+        //console.log("VerticalViewPagerSimple componentDidMount() this.tabView3",this.tabView3/*.getRef().props.children*/);
+        /*if(!this.tabView.getRef().props.children){
+            return;
+        }
+        this.refView = this.tabView.getRef().props.children.map((child,index)=>{
+            if (React.isValidElement(child)) {
+                console.log("VerticalViewPagerSimple child right! :", index);
+                return child;
+            }else{
+                console.log("VerticalViewPagerSimple not child! :", index);
+            }
+        });
+        if(this.refView && this.refView.length > 0){
+            this.setState({
+                refresh:true
+            })
+        }*/
+
     }
     render() {
+
         return (
-            <View style={VerticalViewPagerSimpleStyles.container}>
-                <VerticalViewPager>
-                    <Settings style={{backgroundColor: "red",height:height+400}} tabLabel="Settings"/>
-                    <TabView contentContainerStyle={{minHeight:height+400}} ref={(ref)=>{this.tabView = ref}}/>
-                </VerticalViewPager>
-                {/*<DefaultTabBar />*/}
-                {/*<Text style={{position:'absolute',top:0,fontSize:28}}>TESTTESTTESTTEST</Text>*/}
-            </View>
+            <VerticalViewPager ref={(ref)=>{this.tabView3 = ref}}>
+                <Settings ref={(ref)=>{this.tabView = ref}} style={{backgroundColor: "red",height:height+400}} tabLabel="Settings"/>
+                <TabView ref={(ref)=>{this.tabView2 = ref}} contentContainerStyle={{minHeight:height+400}}/>
+            </VerticalViewPager>
         );
+        /*return (
+            <View style={VerticalViewPagerSimpleStyles.container}>
+                <VerticalViewPager ref={(ref)=>{this.tabView3 = ref}}>
+                    <Settings ref={(ref)=>{this.tabView = ref}} style={{backgroundColor: "red",height:height+400}} tabLabel="Settings"/>
+                    <TabView ref={(ref)=>{this.tabView2 = ref}} contentContainerStyle={{minHeight:height+400}}/>
+                </VerticalViewPager>
+                {this.state.refresh && this.refView}
+            </View>
+        );*/
     }
 
 }
