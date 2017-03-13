@@ -31,11 +31,21 @@ export default class VerticalViewPagerSimple extends Component {
     refView = {};
 
     componentDidMount() {
-        //console.log("VerticalViewPagerSimple componentDidMount() this.tabView3",this.tabView3/*.getRef().props.children*/);
-        /*if(!this.tabView.getRef().props.children){
-            return;
-        }
-        this.refView = this.tabView.getRef().props.children.map((child,index)=>{
+    }
+
+    onScrollDownComplete(){
+        this.tabBar && this.tabBar.setNativeProps({style:{opacity:1,maxHeight:200}})
+
+    }
+    onScrollTopComplete(){
+        this.tabBar && this.tabBar.setNativeProps({style:{opacity:0,maxHeight:0}})
+    }
+
+    onLazyViewLoadComplete(){
+        //console.log("VerticalViewPagerSimple onLazyViewLoadComplete this.tabView2.getRef()._children()",this.tabView2.refs['scrollView'].refs['scrollableTabView']);
+
+        let ref = this.tabView.refs['scrollView'].refs['scrollableTabView'].props.children;
+        this.refView = ref.map((child,index)=>{
             if (React.isValidElement(child)) {
                 console.log("VerticalViewPagerSimple child right! :", index);
                 return child;
@@ -43,36 +53,42 @@ export default class VerticalViewPagerSimple extends Component {
                 console.log("VerticalViewPagerSimple not child! :", index);
             }
         });
+
+        console.log("VerticalViewPagerSimple onLazyViewLoadComplete",this.refView.length);
+
         if(this.refView && this.refView.length > 0){
             this.setState({
                 refresh:true
             })
-        }*/
+        }
+    }
 
+    renderTabBar() {
+        return (
+            <View ref={(ref)=>{this.tabBar = ref}} style={{backgroundColor:"yellow"/*,position:'absolute'*/,zIndex:2}}>
+                {this.state.refresh && this.refView[0]}
+            </View>
+        )
     }
     render() {
-
         return (
-            <VerticalViewPager ref={(ref)=>{this.tabView3 = ref}}>
-                <Settings ref={(ref)=>{this.tabView = ref}} style={{backgroundColor: "red",height:height+400}} tabLabel="Settings"/>
-                <TabView ref={(ref)=>{this.tabView2 = ref}} contentContainerStyle={{minHeight:height+400}}/>
-            </VerticalViewPager>
-        );
-        /*return (
             <View style={VerticalViewPagerSimpleStyles.container}>
-                <VerticalViewPager ref={(ref)=>{this.tabView3 = ref}}>
-                    <Settings ref={(ref)=>{this.tabView = ref}} style={{backgroundColor: "red",height:height+400}} tabLabel="Settings"/>
-                    <TabView ref={(ref)=>{this.tabView2 = ref}} contentContainerStyle={{minHeight:height+400}}/>
+                {this.renderTabBar()}
+                <VerticalViewPager
+                    onScrollDownComplete={()=>{this.onScrollDownComplete()}}
+                    onScrollTopComplete={()=>{this.onScrollTopComplete()}}
+                    onLazyViewLoadComplete={()=>{this.onLazyViewLoadComplete()}}>
+                    <Settings style={{backgroundColor: "red",height:height+400}} tabLabel="Settings"/>
+                    <TabView ref={(ref)=>{this.tabView = ref}} contentContainerStyle={{minHeight:height+400}}/>
                 </VerticalViewPager>
-                {this.state.refresh && this.refView}
             </View>
-        );*/
+        );
     }
-
 }
 
 const VerticalViewPagerSimpleStyles = StyleSheet.create({
     container: {
         flex: 1,
+        zIndex: 1
     },
 });

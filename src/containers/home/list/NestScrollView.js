@@ -126,17 +126,17 @@ export default class NestScrollView extends Component {
         this.count++;
         console.log("NestScrollView render() count:", `${this.count}`);
         return (
-            <ScrollView
+            <View
                 style={NestScrollViewStyles.container}>
-                <Text style={{width,height:100}}>test1111111111</Text>
                 <View
                     ref="view"
                     style={NestScrollViewStyles.nestScrollView}>
                     <Text ref="text" onPress={()=>{alert('test')}} style={{width,height:100}}>test2222222222</Text>
                     {this.state.refresh && this.refs['text']}
                 </View>
-                <VerticalViewPagerSimple ref="vertical"/>
-            </ScrollView>
+                <Text style={{width,height:100,position:'absolute',zIndex:1}}>adawwd</Text>
+
+            </View>
         );
     }
 
@@ -145,7 +145,6 @@ export default class NestScrollView extends Component {
 const NestScrollViewStyles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor:"red",
     },
     nestScrollView: {
         backgroundColor:"blue",

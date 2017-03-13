@@ -50,6 +50,9 @@ const TOUCH_STATUS = {
 
 class PullIcon extends Component{
 
+    static defaultProps = {
+    };
+
     constructor(props, context) {
         super(props, context);
         this.state={
@@ -109,7 +112,9 @@ export default class VerticalViewPager extends Component {
      * @type {{data: {}}}
      */
     static defaultProps = {
-        data: {}
+        onLazyViewLoadComplete:null,
+        onScrollDownComplete:null,
+        onScrollTopComplete:null,
     };
 
     /**
@@ -181,7 +186,7 @@ export default class VerticalViewPager extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("VerticalViewPager", "componentWillReceiveProps():" + newProps);
+        //console.log("VerticalViewPager componentWillReceiveProps():", newProps);
     }
 
     /**
@@ -192,7 +197,7 @@ export default class VerticalViewPager extends Component {
      */
     shouldComponentUpdate(nextProps, nextState) {
         let isUpdate = (this.props != nextProps) || (this.state != nextState);
-        console.log("VerticalViewPager", "shouldComponentUpdate():" + isUpdate);
+        console.log("VerticalViewPager shouldComponentUpdate():",isUpdate);
         return isUpdate;
     }
 
@@ -292,15 +297,23 @@ export default class VerticalViewPager extends Component {
         /*this.refs['scrollView'].setNativeProps({
             scrollEnabled :false
         })*/
+        setTimeout(()=>{
+            this.props.onScrollDownComplete && this.props.onScrollDownComplete();
+        },200);
+
     }
 
     /**
      * 上拉到topView底端，或恢复到topView底端
      */
-    onScrollTop() {
+    onScrollTop(type) {
         console.log("VerticalViewPager", `onScrollTop()`);
         this.refs['scrollView'] && this.refs['scrollView'].scrollTo({y: this.scrollOffset.threshold, animated: true});
         this.refs['pullView'] && this.refs['pullView'].setIconUp();
+        setTimeout(()=>{
+            this.props.LazyViewLoadComplete && this.props.LazyViewLoadComplete();
+        },200);
+        this.props.onScrollTopComplete && this.props.onScrollTopComplete();
     }
 
 
@@ -460,6 +473,12 @@ export default class VerticalViewPager extends Component {
      * BottomView页面
      */
     renderBottomView() {
+        if(this.renderCount == 2){
+            setTimeout(()=>{
+                this.props.onLazyViewLoadComplete && this.props.onLazyViewLoadComplete();
+            },200);
+        }
+
         return this._children().map((child, idx) => {
             if (idx == 1 && child)
                 return <View
@@ -491,6 +510,7 @@ export default class VerticalViewPager extends Component {
      * @returns {XML}
      */
     renderLazyView() {
+
         return (
             <View
                 onLayout={(e)=>{this.layout.bottomViewLayout = e.nativeEvent.layout}}

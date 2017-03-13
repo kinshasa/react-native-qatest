@@ -129,10 +129,6 @@ export default class TabView extends Component {
 
     }
 
-    getRef(){
-        return this.refs['scrollView'];
-    }
-
     /**
      * 组件更新
      * @returns {XML}
@@ -142,9 +138,8 @@ export default class TabView extends Component {
         console.log("TabView render() renderCount:",this.renderCount);
         return (
             <ScrollableTabView
-                {...this.props}
                 ref='scrollView'
-                contentContainerStyle={[TabViewStyles.container,this.props.contentContainerStyle]}>
+                contentContainerStyle={TabViewStyles.container}>
                 <HomePage tabLabel="HomePage"/>
                 <Settings tabLabel="Settings"/>
                 <QATest tabLabel="QATest"/>
@@ -158,6 +153,6 @@ export default class TabView extends Component {
 const TabViewStyles = StyleSheet.create({
     container: {
         width,
-        minHeight:height,
+        minHeight:height+400,
     },
 });
