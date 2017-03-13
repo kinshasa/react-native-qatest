@@ -454,7 +454,7 @@ export default class VerticalViewPager extends Component {
     renderBottomView() {
         return this._children().map((child, idx) => {
             if (idx == 1 && child)
-                return <View onLayout={(e)=>{this.layout.bottomViewLayout = e.nativeEvent.layout}}
+                return <View style={{minHeight:height}} onLayout={(e)=>{this.layout.bottomViewLayout = e.nativeEvent.layout}}
                              key={child.key}>{child}</View>;
         });
     }

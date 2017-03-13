@@ -23,7 +23,7 @@ const {height, width} = Dimensions.get('window');
 export default class VerticalViewPagerSimple extends Component {
 
     componentDidMount() {
-        console.log("VerticalViewPagerSimple render() tabView:", this.tabView);
+        //console.log("VerticalViewPagerSimple render() tabView:", this.tabView);
     }
     render() {
         return (
@@ -33,7 +33,7 @@ export default class VerticalViewPagerSimple extends Component {
                     <TabView contentContainerStyle={{minHeight:height+400}} ref={(ref)=>{this.tabView = ref}}/>
                 </VerticalViewPager>
                 {/*<DefaultTabBar />*/}
-                <Text style={{position:'absolute',top:0,fontSize:28}}>TESTTESTTESTTEST</Text>
+                {/*<Text style={{position:'absolute',top:0,fontSize:28}}>TESTTESTTESTTEST</Text>*/}
             </View>
         );
     }
