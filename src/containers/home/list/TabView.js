@@ -139,7 +139,6 @@ export default class TabView extends Component {
         return (
             <ScrollableTabView
                 {...this.props}
-                onLayout={}
                 ref='scrollView'
                 contentContainerStyle={TabViewStyles.container}>
                 <HomePage tabLabel="HomePage"/>
