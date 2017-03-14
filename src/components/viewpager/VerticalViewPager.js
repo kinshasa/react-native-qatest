@@ -342,7 +342,7 @@ export default class VerticalViewPager extends Component {
             this.scrollOffset.pos = 2;
         }
 
-        //console.log("VerticalViewPager", `getCurrentViewPos() pos: ${this.scrollOffset.pos}`);
+        console.log("VerticalViewPager", `getCurrentViewPos() pos: ${this.scrollOffset.pos}`);
         this.props.getLocation && this.props.getLocation(this.scrollOffset.pos);
 
         return this.scrollOffset.pos;
@@ -371,8 +371,6 @@ export default class VerticalViewPager extends Component {
         //下拉可以看到bottomView的距离
         this.scrollOffset.threshold = this.layout.topViewLayout.height + this.layout.topViewLayout.y - this.layout.scrollViewLayout.height;
 
-        //获取触摸前视图所在的上/下视图中：this.scrollOffset.pos
-        this.getCurrentViewPos();
 
         if (this.scrollOffset.type == 0 && this.scrollOffset.pos == 1) {
             //如果目前就在TopView中，且下拉没有到达BottomView视图中，是不需要人为干扰ScrollView的ScrollTo方法的
@@ -563,7 +561,9 @@ export default class VerticalViewPager extends Component {
                     this.scrollOffset.begin = e.nativeEvent.contentOffset;
                     this.scrollOffset.state = SCROLL_CALC_STATE.STATE_CALC_DISABLE;
                     this.scrollOffset.status = TOUCH_STATUS.STATUS_TOUCH_BEGIN;
-                }}
+                     //获取触摸前视图所在的上/下视图中：this.scrollOffset.pos
+                    this.getCurrentViewPos();
+               }}
                 onScrollEndDrag={(e) => {
                     this.scrollOffset.endDrag = e.nativeEvent.contentOffset;
                     this.scrollOffset.end = e.nativeEvent.contentOffset;

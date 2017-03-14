@@ -29,20 +29,33 @@ export default class VerticalViewPagerSimple extends Component {
         }
     }
     refView = {};
+    verticalLayout = {};
+    tabBarLayout={};
+    tabBarDisplay=false;
 
     componentDidMount() {
     }
 
     onScrollDownComplete(){
-        this.tabBar && this.tabBar.setNativeProps({style:{opacity:1,maxHeight:200}})
+        //如果tabBar没有显示显示，则显示
+        if(this.tabBar && !this.tabBarDisplay){
+            console.log("VerticalViewPagerSimple onScrollDownComplete");
+            this.tabBarDisplay =true;
+            console.log("VerticalViewPagerSimple onScrollDownComplete",this.tabBar.props.style);
+            this.tabBar.setNativeProps({style:{opacity:1/*,maxHeight:200*/}})
+        }
 
     }
     onScrollTopComplete(){
-        this.tabBar && this.tabBar.setNativeProps({style:{opacity:0,maxHeight:0}})
+        //如果tabBar有显示显示，则隐藏
+        if(this.tabBar && this.tabBarDisplay){
+            this.tabBarDisplay =false;
+            console.log("VerticalViewPagerSimple onScrollTopComplete",this.tabBar.props.style);
+            this.tabBar.setNativeProps({style:{opacity:0/*,maxHeight:0*/}})
+        }
     }
 
     onLazyViewLoadComplete(){
-        //console.log("VerticalViewPagerSimple onLazyViewLoadComplete this.tabView2.getRef()._children()",this.tabView2.refs['scrollView'].refs['scrollableTabView']);
 
         let ref = this.tabView.refs['scrollView'].refs['scrollableTabView'].props.children;
         this.refView = ref.map((child,index)=>{
@@ -63,25 +76,46 @@ export default class VerticalViewPagerSimple extends Component {
         }
     }
 
+    onScroll(offset){
+        let tabBarY = this.tabBarLayout.height||50;
+        let verticalY = this.verticalLayout.y||0;
+        let verticalH = this.verticalLayout.height||0;
+        if(offset.y <= (tabBarY+verticalH+verticalY)){
+            this.onScrollTopComplete();
+        } else{
+            this.onScrollDownComplete();
+        }
+
+    }
+
+    onTabBarLayout(layout){
+        if(layout.height>10){
+            this.tabBarLayout =layout;
+        }
+        console.log("VerticalViewPagerSimple onTabBarLayout():",layout);
+    }
+
     renderTabBar() {
         return (
-            <View onLayout={(e)=>{console.log("VerticalViewPagerSimple renderTabBar layout",e.nativeEvent.layout.y)}}
-                  ref={(ref)=>{this.tabBar = ref}}
-                  style={{width,backgroundColor:"yellow",position:'absolute',zIndex:2}}>
+            <View
+                onLayout={(e)=>{this.onTabBarLayout(e.nativeEvent.layout)}}
+                ref={(ref)=>{this.tabBar = ref}}
+                style={{width,backgroundColor:"#999",position:'absolute',zIndex:2}}>
                 {this.state.refresh && this.refView[0]}
             </View>
         )
     }
+
     render() {
         return (
             <View style={VerticalViewPagerSimpleStyles.container}>
 
                 <VerticalViewPager
-                    onScroll={(offset)=>{console.log("VerticalViewPagerSimple render offset",offset.y)}}
+                    onScroll={(offset)=>{this.onScroll(offset)}}
                     onScrollDownComplete={()=>{this.onScrollDownComplete()}}
                     onScrollTopComplete={()=>{this.onScrollTopComplete()}}
                     onLazyViewLoadComplete={()=>{this.onLazyViewLoadComplete()}}>
-                    <Settings style={{backgroundColor: "red",height:height+400}} tabLabel="Settings"/>
+                    <Settings onLayout={(e)=>{this.verticalLayout =e.nativeEvent.layout}} style={{backgroundColor: "red",height:height+400}} tabLabel="Settings"/>
                     <TabView ref={(ref)=>{this.tabView = ref}} contentContainerStyle={{minHeight:height+400}}/>
                 </VerticalViewPager>
                 {this.renderTabBar()}
