@@ -23,6 +23,7 @@ import VerticalViewPagerSimple from "./containers/home/list/VerticalViewPagerSim
 import TabView from "./containers/home/list/TabView";
 import DataBindingRedux from "./containers/home/list/DataBindingRedux";
 import NestScrollView from "./containers/home/list/NestScrollView";
+import GoodsDetailPage from "./containers/home/list/GoodsDetailPage";
 
 export default  scenes = Actions.create(
     <Scene key="root">
@@ -36,6 +37,6 @@ export default  scenes = Actions.create(
         <Scene key="TabView" component={TabView} des={"TableView"} hideNavBar={true}/>
         <Scene key="DataBindingRedux" component={DataBindingRedux} des={"DataBindingRedux"} hideNavBar={true}/>
         <Scene key="NestScrollView" component={NestScrollView} des={"内嵌ScrollView"} hideNavBar={true}/>
-
+        <Scene key="GoodsDetailPage" component={GoodsDetailPage} des={"商品详情页"} hideNavBar={true}/>
     </Scene>
 );

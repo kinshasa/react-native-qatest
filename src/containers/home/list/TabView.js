@@ -15,7 +15,6 @@ import {
 } from 'react-native';
 
 import ScrollableTabView from'react-native-scrollable-tab-view';
-import DefaultTabBar from'react-native-scrollable-tab-view/DefaultTabBar';
 
 
 import HomePage from '../HomePage'

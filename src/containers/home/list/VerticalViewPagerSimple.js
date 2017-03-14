@@ -74,41 +74,11 @@ export default class VerticalViewPagerSimple extends Component {
      */
     onLazyViewLoadComplete(){
 
-        console.log('VerticalViewPagerSimple onLazyViewLoadComplete verticalView',this.refs['verticalView'].props.children.length);
+        console.log("VerticalViewPagerSimple onLazyViewLoadComplete()");
+        this.setState({
+            refresh:true
+        })
 
-        let topView = this.refs['verticalView'].props.children[0];
-        let BottomView = this.refs['verticalView'].props.children[1];
-        if(!React.isValidElement(topView) && !React.isValidElement(BottomView)){
-            return;
-        }
-
-        console.log("VerticalViewPagerSimple onLazyViewLoadComplete topView:", topView);
-
-        if (!this.refs['tabView'].refs['scrollView'].refs['scrollableTabView']) {
-            return;
-        }
-        //需要使用自定义scrollableTabView，且设置了ref为scrollableTabView前提下。
-        let ref = this.refs['tabView'].refs['scrollView'].refs['scrollableTabView'].props.children;
-
-        /*if (React.isValidElement(ref[0])) {
-            this.scrollTabViewChildren[0] = ref[0];
-        }*/
-        this.scrollTabViewChildren = ref.map((child, index)=>{
-            if (React.isValidElement(child)) {
-                console.log("VerticalViewPagerSimple child right! :", index);
-                return child;
-            }else{
-                console.log("VerticalViewPagerSimple not child! :", index);
-            }
-        });
-
-        console.log("VerticalViewPagerSimple onLazyViewLoadComplete",this.scrollTabViewChildren.length);
-
-        if(this.scrollTabViewChildren && this.scrollTabViewChildren.length > 0){
-            this.setState({
-                refresh:true
-            })
-        }
     }
 
     onScroll(offset){
@@ -131,6 +101,30 @@ export default class VerticalViewPagerSimple extends Component {
     }
 
     renderTabBar() {
+        console.log("VerticalViewPagerSimple renderTabBar()");
+        if(this.state.refresh){
+            console.log('VerticalViewPagerSimple renderTabBar() verticalView',this.refs['verticalView'].props.children);
+            console.log('VerticalViewPagerSimple renderTabBar() verticalView',this.refs['tabView']);
+
+            if (!this.refs['tabView'].refs['scrollView'].refs['scrollableTabView']) {
+                return;
+            }
+            //需要使用自定义scrollableTabView，且设置了ref为scrollableTabView前提下。
+            let ref = this.refs['tabView'].refs['scrollView'].refs['scrollableTabView'].props.children;
+            //ref = this.refs['verticalView'].refs['scrollView'].refs['scrollableTabView'].props.children;
+            /*if (React.isValidElement(ref[0])) {
+             this.scrollTabViewChildren[0] = ref[0];
+             }*/
+            this.scrollTabViewChildren = ref.map((child, index)=>{
+                if (React.isValidElement(child)) {
+                    console.log("VerticalViewPagerSimple child right! :", index);
+                    return child;
+                }else{
+                    console.log("VerticalViewPagerSimple not child! :", index);
+                }
+            });
+        }
+
         return (
             <View
                 onLayout={(e)=>{this.onTabBarLayout(e.nativeEvent.layout)}}
@@ -156,6 +150,7 @@ export default class VerticalViewPagerSimple extends Component {
                     <TabView ref='tabView'/>
                 </VerticalViewPager>
                 {this.renderTabBar()}
+
             </View>
         );
     }
