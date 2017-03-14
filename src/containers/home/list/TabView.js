@@ -144,7 +144,6 @@ export default class TabView extends Component {
                 <HomePage tabLabel="HomePage"/>
                 <Settings tabLabel="Settings"/>
                 <QATest tabLabel="QATest"/>
-                {this.refView}
             </ScrollableTabView>
         );
     }
