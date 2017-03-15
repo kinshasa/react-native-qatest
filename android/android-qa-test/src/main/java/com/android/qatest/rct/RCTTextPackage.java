@@ -1,4 +1,4 @@
-package com.qatest.rct;
+package com.android.qatest.rct;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;
@@ -14,7 +14,7 @@ import java.util.List;
  * Created by liusp@gagc.com.cn on 2017.2.27.
  */
 
-public class RCTViewPackage implements ReactPackage {
+public class RCTTextPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         return Collections.emptyList();
@@ -25,11 +25,10 @@ public class RCTViewPackage implements ReactPackage {
         return Collections.emptyList();
     }
 
-
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         return Arrays.<ViewManager>asList(
-                new RCTViewManager()
+                new RCTTextManager()
         );
     }
 }

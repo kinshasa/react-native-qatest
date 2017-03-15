@@ -1,9 +1,11 @@
-package com.qatest;
+package com.android.qatest;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.android.qatest.activity.LoginActivity;
 import com.facebook.react.ReactActivity;
 import com.tencent.bugly.Bugly;
 
@@ -24,9 +26,9 @@ public class MainActivity extends ReactActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        Intent intent = new Intent();
-//        intent.setClass(this, VerticalViewPagerActivity.class);
-//        context.startActivity(intent);
+        Intent intent = new Intent();
+        intent.setClass(this, LoginActivity.class);
+        context.startActivity(intent);
 
         //bugly自动升级初始化
         //Bugly.init(getApplicationContext(), "f130c8d4d9", false);

@@ -1,10 +1,10 @@
-package com.qatest.activity;
+package com.android.qatest.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.qatest.R;
+import com.android.qatest.R;
 
 import me.kaelaela.verticalviewpager.VerticalViewPager;
 

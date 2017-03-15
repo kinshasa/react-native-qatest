@@ -1,4 +1,4 @@
-package com.qatest;
+package com.android.qatest;
 
 import android.app.Application;
 import android.content.Context;

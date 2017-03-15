@@ -1,4 +1,4 @@
-package com.qatest.activity;
+package com.android.qatest.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,7 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.qatest.R;
+import com.android.qatest.R;
+
 
 public class ContentFragment extends Fragment {
 

@@ -7,7 +7,7 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-package com.qatest.rct;
+package com.android.qatest.rct;
 
 import android.graphics.Color;
 import android.view.ViewGroup;

@@ -1,4 +1,4 @@
-package com.qatest.activity;
+package com.android.qatest.activity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

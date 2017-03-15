@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.qatest"
+    package="com.android.qatest"
     android:versionCode="1"
     android:versionName="1.0">
 
@@ -33,7 +33,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.android.qatest.MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:label="@string/app_name">
             <intent-filter>
@@ -44,7 +44,7 @@
         </activity>
         <activity
             android:name=".activity.VerticalViewPagerActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"></activity>
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"/>
         <activity
             android:name="com.facebook.react.devsupport.DevSettingsActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
@@ -65,8 +65,8 @@
         </provider>
 
         <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:name=".activity.LoginActivity"
+            android:label="@string/title_activity_login"/>
     </application>
 
 </manifest>
