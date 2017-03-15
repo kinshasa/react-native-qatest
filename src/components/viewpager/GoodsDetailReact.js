@@ -110,7 +110,7 @@ export default class GoodsDetailReact extends Component {
             <View
                 onLayout={(e)=>{this.onTabBarLayout(e.nativeEvent.layout)}}
                 ref={(ref)=>{this.tabBar = ref}}
-                style={{width,backgroundColor:"#999",position:'absolute',zIndex:2}}>
+                style={{width,backgroundColor:"yellow",position:'absolute',zIndex:2}}>
                 {/*取ScrollableTabView的顶部栏布局引用*/}
                 {this.state.refresh && tabBar}
             </View>
