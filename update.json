@@ -1,0 +1,12 @@
+{
+    "android": {
+        "appId": 7129,
+        "build":"debug",
+        "appKey": "ZkoeI2oi7rnz8XDe8m0VLTn3K4VUAH2Z"
+    },
+    "test": {
+        "appId": 7130,
+        "build":"release",
+        "appKey": "ZkoeI2oi7rnz8XDe8m0VLTn3K4VUAH2Z"
+    }
+}

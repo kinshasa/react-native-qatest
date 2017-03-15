@@ -16,6 +16,9 @@ import com.tencent.bugly.beta.Beta;
 import java.util.Arrays;
 import java.util.List;
 
+import cn.reactnative.modules.update.UpdateContext;
+import cn.reactnative.modules.update.UpdatePackage;
+
 public class MainApplication extends Application implements ReactApplication {
 
     private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
@@ -28,9 +31,16 @@ public class MainApplication extends Application implements ReactApplication {
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
-                    new VectorIconsPackage()
+                    new VectorIconsPackage(),
+                    //react-native-pushy
+                    new UpdatePackage()
                     //new RCTViewPackage()
             );
+        }
+
+        @Override
+        protected String getJSBundleFile() {
+            return UpdateContext.getBundleUrl(MainApplication.this);
         }
     };
 

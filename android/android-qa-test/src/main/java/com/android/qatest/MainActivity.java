@@ -26,9 +26,9 @@ public class MainActivity extends ReactActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent intent = new Intent();
-        intent.setClass(this, LoginActivity.class);
-        context.startActivity(intent);
+//        Intent intent = new Intent();
+//        intent.setClass(this, LoginActivity.class);
+//        context.startActivity(intent);
 
         //bugly自动升级初始化
         //Bugly.init(getApplicationContext(), "f130c8d4d9", false);

@@ -24,6 +24,7 @@ import TabView from "./containers/home/list/TabView";
 import DataBindingRedux from "./containers/home/list/DataBindingRedux";
 import NestScrollView from "./containers/home/list/NestScrollView";
 import GoodsDetailPage from "./containers/home/list/GoodsDetailPage";
+import pushy from "./containers/home/list/pushy";
 
 export default  scenes = Actions.create(
     <Scene key="root">
@@ -38,5 +39,6 @@ export default  scenes = Actions.create(
         <Scene key="DataBindingRedux" component={DataBindingRedux} des={"DataBindingRedux"} hideNavBar={true}/>
         <Scene key="NestScrollView" component={NestScrollView} des={"NestScrollView"} hideNavBar={true}/>
         <Scene key="GoodsDetailPage" component={GoodsDetailPage} des={"商品详情页"} hideNavBar={true}/>
+        <Scene key="pushy" component={pushy} des={"react-native-pushy"} hideNavBar={true}/>
     </Scene>
 );
