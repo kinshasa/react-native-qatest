@@ -98,7 +98,7 @@ export default class Setting extends Component {
 
 const SettingStyles = StyleSheet.create({
     container: {
-        width,minHeight:height,
+        width,minHeight:height+height,
         backgroundColor:"#aaa"
     },
 });
