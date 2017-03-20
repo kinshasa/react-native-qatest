@@ -122,6 +122,11 @@ export default class QATest extends Component {
 
     }
 
+    onPress = ()=> {
+        this.props.actions.getScenesList();
+    };
+
+
     /**
      * 组件更新
      * @returns {XML}
@@ -140,7 +145,7 @@ export default class QATest extends Component {
                                             onPress={()=>{alert("click share icon")}}/>}
                     style={{height: 45}}/>
                 <ScrollView style={QATestStyles.scrollView}>
-                    <Text>{JSON.stringify(config)}</Text>
+                    <Text onPress={()=>{this.onPress()}}>{JSON.stringify(config)}</Text>
 
                 </ScrollView>
             </View>

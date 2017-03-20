@@ -7,6 +7,24 @@ def bakPath = file("${buildDir}/bakApk/")
  */
 def baseApkDir = "android-qa-test-0313-11-28-17"
 
+def tinkerEnable(){
+
+    boolean enable = true
+    def tinkerTask = project.getGradle().startParameter.taskNames
+    if(tinkerTask.size() > 0){
+        println("tinerTask:"+tinkerTask.get(0))
+        String name = tinkerTask.get(0)
+        if(!name.contains("Release")){
+            // debug版本关闭tinker，否则打开
+            println("tinerTask: Debug版本关闭tinker")
+            enable = false
+        }else{
+            println("tinerTask: Release版本关闭tinker")
+        }
+    }
+    return enable
+}
+
 /**
  * 对于插件各参数的详细解析请参考
  */
@@ -34,7 +52,7 @@ tinkerSupport {
     baseApkResourceMapping = "${bakPath}/${baseApkDir}/android-qa-test-release-R.txt"
 
     // 构建基准包和补丁包都要指定不同的tinkerId，并且必须保证唯一性
-    tinkerId = "app_1.1.031311302_patch"
+    tinkerId = "app_1.1.031311302_release"
 
     // 构建多渠道补丁时使用
     // buildAllFlavorsDir = "${bakPath}/${baseApkDir}"

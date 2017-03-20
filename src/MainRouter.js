@@ -27,13 +27,16 @@ class MainRouter extends Component {
         this.state = {};
     }
 
+    data = {}
+
     componentDidMount() {
-        this.props.actions.register()
+        console.log(`#MainRouter componentDidMount this.props:`,this.props.actions);
+        this.data = this.props.actions.getScenesList();
     }
 
     render() {
 
-        console.log("MainRouter render() state:", this.props.state);
+        console.log(`#MainRouter render() props.state:`, this.props.state.router.data);
         return (
             <Router
                 state={this.props.state}

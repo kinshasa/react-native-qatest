@@ -9,8 +9,9 @@
 import * as user_info from './user_info';
 import * as home from './home';
 import * as test from './test';
+import * as router from './router';
 
 
-var actions = {...user_info,...home,...test};
+var actions = {...user_info,...home,...test,...router};
 
 module.exports = actions;

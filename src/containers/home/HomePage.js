@@ -18,8 +18,10 @@ import scenes from '../../scenes';
 
 import TitleBar from "../../components/bar/TitleBar"
 import Icon from 'react-native-vector-icons/FontAwesome';
-
-export default class HomePage extends Component {
+import * as actions from '../../../common/actions';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+class HomePage extends Component {
 
     static propTypes = {};
 
@@ -43,6 +45,7 @@ export default class HomePage extends Component {
 
     componentDidMount() {
         console.log("HomePage", "componentDidMount()");
+        console.log(`#HomePage componentDidMount() this.props.state:`,this.props.state);
     }
 
     componentWillReceiveProps(newProps) {
@@ -50,7 +53,7 @@ export default class HomePage extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        let isUpdate = (this.state != nextState);
+        let isUpdate = (this.props != nextProps) || (this.state != nextState);
         console.log("HomePage", "shouldComponentUpdate():" + isUpdate);
         return isUpdate;
     }
@@ -69,9 +72,14 @@ export default class HomePage extends Component {
 
     getDataSource() {
         let list = {};
-        Object.keys(scenes).map((item, i) => {
+        /*Object.keys(scenes).map((item, i) => {
             list[item] = scenes[item].des || item;
-        });
+        });*/
+        console.log(`#HomePage getDataSource() this.props.state:`,this.props.state);
+
+        if(this.props.state){
+            list = this.props.state.router.data
+        }
         console.log('HomePage list', list);
         return list;
     }
@@ -90,6 +98,8 @@ export default class HomePage extends Component {
     render() {
         this.renderCount++;
         console.log("HomePage", "render() renderCount:" + this.renderCount);
+        console.log(`#HomePage render() this.props.state:`,this.props.state);
+
         let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         return (
             <View style={HomePageStyles.container}>
@@ -103,7 +113,8 @@ export default class HomePage extends Component {
                     style={{height: 45}}/>
 
                 <ListView
-                    dataSource={ds.cloneWithRows(this.getDataSource())}
+                    enableEmptySections={true}
+                    dataSource={ds.cloneWithRows(this.props.state.router.data)}
                     renderRow={this.renderRow}
                 />
             </View>
@@ -121,3 +132,31 @@ const HomePageStyles = StyleSheet.create({
         margin: 3,
     }
 });
+
+/**
+ * 把this.state关联到this.props.state
+ * @param state
+ * @returns {{state: *}}
+ */
+function mapStateToProps(state) {
+    return {
+        state: state
+    }
+}
+
+/**
+ * 把actions.user_info, dispatch通过type关联到一起
+ * @param dispatch
+ * @returns {{actions: (A|B|M|N)}}
+ */
+function mapDispatchToProps(dispatch) {
+    console.log("MainRouter actions:", actions);
+    return {
+        actions: bindActionCreators(actions, dispatch),
+    }
+}
+
+/**
+ * 把mapStateToProps, mapDispatchToProps绑定到MainRouter组件上
+ */
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

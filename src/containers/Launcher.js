@@ -189,9 +189,9 @@ export default class Launcher extends Component {
                 tabBarStyle={LauncherStyles.tabBarStyle}
                 hidesTabTouch={true}
             >
-                {this.renderTabItem("T1", "组件开发", LAUNCHER_IMG_HOME, LAUNCHER_IMG_HOME_SELECT,<HomePage/>,0)}
-                {this.renderTabItem("T2", "品质测试", LAUNCHER_IMG_TEST, LAUNCHER_IMG_TEST_SELECT, <QATest />,0)}
-                {this.renderTabItem("T3", "其他设置", LAUNCHER_IMG_SETTING, LAUNCHER_IMG_SETTING_SELECT, <Setting />,1)}
+                {this.renderTabItem("T1", "组件开发", LAUNCHER_IMG_HOME, LAUNCHER_IMG_HOME_SELECT,<HomePage state={this.props.state} actions={this.props.actions}/>,0)}
+                {this.renderTabItem("T2", "品质测试", LAUNCHER_IMG_TEST, LAUNCHER_IMG_TEST_SELECT, <QATest state={this.props.state} actions={this.props.actions}/>,0)}
+                {this.renderTabItem("T3", "其他设置", LAUNCHER_IMG_SETTING, LAUNCHER_IMG_SETTING_SELECT, <Setting state={this.props.state} actions={this.props.actions}/>,1)}
             </TabNavigator>
         );
     }
