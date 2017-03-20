@@ -97,8 +97,7 @@ class HomePage extends Component {
 
     render() {
         this.renderCount++;
-        console.log("HomePage", "render() renderCount:" + this.renderCount);
-        console.log(`#HomePage render() this.props.state:`,this.props.state);
+        console.log(`#HomePage render() renderCount:${this.renderCount};props.state:`,this.props.state);
 
         let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         return (
