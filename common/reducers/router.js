@@ -10,34 +10,35 @@ import scenes from '../../src/scenes';
 module.exports = function (state, action) {
     state = state || {
             type: 'USER_INITIAL',
-            data: [],
+            data: {
+                list:[],
+                home:[],
+                test:[]
+            },
         };
     //console.log(`#router state:`,state);
     console.log(`#router action:`,action);
     switch (action.type) {
 
         case 'ROUTER_SCENES_LIST': {
-            data = getDataSource();
+            state.data.list = getDataSource();
             return {
                 ...state,
                 ...action,
-                data,
             }
         }
         case 'ROUTER_HOME_SCENES_LIST': {
-            data = getDataSource('Home');
+            state.data.home = getDataSource('Home');
             return {
                 ...state,
                 ...action,
-                data,
             }
         }
         case 'ROUTER_QATEST_SCENES_LIST': {
-            data = getDataSource('QATest');
+            state.data.test = getDataSource('QATest');
             return {
                 ...state,
                 ...action,
-                data,
             }
         }
     }

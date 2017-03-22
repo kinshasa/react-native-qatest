@@ -72,7 +72,7 @@ class QATest extends Component {
      */
     componentDidMount() {
         console.log("QATest componentDidMount()");
-        this.props.actions.getQATestScenesList();
+        //this.props.actions.getQATestScenesList();
     }
 
     /**
@@ -125,7 +125,6 @@ class QATest extends Component {
     }
 
     onPress = ()=> {
-        this.props.actions.getScenesList();
     };
 
     renderRow(rowData, sectionId, rowId) {
@@ -166,7 +165,7 @@ class QATest extends Component {
 
                 <ListView
                     enableEmptySections={true}
-                    dataSource={ds.cloneWithRows(this.props.state.data)}
+                    dataSource={ds.cloneWithRows(this.props.state.data.test)}
                     renderRow={this.renderRow}
                 />
             </View>

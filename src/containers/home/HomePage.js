@@ -17,7 +17,7 @@ import {connect} from "react-redux";
 
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
-class HomePage extends Component {
+export default class HomePage extends Component {
 
     static propTypes = {};
 
@@ -41,7 +41,7 @@ class HomePage extends Component {
 
     componentDidMount() {
         console.log("HomePage componentDidMount()", new Date());
-        this.props.actions.getHomeScenesList();
+        //this.props.actions.getHomeScenesList();
     }
 
     componentWillReceiveProps(newProps) {
@@ -113,7 +113,7 @@ class HomePage extends Component {
 
                 <ListView
                     enableEmptySections={true}
-                    dataSource={ds.cloneWithRows(this.props.state.data)}
+                    dataSource={ds.cloneWithRows(this.getDataSource()/*this.props.state.data.home*/)}
                     renderRow={this.renderRow}
                 />
             </View>
@@ -132,30 +132,30 @@ const HomePageStyles = StyleSheet.create({
     }
 });
 
-/**
- * 把this.state关联到this.props.state
- * @param state
- * @returns {{state: *}}
- */
-function mapStateToProps(state) {
-    return {
-        state: state.router
-    }
-}
-
-/**
- * 把actions.user_info, dispatch通过type关联到一起
- * @param dispatch
- * @returns {{actions: (A|B|M|N)}}
- */
-function mapDispatchToProps(dispatch) {
-    console.log("HomePage actions:, actions");
-    return {
-        actions: bindActionCreators(actions, dispatch),
-    }
-}
-
-/**
- * 把mapStateToProps, mapDispatchToProps绑定到MainRouter组件上
- */
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+// /**
+//  * 把this.state关联到this.props.state
+//  * @param state
+//  * @returns {{state: *}}
+//  */
+// function mapStateToProps(state) {
+//     return {
+//         state: state.router
+//     }
+// }
+//
+// /**
+//  * 把actions.user_info, dispatch通过type关联到一起
+//  * @param dispatch
+//  * @returns {{actions: (A|B|M|N)}}
+//  */
+// function mapDispatchToProps(dispatch) {
+//     console.log("HomePage actions:, actions");
+//     return {
+//         actions: bindActionCreators(actions, dispatch),
+//     }
+// }
+//
+// /**
+//  * 把mapStateToProps, mapDispatchToProps绑定到MainRouter组件上
+//  */
+// export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
