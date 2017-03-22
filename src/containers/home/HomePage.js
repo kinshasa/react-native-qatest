@@ -42,7 +42,7 @@ class HomePage extends Component {
 
     componentDidMount() {
         console.log("HomePage", "componentDidMount()");
-        console.log(`#HomePage componentDidMount() this.props.state:`,this.props.state);
+        console.log(`#HomePage componentDidMount() this.props.state:,this.props.state`);
     }
 
     componentWillReceiveProps(newProps) {
@@ -89,7 +89,7 @@ class HomePage extends Component {
 
     render() {
         this.renderCount++;
-        console.log(`#HomePage render() renderCount:${this.renderCount};props.state:`,this.props.state);
+        console.log(`#HomePage render() renderCount:${this.renderCount};props.state:,this.props.state`);
 
         let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         return (
