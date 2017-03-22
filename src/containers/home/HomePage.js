@@ -49,7 +49,7 @@ export default class HomePage extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        let isUpdate = (this.props != nextProps) || (this.state != nextState);
+        let isUpdate = (this.state != nextState);
         console.log("HomePage shouldComponentUpdate():", isUpdate);
         return isUpdate;
     }
