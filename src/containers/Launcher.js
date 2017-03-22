@@ -83,7 +83,7 @@ export default class Launcher extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("Launcher componentWillReceiveProps():", newProps);
+        console.log("Launcher componentWillReceiveProps():, newProps");
     }
 
     /**

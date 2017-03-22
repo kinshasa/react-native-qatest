@@ -12,8 +12,8 @@ module.exports = function (state, action) {
             type: 'USER_INITIAL',
             data: [],
         };
-    console.log(`#router state:,state`);
-    console.log(`#router action:,action`);
+    //console.log(`#router state:`,state);
+    console.log(`#router action:`,action);
     switch (action.type) {
 
         case 'ROUTER_SCENES_LIST': {
@@ -50,13 +50,13 @@ module.exports = function (state, action) {
 getDataSource = (key='root') => {
     let list = {};
     Object.keys(scenes).map((item, i) => {
-        console.log("#router getDataSource() item:", item);
+        //console.log("#router getDataSource() item:", item);
         if ((key == "root" || scenes[item].parent == key) && (item != key && item != 'root' && item != 'rootProps')) {
             list[item] = scenes[item].des || item;
         }else{
-            console.log(`#router getDataSource() scenes[${item}]:`, scenes[item]);
+            //console.log(`#router getDataSource() scenes[${item}]:`, scenes[item]);
         }
     });
-    console.log("#router getDataSource() scenes:", list);
+    //console.log("#router getDataSource() scenes:", list);
     return list;
 }

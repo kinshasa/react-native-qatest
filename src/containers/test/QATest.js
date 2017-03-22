@@ -7,12 +7,18 @@
  */
 
 import React, {Component, PropTypes} from "react";
-import {Dimensions, ScrollView, StyleSheet, Text, View} from "react-native";
+import {Dimensions, ListView, StyleSheet, Text, View} from "react-native";
+import {Actions} from "react-native-router-flux";
 import TitleBar from "../../components/bar/TitleBar";
 import Icon from "react-native-vector-icons/FontAwesome";
-const {height, width} = Dimensions.get('window');
+import * as actions from "../../../common/actions";
+import {bindActionCreators} from "redux";
+import {connect} from "react-redux";
 
-export default class QATest extends Component {
+const {height, width} = Dimensions.get('window');
+const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
+class QATest extends Component {
 
     /**
      * 父组件传入的属性值
@@ -66,6 +72,7 @@ export default class QATest extends Component {
      */
     componentDidMount() {
         console.log("QATest componentDidMount()");
+        this.props.actions.getQATestScenesList();
     }
 
     /**
@@ -74,7 +81,7 @@ export default class QATest extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("QATest componentWillReceiveProps():" , newProps);
+        console.log("QATest componentWillReceiveProps():, newProps");
     }
 
     /**
@@ -121,6 +128,22 @@ export default class QATest extends Component {
         this.props.actions.getScenesList();
     };
 
+    renderRow(rowData, sectionId, rowId) {
+
+        return (
+            <View style={QATestStyles.btnList}>
+                <Icon.Button name="star" backgroundColor="#aaa" onPress={() => {
+                    try {
+                        Actions[rowId]()
+                    } catch (e) {
+                        alert(e.message)
+                    }
+                }}>
+                    <Text style={{fontFamily: 'Arial', fontSize: 15}}>{rowData}</Text>
+                </Icon.Button>
+            </View>
+        )
+    }
 
     /**
      * 组件更新
@@ -139,10 +162,13 @@ export default class QATest extends Component {
                     rightView={<Icon.Button name="undo" size={25} color="#999" backgroundColor="transparent"
                                             onPress={()=>{alert("click share icon")}}/>}
                     style={{height: 45}}/>
-                <ScrollView style={QATestStyles.scrollView}>
                     <Text onPress={()=>{this.onPress()}}>{JSON.stringify(config)}</Text>
 
-                </ScrollView>
+                <ListView
+                    enableEmptySections={true}
+                    dataSource={ds.cloneWithRows(this.props.state.data)}
+                    renderRow={this.renderRow}
+                />
             </View>
         );
     }
@@ -157,4 +183,35 @@ const QATestStyles = StyleSheet.create({
         width:width,
         height:height*2
     },
+    btnList: {
+        margin: 3,
+    }
 });
+
+/**
+ * 把this.state关联到this.props.state
+ * @param state
+ * @returns {{state: *}}
+ */
+function mapStateToProps(state) {
+    return {
+        state: state.router
+    }
+}
+
+/**
+ * 把actions.user_info, dispatch通过type关联到一起
+ * @param dispatch
+ * @returns {{actions: (A|B|M|N)}}
+ */
+function mapDispatchToProps(dispatch) {
+    console.log("HomePage actions:, actions");
+    return {
+        actions: bindActionCreators(actions, dispatch),
+    }
+}
+
+/**
+ * 把mapStateToProps, mapDispatchToProps绑定到MainRouter组件上
+ */
+export default connect(mapStateToProps, mapDispatchToProps)(QATest);

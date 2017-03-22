@@ -7,16 +7,15 @@
 
 import React, {Component} from "react";
 import {ListView, StyleSheet, Text, View} from "react-native";
-
 import {Actions} from "react-native-router-flux";
 import scenes from "../../scenes";
-
 import TitleBar from "../../components/bar/TitleBar";
 import Icon from "react-native-vector-icons/FontAwesome";
 import * as actions from "../../../common/actions";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 
+const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 class HomePage extends Component {
 
@@ -42,12 +41,11 @@ class HomePage extends Component {
 
     componentDidMount() {
         console.log("HomePage componentDidMount()", new Date());
-        console.log("HomePage componentDidMount()this.props.actions:", this.props.actions);
-        this.data = this.props.actions.getHomeScenesList();
+        this.props.actions.getHomeScenesList();
     }
 
     componentWillReceiveProps(newProps) {
-        console.log("HomePage componentWillReceiveProps()");
+        console.log("HomePage componentWillReceiveProps(),newProps");
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -98,7 +96,6 @@ class HomePage extends Component {
         this.renderCount++;
         console.log("HomePage render() renderCount:", this.renderCount);
 
-        let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         return (
             <View style={HomePageStyles.container}>
                 <TitleBar

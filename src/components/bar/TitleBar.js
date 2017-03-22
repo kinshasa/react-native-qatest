@@ -47,51 +47,79 @@ export default class TitleBar extends Component {
      * @type {number}
      */
     renderCount = 0;
-
     componentWillMount() {
-
+        console.log("TitleBar componentWillMount()", new Date());
     }
 
     componentDidMount() {
-
+        console.log("TitleBar componentDidMount()", new Date());
     }
 
     componentWillReceiveProps(newProps) {
+        console.log("TitleBar componentWillReceiveProps(),newProps");
+    }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        let isUpdate = false;
+        isUpdate = this.props != nextProps;
+        if(isUpdate){
+            console.log("TitleBar shouldComponentUpdate():props changed.", isUpdate);
+            // console.log("TitleBar shouldComponentUpdate()nextProps:", nextProps);
+            // console.log("TitleBar shouldComponentUpdate()props:", this.props);
+            return true;
+        }
+
+        isUpdate = this.state != nextState;
+        if(isUpdate){
+            console.log("TitleBar shouldComponentUpdate():state changed.", isUpdate);
+            // console.log("TitleBar shouldComponentUpdate()nextState:", nextState);
+            // console.log("TitleBar shouldComponentUpdate()state:", this.state);
+        }
+        // let isUpdate = (this.props != nextProps) || (this.state != nextState);
+        //console.log("TitleBar shouldComponentUpdate():", isUpdate);
+        return isUpdate;
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        console.log("TitleBar componentWillUpdate()", new Date());
     }
 
     componentDidUpdate(prevProps, prevState) {
+        console.log("TitleBar componentDidUpdate()", new Date());
     }
 
-    componentWillUnMount() {
-
+    componentWillUnmount() {
+        console.log("TitleBar componentWillUnmount()");
     }
-
+    
     render() {
         this.renderCount++;
-        console.log("TitleBar", "render() renderCount:" + this.renderCount);
-        console.log("TitleBar",this._reactInternalInstance._currentElement.type.displayName);
+        console.log("TitleBar render() renderCount:", this.renderCount);
+        //console.log("TitleBar",this._reactInternalInstance._currentElement.type.displayName);
         let {style, ...other} = this.props;
         let styles = [TitleBarStyles.container, style];
         return (
             <View{...other} style={styles}>
-
                 {this.renderLeftView()}
                 {this.renderCenterView()}
                 {this.renderRightView()}
-
-
             </View>
         );
     }
 
     renderLeftView() {
-        if(this.props.leftView){
+        if (this.props.leftView) {
             return this.props.leftView;
         }
         let titleLeft = [TitleBarStyles.leftStyle, this.props.leftStyle];
         return (
-            <Text style={titleLeft} onPress={()=>{try{Actions.pop()}catch(e){alert(e.message)}}}> {"返回"} </Text>
+            <Text style={titleLeft} onPress={() => {
+                try {
+                    Actions.pop()
+                } catch (e) {
+                    alert(e.message)
+                }
+            }}> {"返回"} </Text>
         );
     }
 
@@ -111,12 +139,14 @@ export default class TitleBar extends Component {
     }
 
     renderRightView() {
-        if(this.props.rightView){
+        if (this.props.rightView) {
             return this.props.rightView;
         }
         let titleRight = [TitleBarStyles.rightStyle, this.props.rightStyle];
         return (
-            <Text style={titleRight} onPress={()=>{alert("菜单")}}> {"菜单"} </Text>
+            <Text style={titleRight} onPress={() => {
+                alert("菜单")
+            }}> {"菜单"} </Text>
         );
     }
 }
