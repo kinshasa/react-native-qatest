@@ -24,6 +24,22 @@ module.exports = function (state, action) {
                 data,
             }
         }
+        case 'ROUTER_HOME_SCENES_LIST': {
+            data = getDataSource('Home');
+            return {
+                ...state,
+                ...action,
+                data,
+            }
+        }
+        case 'ROUTER_QATEST_SCENES_LIST': {
+            data = getDataSource('QATest');
+            return {
+                ...state,
+                ...action,
+                data,
+            }
+        }
     }
 
     return {
@@ -31,11 +47,16 @@ module.exports = function (state, action) {
     }
 };
 
-getDataSource = () => {
+getDataSource = (key='root') => {
     let list = {};
     Object.keys(scenes).map((item, i) => {
-        list[item] = scenes[item].des || item;
+        console.log("#router getDataSource() item:", item);
+        if ((key == "root" || scenes[item].parent == key) && (item != key && item != 'root' && item != 'rootProps')) {
+            list[item] = scenes[item].des || item;
+        }else{
+            console.log(`#router getDataSource() scenes[${item}]:`, scenes[item]);
+        }
     });
-    console.log(`#router getDataSource() list:, list`);
+    console.log("#router getDataSource() scenes:", list);
     return list;
 }

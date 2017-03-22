@@ -37,11 +37,13 @@ class HomePage extends Component {
     renderCount = 0;
 
     componentWillMount() {
-        console.log("HomePage componentWillMount()");
+        console.log("HomePage componentWillMount()", new Date());
     }
 
     componentDidMount() {
-        console.log("HomePage componentDidMount()");
+        console.log("HomePage componentDidMount()", new Date());
+        console.log("HomePage componentDidMount()this.props.actions:", this.props.actions);
+        this.data = this.props.actions.getHomeScenesList();
     }
 
     componentWillReceiveProps(newProps) {
@@ -55,11 +57,11 @@ class HomePage extends Component {
     }
 
     componentWillUpdate(nextProps, nextState) {
-        console.log("HomePage componentWillUpdate()");
+        console.log("HomePage componentWillUpdate()", new Date());
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log("HomePage componentDidUpdate()");
+        console.log("HomePage componentDidUpdate()", new Date());
     }
 
     componentWillUnmount() {
@@ -79,7 +81,13 @@ class HomePage extends Component {
 
         return (
             <View style={HomePageStyles.btnList}>
-                <Icon.Button name="star" backgroundColor="#aaa" onPress={() => {try { Actions[rowId]() } catch (e) {alert(e.message)}}}>
+                <Icon.Button name="star" backgroundColor="#aaa" onPress={() => {
+                    try {
+                        Actions[rowId]()
+                    } catch (e) {
+                        alert(e.message)
+                    }
+                }}>
                     <Text style={{fontFamily: 'Arial', fontSize: 15}}>{rowData}</Text>
                 </Icon.Button>
             </View>
@@ -88,18 +96,22 @@ class HomePage extends Component {
 
     render() {
         this.renderCount++;
-        console.log("HomePage render() renderCount:",this.renderCount);
+        console.log("HomePage render() renderCount:", this.renderCount);
 
         let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         return (
             <View style={HomePageStyles.container}>
                 <TitleBar
                     label="首页(热修复更新成功)"
-                    labelStyle={{backgroundColor:"transparent",color:"black"}}
+                    labelStyle={{backgroundColor: "transparent", color: "black"}}
                     leftView={<Icon.Button name="android" size={30} color="#166AF6" backgroundColor="transparent"
-                                           onPress={()=>{alert("click android logo")}}/>}
+                                           onPress={() => {
+                                               alert("click android logo")
+                                           }}/>}
                     rightView={<Icon.Button name="share-alt" size={25} color="#999" backgroundColor="transparent"
-                                            onPress={()=>{alert("click share icon")}}/>}
+                                            onPress={() => {
+                                                alert("click share icon")
+                                            }}/>}
                     style={{height: 45}}/>
 
                 <ListView

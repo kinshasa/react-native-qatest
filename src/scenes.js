@@ -28,17 +28,21 @@ import pushy from "./containers/home/list/pushy";
 
 export default  scenes = Actions.create(
     <Scene key="root">
-        <Scene key="Launcher" component={Launcher} des={"启动器"} hideNavBar={true}/>
-        <Scene key="CartAnimation" component={CartAnimation} des={"购物车动画"} hideNavBar={true}/>
-        <Scene key="AnimationDemo" component={AnimationDemo} des={"动画Demo"} hideNavBar={true}/>
-        <Scene key="LayoutXYDemo" component={LayoutXYDemo} des={"Layout布局"} hideNavBar={true}/>
-        <Scene key="PicStore" component={PicStore} des={"图标库"} hideNavBar={false}/>
-        <Scene key="SwipeList" component={SwipeList} des={"Swipe组件"} hideNavBar={true}/>
-        <Scene key="VerticalViewPagerSimple" component={VerticalViewPagerSimple} des={"VerticalViewPagerSimple"} hideNavBar={true}/>
-        <Scene key="TabView" component={TabView} des={"scrollable-tab-view"} hideNavBar={true}/>
-        <Scene key="DataBindingRedux" component={DataBindingRedux} des={"DataBindingRedux"} hideNavBar={true}/>
-        <Scene key="NestScrollView" component={NestScrollView} des={"NestScrollView"} hideNavBar={true}/>
-        <Scene key="GoodsDetailPage" component={GoodsDetailPage} des={"商品详情页"} hideNavBar={true}/>
-        <Scene key="pushy" component={pushy} des={"react-native-pushy"} hideNavBar={true}/>
+        <Scene key="Home">
+            <Scene key="Launcher" component={Launcher} des={"启动器"} hideNavBar={true}/>
+            <Scene key="CartAnimation" component={CartAnimation} des={"购物车动画"} hideNavBar={true}/>
+            <Scene key="AnimationDemo" component={AnimationDemo} des={"动画Demo"} hideNavBar={true}/>
+            <Scene key="LayoutXYDemo" component={LayoutXYDemo} des={"Layout布局"} hideNavBar={true}/>
+            <Scene key="PicStore" component={PicStore} des={"图标库"} hideNavBar={false}/>
+            <Scene key="SwipeList" component={SwipeList} des={"Swipe组件"}/>
+            <Scene key="VerticalViewPagerSimple" component={VerticalViewPagerSimple} des={"VerticalViewPagerSimple"}/>
+            <Scene key="TabView" component={TabView} des={"scrollable-tab-view"}/>
+            <Scene key="DataBindingRedux" component={DataBindingRedux} des={"DataBindingRedux"} hideNavBar={true}/>
+            <Scene key="NestScrollView" component={NestScrollView} des={"NestScrollView"} hideNavBar={true}/>
+            <Scene key="GoodsDetailPage" component={GoodsDetailPage} des={"商品详情页"} hideNavBar={true}/>
+        </Scene>
+        <Scene key="QATest">
+            <Scene key="pushy" component={pushy} des={"react-native-pushy"} hideNavBar={true}/>
+        </Scene>
     </Scene>
 );

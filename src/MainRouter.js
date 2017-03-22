@@ -25,7 +25,6 @@ class MainRouter extends Component {
 
     componentDidMount() {
         console.log('#MainRouter componentDidMount this.props:,this.props.actions');
-        this.data = this.props.actions.getScenesList();
     }
 
     render() {
