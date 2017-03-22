@@ -6,17 +6,11 @@
  * @LIFECYCLE：http://www.tuicool.com/articles/nu6zInB
  */
 import React, {Component} from 'react';
-import {
-    StyleSheet,
-    Text,
-    View
-} from 'react-native';
 import {Actions, Scene, Router} from 'react-native-router-flux';
 import scenes from './scenes';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as actions from '../common/actions';
-
 
 class MainRouter extends Component {
 
@@ -39,8 +33,8 @@ class MainRouter extends Component {
         console.log(`#MainRouter render() props.state:`, this.props.state.router.data);
         return (
             <Router
-                state={this.props.state}
-                actions={this.props.actions}
+                //state={this.props.state}
+                //actions={this.props.actions}
                 scenes={scenes}/>
         );
     }

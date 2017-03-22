@@ -5,22 +5,17 @@
  * @NAME: HomePage
  */
 
-import React, {Component, PropTypes} from 'react';
-import {
-    StyleSheet,
-    View,
-    Text,
-    ListView
-} from 'react-native';
+import React, {Component} from "react";
+import {ListView, StyleSheet, Text, View} from "react-native";
 
-import {Actions} from 'react-native-router-flux'
-import scenes from '../../scenes';
+import {Actions} from "react-native-router-flux";
+import scenes from "../../scenes";
 
-import TitleBar from "../../components/bar/TitleBar"
-import Icon from 'react-native-vector-icons/FontAwesome';
-import * as actions from '../../../common/actions';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import TitleBar from "../../components/bar/TitleBar";
+import Icon from "react-native-vector-icons/FontAwesome";
+import * as actions from "../../../common/actions";
+import {bindActionCreators} from "redux";
+import {connect} from "react-redux";
 
 
 class HomePage extends Component {
@@ -74,14 +69,9 @@ class HomePage extends Component {
 
     getDataSource() {
         let list = {};
-        /*Object.keys(scenes).map((item, i) => {
+        Object.keys(scenes).map((item, i) => {
             list[item] = scenes[item].des || item;
-        });*/
-        console.log(`#HomePage getDataSource() this.props.state:`,this.props.state);
-
-        if(this.props.state){
-            list = this.props.state.router.data
-        }
+        });
         console.log('HomePage list', list);
         return list;
     }

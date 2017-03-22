@@ -6,16 +6,11 @@
  * @LIFECYCLE：http://www.tuicool.com/articles/nu6zInB
  */
 
-import React, {Component, PropTypes} from 'react';
-import {
-    StyleSheet,
-    View,
-    Text,
-    Dimensions
-} from 'react-native';
+import React, {Component, PropTypes} from "react";
+import {Dimensions, StyleSheet, Text, View} from "react-native";
 
-import TitleBar from "../../components/bar/TitleBar"
-import Icon from 'react-native-vector-icons/FontAwesome';
+import TitleBar from "../../components/bar/TitleBar";
+import Icon from "react-native-vector-icons/FontAwesome";
 const {height, width} = Dimensions.get('window');
 
 export default class Setting extends Component {

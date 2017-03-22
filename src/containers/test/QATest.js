@@ -6,17 +6,12 @@
  * @LifeCycle：http://www.tuicool.com/articles/nu6zInB
  */
 
-import React, {Component, PropTypes} from 'react';
-import {
-    StyleSheet,
-    View,
-    Text,
-    Dimensions,
-    ScrollView
-} from 'react-native';
-import TitleBar from "../../components/bar/TitleBar"
-import Icon from 'react-native-vector-icons/FontAwesome';
+import React, {Component, PropTypes} from "react";
+import {Dimensions, ScrollView, StyleSheet, Text, View} from "react-native";
+import TitleBar from "../../components/bar/TitleBar";
+import Icon from "react-native-vector-icons/FontAwesome";
 const {height, width} = Dimensions.get('window');
+
 export default class QATest extends Component {
 
     /**

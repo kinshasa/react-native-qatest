@@ -5,7 +5,7 @@
  * @NAME: scenes.js
  * Source : https://github.com/Qwikly/react-native-router-redux
  */
-import React, {Component} from "react";
+import React from "react";
 import {Actions, Scene} from "react-native-router-flux";
 /**
  * 启动页
