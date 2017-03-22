@@ -21,6 +21,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import * as actions from '../../../common/actions';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+
+
 class HomePage extends Component {
 
     static propTypes = {};
@@ -113,7 +115,7 @@ class HomePage extends Component {
 
                 <ListView
                     enableEmptySections={true}
-                    dataSource={ds.cloneWithRows(this.props.state.router.data)}
+                    dataSource={ds.cloneWithRows(this.props.state.data)}
                     renderRow={this.renderRow}
                 />
             </View>
@@ -139,7 +141,7 @@ const HomePageStyles = StyleSheet.create({
  */
 function mapStateToProps(state) {
     return {
-        state: state
+        state: state.router
     }
 }
 

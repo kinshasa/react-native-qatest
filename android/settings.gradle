@@ -1,8 +1,10 @@
 rootProject.name = 'QATest'
-include ':android-qa-test'
-include ':android-upgrade-module'
+include ':android-qa-test', ':react-native-device'
 include ':react-native-vector-icons'
 include ':react-native-update'
+include ':android-upgrade-module'
 
 project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vector-icons/android')
 project(':react-native-update').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-update/android')
+//project(':react-native-device-module').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-device-module/react-native-device-module')
+

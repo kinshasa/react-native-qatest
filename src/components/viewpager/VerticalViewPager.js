@@ -25,7 +25,7 @@ const {height, width} = Dimensions.get('window');
  * 防止计算误差，拉伸到多于5的距离才起作用
  * @type {number}
  */
-const PULL_TO_SCROLL_MAX = 5;
+const PULL_TO_SCROLL_MAX = 50;
 
 /**
  * 0表示不需要人为计算滚动位置或在计算中，1表示开始计算滚动位置并人为滚动
@@ -247,10 +247,10 @@ export default class VerticalViewPager extends Component {
         if (this.scrollOffset.pos == 0) {
 
             //下拉可以看到bottomView的距离
-            this.scrollOffset.threshold = this.layout.topViewLayout.height + this.layout.topViewLayout.y - this.layout.scrollViewLayout.height - PULL_TO_SCROLL_MAX;
+            this.scrollOffset.threshold = parseInt(this.layout.topViewLayout.height + this.layout.topViewLayout.y - this.layout.scrollViewLayout.height);
             //console.log("VerticalViewPager", `onScroll() threshold:${ this.scrollOffset.threshold}；offset.y:${offset.y};state:${this.scrollOffset.state}`);
             //如果滑动中的距离大于threshold的高度，则不需要让它继续滑动，需要停止到onScrollTop()
-            if (offset.y >= this.scrollOffset.threshold) {
+            if (parseInt(offset.y) >= (this.scrollOffset.threshold)) {
                 //如果pullToPos()已经扑住到滑动，则直接返回
                 if (this.scrollOffset.state == SCROLL_CALC_STATE.STATE_CALC_ENABLE) {
                     return;
@@ -261,11 +261,11 @@ export default class VerticalViewPager extends Component {
             }
         } else {
             //TopView的底部坐标
-            let topViewBottomY = this.layout.topViewLayout.height + this.layout.topViewLayout.y - PULL_TO_SCROLL_MAX;
+            let topViewBottomY = parseInt(this.layout.topViewLayout.height + this.layout.topViewLayout.y - PULL_TO_SCROLL_MAX);
             //console.log("VerticalViewPager", `onScroll() topViewBottomY:${ topViewBottomY}；offset.y:${offset.y};state:${this.scrollOffset.state}`);
             //触摸前在BottomView中,上拉动滑动中
             //如果滑动中的距离大于TopView的高度，则不需要让它继续滑动，需要停止到onScrollDown()
-            if (offset.y <= topViewBottomY) {
+            if (parseInt(offset.y) <= topViewBottomY) {
                 //如果pullToPos()已经扑住到滑动，则直接返回
                 if (this.scrollOffset.state == SCROLL_CALC_STATE.STATE_CALC_ENABLE) {
                     return;
@@ -309,8 +309,11 @@ export default class VerticalViewPager extends Component {
      * 上拉到topView底端，或恢复到topView底端
      */
     onScrollTop(type) {
-        console.log("VerticalViewPager", `onScrollTop()`);
-        this.refs['scrollView'] && this.refs['scrollView'].scrollTo({y: this.scrollOffset.threshold - this.layout.scrollViewLayout.y, animated: true});
+        console.log(`VerticalViewPager onScrollTop(${type})`);
+        this.refs['scrollView'] && this.refs['scrollView'].scrollTo({
+            y: this.scrollOffset.threshold - this.layout.scrollViewLayout.y,
+            animated: true
+        });
         this.refs['pullView'] && this.refs['pullView'].setIconUp();
         setTimeout(()=>{
             this.props.LazyViewLoadComplete && this.props.LazyViewLoadComplete();
@@ -325,16 +328,16 @@ export default class VerticalViewPager extends Component {
      */
     getCurrentViewPos() {
         //TopView的底部坐标
-        let topViewBottomY = this.layout.topViewLayout.height + this.layout.topViewLayout.y;
+        let topViewBottomY = parseInt(this.layout.topViewLayout.height + this.layout.topViewLayout.y);
 
         //console.log("VerticalViewPager", `getCurrentViewPos() topViewBottomY: ${topViewBottomY}`);
         //console.log("VerticalViewPager", `getCurrentViewPos() beginDrag.y: ${this.scrollOffset.beginDrag.y}`);
 
         //判断当前所处ScrollView的组件位置
-        if (this.scrollOffset.beginDrag.y <= this.scrollOffset.threshold + PULL_TO_SCROLL_MAX) {
+        if (parseInt(this.scrollOffset.beginDrag.y) <= this.scrollOffset.threshold + PULL_TO_SCROLL_MAX) {
             //触摸前可见View底部栏在TopView中
             this.scrollOffset.pos = 0;
-        } else if (this.scrollOffset.beginDrag.y >= (topViewBottomY - PULL_TO_SCROLL_MAX/*PULL_TO_SCROLL_MAX为防止误差*/)) {
+        } else if (parseInt(this.scrollOffset.beginDrag.y) >= (topViewBottomY - PULL_TO_SCROLL_MAX/*PULL_TO_SCROLL_MAX为防止误差*/)) {
             //触摸前底部栏在BottomView中
             this.scrollOffset.pos = 1;
         } else {
@@ -369,7 +372,7 @@ export default class VerticalViewPager extends Component {
             this.scrollOffset.type = 1;
         }
         //下拉可以看到bottomView的距离
-        this.scrollOffset.threshold = this.layout.topViewLayout.height + this.layout.topViewLayout.y - this.layout.scrollViewLayout.height;
+        this.scrollOffset.threshold = parseInt(this.layout.topViewLayout.height + this.layout.topViewLayout.y - this.layout.scrollViewLayout.height);
 
 
         if (this.scrollOffset.type == 0 && this.scrollOffset.pos == 1) {
@@ -385,7 +388,7 @@ export default class VerticalViewPager extends Component {
         }
 
         //ScrollView下拉到滑动停止后的距离
-        let y = this.scrollOffset.end.y;
+        let y = parseInt(this.scrollOffset.end.y);
 
         //下拉
         if (this.scrollOffset.type == 0) {
@@ -403,11 +406,11 @@ export default class VerticalViewPager extends Component {
             }
         } else {
             //上拉可以看到TopView的距离为 TopView底部坐标(TopView的高度和Y轴值)
-            let topViewBottomY = this.layout.topViewLayout.height + this.layout.topViewLayout.y;
+            let topViewBottomY = parseInt(this.layout.topViewLayout.height + this.layout.topViewLayout.y);
             if (y < (topViewBottomY - PULL_TO_SCROLL_MAX)) {
                 //上拉到TopView顶端
                 this.onScrollTop('pullToPos');
-            } else if (y > topViewBottomY) {
+            } else if (y < topViewBottomY) {
                 //不超过下拉临界值+PULL_TO_SCROLL_MAX，不用下拉，恢复到topView的底端
                 this.onScrollDown('pullToPos');
             } else {
