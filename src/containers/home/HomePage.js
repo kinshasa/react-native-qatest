@@ -25,7 +25,7 @@ class HomePage extends Component {
     static defaultProps = {};
 
     constructor(props, context) {
-        console.log("HomePage", "constructor()");
+        console.log("HomePage constructor()");
         super(props, context);
         this.state = {};
     }
@@ -37,34 +37,33 @@ class HomePage extends Component {
     renderCount = 0;
 
     componentWillMount() {
-        console.log("HomePage", "componentWillMount()");
+        console.log("HomePage componentWillMount()");
     }
 
     componentDidMount() {
-        console.log("HomePage", "componentDidMount()");
-        console.log(`#HomePage componentDidMount() this.props.state:,this.props.state`);
+        console.log("HomePage componentDidMount()");
     }
 
     componentWillReceiveProps(newProps) {
-        console.log("HomePage", "componentWillReceiveProps()");
+        console.log("HomePage componentWillReceiveProps()");
     }
 
     shouldComponentUpdate(nextProps, nextState) {
         let isUpdate = (this.props != nextProps) || (this.state != nextState);
-        console.log("HomePage", "shouldComponentUpdate():" + isUpdate);
+        console.log("HomePage shouldComponentUpdate():", isUpdate);
         return isUpdate;
     }
 
     componentWillUpdate(nextProps, nextState) {
-        console.log("HomePage", "componentWillUpdate()");
+        console.log("HomePage componentWillUpdate()");
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log("HomePage", "componentDidUpdate()");
+        console.log("HomePage componentDidUpdate()");
     }
 
     componentWillUnmount() {
-        console.log("HomePage", "componentWillUnmount()");
+        console.log("HomePage componentWillUnmount()");
     }
 
     getDataSource() {
@@ -89,7 +88,7 @@ class HomePage extends Component {
 
     render() {
         this.renderCount++;
-        console.log(`#HomePage render() renderCount:${this.renderCount};props.state:,this.props.state`);
+        console.log("HomePage render() renderCount:",this.renderCount);
 
         let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         return (
@@ -141,7 +140,7 @@ function mapStateToProps(state) {
  * @returns {{actions: (A|B|M|N)}}
  */
 function mapDispatchToProps(dispatch) {
-    console.log("MainRouter actions:", actions);
+    console.log("HomePage actions:, actions");
     return {
         actions: bindActionCreators(actions, dispatch),
     }

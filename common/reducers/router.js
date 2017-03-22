@@ -12,8 +12,8 @@ module.exports = function (state, action) {
             type: 'USER_INITIAL',
             data: [],
         };
-    console.log(`#router state:`,state);
-    console.log(`#router action:`,action);
+    console.log(`#router state:,state`);
+    console.log(`#router action:,action`);
     switch (action.type) {
 
         case 'ROUTER_SCENES_LIST': {
@@ -36,6 +36,6 @@ getDataSource = () => {
     Object.keys(scenes).map((item, i) => {
         list[item] = scenes[item].des || item;
     });
-    console.log('#router getDataSource() list:', list);
+    console.log(`#router getDataSource() list:, list`);
     return list;
 }

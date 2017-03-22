@@ -40,7 +40,7 @@ export default class QATest extends Component {
      * @param context
      */
     constructor(props, context) {
-        console.log("QATest", "constructor()");
+        console.log("QATest constructor()");
         super(props, context);
         this.state = {};
     }
@@ -56,7 +56,7 @@ export default class QATest extends Component {
      * 生命周期中仅被调用1次，可以使用SetState
      */
     componentWillMount() {
-        console.log("QATest", "componentWillMount()");
+        console.log("QATest componentWillMount()");
     }
 
     /**
@@ -65,7 +65,7 @@ export default class QATest extends Component {
      * 用于网络请求和页面渲染
      */
     componentDidMount() {
-        console.log("QATest", "componentDidMount()");
+        console.log("QATest componentDidMount()");
     }
 
     /**
@@ -74,7 +74,7 @@ export default class QATest extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("QATest", "componentWillReceiveProps():" + newProps);
+        console.log("QATest componentWillReceiveProps():" , newProps);
     }
 
     /**
@@ -85,7 +85,7 @@ export default class QATest extends Component {
      */
     shouldComponentUpdate(nextProps, nextState) {
         let isUpdate = (this.props != nextProps) || (this.state != nextState);
-        console.log("QATest", "shouldComponentUpdate():" + isUpdate);
+        console.log("QATest shouldComponentUpdate():" , isUpdate);
         return isUpdate;
     }
 
@@ -95,7 +95,7 @@ export default class QATest extends Component {
      * @param nextState 更新之后的状态
      */
     componentWillUpdate(nextProps, nextState) {
-        console.log("QATest", "componentWillUpdate()");
+        console.log("QATest componentWillUpdate()");
     }
 
     /**
@@ -105,7 +105,7 @@ export default class QATest extends Component {
      * @returns {boolean}
      */
     componentDidUpdate(prevProps, prevState) {
-        console.log("QATest", "componentDidUpdate()");
+        console.log("QATest componentDidUpdate()");
     }
 
     /**
@@ -113,7 +113,7 @@ export default class QATest extends Component {
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
     componentDidUnMount() {
-        console.log("QATest", "componentDidUnMount()");
+        console.log("QATest componentDidUnMount()");
 
     }
 
@@ -128,7 +128,7 @@ export default class QATest extends Component {
      */
     render() {
         this.renderCount++;
-        console.log("QATest", "render() renderCount:" + this.renderCount);
+        console.log("QATest render() renderCount:" , this.renderCount);
         return (
             <View style={[QATestStyles.container,this.props.style]}>
                 <TitleBar

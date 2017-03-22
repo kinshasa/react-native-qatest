@@ -47,9 +47,7 @@ export default class Launcher extends Component {
      * @param context
      */
     constructor(props, context) {
-        console.log("Launcher", "constructor() :" + time1);
-        time1 = new Date();
-        console.log("Launcher", "constructor() :" + time1);
+        console.log("Launcher constructor()");
         super(props, context);
         this.state = {
             selectedTab: "T1"
@@ -67,8 +65,7 @@ export default class Launcher extends Component {
      * 生命周期中仅被调用1次，可以使用SetState
      */
     componentWillMount() {
-        time1 = new Date();
-        console.log("Launcher", "componentWillMount()" + time1);
+        console.log("Launcher componentWillMount()",new Date());
     }
 
     /**
@@ -77,7 +74,7 @@ export default class Launcher extends Component {
      * 用于网络请求和页面渲染
      */
     componentDidMount() {
-        console.log("Launcher", "componentDidMount()");
+        console.log("Launcher componentDidMount()",new Date());
     }
 
     /**
@@ -86,7 +83,7 @@ export default class Launcher extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("Launcher", "componentWillReceiveProps():" + newProps);
+        console.log("Launcher componentWillReceiveProps():", newProps);
     }
 
     /**
@@ -96,8 +93,9 @@ export default class Launcher extends Component {
      * @returns {boolean} 默认true, 返回值决定是否需要更新组件，如果 true 表示需要更新，继续走后面的更新流程。
      */
     shouldComponentUpdate(nextProps, nextState) {
+        //let isUpdate = (this.props != nextProps) || (this.state != nextState);
         let isUpdate = (this.state != nextState);
-        console.log("Launcher", "shouldComponentUpdate():" + isUpdate);
+        console.log("Launcher shouldComponentUpdate():" ,isUpdate);
         return isUpdate;
     }
 
@@ -107,7 +105,7 @@ export default class Launcher extends Component {
      * @param nextState 更新之后的状态
      */
     componentWillUpdate(nextProps, nextState) {
-        console.log("Launcher", "componentWillUpdate()");
+        console.log("Launcher componentWillUpdate()");
     }
 
     /**
@@ -117,7 +115,7 @@ export default class Launcher extends Component {
      * @returns {boolean}
      */
     componentDidUpdate(prevProps, prevState) {
-        console.log("Launcher", "componentDidUpdate()");
+        console.log("Launcher componentDidUpdate()");
     }
 
     /**
@@ -125,9 +123,7 @@ export default class Launcher extends Component {
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
     componentWillUnmount() {
-        time1 = new Date();
-        console.log("Launcher", "componentWillUnmount()" + time1);
-
+        console.log("Launcher componentWillUnmount()");
     }
 
     /**
@@ -136,7 +132,7 @@ export default class Launcher extends Component {
      */
     render() {
         this.renderCount++;
-        console.log("Launcher", "render() renderCount:" + this.renderCount);
+        console.log("Launcher render() renderCount:" , this.renderCount);
 
         return (
             <View style={LauncherStyles.container}>

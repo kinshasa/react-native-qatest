@@ -24,13 +24,13 @@ class MainRouter extends Component {
     data = {}
 
     componentDidMount() {
-        console.log(`#MainRouter componentDidMount this.props:,this.props.actions`);
+        console.log('#MainRouter componentDidMount this.props:,this.props.actions');
         this.data = this.props.actions.getScenesList();
     }
 
     render() {
 
-        console.log(`#MainRouter render() props.state:, this.props.state.router.data`);
+        console.log('#MainRouter render() props.state:, this.props.state.router.data');
         return (
             <Router
                 //state={this.props.state}
@@ -69,7 +69,7 @@ function mapStateToProps(state) {
  * @returns {{actions: (A|B|M|N)}}
  */
 function mapDispatchToProps(dispatch) {
-    console.log("MainRouter actions:", actions);
+    console.log('MainRouter actions:, actions');
     return {
         actions: bindActionCreators(actions, dispatch),
     }

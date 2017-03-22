@@ -28,7 +28,7 @@ export default class ${NAME} extends Component {
     };
 
     constructor(props, context) {
-        console.log("${NAME}",`constructor()`);
+        console.log("${NAME}" constructor()");
         super(props, context);
         this.state = {};
     }
@@ -40,11 +40,11 @@ export default class ${NAME} extends Component {
     count = 0;
 
     componentWillMount() {
-        console.log("${NAME} componentWillMount()",``);
+        console.log("${NAME} componentWillMount()",new Date());
     }
 
     componentDidMount() {
-        console.log("${NAME} componentDidMount()",``);
+        console.log("${NAME} componentDidMount()",new Date());
     }
 
     /**
@@ -64,7 +64,7 @@ export default class ${NAME} extends Component {
      */
     shouldComponentUpdate(nextProps, nextState){
         let isUpdate = (this.props != nextProps)||(this.state != nextState);
-        console.log("${NAME} shouldComponentUpdate()", `${isUpdate}`);
+        console.log("${NAME} shouldComponentUpdate()", isUpdate);
         return isUpdate;
     }
 
@@ -74,7 +74,7 @@ export default class ${NAME} extends Component {
      * @param nextState 更新之后的状态
      */
     componentWillUpdate(nextProps, nextState) {
-        console.log("${NAME} componentWillUpdate()", ``);
+        console.log("${NAME} componentWillUpdate()");
     }
 
     /**
@@ -84,7 +84,7 @@ export default class ${NAME} extends Component {
      * @returns {boolean}
      */
     componentDidUpdate(prevProps, prevState) {
-        console.log("${NAME} componentDidUpdate()",``);
+        console.log("${NAME} componentDidUpdate()");
     }
 
     /**
@@ -92,13 +92,13 @@ export default class ${NAME} extends Component {
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
     componentWillUnmount() {
-        console.log("${NAME} componentWillUnmount()",``);
+        console.log("${NAME} componentWillUnmount()");
 
     }
 
     render() {
         this.count++;
-        console.log("${NAME} render() count:", `${this.count}`);
+        console.log("${NAME} render() count:", this.count);
         return (
             <View style={${NAME}Styles.container}>
 

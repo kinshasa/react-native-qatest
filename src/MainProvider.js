@@ -20,11 +20,9 @@ const store = createStoreWithThunk(reducer);
 
 export default class MainProvider extends Component {
 
-
-
     render() {
         //我们现在通过Provider把Store递交给了真正的App入口，也就是开始渲染界面的东西MainNavigator
-        console.log("MainProvider render()",reducer);
+        console.log('MainProvider render() reducer');
         return (
             <Provider store={store}>
                 <MainRouter />
