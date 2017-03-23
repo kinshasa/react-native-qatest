@@ -25,6 +25,7 @@ module.exports = function (state, action) {
             return {
                 ...state,
                 ...action,
+                data,
             }
         }
         case 'ROUTER_HOME_SCENES_LIST': {
@@ -58,6 +59,6 @@ getDataSource = (key='root') => {
             //console.log(`#router getDataSource() scenes[${item}]:`, scenes[item]);
         }
     });
-    //console.log("#router getDataSource() scenes:", list);
+    console.log("#router getDataSource() scenes:", list);
     return list;
 }

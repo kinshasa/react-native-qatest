@@ -72,7 +72,7 @@ class QATest extends Component {
      */
     componentDidMount() {
         console.log("QATest componentDidMount()");
-        //this.props.actions.getQATestScenesList();
+        this.props.actions.getQATestScenesList();
     }
 
     /**
