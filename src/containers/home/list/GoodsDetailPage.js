@@ -110,9 +110,17 @@ export default class GoodsDetailPage extends Component {
             }
             //如果能取到
             let ref = this.refs['tabView'].refs['scrollView'].refs['scrollableTabView'].props.children;
-            return ref[0];
+            this.tabBar = ref[0];
+            return this.tabBar;
         } catch (e) {
             console.log("GoodsDetailPage renderTabBar():", e.message);
+        }
+    }
+
+    onChangeTab(pre,ref,from){
+        //console.log("GoodsDetailPage render() onChangeTab:",this.tabBar);
+        if(this.tabBar && this.tabBar.setTabBarTextProps){
+            this.tabBar.setTabBarTextProps(pre.i,{style:{color:"green"}});
         }
     }
 
@@ -129,7 +137,7 @@ export default class GoodsDetailPage extends Component {
                     {/*TopView 商品详情页的顶部布局，默认minHeight:屏幕高度，达到第一页不会看到BottomView，不填满会看到背景空白*/}
                     <Settings onLayout={(e)=>{this.verticalLayout =e.nativeEvent.layout}}/>
                     {/*BottomView 可以是scrollableViewPager，也可以自定义组件*/}
-                    <TabView ref='tabView'/>
+                    <TabView onChangeTab={(pre,ref,from)=>{this.onChangeTab(pre,ref,from)}} ref='tabView'/>
                 </GoodsDetailReact>
             </View>
         );

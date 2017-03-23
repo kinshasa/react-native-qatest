@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 
 import ScrollableTabView from'react-native-scrollable-tab-view';
+import ScrollableTabBar from 'react-native-scrollable-tab-view/ScrollableTabBar';
 
 
 import HomePage from '../HomePage'
@@ -138,6 +139,7 @@ export default class TabView extends Component {
         return (
             <ScrollableTabView
                 {...this.props}
+                renderTabBar={() => <ScrollableTabBar /> }
                 ref='scrollView'
                 contentContainerStyle={TabViewStyles.container}>
                 <HomePage tabLabel="HomePage"/>
