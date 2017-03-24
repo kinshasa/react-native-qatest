@@ -7,8 +7,7 @@
  */
 
 import React, {Component, PropTypes} from "react";
-import {Dimensions, ListView, StyleSheet, Text, View, InteractionManager} from "react-native";
-import {Actions} from "react-native-router-flux";
+import {Dimensions, InteractionManager, ListView, StyleSheet, Text, View} from "react-native";
 import TitleBar from "../../../components/bar/TitleBar";
 import Icon from "react-native-vector-icons/FontAwesome";
 
@@ -17,12 +16,7 @@ const ds = new ListView.DataSource({
     rowHasChanged: (r1, r2) => r1 !== r2,
     sectionHeaderHasChanged: (s1, s2) => s1 !== s2,
 });
-/*ds = new ListView.DataSource({
- getRowData: this.getRowData,
- getSectionHeaderData: this.getSectionData,
- rowHasChanged: (r1, r2) => r1 !== r2,
- sectionHeaderHasChanged: (s1, s2) => s1 !== s2,
- });*/
+
 export default class CustomListView extends Component {
 
     static propTypes = {
@@ -117,13 +111,12 @@ export default class CustomListView extends Component {
 
     getDataSource() {
         console.log("CustomListView getDataSource() data",this.data);
-        for (let i = 0; i < 2; i++) {
+        for (let i = 0; i < 100; i++) {
             this.data['sectionID_'+i] = {};
-            for(let j=0;j<10;j++){
+            for(let j=0;j<100;j++){
                 this.data['sectionID_'+i]['rowID_'+j] = 'rowData_'+i+'_'+j;
             }
         }
-        console.log("CustomListView getDataSource() data",this.data);
         return this.data;
     }
 
@@ -164,7 +157,7 @@ export default class CustomListView extends Component {
                     renderSectionHeader={this.renderSectionHeader}
                     renderRow={this.renderRow}
                     enableEmptySections={true}
-                    dataSource={ds.cloneWithRowsAndSections({'test':{'t1':11,'t2':22},'test2':[2,4]})}
+                    dataSource={ds.cloneWithRowsAndSections(this.data)}//{'test':{'t1':11,'t2':22},'test2':[2,4]}
                 />
             </View>
         );
