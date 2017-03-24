@@ -60,8 +60,8 @@ export default class CustomListView extends Component {
         console.log("CustomListView componentDidMount()", new Date());
         InteractionManager.runAfterInteractions(() => {
             // ...耗时较长的同步的任务...
-            //this.getDataSource();
-            //this.setState({refresh: true});
+            this.getDataSource();
+            this.setState({refresh: true});
         });
 
     }
@@ -135,7 +135,7 @@ export default class CustomListView extends Component {
 
     renderSectionHeader = (sectionData, sectionID) => {
         return(
-            <Text style={{color:"red", fontSize: 18}}>{sectionData}</Text>
+            <Text style={{color:"red", fontSize: 18,width,backgroundColor:"green"}}>{sectionID}</Text>
         )
     };
 
@@ -144,7 +144,7 @@ export default class CustomListView extends Component {
         return (
             <View style={{margin: 3,}}>
                 <Icon.Button name="star" backgroundColor="#aaa">
-                    <Text style={{fontFamily: 'Arial', fontSize: 15}}>{rowData}</Text>
+                    <Text style={{fontFamily: 'Arial', fontSize: 15}}>{rowId},{rowData}</Text>
                 </Icon.Button>
             </View>
         )
@@ -162,9 +162,9 @@ export default class CustomListView extends Component {
                 <ListView
                     renderHeader={this.renderHeader}
                     renderSectionHeader={this.renderSectionHeader}
-                    enableEmptySections={true}
-                    dataSource={ds.cloneWithRows(this.getDataSource())}
                     renderRow={this.renderRow}
+                    enableEmptySections={true}
+                    dataSource={ds.cloneWithRowsAndSections({'test':{'t1':11,'t2':22},'test2':[2,4]})}
                 />
             </View>
         );
