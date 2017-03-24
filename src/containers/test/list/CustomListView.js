@@ -1,8 +1,8 @@
 /**
  * @Author: liushaobo2005@163.com
- * @Date: ${DATE} ${TIME}
- * @Desc: 公共组件 - ${NAME}
- * @Name: ${NAME}.js
+ * @Date: 2017.3.24 下午 4:58
+ * @Desc: 公共组件 - CustomListView
+ * @Name: CustomListView.js
  * @LifeCycle：https://github.com/kinshasa/react-native-qatest
  */
 
@@ -13,7 +13,7 @@ import {
     Text,
 } from 'react-native';
 
-export default class ${NAME} extends Component {
+export default class CustomListView extends Component {
 
     static propTypes = {
         style: View.propTypes.style,
@@ -24,11 +24,11 @@ export default class ${NAME} extends Component {
     };
 
     static defaultProps = {
-        data:{}
+        data: {}
     };
 
     constructor(props, context) {
-        console.log("${NAME} constructor()");
+        console.log("CustomListView constructor()");
         super(props, context);
         this.state = {};
     }
@@ -40,11 +40,11 @@ export default class ${NAME} extends Component {
     count = 0;
 
     componentWillMount() {
-        console.log("${NAME} componentWillMount()",new Date());
+        console.log("CustomListView componentWillMount()", new Date());
     }
 
     componentDidMount() {
-        console.log("${NAME} componentDidMount()",new Date());
+        console.log("CustomListView componentDidMount()", new Date());
     }
 
     /**
@@ -53,7 +53,7 @@ export default class ${NAME} extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("${NAME} componentWillReceiveProps()",newProps);
+        console.log("CustomListView componentWillReceiveProps()", newProps);
     }
 
     /**
@@ -62,9 +62,9 @@ export default class ${NAME} extends Component {
      * @param nextState 表示组件即将更新的状态值。
      * @returns {boolean} 默认true, 返回值决定是否需要更新组件，如果 true 表示需要更新，继续走后面的更新流程。
      */
-    shouldComponentUpdate(nextProps, nextState){
-        let isUpdate = (this.props != nextProps)||(this.state != nextState);
-        console.log("${NAME} shouldComponentUpdate()", isUpdate);
+    shouldComponentUpdate(nextProps, nextState) {
+        let isUpdate = (this.props != nextProps) || (this.state != nextState);
+        console.log("CustomListView shouldComponentUpdate()", isUpdate);
         return isUpdate;
     }
 
@@ -74,7 +74,7 @@ export default class ${NAME} extends Component {
      * @param nextState 更新之后的状态
      */
     componentWillUpdate(nextProps, nextState) {
-        console.log("${NAME} componentWillUpdate()", new Date());
+        console.log("CustomListView componentWillUpdate()");
     }
 
     /**
@@ -84,7 +84,7 @@ export default class ${NAME} extends Component {
      * @returns {boolean}
      */
     componentDidUpdate(prevProps, prevState) {
-        console.log("${NAME} componentDidUpdate()", new Date());
+        console.log("CustomListView componentDidUpdate()");
     }
 
     /**
@@ -92,23 +92,23 @@ export default class ${NAME} extends Component {
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
     componentWillUnmount() {
-        console.log("${NAME} componentWillUnmount()");
+        console.log("CustomListView componentWillUnmount()");
 
     }
 
     render() {
         this.count++;
-        console.log("${NAME} render() count:", this.count);
+        console.log("CustomListView render() count:", this.count);
         return (
-            <View style={${NAME}Styles.container}>
+            <View style={CustomListViewStyles.container}>
 
             </View>
         );
     }
 
- }
+}
 
-const ${NAME}Styles = StyleSheet.create({
+const CustomListViewStyles = StyleSheet.create({
     container: {
         flex: 1,
     },

@@ -38,7 +38,6 @@ export default class App extends Component {
     }
 
     render() {
-        console.log('App render() config:',config);
         return (
             <MainProvider />
         );
