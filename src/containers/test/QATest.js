@@ -91,8 +91,8 @@ class QATest extends Component {
      * @returns {boolean} 默认true, 返回值决定是否需要更新组件，如果 true 表示需要更新，继续走后面的更新流程。
      */
     shouldComponentUpdate(nextProps, nextState) {
-        //let isUpdate = (this.props != nextProps) || (this.state != nextState);
-        let isUpdate = this.state != nextState;
+        let isUpdate = (this.props != nextProps) || (this.state != nextState);
+        //let isUpdate = this.state != nextState;
         console.log("QATest shouldComponentUpdate():" , isUpdate);
         return isUpdate;
     }

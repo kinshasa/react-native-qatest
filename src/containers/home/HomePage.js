@@ -41,7 +41,7 @@ class HomePage extends Component {
 
     componentDidMount() {
         console.log("HomePage componentDidMount()", new Date());
-        this.props.actions.getHomeScenesList();
+        //this.props.actions.getHomeScenesList();
     }
 
     componentWillReceiveProps(newProps) {
@@ -49,7 +49,8 @@ class HomePage extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        let isUpdate = (this.props != nextProps) || (this.state != nextState);
+        let isUpdate = this.state != nextState;
+        //let isUpdate = (this.props != nextProps) || (this.state != nextState);
         console.log("HomePage shouldComponentUpdate():", isUpdate);
         return isUpdate;
     }
@@ -114,7 +115,7 @@ class HomePage extends Component {
 
                 <ListView
                     enableEmptySections={true}
-                    dataSource={ds.cloneWithRows(this.props.state.data.home)}
+                    dataSource={ds.cloneWithRows(/*this.props.state.data.home*/this.getDataSource())}
                     renderRow={this.renderRow}
                 />
             </View>
@@ -159,4 +160,4 @@ function mapDispatchToProps(dispatch) {
 /**
  * 把mapStateToProps, mapDispatchToProps绑定到MainRouter组件上
  */
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default /*connect(mapStateToProps, mapDispatchToProps)*/(HomePage);

@@ -11,6 +11,7 @@ import {Actions, Scene} from "react-native-router-flux";
  * 启动页
  */
 import Launcher from "./containers/Launcher";
+
 /**
  * HomeList
  */
@@ -25,6 +26,11 @@ import DataBindingRedux from "./containers/home/list/DataBindingRedux";
 import NestScrollView from "./containers/home/list/NestScrollView";
 import GoodsDetailPage from "./containers/home/list/GoodsDetailPage";
 import pushy from "./containers/home/list/pushy";
+
+/**
+ * QATest
+ */
+import CustomListView from "./containers/test/list/CustomListView";
 
 export default  scenes = Actions.create(
     <Scene key="root">
@@ -41,8 +47,8 @@ export default  scenes = Actions.create(
             <Scene key="NestScrollView" component={NestScrollView} des={"NestScrollView"} hideNavBar={true}/>
             <Scene key="GoodsDetailPage" component={GoodsDetailPage} des={"商品详情页"} hideNavBar={true}/>
         </Scene>
-        <Scene key="QATest">
-            <Scene key="pushy" component={pushy} des={"react-native-pushy"} hideNavBar={true}/>
-        </Scene>
+
+        <Scene key="pushy" component={pushy} des={"react-native-pushy"} hideNavBar={true}/>
+        <Scene key="CustomListView" component={CustomListView} des={"CustomListView"} hideNavBar={true}/>
     </Scene>
 );

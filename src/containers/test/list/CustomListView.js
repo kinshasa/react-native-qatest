@@ -6,13 +6,23 @@
  * @LifeCycle：https://github.com/kinshasa/react-native-qatest
  */
 
-import React, {Component, PropTypes} from 'react';
-import {
-    StyleSheet,
-    View,
-    Text,
-} from 'react-native';
+import React, {Component, PropTypes} from "react";
+import {Dimensions, ListView, StyleSheet, Text, View, InteractionManager} from "react-native";
+import {Actions} from "react-native-router-flux";
+import TitleBar from "../../../components/bar/TitleBar";
+import Icon from "react-native-vector-icons/FontAwesome";
 
+const {height, width} = Dimensions.get('window');
+const ds = new ListView.DataSource({
+    rowHasChanged: (r1, r2) => r1 !== r2,
+    sectionHeaderHasChanged: (s1, s2) => s1 !== s2,
+});
+/*ds = new ListView.DataSource({
+ getRowData: this.getRowData,
+ getSectionHeaderData: this.getSectionData,
+ rowHasChanged: (r1, r2) => r1 !== r2,
+ sectionHeaderHasChanged: (s1, s2) => s1 !== s2,
+ });*/
 export default class CustomListView extends Component {
 
     static propTypes = {
@@ -30,7 +40,7 @@ export default class CustomListView extends Component {
     constructor(props, context) {
         console.log("CustomListView constructor()");
         super(props, context);
-        this.state = {};
+        this.state = {refresh: false};
     }
 
     /**
@@ -39,12 +49,21 @@ export default class CustomListView extends Component {
      */
     count = 0;
 
+    //ListView的dataSource
+    data = {};
+
     componentWillMount() {
         console.log("CustomListView componentWillMount()", new Date());
     }
 
     componentDidMount() {
         console.log("CustomListView componentDidMount()", new Date());
+        InteractionManager.runAfterInteractions(() => {
+            // ...耗时较长的同步的任务...
+            //this.getDataSource();
+            //this.setState({refresh: true});
+        });
+
     }
 
     /**
@@ -96,12 +115,57 @@ export default class CustomListView extends Component {
 
     }
 
+    getDataSource() {
+        console.log("CustomListView getDataSource() data",this.data);
+        for (let i = 0; i < 2; i++) {
+            this.data['sectionID_'+i] = {};
+            for(let j=0;j<10;j++){
+                this.data['sectionID_'+i]['rowID_'+j] = 'rowData_'+i+'_'+j;
+            }
+        }
+        console.log("CustomListView getDataSource() data",this.data);
+        return this.data;
+    }
+
+    renderHeader = () => {
+        return (
+            <Text >{JSON.stringify(config)}</Text>
+        )
+    };
+
+    renderSectionHeader = (sectionData, sectionID) => {
+        return(
+            <Text style={{color:"red", fontSize: 18}}>{sectionData}</Text>
+        )
+    };
+
+    renderRow = (rowData, sectionId, rowId) => {
+
+        return (
+            <View style={{margin: 3,}}>
+                <Icon.Button name="star" backgroundColor="#aaa">
+                    <Text style={{fontFamily: 'Arial', fontSize: 15}}>{rowData}</Text>
+                </Icon.Button>
+            </View>
+        )
+    };
+
     render() {
         this.count++;
         console.log("CustomListView render() count:", this.count);
         return (
             <View style={CustomListViewStyles.container}>
-
+                <TitleBar
+                    label="ListView测试"
+                    labelStyle={{backgroundColor: "transparent", color: "black"}}
+                    style={{height: 45}}/>
+                <ListView
+                    renderHeader={this.renderHeader}
+                    renderSectionHeader={this.renderSectionHeader}
+                    enableEmptySections={true}
+                    dataSource={ds.cloneWithRows(this.getDataSource())}
+                    renderRow={this.renderRow}
+                />
             </View>
         );
     }
