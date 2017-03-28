@@ -8,12 +8,13 @@
 import React, {Component} from "react";
 import {ListView, StyleSheet, Text, View} from "react-native";
 import {Actions} from "react-native-router-flux";
-import scenes from "../../scenes";
 import TitleBar from "../../components/bar/TitleBar";
 import Icon from "react-native-vector-icons/FontAwesome";
 import * as actions from "../../../common/actions";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
+import * as LauncherController from "../LauncherController";
+
 
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
@@ -67,23 +68,13 @@ class HomePage extends Component {
         console.log("HomePage componentWillUnmount()");
     }
 
-    getDataSource() {
-        let list = {};
-        Object.keys(scenes).map((item, i) => {
-            if(item.type == 'home'){
-                list[item] = scenes[item].des || item;
-            }
-        });
-        console.log('HomePage list', list);
-        return list;
-    }
-
-    renderRow(rowData, sectionId, rowId) {
+    renderRow = (rowData, sectionId, rowId) => {
 
         return (
             <View style={HomePageStyles.btnList}>
                 <Icon.Button name="star" backgroundColor="#aaa" onPress={() => {
                     try {
+                        console.log(rowId);
                         Actions[rowId]()
                     } catch (e) {
                         alert(e.message)
@@ -117,7 +108,7 @@ class HomePage extends Component {
 
                 <ListView
                     enableEmptySections={true}
-                    dataSource={ds.cloneWithRows(/*this.props.state.data.home*/this.getDataSource())}
+                    dataSource={ds.cloneWithRows(/*this.props.state.data.home*/LauncherController.getDataSource('home'))}
                     renderRow={this.renderRow}
                 />
             </View>
