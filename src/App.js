@@ -36,6 +36,7 @@ export default class App extends Component {
                 alert(url)
             }
         }).catch(err => console.error('An error occurred', err));
+
         Linking.addEventListener('url', (event)=>{console.log('event:',event.url);});
 
     }

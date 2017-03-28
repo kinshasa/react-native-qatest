@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 
+import com.elvishew.xlog.LogLevel;
+import com.elvishew.xlog.XLog;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -56,7 +58,9 @@ public class MainApplication extends Application implements ReactApplication {
 
         // 这里实现SDK初始化，appId替换成你的在Bugly平台申请的appId
         // 调试时，将第三个参数改为true
-        Bugly.init(this, "f130c8d4d9", true);
+        Bugly.init(this, "f130c8d4d9", false);
+
+        XLog.init(LogLevel.ALL);
     }
 
     @Override

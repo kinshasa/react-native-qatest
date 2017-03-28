@@ -177,6 +177,9 @@ dependencies {
 
     //react-native-pushy
     compile project(':react-native-update')
+
+    //Android logger@https://github.com/elvishew/xLog
+    compile 'com.elvishew:xlog:1.3.0'
 }
 
 // Run this once to be able to run the application with BUCK
