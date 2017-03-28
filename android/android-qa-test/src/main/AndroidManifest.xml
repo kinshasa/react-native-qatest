@@ -45,8 +45,8 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <!--<a href="dscf://www.ds.cn/rn?username=root&password=123456">启动应用程序</a> -->
-                <data android:scheme="dscf:" android:host="jp.app" android:pathPrefix="/rn"/>
+                <!--<a href="qatest://www.ds.cn/rn?username=root&password=123456">启动应用程序</a> -->
+                <data android:scheme="qatest:" android:host="liushaobo.xicp.net" android:pathPrefix="/rn"/>
             </intent-filter>
         </activity>
         <activity
