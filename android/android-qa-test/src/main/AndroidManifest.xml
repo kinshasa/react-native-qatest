@@ -37,7 +37,7 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:launchMode="singleTask">
-            <intent-filter android:label="@string/app_name">
+            <intent-filter android:label="MainActivity">
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -46,7 +46,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!--<a href="qatest://www.ds.cn/rn?username=root&password=123456">启动应用程序</a> -->
-                <data android:scheme="qatest:" android:host="liushaobo.xicp.net" android:pathPrefix="/rn"/>
+                <data android:scheme="qatest" android:host="liushaobo.xicp.net" android:pathPrefix="/rn"/>
             </intent-filter>
         </activity>
         <activity

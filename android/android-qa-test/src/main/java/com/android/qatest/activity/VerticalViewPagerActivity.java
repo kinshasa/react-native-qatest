@@ -25,10 +25,10 @@ public class VerticalViewPagerActivity extends AppCompatActivity {
         if(Intent.ACTION_VIEW.equals(action)) {
             Uri uri = intent.getData();
             if (uri != null) {
-                String name = uri.getQueryParameter("name");
-                String age = uri.getQueryParameter("age");
-                Log.v("MainActivity age", age);
-                Log.v("MainActivity name", name);
+                String password = uri.getQueryParameter("password");
+                String username = uri.getQueryParameter("username");
+                Log.v("MainActivity age", username);
+                Log.v("MainActivity name", password);
             }
         }
     }

@@ -7,19 +7,13 @@
  */
 import React from "react";
 import {Actions, Scene} from "react-native-router-flux";
-/**
- * 启动页
- */
 import Launcher from "./containers/Launcher";
-
-/**
- * HomeList
- */
 import CartAnimation from "./containers/home/list/CartAnimation";
 import AnimationDemo from "./containers/home/list/AnimationDemo";
 import LayoutXYDemo from "./containers/home/list/LayoutXYDemo";
 import PicStore from "./containers/home/list/PicStore";
 import SwipeList from "./containers/home/list/SwipeList";
+import DropDownAlertContainer from "./containers/home/list/DropDownAlertContainer";
 import VerticalViewPagerSimple from "./containers/home/list/VerticalViewPagerSimple";
 import TabView from "./containers/home/list/TabView";
 import DataBindingRedux from "./containers/home/list/DataBindingRedux";
@@ -27,9 +21,6 @@ import NestScrollView from "./containers/home/list/NestScrollView";
 import GoodsDetailPage from "./containers/home/list/GoodsDetailPage";
 import pushy from "./containers/home/list/pushy";
 
-/**
- * QATest
- */
 import CustomListView from "./containers/test/list/CustomListView";
 
 export default  scenes = Actions.create(
@@ -46,6 +37,7 @@ export default  scenes = Actions.create(
             <Scene key="DataBindingRedux" component={DataBindingRedux} des={"DataBindingRedux"} hideNavBar={true}/>
             <Scene key="NestScrollView" component={NestScrollView} des={"NestScrollView"} hideNavBar={true}/>
             <Scene key="GoodsDetailPage" component={GoodsDetailPage} des={"商品详情页"} hideNavBar={true}/>
+            <Scene key="DropDownAlertContainer" component={DropDownAlertContainer} des={"DropDownAlertContainer"} hideNavBar={true}/>
         </Scene>
 
         <Scene key="pushy" component={pushy} des={"react-native-pushy"} hideNavBar={true}/>
