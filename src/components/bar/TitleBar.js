@@ -6,13 +6,9 @@
  */
 
 'use strict';
-import React, {Component, PropTypes} from 'react';
-import {
-    StyleSheet,
-    Text,
-    View
-} from 'react-native';
-import {Actions} from 'react-native-router-flux'
+import React, {Component, PropTypes} from "react";
+import {StyleSheet, Text, View,InteractionManager} from "react-native";
+import {Actions} from "react-native-router-flux";
 
 export default class TitleBar extends Component {
 
@@ -107,19 +103,24 @@ export default class TitleBar extends Component {
         );
     }
 
+    closeContainer = ()=>{
+        InteractionManager.runAfterInteractions(() => {
+            // ...耗时较长的同步的任务...
+            try {
+                Actions.pop()
+            } catch (e) {
+                alert(e.message)
+            }
+        });
+    }
+
     renderLeftView() {
         if (this.props.leftView) {
             return this.props.leftView;
         }
         let titleLeft = [TitleBarStyles.leftStyle, this.props.leftStyle];
         return (
-            <Text style={titleLeft} onPress={() => {
-                try {
-                    Actions.pop()
-                } catch (e) {
-                    alert(e.message)
-                }
-            }}> {"返回"} </Text>
+            <Text style={titleLeft} onPress={() => {this.closeContainer()}}> {"返回"} </Text>
         );
     }
 

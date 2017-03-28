@@ -153,6 +153,9 @@ export default class CustomListView extends Component {
                     labelStyle={{backgroundColor: "transparent", color: "black"}}
                     style={{height: 45}}/>
                 <ListView
+                    onEndReachedThreshold={50}
+                    pageSize={30}
+                    initialListSize={30}
                     renderHeader={this.renderHeader}
                     renderSectionHeader={this.renderSectionHeader}
                     renderRow={this.renderRow}
