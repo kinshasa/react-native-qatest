@@ -20,27 +20,28 @@ import NestScrollViewContainer from "./containers/home/list/NestScrollViewContai
 import GoodsDetailPageContainer from "./containers/home/list/GoodsDetailPageContainer";
 import HotFixPushyContainer from "./containers/home/list/HotFixPushyContainer";
 
-import CustomListView from "./containers/test/list/CustomListView";
+import CustomListViewContainer from "./containers/test/list/CustomListViewContainer";
 import InheritanceBaseContainer from "./containers/test/list/InheritanceBaseContainer";
+import CustomWebViewContainer from "./containers/test/list/CustomWebViewContainer";
 
 export default  scenes = Actions.create(
     <Scene key="root">
         <Scene role="root" key="Launcher" component={Launcher} des={"启动器"} hideNavBar/>
-        <Scene role="home" key="CartAnimationContainer" component={CartAnimationContainer} des={"购物车动画"} hideNavBar/>
-        <Scene role="home" key="AnimationDemoContainer" component={AnimationDemoContainer} des={"动画Demo"} hideNavBar/>
-        <Scene role="home" key="LayoutXYDemoContainer" component={LayoutXYDemoContainer} des={"Layout布局"} hideNavBar/>
-        <Scene role="home" key="IconCollectContainer" component={IconCollectContainer} des={"图标库"} hideNavBar={false}/>
-        <Scene role="home" key="SwipeListContainer" component={SwipeListContainer} des={"Swipe组件"}/>
-        <Scene role="home" key="VerticalViewPagerContainer" component={VerticalViewPagerContainer} des={"垂直ViewPager"}/>
-        <Scene role="home" key="TabViewContainer" component={TabViewContainer} des={"scrollable-tab-view"}/>
-        <Scene role="home" key="NestScrollViewContainer" component={NestScrollViewContainer} des={"内嵌ViewPager"}/>
-        <Scene role="home" key="GoodsDetailPageContainer" component={GoodsDetailPageContainer} des={"商品详情页"}/>
-        <Scene role="home" key="DropDownAlertContainer" component={DropDownAlertContainer}
+        <Scene role="home" key="CartAnimation" component={CartAnimationContainer} des={"购物车动画"} hideNavBar/>
+        <Scene role="home" key="AnimationDemo" component={AnimationDemoContainer} des={"动画Demo"} hideNavBar/>
+        <Scene role="home" key="LayoutXYDemo" component={LayoutXYDemoContainer} des={"Layout布局"} hideNavBar/>
+        <Scene role="home" key="IconCollect" component={IconCollectContainer} des={"图标库"} hideNavBar={false}/>
+        <Scene role="home" key="SwipeList" component={SwipeListContainer} des={"Swipe组件"}/>
+        <Scene role="home" key="VerticalViewPager" component={VerticalViewPagerContainer} des={"垂直ViewPager"}/>
+        <Scene role="home" key="TabView" component={TabViewContainer} des={"scrollable-tab-view"}/>
+        <Scene role="home" key="NestScrollView" component={NestScrollViewContainer} des={"内嵌ViewPager"}/>
+        <Scene role="home" key="GoodsDetailPage" component={GoodsDetailPageContainer} des={"商品详情页"}/>
+        <Scene role="home" key="DropDownAlert" component={DropDownAlertContainer}
                des={"DropDownAlertContainer"}/>
-        <Scene role="home" key="HotFixPushyContainer" component={HotFixPushyContainer} des={"react-native-pushy"}/>
+        <Scene role="home" key="HotFixPushy" component={HotFixPushyContainer} des={"react-native-pushy"}/>
 
-        <Scene role="QATest" key="CustomListView" component={CustomListView} des={"1万行数据的ListView"}/>
-        <Scene role="QATest" key="InheritanceBaseContainer" component={InheritanceBaseContainer}
-               des={"集成BaseContainer"}/>
+        <Scene role="QATest" key="CustomListView" component={CustomListViewContainer} des={"大数据量的ListView"}/>
+        <Scene role="QATest" key="Inheritance" component={InheritanceBaseContainer} des={"继承BaseContainer"}/>
+        <Scene role="QATest" key="WebView" component={CustomWebViewContainer} des={"webView"}/>
     </Scene>
 );

@@ -41,7 +41,6 @@ export default class DropDownAlertContainer extends Component {
         console.log("DropDownAlertContainer constructor()");
         super(props, context);
         this.state = {};
-        this.showAlert = this.showAlert.bind(this)
     }
 
     /**
@@ -96,7 +95,7 @@ export default class DropDownAlertContainer extends Component {
         );
     }
 
-    showAlert(type) {
+    showAlert = (type) => {
         var randomNum = Math.floor((Math.random() * 1000) + 1)
         switch (type) {
             case 'info':

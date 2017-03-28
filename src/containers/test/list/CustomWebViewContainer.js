@@ -1,8 +1,8 @@
 /**
  * @Author: liushaobo2005@163.com
- * @Date: 2017.3.28 下午 5:25
- * @Desc: 公共组件 - BaseContainer
- * @Name: BaseContainer.js
+ * @Date: 2017.3.28 下午 7:34
+ * @Desc: 公共组件 - CustomWebViewContainer
+ * @Name: CustomWebViewContainer.js
  * @LifeCycle：https://github.com/kinshasa/react-native-qatest
  */
 
@@ -11,10 +11,12 @@ import {
     StyleSheet,
     View,
     Text,
+    WebView
 } from 'react-native';
-
+import TitleBar from '../../../components/bar/TitleBar'
 import * as Progress from 'react-native-progress';
-export default class BaseContainer extends Component {
+
+export default class CustomWebViewContainer extends Component {
 
     static propTypes = {
         style: View.propTypes.style,
@@ -29,9 +31,9 @@ export default class BaseContainer extends Component {
     };
 
     constructor(props, context) {
-        console.log("BaseContainer constructor()");
+        console.log("CustomWebViewContainer constructor()");
         super(props, context);
-        this.state = {lazyLoad: false};
+        this.state = {};
     }
 
     /**
@@ -41,11 +43,11 @@ export default class BaseContainer extends Component {
     count = 0;
 
     componentWillMount() {
-        console.log("BaseContainer componentWillMount()", new Date());
+        console.log("CustomWebViewContainer componentWillMount()", new Date());
     }
 
     componentDidMount() {
-        console.log("BaseContainer componentDidMount()", new Date());
+        console.log("CustomWebViewContainer componentDidMount()", new Date());
     }
 
     /**
@@ -54,7 +56,7 @@ export default class BaseContainer extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("BaseContainer componentWillReceiveProps()", newProps);
+        console.log("CustomWebViewContainer componentWillReceiveProps()", newProps);
     }
 
     /**
@@ -63,11 +65,11 @@ export default class BaseContainer extends Component {
      * @param nextState 表示组件即将更新的状态值。
      * @returns {boolean} 默认true, 返回值决定是否需要更新组件，如果 true 表示需要更新，继续走后面的更新流程。
      */
-    /*shouldComponentUpdate(nextProps, nextState) {
+    shouldComponentUpdate(nextProps, nextState) {
         let isUpdate = (this.props != nextProps) || (this.state != nextState);
-        console.log("BaseContainer shouldComponentUpdate()", isUpdate);
+        console.log("CustomWebViewContainer shouldComponentUpdate()", isUpdate);
         return isUpdate;
-    }*/
+    }
 
     /**
      * 如果组件状态或者属性改变，并且shouldComponentUpdate返回为 true
@@ -75,7 +77,7 @@ export default class BaseContainer extends Component {
      * @param nextState 更新之后的状态
      */
     componentWillUpdate(nextProps, nextState) {
-        console.log("BaseContainer componentWillUpdate()", new Date());
+        console.log("CustomWebViewContainer componentWillUpdate()", new Date());
     }
 
     /**
@@ -85,7 +87,7 @@ export default class BaseContainer extends Component {
      * @returns {boolean}
      */
     componentDidUpdate(prevProps, prevState) {
-        console.log("BaseContainer componentDidUpdate()", new Date());
+        console.log("CustomWebViewContainer componentDidUpdate()", new Date());
     }
 
     /**
@@ -93,54 +95,43 @@ export default class BaseContainer extends Component {
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
     componentWillUnmount() {
-        console.log("BaseContainer componentWillUnmount()");
+        console.log("CustomWebViewContainer componentWillUnmount()");
 
     }
 
-    renderLazyView = () => {
-        return (
-            <View style={BaseContainerStyles.lazyView}>
-                <Progress.Bar
-                    indeterminate
-                    progress={0.2}
-                    borderWidth={1}
-                    width={config.window.width}
-                    style={{flex: 1}}/>
-            </View>
-        );
-    };
-
-   /* renderView = () => {
-        return (
-            <View style={BaseContainerStyles.container}>
-                <Text style={BaseContainerStyles.container}>测试数据</Text>
-            </View>
-        );
-    };*/
-
     render() {
         this.count++;
-        console.log("BaseContainer render() count:", this.count);
-
-        if (this.state.lazyLoad && this.renderView) {
-            return (
-                <View style={BaseContainerStyles.container}>
-                    {this.renderView()}
-                </View>
-            );
-        }
-        return this.renderLazyView();
+        console.log("CustomWebViewContainer render() count:", this.count);
+        return (
+            <View style={CustomWebViewContainerStyles.container}>
+                <TitleBar label="https://github.com/kinshasa"/>
+                {
+                    !this.state.load &&
+                    <View style={CustomWebViewContainerStyles.container}>
+                        <Progress.Bar
+                            indeterminate
+                            progress={0.2}
+                            borderWidth={1}
+                            width={config.window.width}
+                            style={{position:'absolute'}}
+                        />
+                    </View>
+                }
+                <WebView
+                    onLoad={()=>{this.setState({load:true})}}
+                    source={{uri: 'https://github.com/kinshasa'}}
+                    style={CustomWebViewContainerStyles.webView}/>
+            </View>
+        );
     }
 
 }
 
-const BaseContainerStyles = StyleSheet.create({
+const CustomWebViewContainerStyles = StyleSheet.create({
     container: {
+        flex: 1,
+    },
+    webView: {
         flex: 1
     },
-    lazyView: {
-        padding: 3,
-        flexDirection: 'row',
-        backgroundColor: "#eee"
-    }
 });
