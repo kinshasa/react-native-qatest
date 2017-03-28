@@ -1,9 +1,9 @@
 /**
  * @Author: liushaobo2005@163.com
- * @Date: 2017.3.10 下午 5:47
- * @Desc: 公共组件 - NestScrollView
- * @Name: NestScrollView.js
- * @LifeCycle：https://github.com/kinshasa/react-native-qatest
+ * @Date: 2017.2.15 下午 2:05
+ * @Desc: 图片库
+ * @Name: IconCollectContainer.js
+ * @LifeCycle：http://www.tuicool.com/articles/nu6zInB
  */
 
 import React, {Component, PropTypes} from 'react';
@@ -11,16 +11,16 @@ import {
     StyleSheet,
     View,
     Text,
-    ScrollView,
-    Dimensions
 } from 'react-native';
-import VerticalViewPagerSimple from './VerticalViewPagerContainer'
+import Icon from 'react-native-vector-icons/FontAwesome';
+import IonIcons from 'react-native-vector-icons/Ionicons';
 
+export default class IconCollectContainer extends Component {
 
-const {height, width} = Dimensions.get('window');
-
-export default class NestScrollView extends Component {
-
+    /**
+     * 父组件传入的属性值
+     * @type {{style: *, account: *, name: *, isTrue: *, callback: *}}
+     */
     static propTypes = {
         style: View.propTypes.style,
         account: PropTypes.number,
@@ -29,32 +29,46 @@ export default class NestScrollView extends Component {
         callback: PropTypes.func,
     };
 
+    /**
+     * 父组件传入的数据
+     * @type {{data: {}}}
+     */
     static defaultProps = {
         data: {}
     };
 
+    /**
+     * 构造函数
+     * @param props
+     * @param context
+     */
     constructor(props, context) {
-        console.log("NestScrollView", `constructor()`);
+        console.log("IconCollectContainer", "constructor()");
         super(props, context);
-        this.state = {refresh:false};
-        this.refView = {
-            scrollView:{},
-            text:{}
-        }
+        this.state = {};
     }
 
     /**
      * 当前组件渲染次数
      * @type {number}
      */
-    count = 0;
+    renderCount = 0;
 
+    /**
+     * 组件加载前
+     * 生命周期中仅被调用1次，可以使用SetState
+     */
     componentWillMount() {
-        console.log("NestScrollView componentWillMount()", ``);
+        console.log("IconCollectContainer", "componentWillMount()");
     }
 
+    /**
+     * 组件加载后
+     * 生命周期中仅被调用1次，可以使用SetState
+     * 用于网络请求和页面渲染
+     */
     componentDidMount() {
-        //console.log("NestScrollView componentDidMount() this.refs['view'].props.children[0]", this.refs['view'].props.children[0]);
+        console.log("IconCollectContainer", "componentDidMount()");
     }
 
     /**
@@ -63,7 +77,7 @@ export default class NestScrollView extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("NestScrollView componentWillReceiveProps()", newProps);
+        console.log("IconCollectContainer", "componentWillReceiveProps():" + newProps);
     }
 
     /**
@@ -74,7 +88,7 @@ export default class NestScrollView extends Component {
      */
     shouldComponentUpdate(nextProps, nextState) {
         let isUpdate = (this.props != nextProps) || (this.state != nextState);
-        console.log("NestScrollView shouldComponentUpdate()", ``);
+        console.log("IconCollectContainer", "shouldComponentUpdate():" + isUpdate);
         return isUpdate;
     }
 
@@ -84,7 +98,7 @@ export default class NestScrollView extends Component {
      * @param nextState 更新之后的状态
      */
     componentWillUpdate(nextProps, nextState) {
-        console.log("NestScrollView componentWillUpdate()", ``);
+        console.log("IconCollectContainer", "componentWillUpdate()");
     }
 
     /**
@@ -94,7 +108,7 @@ export default class NestScrollView extends Component {
      * @returns {boolean}
      */
     componentDidUpdate(prevProps, prevState) {
-        console.log("NestScrollView componentDidUpdate()", ``);
+        console.log("IconCollectContainer", "componentDidUpdate()");
     }
 
     /**
@@ -102,40 +116,32 @@ export default class NestScrollView extends Component {
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
     componentWillUnmount() {
-        console.log("NestScrollView componentWillUnmount()", ``);
+        console.log("IconCollectContainer", "componentWillUnmount()");
 
     }
 
+    /**
+     * 组件更新
+     * @returns {XML}
+     */
     render() {
-        this.count++;
-        console.log("NestScrollView render() count:", `${this.count}`);
+        this.renderCount++;
+        console.log("IconCollectContainer", "render() renderCount:" + this.renderCount);
         return (
-            <View>
-                <Text style={{width,height:100,position:'absolute',zIndex:1}}>adawwd</Text>
-                <ScrollView
-                    style={NestScrollViewStyles.container}>
-                    <View
-                        ref="view"
-                        style={NestScrollViewStyles.nestScrollView}>
-                        <Text ref="text" onPress={()=>{alert('test')}} style={{width,height:100}}>test2222222222</Text>
-                        {this.state.refresh && this.refs['text']}
-                    </View>
-
-                </ScrollView>
+            <View style={IconCollectContainerStyles.container}>
+                <Icon name="home" size={50} color="#900" />
+                <Icon name="home" size={100} color="#999" />
+                <IonIcons name="ios-home" size={30} color="#4F8EF7" />
+                <IonIcons name="ios-home-outline" size={30} color="#4F8EF7" />
             </View>
         );
     }
 
 }
 
-const NestScrollViewStyles = StyleSheet.create({
+const IconCollectContainerStyles = StyleSheet.create({
     container: {
-        width,height:height*2
-    },
-    nestScrollView: {
-        backgroundColor:"blue",
-        width,
-        minHeight:height*2,
-
+        flex: 1,
+        paddingTop:100
     },
 });

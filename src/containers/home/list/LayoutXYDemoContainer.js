@@ -1,8 +1,8 @@
 /**
  * @Author: liushaobo2005@163.com
  * @Date: 2017.2.15 上午 10:08
- * @Desc: 公共组件 - LayoutXYDemo
- * @Name: LayoutXYDemo.js
+ * @Desc: 公共组件 - LayoutXYDemoContainer
+ * @Name: LayoutXYDemoContainer.js
  * @LifeCycle：http://www.tuicool.com/articles/nu6zInB
  */
 
@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 
 let {width: deviceWidth, height: deviceHeight} = Dimensions.get('window');
-export default class LayoutXYDemo extends Component {
+export default class LayoutXYDemoContainer extends Component {
 
     /**
      * 父组件传入的属性值
@@ -45,7 +45,7 @@ export default class LayoutXYDemo extends Component {
      * @param context
      */
     constructor(props, context) {
-        console.log("LayoutXYDemo", "constructor()");
+        console.log("LayoutXYDemoContainer", "constructor()");
         super(props, context);
         this.state = {data: {}};
     }
@@ -68,7 +68,7 @@ export default class LayoutXYDemo extends Component {
      * 生命周期中仅被调用1次，可以使用SetState
      */
     componentWillMount() {
-        console.log("LayoutXYDemo", "componentWillMount()");
+        console.log("LayoutXYDemoContainer", "componentWillMount()");
     }
 
     /**
@@ -77,7 +77,7 @@ export default class LayoutXYDemo extends Component {
      * 用于网络请求和页面渲染
      */
     componentDidMount() {
-        console.log("LayoutXYDemo", "componentDidMount()");
+        console.log("LayoutXYDemoContainer", "componentDidMount()");
 
     }
 
@@ -87,7 +87,7 @@ export default class LayoutXYDemo extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("LayoutXYDemo", "componentWillReceiveProps():" + newProps);
+        console.log("LayoutXYDemoContainer", "componentWillReceiveProps():" + newProps);
     }
 
     /**
@@ -98,7 +98,7 @@ export default class LayoutXYDemo extends Component {
      */
     shouldComponentUpdate(nextProps, nextState) {
         let isUpdate = (this.props != nextProps) || (this.state != nextState);
-        console.log("LayoutXYDemo", "shouldComponentUpdate():" + isUpdate);
+        console.log("LayoutXYDemoContainer", "shouldComponentUpdate():" + isUpdate);
         return isUpdate;
     }
 
@@ -108,7 +108,7 @@ export default class LayoutXYDemo extends Component {
      * @param nextState 更新之后的状态
      */
     componentWillUpdate(nextProps, nextState) {
-        console.log("LayoutXYDemo", "componentWillUpdate()");
+        console.log("LayoutXYDemoContainer", "componentWillUpdate()");
     }
 
     /**
@@ -118,7 +118,7 @@ export default class LayoutXYDemo extends Component {
      * @returns {boolean}
      */
     componentDidUpdate(prevProps, prevState) {
-        console.log("LayoutXYDemo", "componentDidUpdate()");
+        console.log("LayoutXYDemoContainer", "componentDidUpdate()");
     }
 
     /**
@@ -126,7 +126,7 @@ export default class LayoutXYDemo extends Component {
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
     componentDidUnMount() {
-        console.log("LayoutXYDemo", "componentDidUnMount()");
+        console.log("LayoutXYDemoContainer", "componentDidUnMount()");
 
     }
 
@@ -136,10 +136,10 @@ export default class LayoutXYDemo extends Component {
      */
     render() {
         this.renderCount++;
-        console.log("LayoutXYDemo", "render() renderCount:" + this.renderCount);
+        console.log("LayoutXYDemoContainer", "render() renderCount:" + this.renderCount);
         return (
-            <View style={LayoutXYDemoStyles.container}>
-                <View style={LayoutXYDemoStyles.body}>
+            <View style={LayoutXYDemoContainerStyles.container}>
+                <View style={LayoutXYDemoContainerStyles.body}>
                     <TouchableNativeFeedback
                         onLayout={(e)=> {
                             this.view.btn = e.nativeEvent.layout;
@@ -151,8 +151,8 @@ export default class LayoutXYDemo extends Component {
                         }}
                     >
                         <View
-                            style={LayoutXYDemoStyles.layoutBtn}>
-                            <Text style={LayoutXYDemoStyles.layoutText}>btn获取高度</Text>
+                            style={LayoutXYDemoContainerStyles.layoutBtn}>
+                            <Text style={LayoutXYDemoContainerStyles.layoutText}>btn获取高度</Text>
                         </View>
                     </TouchableNativeFeedback>
                     <ScrollView
@@ -175,9 +175,9 @@ export default class LayoutXYDemo extends Component {
                                 LogInfo("searchCarList fail:", e);
                             }
                         }}
-                        style={LayoutXYDemoStyles.scroll}>
+                        style={LayoutXYDemoContainerStyles.scroll}>
                         <View
-                            style={LayoutXYDemoStyles.head}
+                            style={LayoutXYDemoContainerStyles.head}
                             onLayout={(e)=> {
                                 this.view.head = e.nativeEvent.layout;
                             }}>
@@ -188,28 +188,28 @@ export default class LayoutXYDemo extends Component {
                                 marginLeft:10</Text>
                         </View>
                         <View
-                            style={LayoutXYDemoStyles.child1}
+                            style={LayoutXYDemoContainerStyles.child1}
                             onLayout={(e)=> {this.view.child1 = e.nativeEvent.layout}}>
                             <Text onPress={()=>{this.setState({data: this.view.child1})}}>this.view.child1</Text>
                         </View>
                         <View
-                            style={LayoutXYDemoStyles.child2}
+                            style={LayoutXYDemoContainerStyles.child2}
                             onLayout={(e)=> {this.view.child2 = e.nativeEvent.layout}}>
                             <Text onPress={()=>{this.setState({data: this.view.child2})}}>this.view.child2</Text>
                             <View
-                                style={LayoutXYDemoStyles.child1}
+                                style={LayoutXYDemoContainerStyles.child1}
                                 onLayout={(e)=> {this.view.child21 = e.nativeEvent.layout}}>
                                 <Text onPress={()=>{this.setState({data: this.view.child21})}}>this.view.child21</Text>
                             </View>
                         </View>
 
                         <View
-                            style={LayoutXYDemoStyles.child4}
+                            style={LayoutXYDemoContainerStyles.child4}
                             onLayout={(e)=> {this.view.child4 = e.nativeEvent.layout}}>
                             <Text onPress={()=>{this.setState({data: this.view.child4})}}>this.view.child4</Text>
                         </View>
 
-                        <View style={LayoutXYDemoStyles.child3}>
+                        <View style={LayoutXYDemoContainerStyles.child3}>
                             <Text>{JSON.stringify(this.state.data)}</Text>
                         </View>
                     </ScrollView>
@@ -220,7 +220,7 @@ export default class LayoutXYDemo extends Component {
 
 }
 
-const LayoutXYDemoStyles = StyleSheet.create({
+const LayoutXYDemoContainerStyles = StyleSheet.create({
     container: {
         flex: 1,
     },

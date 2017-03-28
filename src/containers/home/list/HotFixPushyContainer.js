@@ -1,8 +1,8 @@
 /**
  * @Author: liushaobo2005@163.com
  * @Date: 2017.3.15 下午 4:41
- * @Desc: 公共组件 - pushy
- * @Name: pushy.js
+ * @Desc: 公共组件 - HotFixPushyContainer
+ * @Name: HotFixPushyContainer.js
  * @LifeCycle：https://github.com/kinshasa/react-native-qatest
  */
 
@@ -31,7 +31,7 @@ import _updateConfig from '../../../../update.json';
 const {appKey} = _updateConfig[Platform.OS];
 
 
-export default class pushy extends Component {
+export default class HotFixPushyContainer extends Component {
 
     static propTypes = {
         style: View.propTypes.style,
@@ -46,7 +46,7 @@ export default class pushy extends Component {
     };
 
     constructor(props, context) {
-        console.log("pushy", `constructor()`);
+        console.log("HotFixPushyContainer", `constructor()`);
         super(props, context);
         this.state = {};
     }
@@ -58,7 +58,7 @@ export default class pushy extends Component {
     count = 0;
 
     componentWillMount() {
-        console.log("pushy componentWillMount()", ``);
+        console.log("HotFixPushyContainer componentWillMount()", ``);
         if (isFirstTime) {
             Alert.alert('提示', '这是当前版本第一次启动,是否要模拟启动失败?失败将回滚到上一版本', [
                 {text: '是', onPress: ()=>{throw new Error('模拟启动失败,请重启应用')}},
@@ -101,7 +101,7 @@ export default class pushy extends Component {
     };
 
     componentDidMount() {
-        console.log("pushy componentDidMount()", ``);
+        console.log("HotFixPushyContainer componentDidMount()", ``);
     }
 
     /**
@@ -110,7 +110,7 @@ export default class pushy extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("pushy componentWillReceiveProps()", newProps);
+        console.log("HotFixPushyContainer componentWillReceiveProps()", newProps);
     }
 
     /**
@@ -121,7 +121,7 @@ export default class pushy extends Component {
      */
     shouldComponentUpdate(nextProps, nextState) {
         let isUpdate = (this.props != nextProps) || (this.state != nextState);
-        console.log("pushy shouldComponentUpdate()", ``);
+        console.log("HotFixPushyContainer shouldComponentUpdate()", ``);
         return isUpdate;
     }
 
@@ -131,7 +131,7 @@ export default class pushy extends Component {
      * @param nextState 更新之后的状态
      */
     componentWillUpdate(nextProps, nextState) {
-        console.log("pushy componentWillUpdate()", ``);
+        console.log("HotFixPushyContainer componentWillUpdate()", ``);
     }
 
     /**
@@ -141,7 +141,7 @@ export default class pushy extends Component {
      * @returns {boolean}
      */
     componentDidUpdate(prevProps, prevState) {
-        console.log("pushy componentDidUpdate()", ``);
+        console.log("HotFixPushyContainer componentDidUpdate()", ``);
     }
 
     /**
@@ -149,27 +149,27 @@ export default class pushy extends Component {
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
     componentWillUnmount() {
-        console.log("pushy componentWillUnmount()", ``);
+        console.log("HotFixPushyContainer componentWillUnmount()", ``);
 
     }
 
     render() {
         this.count++;
-        console.log("pushy render() count:", `${this.count}`);
+        console.log("HotFixPushyContainer render() count:", `${this.count}`);
         return (
-            <View style={pushyStyles.container}>
-                <Text style={pushyStyles.welcome}>
-                    欢迎使用热更新服务(使用react-native-pushy更新完成)
-                    欢迎使用热更新服务(使用react-native-pushy更新完成)
-                    欢迎使用热更新服务(使用react-native-pushy更新完成)
+            <View style={HotFixPushyContainerStyles.container}>
+                <Text style={HotFixPushyContainerStyles.welcome}>
+                    欢迎使用热更新服务(使用react-native-HotFixPushyContainer更新完成)
+                    欢迎使用热更新服务(使用react-native-HotFixPushyContainer更新完成)
+                    欢迎使用热更新服务(使用react-native-HotFixPushyContainer更新完成)
                 </Text>
-                <Text style={pushyStyles.instructions}>
+                <Text style={HotFixPushyContainerStyles.instructions}>
                     这是版本一 {'\n'}
                     当前包版本号: {packageVersion}{'\n'}
                     当前版本Hash: {currentVersion||'(空)'}{'\n'}
                 </Text>
                 <TouchableOpacity onPress={this.checkUpdate}>
-                    <Text style={pushyStyles.instructions}>
+                    <Text style={HotFixPushyContainerStyles.instructions}>
                         点击这里检查更新
                     </Text>
                 </TouchableOpacity>
@@ -179,7 +179,7 @@ export default class pushy extends Component {
 
 }
 
-const pushyStyles = StyleSheet.create({
+const HotFixPushyContainerStyles = StyleSheet.create({
     container: {
         flex: 1,
     },
