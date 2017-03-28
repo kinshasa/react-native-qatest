@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import GoodsDetailReact from '../../../components/viewpager/GoodsDetailReact'
 import Settings from '../../set/Setting'
-import TabView from './TabView'
+import TabView from './TabViewContainer'
 
 export default class GoodsDetailPage extends Component {
 

@@ -70,7 +70,9 @@ class HomePage extends Component {
     getDataSource() {
         let list = {};
         Object.keys(scenes).map((item, i) => {
-            list[item] = scenes[item].des || item;
+            if(item.type == 'home'){
+                list[item] = scenes[item].des || item;
+            }
         });
         console.log('HomePage list', list);
         return list;

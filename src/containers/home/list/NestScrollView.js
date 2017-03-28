@@ -14,7 +14,7 @@ import {
     ScrollView,
     Dimensions
 } from 'react-native';
-import VerticalViewPagerSimple from './VerticalViewPagerSimple'
+import VerticalViewPagerSimple from './VerticalViewPagerContainer'
 
 
 const {height, width} = Dimensions.get('window');

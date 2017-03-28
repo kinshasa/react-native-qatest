@@ -14,8 +14,8 @@ import LayoutXYDemo from "./containers/home/list/LayoutXYDemo";
 import PicStore from "./containers/home/list/PicStore";
 import SwipeList from "./containers/home/list/SwipeList";
 import DropDownAlertContainer from "./containers/home/list/DropDownAlertContainer";
-import VerticalViewPagerSimple from "./containers/home/list/VerticalViewPagerSimple";
-import TabView from "./containers/home/list/TabView";
+import VerticalViewPagerContainer from "./containers/home/list/VerticalViewPagerContainer";
+import TabViewContainer from "./containers/home/list/TabViewContainer";
 import DataBindingRedux from "./containers/home/list/DataBindingRedux";
 import NestScrollView from "./containers/home/list/NestScrollView";
 import GoodsDetailPage from "./containers/home/list/GoodsDetailPage";
@@ -25,22 +25,20 @@ import CustomListView from "./containers/test/list/CustomListView";
 
 export default  scenes = Actions.create(
     <Scene key="root">
-        <Scene key="Home">
-            <Scene key="Launcher" component={Launcher} des={"启动器"} hideNavBar={true}/>
-            <Scene key="CartAnimation" component={CartAnimation} des={"购物车动画"} hideNavBar={true}/>
-            <Scene key="AnimationDemo" component={AnimationDemo} des={"动画Demo"} hideNavBar={true}/>
-            <Scene key="LayoutXYDemo" component={LayoutXYDemo} des={"Layout布局"} hideNavBar={true}/>
-            <Scene key="PicStore" component={PicStore} des={"图标库"} hideNavBar={false}/>
-            <Scene key="SwipeList" component={SwipeList} des={"Swipe组件"}/>
-            <Scene key="VerticalViewPagerSimple" component={VerticalViewPagerSimple} des={"VerticalViewPagerSimple"}/>
-            <Scene key="TabView" component={TabView} des={"scrollable-tab-view"}/>
-            <Scene key="DataBindingRedux" component={DataBindingRedux} des={"DataBindingRedux"} hideNavBar={true}/>
-            <Scene key="NestScrollView" component={NestScrollView} des={"NestScrollView"} hideNavBar={true}/>
-            <Scene key="GoodsDetailPage" component={GoodsDetailPage} des={"商品详情页"} hideNavBar={true}/>
-            <Scene key="DropDownAlertContainer" component={DropDownAlertContainer} des={"DropDownAlertContainer"} hideNavBar={true}/>
-        </Scene>
-
-        <Scene key="pushy" component={pushy} des={"react-native-pushy"} hideNavBar={true}/>
-        <Scene key="CustomListView" component={CustomListView} des={"CustomListView"} hideNavBar={true}/>
+        <Scene type="home" key="Launcher" component={Launcher} des={"启动器"} hideNavBar={true}/>
+        <Scene type="home" key="CartAnimation" component={CartAnimation} des={"购物车动画"} hideNavBar={true}/>
+        <Scene type="home" key="AnimationDemo" component={AnimationDemo} des={"动画Demo"} hideNavBar={true}/>
+        <Scene type="home" key="LayoutXYDemo" component={LayoutXYDemo} des={"Layout布局"} hideNavBar={true}/>
+        <Scene type="home" key="PicStore" component={PicStore} des={"图标库"} hideNavBar={false}/>
+        <Scene type="home" key="SwipeList" component={SwipeList} des={"Swipe组件"}/>
+        <Scene type="home" key="VerticalViewPagerContainer" component={VerticalViewPagerContainer} des={"VerticalViewPagerContainer"}/>
+        <Scene type="home" key="TabViewContainer" component={TabViewContainer} des={"scrollable-tab-view"}/>
+        <Scene type="home" key="DataBindingRedux" component={DataBindingRedux} des={"DataBindingRedux"} hideNavBar={true}/>
+        <Scene type="home" key="NestScrollView" component={NestScrollView} des={"NestScrollView"} hideNavBar={true}/>
+        <Scene type="home" key="GoodsDetailPage" component={GoodsDetailPage} des={"商品详情页"} hideNavBar={true}/>
+        <Scene type="home" key="DropDownAlertContainer" component={DropDownAlertContainer} des={"DropDownAlertContainer"}
+               hideNavBar={true}/>
+        <Scene type="home" key="pushy" component={pushy} des={"react-native-pushy"} hideNavBar={true}/>
+        <Scene type="test" key="CustomListView" component={CustomListView} des={"CustomListView"} hideNavBar={true}/>
     </Scene>
 );

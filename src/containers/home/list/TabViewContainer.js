@@ -1,8 +1,8 @@
 /**
  * @Author: liushaobo2005@163.com
  * @Date: 2017.3.2 上午 11:17
- * @Desc: 公共组件 - TabView
- * @Name: TabView.js
+ * @Desc: 公共组件 - TabViewContainer
+ * @Name: TabViewContainer.js
  * @LifeCycle：http://www.tuicool.com/articles/nu6zInB
  */
 
@@ -24,7 +24,7 @@ import QATest from '../../test/QATest'
 
 const {height, width} = Dimensions.get('window');
 
-export default class TabView extends Component {
+export default class TabViewContainer extends Component {
 
     /**
      * 父组件传入的属性值
@@ -52,7 +52,7 @@ export default class TabView extends Component {
      * @param context
      */
     constructor(props, context) {
-        console.log("TabView", "constructor()");
+        console.log("TabViewContainer", "constructor()");
         super(props, context);
         this.state = {refresh:false};
     }
@@ -68,7 +68,7 @@ export default class TabView extends Component {
      * 生命周期中仅被调用1次，可以使用SetState
      */
     componentWillMount() {
-        console.log("TabView", "componentWillMount()");
+        console.log("TabViewContainer", "componentWillMount()");
     }
 
     /**
@@ -77,7 +77,7 @@ export default class TabView extends Component {
      * 用于网络请求和页面渲染
      */
     componentDidMount() {
-        console.log("TabView", "componentDidMount() this.props.children",this.refs['scrollView'].props.children.length);
+        console.log("TabViewContainer", "componentDidMount() this.props.children",this.refs['scrollView'].props.children.length);
     }
 
     /**
@@ -86,7 +86,7 @@ export default class TabView extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("TabView", "componentWillReceiveProps():" + newProps);
+        console.log("TabViewContainer", "componentWillReceiveProps():" + newProps);
     }
 
     /**
@@ -97,7 +97,7 @@ export default class TabView extends Component {
      */
     shouldComponentUpdate(nextProps, nextState) {
         let isUpdate = (this.props != nextProps) || (this.state != nextState);
-        console.log("TabView", "shouldComponentUpdate():" + isUpdate);
+        console.log("TabViewContainer", "shouldComponentUpdate():" + isUpdate);
         return isUpdate;
     }
 
@@ -107,7 +107,7 @@ export default class TabView extends Component {
      * @param nextState 更新之后的状态
      */
     componentWillUpdate(nextProps, nextState) {
-        console.log("TabView", "componentWillUpdate()");
+        console.log("TabViewContainer", "componentWillUpdate()");
     }
 
     /**
@@ -117,7 +117,7 @@ export default class TabView extends Component {
      * @returns {boolean}
      */
     componentDidUpdate(prevProps, prevState) {
-        console.log("TabView", "componentDidUpdate()");
+        console.log("TabViewContainer", "componentDidUpdate()");
     }
 
     /**
@@ -125,7 +125,7 @@ export default class TabView extends Component {
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
     componentWillUnmount() {
-        console.log("TabView componentWillUnmount()");
+        console.log("TabViewContainer componentWillUnmount()");
 
     }
 
@@ -135,13 +135,13 @@ export default class TabView extends Component {
      */
     render() {
         this.renderCount++;
-        console.log("TabView render() renderCount:",this.renderCount);
+        console.log("TabViewContainer render() renderCount:",this.renderCount);
         return (
             <ScrollableTabView
                 {...this.props}
                 renderTabBar={() => <ScrollableTabBar /> }
                 ref='scrollView'
-                contentContainerStyle={TabViewStyles.container}>
+                contentContainerStyle={TabViewContainerStyles.container}>
                 <HomePage tabLabel="HomePage"/>
                 <Settings tabLabel="Settings"/>
                 <QATest tabLabel="QATest"/>
@@ -151,7 +151,7 @@ export default class TabView extends Component {
 
 }
 
-const TabViewStyles = StyleSheet.create({
+const TabViewContainerStyles = StyleSheet.create({
     container: {
         width,
         minHeight:height+400,
