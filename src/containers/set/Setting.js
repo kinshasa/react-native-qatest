@@ -7,7 +7,7 @@
  */
 
 import React, {Component, PropTypes} from "react";
-import {Dimensions, StyleSheet, Text, View,ScrollView} from "react-native";
+import {Dimensions, StyleSheet, Text, View} from "react-native";
 
 import TitleBar from "../../components/bar/TitleBar";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -30,13 +30,13 @@ export default class Setting extends Component {
         super(props, context);
         this.state = {};
     }
-
+    
     /**
      * 当前组件渲染次数
      * @type {number}
      */
     renderCount = 0;
-
+    
     componentWillMount() {
         console.log("Setting componentWillMount()");
     }
@@ -72,7 +72,7 @@ export default class Setting extends Component {
         this.renderCount++;
         console.log("Setting render() renderCount:" , this.renderCount);
         return (
-            <ScrollView contentContainerStyle={SettingStyles.body}>
+            <View {...this.props} style={[SettingStyles.container,this.props.style]}>
                 <TitleBar
                     label="其他设置"
                     labelStyle={{backgroundColor:"transparent",color:"black"}}
@@ -81,21 +81,15 @@ export default class Setting extends Component {
                     rightView={<Icon.Button name="undo" size={25} color="#999" backgroundColor="transparent"
                                             onPress={()=>{alert("click share icon")}}/>}
                     style={{height: 45}}/>
-                <View style={SettingStyles.container}>
-                    <Text>设置相关</Text>
-                </View>
-            </ScrollView>
+                <Text>设置相关</Text>
+            </View>
         );
     }
 }
 
 const SettingStyles = StyleSheet.create({
     container: {
-        flex:1
-    },
-    body: {
-        width,
-        height:height*2,
+        width,minHeight:height+height,
         backgroundColor:"#aaa"
     },
 });

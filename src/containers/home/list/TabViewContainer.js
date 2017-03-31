@@ -6,15 +6,21 @@
  * @LifeCycle：http://www.tuicool.com/articles/nu6zInB
  */
 
-import React, {Component, PropTypes} from "react";
-import {Dimensions, StyleSheet, View} from "react-native";
+import React, {Component, PropTypes} from 'react';
+import {
+    StyleSheet,
+    View,
+    Text,
+    Dimensions
+} from 'react-native';
 
-import ScrollableTabView from "react-native-scrollable-tab-view";
+import ScrollableTabView from'react-native-scrollable-tab-view';
+import ScrollableTabBar from 'react-native-scrollable-tab-view/ScrollableTabBar';
 
 
-import HomePage from "../HomePage";
-import Settings from "../../set/Setting";
-import QATest from "../../test/QATest";
+import HomePage from '../HomePage'
+import Settings from '../../set/Setting'
+import QATest from '../../test/QATest'
 
 const {height, width} = Dimensions.get('window');
 
@@ -71,7 +77,7 @@ export default class TabViewContainer extends Component {
      * 用于网络请求和页面渲染
      */
     componentDidMount() {
-        console.log("TabViewContainer", "componentDidMount() this.props.children",this.scrollView.props.children.length);
+        console.log("TabViewContainer", "componentDidMount() this.props.children",this.refs['scrollView'].props.children.length);
     }
 
     /**
@@ -133,11 +139,12 @@ export default class TabViewContainer extends Component {
         return (
             <ScrollableTabView
                 {...this.props}
-                ref={(ref)=>{this.scrollView = ref}}
+                renderTabBar={() => <ScrollableTabBar /> }
+                ref='scrollView'
                 contentContainerStyle={TabViewContainerStyles.container}>
                 <HomePage tabLabel="HomePage"/>
-                <QATest tabLabel="QATest"/>
                 <Settings tabLabel="Settings"/>
+                <QATest tabLabel="QATest"/>
             </ScrollableTabView>
         );
     }

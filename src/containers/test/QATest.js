@@ -14,7 +14,6 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import * as actions from "../../../common/actions";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import * as LauncherController from "../LauncherController";
 
 const {height, width} = Dimensions.get('window');
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -73,7 +72,7 @@ class QATest extends Component {
      */
     componentDidMount() {
         console.log("QATest componentDidMount()");
-        //this.props.actions.getQATestScenesList();
+        this.props.actions.getQATestScenesList();
     }
 
     /**
@@ -144,7 +143,7 @@ class QATest extends Component {
                 </Icon.Button>
             </View>
         )
-    }
+    };
 
     /**
      * 组件更新
@@ -167,7 +166,7 @@ class QATest extends Component {
 
                 <ListView
                     enableEmptySections={true}
-                    dataSource={ds.cloneWithRows(/*this.props.state.data.test*/LauncherController.getDataSource('test'))}
+                    dataSource={ds.cloneWithRows(this.props.state.data.test)}
                     renderRow={this.renderRow}
                 />
             </View>
@@ -189,30 +188,30 @@ const QATestStyles = StyleSheet.create({
     }
 });
 
-// /**
-//  * 把this.state关联到this.props.state
-//  * @param state
-//  * @returns {{state: *}}
-//  */
-// function mapStateToProps(state) {
-//     return {
-//         state: state.router
-//     }
-// }
-//
-// /**
-//  * 把actions.user_info, dispatch通过type关联到一起
-//  * @param dispatch
-//  * @returns {{actions: (A|B|M|N)}}
-//  */
-// function mapDispatchToProps(dispatch) {
-//     console.log("HomePage actions:, actions");
-//     return {
-//         actions: bindActionCreators(actions, dispatch),
-//     }
-// }
+/**
+ * 把this.state关联到this.props.state
+ * @param state
+ * @returns {{state: *}}
+ */
+function mapStateToProps(state) {
+    return {
+        state: state.router
+    }
+}
+
+/**
+ * 把actions.user_info, dispatch通过type关联到一起
+ * @param dispatch
+ * @returns {{actions: (A|B|M|N)}}
+ */
+function mapDispatchToProps(dispatch) {
+    console.log("HomePage actions:, actions");
+    return {
+        actions: bindActionCreators(actions, dispatch),
+    }
+}
 
 /**
  * 把mapStateToProps, mapDispatchToProps绑定到MainRouter组件上
  */
-export default /*connect(mapStateToProps, mapDispatchToProps)*/(QATest);
+export default connect(mapStateToProps, mapDispatchToProps)(QATest);

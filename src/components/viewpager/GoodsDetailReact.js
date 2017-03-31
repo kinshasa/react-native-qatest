@@ -44,9 +44,7 @@ export default class GoodsDetailReact extends Component {
         //如果tabBar没有显示显示，则显示
         if(this.tabBar && !this.tabBarDisplay){
             this.tabBarDisplay =true;
-            // release 会报错 undefined is not an object (evaluating 'this.tabBar.props.style')
-            //console.log("GoodsDetailReact onScrollDownComplete this.tabBar.props:",this.tabBar.props);
-            //console.log("GoodsDetailReact onScrollDownComplete this.tabBar.setNativeProps:",this.tabBar.setNativeProps);
+            console.log("GoodsDetailReact onScrollDownComplete",this.tabBar.props.style);
             this.tabBar.setNativeProps({style:{opacity:1/*,maxHeight:200*/}})
         }
 
@@ -59,7 +57,7 @@ export default class GoodsDetailReact extends Component {
         //如果tabBar有显示显示，则隐藏
         if(this.tabBar && this.tabBarDisplay){
             this.tabBarDisplay =false;
-            //console.log("GoodsDetailReact onScrollTopComplete",this.tabBar.props.style);
+            console.log("GoodsDetailReact onScrollTopComplete",this.tabBar.props.style);
             this.tabBar.setNativeProps({style:{opacity:0/*,maxHeight:0*/}})
         }
     }
@@ -125,7 +123,7 @@ export default class GoodsDetailReact extends Component {
         return (
             <View style={GoodsDetailReactStyles.container}>
                 <VerticalViewPager
-                    ref={(ref)=>{this.verticalView = ref}}
+                    ref="verticalView"
                     onScroll={(offset)=>{this.onScroll(offset)}}
                     onScrollDownComplete={()=>{this.onScrollDownComplete()}}
                     onScrollTopComplete={()=>{this.onScrollTopComplete()}}

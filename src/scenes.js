@@ -33,15 +33,15 @@ export default  scenes = Actions.create(
         <Scene role="home" key="IconCollect" component={IconCollectContainer} des={"图标库"} hideNavBar={false}/>
         <Scene role="home" key="SwipeList" component={SwipeListContainer} des={"Swipe组件"}/>
         <Scene role="home" key="VerticalViewPager" component={VerticalViewPagerContainer} des={"垂直ViewPager"}/>
-        <Scene role="home" key="scrollable-tab-view" component={TabViewContainer} des={"scrollable-tab-view"}/>
+        <Scene role="home" key="TabView" component={TabViewContainer} des={"scrollable-tab-view"}/>
         <Scene role="home" key="NestScrollView" component={NestScrollViewContainer} des={"内嵌ViewPager"}/>
         <Scene role="home" key="GoodsDetailPage" component={GoodsDetailPageContainer} des={"商品详情页"}/>
         <Scene role="home" key="DropDownAlert" component={DropDownAlertContainer}
                des={"DropDownAlertContainer"}/>
         <Scene role="home" key="HotFixPushy" component={HotFixPushyContainer} des={"react-native-pushy"}/>
 
-        <Scene role="test" key="CustomListView" component={CustomListViewContainer} des={"大数据量的ListView"}/>
-        <Scene role="test" key="Inheritance" component={InheritanceBaseContainer} des={"继承BaseContainer"}/>
-        <Scene role="test" key="WebView" component={CustomWebViewContainer} des={"webView"}/>
+        <Scene role="QATest" key="CustomListView" component={CustomListViewContainer} des={"大数据量的ListView"}/>
+        <Scene role="QATest" key="Inheritance" component={InheritanceBaseContainer} des={"继承BaseContainer"}/>
+        <Scene role="QATest" key="WebView" component={CustomWebViewContainer} des={"webView"}/>
     </Scene>
 );
