@@ -44,7 +44,8 @@ export default class GoodsDetailReact extends Component {
         //如果tabBar没有显示显示，则显示
         if(this.tabBar && !this.tabBarDisplay){
             this.tabBarDisplay =true;
-            console.log("GoodsDetailReact onScrollDownComplete",this.tabBar.props.style);
+            // release 会报错 undefined is not an object (evaluating 'this.tabBar.props.style')
+            // console.log("GoodsDetailReact onScrollDownComplete",this.tabBar.props.style);
             this.tabBar.setNativeProps({style:{opacity:1/*,maxHeight:200*/}})
         }
 
@@ -57,7 +58,7 @@ export default class GoodsDetailReact extends Component {
         //如果tabBar有显示显示，则隐藏
         if(this.tabBar && this.tabBarDisplay){
             this.tabBarDisplay =false;
-            console.log("GoodsDetailReact onScrollTopComplete",this.tabBar.props.style);
+            //console.log("GoodsDetailReact onScrollTopComplete",this.tabBar.props.style);
             this.tabBar.setNativeProps({style:{opacity:0/*,maxHeight:0*/}})
         }
     }

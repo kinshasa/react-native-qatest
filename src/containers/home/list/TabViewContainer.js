@@ -6,21 +6,15 @@
  * @LifeCycle：http://www.tuicool.com/articles/nu6zInB
  */
 
-import React, {Component, PropTypes} from 'react';
-import {
-    StyleSheet,
-    View,
-    Text,
-    Dimensions
-} from 'react-native';
+import React, {Component, PropTypes} from "react";
+import {Dimensions, StyleSheet, View} from "react-native";
 
-import ScrollableTabView from'react-native-scrollable-tab-view';
-import ScrollableTabBar from 'react-native-scrollable-tab-view/ScrollableTabBar';
+import ScrollableTabView from "react-native-scrollable-tab-view";
 
 
-import HomePage from '../HomePage'
-import Settings from '../../set/Setting'
-import QATest from '../../test/QATest'
+import HomePage from "../HomePage";
+import Settings from "../../set/Setting";
+import QATest from "../../test/QATest";
 
 const {height, width} = Dimensions.get('window');
 
@@ -139,7 +133,6 @@ export default class TabViewContainer extends Component {
         return (
             <ScrollableTabView
                 {...this.props}
-                renderTabBar={() => <ScrollableTabBar /> }
                 ref='scrollView'
                 contentContainerStyle={TabViewContainerStyles.container}>
                 <HomePage tabLabel="HomePage"/>
