@@ -30,13 +30,13 @@ export default class Setting extends Component {
         super(props, context);
         this.state = {};
     }
-    
+
     /**
      * 当前组件渲染次数
      * @type {number}
      */
     renderCount = 0;
-    
+
     componentWillMount() {
         console.log("Setting componentWillMount()");
     }
@@ -72,7 +72,7 @@ export default class Setting extends Component {
         this.renderCount++;
         console.log("Setting render() renderCount:" , this.renderCount);
         return (
-            <View style={SettingStyles.container}>
+            <ScrollView contentContainerStyle={SettingStyles.body}>
                 <TitleBar
                     label="其他设置"
                     labelStyle={{backgroundColor:"transparent",color:"black"}}
@@ -81,10 +81,10 @@ export default class Setting extends Component {
                     rightView={<Icon.Button name="undo" size={25} color="#999" backgroundColor="transparent"
                                             onPress={()=>{alert("click share icon")}}/>}
                     style={{height: 45}}/>
-                <ScrollView style={SettingStyles.body}>
+                <View style={SettingStyles.container}>
                     <Text>设置相关</Text>
-                </ScrollView>
-            </View>
+                </View>
+            </ScrollView>
         );
     }
 }

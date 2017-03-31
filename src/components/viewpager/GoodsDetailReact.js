@@ -125,7 +125,7 @@ export default class GoodsDetailReact extends Component {
         return (
             <View style={GoodsDetailReactStyles.container}>
                 <VerticalViewPager
-                    ref="verticalView"
+                    ref={(ref)=>{this.verticalView = ref}}
                     onScroll={(offset)=>{this.onScroll(offset)}}
                     onScrollDownComplete={()=>{this.onScrollDownComplete()}}
                     onScrollTopComplete={()=>{this.onScrollTopComplete()}}
