@@ -105,11 +105,14 @@ export default class GoodsDetailPageContainer extends Component {
     renderTabBar() {
         console.log("GoodsDetailPageContainer renderTabBar():");
         try {
-            if (!this.refs['tabView'].refs['scrollView'].refs['scrollableTabView']) {
+            if (!this.tabView.scrollView.scrollableTabView) {
                 return;
             }
             //如果能取到
-            let ref = this.refs['tabView'].refs['scrollView'].refs['scrollableTabView'].props.children;
+            //console.log("GoodsDetailPageContainer renderTabBar() scrollableTabView:", this.tabView.scrollView);
+            //console.log("GoodsDetailPageContainer renderTabBar() props:", this.tabView.scrollView.scrollableTabView.props);
+            let ref = this.tabView.scrollView.getTabViewChildren();
+            console.log("GoodsDetailPageContainer renderTabBar() ref:", ref);
             this.tabBar = ref[0];
             return this.tabBar;
         } catch (e) {
@@ -137,7 +140,7 @@ export default class GoodsDetailPageContainer extends Component {
                     {/*TopView 商品详情页的顶部布局，默认minHeight:屏幕高度，达到第一页不会看到BottomView，不填满会看到背景空白*/}
                     <Settings onLayout={(e)=>{this.verticalLayout =e.nativeEvent.layout}}/>
                     {/*BottomView 可以是scrollableViewPager，也可以自定义组件*/}
-                    <TabView onChangeTab={(pre,ref,from)=>{this.onChangeTab(pre,ref,from)}} ref='tabView'/>
+                    <TabView onChangeTab={(pre,ref,from)=>{this.onChangeTab(pre,ref,from)}} ref={(ref)=>{this.tabView = ref}}/>
                 </GoodsDetailReact>
             </View>
         );

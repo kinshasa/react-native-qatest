@@ -71,7 +71,7 @@ export default class TabViewContainer extends Component {
      * 用于网络请求和页面渲染
      */
     componentDidMount() {
-        console.log("TabViewContainer", "componentDidMount() this.props.children",this.refs['scrollView'].props.children.length);
+        console.log("TabViewContainer", "componentDidMount() this.props.children",this.scrollView.props.children.length);
     }
 
     /**
@@ -133,7 +133,7 @@ export default class TabViewContainer extends Component {
         return (
             <ScrollableTabView
                 {...this.props}
-                ref='scrollView'
+                ref={(ref)=>{this.scrollView = ref}}
                 contentContainerStyle={TabViewContainerStyles.container}>
                 <HomePage tabLabel="HomePage"/>
                 <Settings tabLabel="Settings"/>

@@ -45,7 +45,8 @@ export default class GoodsDetailReact extends Component {
         if(this.tabBar && !this.tabBarDisplay){
             this.tabBarDisplay =true;
             // release 会报错 undefined is not an object (evaluating 'this.tabBar.props.style')
-            // console.log("GoodsDetailReact onScrollDownComplete",this.tabBar.props.style);
+            //console.log("GoodsDetailReact onScrollDownComplete this.tabBar.props:",this.tabBar.props);
+            //console.log("GoodsDetailReact onScrollDownComplete this.tabBar.setNativeProps:",this.tabBar.setNativeProps);
             this.tabBar.setNativeProps({style:{opacity:1/*,maxHeight:200*/}})
         }
 
@@ -111,7 +112,7 @@ export default class GoodsDetailReact extends Component {
             <View
                 onLayout={(e)=>{this.onTabBarLayout(e.nativeEvent.layout)}}
                 ref={(ref)=>{this.tabBar = ref}}
-                style={{width,backgroundColor:"yellow",position:'absolute',zIndex:2,top:0,left:0/*0.29需要加入top,left*/}}>
+                style={{width,backgroundColor:"yellow",position:'absolute',zIndex:2,top:0,left:0,minHeight:50/*0.29需要加入top,left*/}}>
                 {/*取ScrollableTabView的顶部栏布局引用*/}
                 {this.state.refresh && tabBar}
             </View>
