@@ -112,7 +112,7 @@ export default class GoodsDetailPageContainer extends Component {
             //console.log("GoodsDetailPageContainer renderTabBar() scrollableTabView:", this.tabView.scrollView);
             //console.log("GoodsDetailPageContainer renderTabBar() props:", this.tabView.scrollView.scrollableTabView.props);
             let ref = this.tabView.scrollView.getTabViewChildren();
-            console.log("GoodsDetailPageContainer renderTabBar() ref:", ref);
+            //console.log("GoodsDetailPageContainer renderTabBar() ref:", ref);
             this.tabBar = ref[0];
             return this.tabBar;
         } catch (e) {

@@ -136,8 +136,8 @@ export default class TabViewContainer extends Component {
                 ref={(ref)=>{this.scrollView = ref}}
                 contentContainerStyle={TabViewContainerStyles.container}>
                 <HomePage tabLabel="HomePage"/>
-                <Settings tabLabel="Settings"/>
                 <QATest tabLabel="QATest"/>
+                <Settings tabLabel="Settings"/>
             </ScrollableTabView>
         );
     }

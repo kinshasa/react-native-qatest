@@ -11,13 +11,13 @@ import {Dimensions, Platform} from 'react-native';
 const window = Dimensions.get('window');
 
 global.config={
-    log:false,
+    log:true,
     OS:Platform.OS,
     window
 };
 
 //disable console.log
-if (!__DEV__) {
+if (!__DEV__ && !global.config.log ) {
     global.console = {
         info: () => {},
         log: () => {},
