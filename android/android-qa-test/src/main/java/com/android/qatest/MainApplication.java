@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 
+import com.android.qatest.rct.RCTViewPackage;
 import com.elvishew.xlog.LogLevel;
 import com.elvishew.xlog.XLog;
 import com.facebook.react.ReactApplication;
@@ -35,8 +36,8 @@ public class MainApplication extends Application implements ReactApplication {
                     new MainReactPackage(),
                     new VectorIconsPackage(),
                     //react-native-pushy
-                    new UpdatePackage()
-                    //new RCTViewPackage()
+                    new UpdatePackage(),
+                    new RCTViewPackage()
             );
         }
 

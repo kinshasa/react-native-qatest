@@ -19,6 +19,7 @@ import TabViewContainer from "./containers/home/list/TabViewContainer";
 import NestScrollViewContainer from "./containers/home/list/NestScrollViewContainer";
 import GoodsDetailPageContainer from "./containers/home/list/GoodsDetailPageContainer";
 import HotFixPushyContainer from "./containers/home/list/HotFixPushyContainer";
+import RCTComponentContainer from "./containers/home/list/RCTComponentContainer";
 
 import CustomListViewContainer from "./containers/test/list/CustomListViewContainer";
 import InheritanceBaseContainer from "./containers/test/list/InheritanceBaseContainer";
@@ -39,6 +40,7 @@ export default  scenes = Actions.create(
         <Scene role="home" key="DropDownAlert" component={DropDownAlertContainer}
                des={"DropDownAlertContainer"}/>
         <Scene role="home" key="HotFixPushy" component={HotFixPushyContainer} des={"react-native-pushy"}/>
+        <Scene role="home" key="RCTComponentContainer" component={RCTComponentContainer} des={"RCTComponentContainer"}/>
 
         <Scene role="QATest" key="CustomListView" component={CustomListViewContainer} des={"大数据量的ListView"}/>
         <Scene role="QATest" key="Inheritance" component={InheritanceBaseContainer} des={"继承BaseContainer"}/>
