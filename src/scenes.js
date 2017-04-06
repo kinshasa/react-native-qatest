@@ -20,6 +20,9 @@ import NestScrollViewContainer from "./containers/home/list/NestScrollViewContai
 import GoodsDetailPageContainer from "./containers/home/list/GoodsDetailPageContainer";
 import HotFixPushyContainer from "./containers/home/list/HotFixPushyContainer";
 import RCTComponentContainer from "./containers/home/list/RCTComponentContainer";
+import NavHomeScreenContainer from "./containers/home/list/NavHomeScreenContainer";
+import NavHomePage1Container from "./containers/home/list/NavHomePage1Container";
+import FlatListContainer from "./containers/home/list/FlatListContainer";
 
 import CustomListViewContainer from "./containers/test/list/CustomListViewContainer";
 import InheritanceBaseContainer from "./containers/test/list/InheritanceBaseContainer";
@@ -41,6 +44,11 @@ export default  scenes = Actions.create(
                des={"DropDownAlertContainer"}/>
         <Scene role="home" key="HotFixPushy" component={HotFixPushyContainer} des={"react-native-pushy"}/>
         <Scene role="home" key="RCTComponentContainer" component={RCTComponentContainer} des={"RCTComponentContainer"}/>
+        <Scene role="home" key="NavHomeScreenContainer" component={NavHomeScreenContainer}
+               des={"NavHomeScreenContainer"}/>
+        <Scene role="home" key="NavHomePage1Container" component={NavHomePage1Container}
+               des={"NavHomePage1Container"}/>
+        <Scene role="home" key="FlatListContainer" component={FlatListContainer} des={"FlatListContainer"}/>
 
         <Scene role="QATest" key="CustomListView" component={CustomListViewContainer} des={"大数据量的ListView"}/>
         <Scene role="QATest" key="Inheritance" component={InheritanceBaseContainer} des={"继承BaseContainer"}/>

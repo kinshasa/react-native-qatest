@@ -25,7 +25,7 @@ export default class RCTComponentContainer extends Component {
                 <MyImageView
                     style={{width:100,height:100,backgroundColor:'red'}}
                     borderRadius={5}
-                    //src={{uri:"https://img11.360buyimg.com/cms/jfs/t4825/99/109607936/269767/e955116e/58db13f4N1eb29714.jpg"}}
+                    src={uri}
                 />
             </View>
         );
