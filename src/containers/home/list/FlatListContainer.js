@@ -7,7 +7,7 @@
  */
 
 import React, {Component, PropTypes} from "react";
-import {StyleSheet, Text, View,Image} from "react-native";
+import {StyleSheet, Text, View,Image,InteractionManager} from "react-native";
 import FlatList from "../../../components/listview/flatList/FlatList";
 import icon from '../../../assets/NavLogo.png'
 
@@ -65,7 +65,6 @@ export default class FlatFlatListContainer extends Component {
         } catch (e) {
 
         }
-
     }
 
     getDataSource = () => {
@@ -73,7 +72,7 @@ export default class FlatFlatListContainer extends Component {
         for (let i = 0; i < 100; i++) {
             data[i] = 'data' + i;
         }
-        console.log('getDataSource', data);
+        //console.log('getDataSource', data);
         return data;
     };
 
@@ -83,7 +82,11 @@ export default class FlatFlatListContainer extends Component {
 
     componentDidMount() {
         console.log("FlatListContainer componentDidMount()", new Date());
-        this.getData()
+        InteractionManager.runAfterInteractions(() => {
+            // ...耗时较长的同步的任务...
+            this.getData()
+        });
+
     }
 
     /**

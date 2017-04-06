@@ -13,7 +13,7 @@ import {
     Text,
     Button
 } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import {TabNavigator} from 'react-navigation';
 import NavHomePage1Container from './NavHomePage1Container';
 import FlatListContainer from './FlatListContainer';
 
@@ -69,7 +69,7 @@ class NavHomeScreenContainer extends Component {
         this.count++;
         console.log("NavHomeScreenContainer render() count:", this.count);
 
-        const { navigate } = this.props.navigation;
+        const {navigate} = this.props.navigation;
         return (
             <View style={NavHomeScreenContainerStyles.container}>
                 <Text>Hello, Navigation!</Text>
@@ -97,16 +97,17 @@ class NavHomeScreenContainer extends Component {
 
 }
 
-export default SimpleApp = StackNavigator({
-    Home: { screen: NavHomeScreenContainer },
-    HomePage1: { screen: NavHomePage1Container },
-    FlatList: { screen: FlatListContainer },
-
-});
+export default SimpleApp = TabNavigator(
+    {
+        Home: {screen: NavHomeScreenContainer},
+        HomePage1: {screen: FlatListContainer},
+        FlatList: {screen: FlatListContainer},
+    },
+    {tabBarPosition: 'bottom'});
 
 const NavHomeScreenContainerStyles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    btn:{marginTop:10}
+    btn: {marginTop: 10}
 });
