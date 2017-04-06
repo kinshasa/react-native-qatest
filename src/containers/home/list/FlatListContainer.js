@@ -69,6 +69,7 @@ export default class FlatListContainer extends Component {
             let json = await response.json();
             let data = [...json.data.list/*, ...json.data.list, ...json.data.list, ...json.data.list*/];
             console.log('FlatListContainer getData()', json.data.list.length);
+            //异步请求刷新需要判断当前组件是否已经Unmount了。
             !this.unMount && this.setState({data});
         } catch (e) {
 
