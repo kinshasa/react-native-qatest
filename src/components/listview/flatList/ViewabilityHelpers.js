@@ -141,8 +141,8 @@ class ViewabilityHelpers {
         viewportHeight: number,
         getFrameMetrics: (index: number) => ?{length: number, offset: number},
         createViewToken: (index: number, isViewable: boolean) => ViewToken,
-        onViewableItemsChanged: ({viewableItems: Array<ViewToken>, changed: Array<ViewToken>}) => void;,
-    renderRange;?: {first: number;, last: number}, // Optional optimization to reduce the scan size
+        onViewableItemsChanged: ({viewableItems: Array<ViewToken>, changed: Array<ViewToken>}) => void,
+    renderRange?: {first: number, last: number}, // Optional optimization to reduce the scan size
 ): void {
     const updateTime = Date.now();
 if (this._lastUpdateTime === 0 && itemCount > 0 && getFrameMetrics(0)) {
@@ -188,11 +188,11 @@ if (this._config.minimumViewTime && updateElapsed < this._config.minimumViewTime
 /**
  * Records that an interaction has happened even if there has been no scroll.
  */
-recordInteraction(); {
+recordInteraction() {
     this._hasInteracted = true;
 }
 
-_onUpdateSync(viewableIndicesToCheck, onViewableItemsChanged, createViewToken); {
+_onUpdateSync(viewableIndicesToCheck, onViewableItemsChanged, createViewToken) {
     // Filter out indices that have gone out of view since this call was scheduled.
     viewableIndicesToCheck = viewableIndicesToCheck.filter(
         (ii) => this._viewableIndices.includes(ii)
