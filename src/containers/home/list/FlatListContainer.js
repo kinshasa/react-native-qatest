@@ -8,7 +8,7 @@
 
 import React, {Component, PropTypes} from "react";
 import {StyleSheet, Text, View,Image} from "react-native";
-import FlatList from "./flatList/FlatList";
+import FlatList from "../../../components/listview/flatList/FlatList";
 import icon from '../../../assets/NavLogo.png'
 
 export default class FlatFlatListContainer extends Component {
