@@ -9,6 +9,7 @@
  * @providesModule ViewabilityHelpers
  * @flow
  */
+'use strict';
 
 const invariant = require('fbjs/lib/invariant');
 
