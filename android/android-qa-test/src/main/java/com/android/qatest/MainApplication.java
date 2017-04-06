@@ -13,6 +13,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.oblador.vectoricons.VectorIconsPackage;
+import com.react.rnspinkit.RNSpinkitPackage;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 
@@ -37,7 +38,8 @@ public class MainApplication extends Application implements ReactApplication {
                     new VectorIconsPackage(),
                     //react-native-pushy
                     new UpdatePackage(),
-                    new RCTViewPackage()
+                    new RCTViewPackage(),
+                    new RNSpinkitPackage()
             );
         }
 

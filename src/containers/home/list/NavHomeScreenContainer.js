@@ -103,7 +103,10 @@ export default SimpleApp = TabNavigator(
         HomePage1: {screen: FlatListContainer},
         FlatList: {screen: FlatListContainer},
     },
-    {tabBarPosition: 'bottom'});
+    {
+        tabBarPosition: 'bottom',
+        lazyLoad: true,
+    });
 
 const NavHomeScreenContainerStyles = StyleSheet.create({
     container: {
