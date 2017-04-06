@@ -42,6 +42,11 @@ export default class LoadingView extends Component {
     count = 0;
 
     setVisible = (visible) => {
+        /*if(!this.state.timeout){
+            this.timer = setTimeout(() => {
+                this.state.visible && this.setState({timeout: true})
+            }, 15000)
+        }*/
         if (this.state.visible != visible) {
             this.setState({visible,timeout:false});
         }
