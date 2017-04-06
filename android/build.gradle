@@ -16,6 +16,8 @@ allprojects {
     buildDir = "$rootDir/build/$project.name"
     //buildDir = "$rootDir/build/"
     repositories {
+        // Add jitpack repository (added by react-native-spinkit)
+        maven { url "https://jitpack.io" }
         mavenLocal()
         jcenter()
         maven {

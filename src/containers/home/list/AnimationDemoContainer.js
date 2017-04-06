@@ -1,8 +1,8 @@
 /**
  * @Author: liushaobo2005@163.com
  * @Date: 2017.2.10 下午 3:21
- * @Desc: 公共组件 - AnimationDemo
- * @Name: AnimationDemo.js
+ * @Desc: 公共组件 - AnimationDemoContainer
+ * @Name: AnimationDemoContainer.js
  * @LifeCycle：http://www.tuicool.com/articles/nu6zInB
  */
 
@@ -27,7 +27,7 @@ const {height, width} = Dimensions.get('window');
 
 UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
 
-export default class AnimationDemo extends Component {
+export default class AnimationDemoContainer extends Component {
 
     /**
      * 父组件传入的属性值
@@ -55,7 +55,7 @@ export default class AnimationDemo extends Component {
      * @param context
      */
     constructor(props, context) {
-        console.log("AnimationDemo", "constructor()");
+        console.log("AnimationDemoContainer", "constructor()");
         super(props, context);
         this.state = {
             fadeAnim: new Animated.Value(0), // init opacity 0
@@ -86,7 +86,7 @@ export default class AnimationDemo extends Component {
      * 生命周期中仅被调用1次，可以使用SetState
      */
     componentWillMount() {
-        console.log("AnimationDemo", "componentWillMount()");
+        console.log("AnimationDemoContainer", "componentWillMount()");
         LayoutAnimation.spring();
     }
 
@@ -96,7 +96,7 @@ export default class AnimationDemo extends Component {
      * 用于网络请求和页面渲染
      */
     componentDidMount() {
-        console.log("AnimationDemo", "componentDidMount()");
+        console.log("AnimationDemoContainer", "componentDidMount()");
     }
 
     /**
@@ -105,7 +105,7 @@ export default class AnimationDemo extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("AnimationDemo", "componentWillReceiveProps():" + newProps);
+        console.log("AnimationDemoContainer", "componentWillReceiveProps():" + newProps);
     }
 
     /**
@@ -116,7 +116,7 @@ export default class AnimationDemo extends Component {
      */
     shouldComponentUpdate(nextProps, nextState) {
         let isUpdate = (this.props != nextProps) || (this.state != nextState);
-        console.log("AnimationDemo", "shouldComponentUpdate():" + isUpdate);
+        console.log("AnimationDemoContainer", "shouldComponentUpdate():" + isUpdate);
         return isUpdate;
     }
 
@@ -126,7 +126,7 @@ export default class AnimationDemo extends Component {
      * @param nextState 更新之后的状态
      */
     componentWillUpdate(nextProps, nextState) {
-        console.log("AnimationDemo", "componentWillUpdate()");
+        console.log("AnimationDemoContainer", "componentWillUpdate()");
     }
 
     /**
@@ -136,7 +136,7 @@ export default class AnimationDemo extends Component {
      * @returns {boolean}
      */
     componentDidUpdate(prevProps, prevState) {
-        console.log("AnimationDemo", "componentDidUpdate()");
+        console.log("AnimationDemoContainer", "componentDidUpdate()");
     }
 
     /**
@@ -144,7 +144,7 @@ export default class AnimationDemo extends Component {
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
     componentWillUnmount() {
-        console.log("AnimationDemo", "componentWillUnmount()");
+        console.log("AnimationDemoContainer", "componentWillUnmount()");
 
     }
 
@@ -184,19 +184,19 @@ export default class AnimationDemo extends Component {
      */
     render() {
         this.renderCount++;
-        console.log("AnimationDemo", "render() renderCount:" + this.renderCount);
+        console.log("AnimationDemoContainer", "render() renderCount:" + this.renderCount);
         return (
-            <ScrollView  style={AnimationDemoStyles.container}>
+            <ScrollView  style={AnimationDemoContainerStyles.container}>
                 <Animatable.View animation="zoomIn">
-                    <Text style={AnimationDemoStyles.textBtn}>{'zoomIn动画'}</Text>
-                    <View style={[AnimationDemoStyles.views]}>
-                        <Text style={AnimationDemoStyles.textBtn} onPress={() => {this.refZoom && this.refZoom.zoomOutRight();}}>
+                    <Text style={AnimationDemoContainerStyles.textBtn}>{'zoomIn动画'}</Text>
+                    <View style={[AnimationDemoContainerStyles.views]}>
+                        <Text style={AnimationDemoContainerStyles.textBtn} onPress={() => {this.refZoom && this.refZoom.zoomOutRight();}}>
                             {'zoomOutLeft动画'}
                         </Text>
-                        <Animatable.View animation="zoomOutLeft" delay={3000} ref={(ref)=>{this.refZoom = ref}} style={AnimationDemoStyles.zoomOut}/>
+                        <Animatable.View animation="zoomOutLeft" delay={3000} ref={(ref)=>{this.refZoom = ref}} style={AnimationDemoContainerStyles.zoomOut}/>
                     </View>
-                    <Animatable.View style={AnimationDemoStyles.views}>
-                        <Text style={AnimationDemoStyles.textBtn} onPress={() => {this.setAnim() }}>
+                    <Animatable.View style={AnimationDemoContainerStyles.views}>
+                        <Text style={AnimationDemoContainerStyles.textBtn} onPress={() => {this.setAnim() }}>
                             {'冒泡动画'}
                         </Text>
                         <Badge
@@ -210,8 +210,8 @@ export default class AnimationDemo extends Component {
 
                     {/*举个例子，你可能希望你的Animated.Value从0变化到1时，把组件的位置从150px移动到0px，不透明度从0到1。
                      可以通过以下的方法修改style属性来实现：*/}
-                    <View style={[AnimationDemoStyles.views,{height: 100}]}>
-                        <Text style={AnimationDemoStyles.textBtn} onPress={()=>{this.animFade.start()}}>
+                    <View style={[AnimationDemoContainerStyles.views,{height: 100}]}>
+                        <Text style={AnimationDemoContainerStyles.textBtn} onPress={()=>{this.animFade.start()}}>
                             位移动画
                         </Text>
                         <Animated.View
@@ -234,15 +234,15 @@ export default class AnimationDemo extends Component {
                             <Text style={{backgroundColor: "white"}}>自定义动画</Text>
                         </Animated.View>
                     </View>
-                    <View style={AnimationDemoStyles.views}>
+                    <View style={AnimationDemoContainerStyles.views}>
 
                         <View style={[{width: this.state.w, height: this.state.h,backgroundColor:"red"}]} />
-                        <Text style={[AnimationDemoStyles.textBtn,{backgroundColor:"white",width:200,marginTop:10}]} onPress={()=>{this.onPress()}}>
+                        <Text style={[AnimationDemoContainerStyles.textBtn,{backgroundColor:"white",width:200,marginTop:10}]} onPress={()=>{this.onPress()}}>
                             LayoutAnimation
                         </Text>
                     </View>
-                    <View style={[AnimationDemoStyles.views,{height: 150}]}>
-                        <Text style={AnimationDemoStyles.textBtn} onPress={()=>{this.onPress1()}}>
+                    <View style={[AnimationDemoContainerStyles.views,{height: 150}]}>
+                        <Text style={AnimationDemoContainerStyles.textBtn} onPress={()=>{this.onPress1()}}>
                             插值并行动画
                         </Text>
                         <Animated.View style={[ {
@@ -262,8 +262,8 @@ export default class AnimationDemo extends Component {
                             }}>Parallel并行渲染，interpolate插值实现数值转换</Animated.Text>
                         </Animated.View>
                     </View>
-                    <View style={[AnimationDemoStyles.views,{height: 150}]}>
-                        <Text style={AnimationDemoStyles.textBtn} onPress={()=>{this.onPress3()}}>
+                    <View style={[AnimationDemoContainerStyles.views,{height: 150}]}>
+                        <Text style={AnimationDemoContainerStyles.textBtn} onPress={()=>{this.onPress3()}}>
                             弹跳
                         </Text>
                         <Animated.Image                         // 可选的基本组件类型: Image, Text, View
@@ -291,7 +291,7 @@ export default class AnimationDemo extends Component {
 
 }
 
-const AnimationDemoStyles = StyleSheet.create({
+const AnimationDemoContainerStyles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#333",

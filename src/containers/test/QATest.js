@@ -128,7 +128,7 @@ class QATest extends Component {
     onPress = ()=> {
     };
 
-    renderRow(rowData, sectionId, rowId) {
+    renderRow = (rowData, sectionId, rowId)=>{
 
         return (
             <View style={QATestStyles.btnList}>
@@ -143,7 +143,7 @@ class QATest extends Component {
                 </Icon.Button>
             </View>
         )
-    }
+    };
 
     /**
      * 组件更新

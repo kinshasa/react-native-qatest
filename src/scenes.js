@@ -7,48 +7,51 @@
  */
 import React from "react";
 import {Actions, Scene} from "react-native-router-flux";
-/**
- * 启动页
- */
 import Launcher from "./containers/Launcher";
+import CartAnimationContainer from "./containers/home/list/CartAnimationContainer";
+import AnimationDemoContainer from "./containers/home/list/AnimationDemoContainer";
+import LayoutXYDemoContainer from "./containers/home/list/LayoutXYDemoContainer";
+import IconCollectContainer from "./containers/home/list/IconCollectContainer";
+import SwipeListContainer from "./containers/home/list/SwipeListContainer";
+import DropDownAlertContainer from "./containers/home/list/DropDownAlertContainer";
+import VerticalViewPagerContainer from "./containers/home/list/VerticalViewPagerContainer";
+import TabViewContainer from "./containers/home/list/TabViewContainer";
+import NestScrollViewContainer from "./containers/home/list/NestScrollViewContainer";
+import GoodsDetailPageContainer from "./containers/home/list/GoodsDetailPageContainer";
+import HotFixPushyContainer from "./containers/home/list/HotFixPushyContainer";
+import RCTComponentContainer from "./containers/home/list/RCTComponentContainer";
+import NavHomeScreenContainer from "./containers/home/list/NavHomeScreenContainer";
+import NavHomePage1Container from "./containers/home/list/NavHomePage1Container";
+import FlatListContainer from "./containers/home/list/FlatListContainer";
 
-/**
- * HomeList
- */
-import CartAnimation from "./containers/home/list/CartAnimation";
-import AnimationDemo from "./containers/home/list/AnimationDemo";
-import LayoutXYDemo from "./containers/home/list/LayoutXYDemo";
-import PicStore from "./containers/home/list/PicStore";
-import SwipeList from "./containers/home/list/SwipeList";
-import VerticalViewPagerSimple from "./containers/home/list/VerticalViewPagerSimple";
-import TabView from "./containers/home/list/TabView";
-import DataBindingRedux from "./containers/home/list/DataBindingRedux";
-import NestScrollView from "./containers/home/list/NestScrollView";
-import GoodsDetailPage from "./containers/home/list/GoodsDetailPage";
-import pushy from "./containers/home/list/pushy";
-
-/**
- * QATest
- */
-import CustomListView from "./containers/test/list/CustomListView";
+import CustomListViewContainer from "./containers/test/list/CustomListViewContainer";
+import InheritanceBaseContainer from "./containers/test/list/InheritanceBaseContainer";
+import CustomWebViewContainer from "./containers/test/list/CustomWebViewContainer";
 
 export default  scenes = Actions.create(
     <Scene key="root">
-        <Scene key="Home">
-            <Scene key="Launcher" component={Launcher} des={"启动器"} hideNavBar={true}/>
-            <Scene key="CartAnimation" component={CartAnimation} des={"购物车动画"} hideNavBar={true}/>
-            <Scene key="AnimationDemo" component={AnimationDemo} des={"动画Demo"} hideNavBar={true}/>
-            <Scene key="LayoutXYDemo" component={LayoutXYDemo} des={"Layout布局"} hideNavBar={true}/>
-            <Scene key="PicStore" component={PicStore} des={"图标库"} hideNavBar={false}/>
-            <Scene key="SwipeList" component={SwipeList} des={"Swipe组件"}/>
-            <Scene key="VerticalViewPagerSimple" component={VerticalViewPagerSimple} des={"VerticalViewPagerSimple"}/>
-            <Scene key="TabView" component={TabView} des={"scrollable-tab-view"}/>
-            <Scene key="DataBindingRedux" component={DataBindingRedux} des={"DataBindingRedux"} hideNavBar={true}/>
-            <Scene key="NestScrollView" component={NestScrollView} des={"NestScrollView"} hideNavBar={true}/>
-            <Scene key="GoodsDetailPage" component={GoodsDetailPage} des={"商品详情页"} hideNavBar={true}/>
-        </Scene>
+        <Scene role="root" key="Launcher" component={Launcher} des={"启动器"} hideNavBar/>
+        <Scene role="home" key="CartAnimation" component={CartAnimationContainer} des={"购物车动画"} hideNavBar/>
+        <Scene role="home" key="AnimationDemo" component={AnimationDemoContainer} des={"动画Demo"} hideNavBar/>
+        <Scene role="home" key="LayoutXYDemo" component={LayoutXYDemoContainer} des={"Layout布局"} hideNavBar/>
+        <Scene role="home" key="IconCollect" component={IconCollectContainer} des={"图标库"} hideNavBar={false}/>
+        <Scene role="home" key="SwipeList" component={SwipeListContainer} des={"Swipe组件"}/>
+        <Scene role="home" key="VerticalViewPager" component={VerticalViewPagerContainer} des={"垂直ViewPager"}/>
+        <Scene role="home" key="TabView" component={TabViewContainer} des={"scrollable-tab-view"}/>
+        <Scene role="home" key="NestScrollView" component={NestScrollViewContainer} des={"内嵌ViewPager"}/>
+        <Scene role="home" key="GoodsDetailPage" component={GoodsDetailPageContainer} des={"商品详情页"}/>
+        <Scene role="home" key="DropDownAlert" component={DropDownAlertContainer}
+               des={"DropDownAlertContainer"}/>
+        <Scene role="home" key="HotFixPushy" component={HotFixPushyContainer} des={"react-native-pushy"}/>
+        <Scene role="home" key="RCTComponentContainer" component={RCTComponentContainer} des={"RCTComponentContainer"}/>
+        <Scene role="home" key="NavHomeScreenContainer" component={NavHomeScreenContainer}
+               des={"NavHomeScreenContainer"}/>
+        <Scene role="home" key="NavHomePage1Container" component={NavHomePage1Container}
+               des={"NavHomePage1Container"}/>
+        <Scene role="home" key="FlatListContainer" component={FlatListContainer} des={"FlatListContainer"}/>
 
-        <Scene key="pushy" component={pushy} des={"react-native-pushy"} hideNavBar={true}/>
-        <Scene key="CustomListView" component={CustomListView} des={"CustomListView"} hideNavBar={true}/>
+        <Scene role="QATest" key="CustomListView" component={CustomListViewContainer} des={"大数据量的ListView"}/>
+        <Scene role="QATest" key="Inheritance" component={InheritanceBaseContainer} des={"继承BaseContainer"}/>
+        <Scene role="QATest" key="WebView" component={CustomWebViewContainer} des={"webView"}/>
     </Scene>
 );

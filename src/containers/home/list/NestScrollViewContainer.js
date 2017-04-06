@@ -1,9 +1,9 @@
 /**
  * @Author: liushaobo2005@163.com
- * @Date: 2017.2.15 下午 2:05
- * @Desc: 图片库
- * @Name: PicStore.js
- * @LifeCycle：http://www.tuicool.com/articles/nu6zInB
+ * @Date: 2017.3.10 下午 5:47
+ * @Desc: 公共组件 - NestScrollViewContainer
+ * @Name: NestScrollViewContainer.js
+ * @LifeCycle：https://github.com/kinshasa/react-native-qatest
  */
 
 import React, {Component, PropTypes} from 'react';
@@ -11,16 +11,16 @@ import {
     StyleSheet,
     View,
     Text,
+    ScrollView,
+    Dimensions
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import IonIcons from 'react-native-vector-icons/Ionicons';
+import VerticalViewPagerSimple from './VerticalViewPagerContainer'
 
-export default class PicStore extends Component {
 
-    /**
-     * 父组件传入的属性值
-     * @type {{style: *, account: *, name: *, isTrue: *, callback: *}}
-     */
+const {height, width} = Dimensions.get('window');
+
+export default class NestScrollViewContainer extends Component {
+
     static propTypes = {
         style: View.propTypes.style,
         account: PropTypes.number,
@@ -29,46 +29,32 @@ export default class PicStore extends Component {
         callback: PropTypes.func,
     };
 
-    /**
-     * 父组件传入的数据
-     * @type {{data: {}}}
-     */
     static defaultProps = {
         data: {}
     };
 
-    /**
-     * 构造函数
-     * @param props
-     * @param context
-     */
     constructor(props, context) {
-        console.log("PicStore", "constructor()");
+        console.log("NestScrollViewContainer", `constructor()`);
         super(props, context);
-        this.state = {};
+        this.state = {refresh:false};
+        this.refView = {
+            scrollView:{},
+            text:{}
+        }
     }
 
     /**
      * 当前组件渲染次数
      * @type {number}
      */
-    renderCount = 0;
+    count = 0;
 
-    /**
-     * 组件加载前
-     * 生命周期中仅被调用1次，可以使用SetState
-     */
     componentWillMount() {
-        console.log("PicStore", "componentWillMount()");
+        console.log("NestScrollViewContainer componentWillMount()", ``);
     }
 
-    /**
-     * 组件加载后
-     * 生命周期中仅被调用1次，可以使用SetState
-     * 用于网络请求和页面渲染
-     */
     componentDidMount() {
-        console.log("PicStore", "componentDidMount()");
+        //console.log("NestScrollViewContainer componentDidMount() this.refs['view'].props.children[0]", this.refs['view'].props.children[0]);
     }
 
     /**
@@ -77,7 +63,7 @@ export default class PicStore extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("PicStore", "componentWillReceiveProps():" + newProps);
+        console.log("NestScrollViewContainer componentWillReceiveProps()", newProps);
     }
 
     /**
@@ -88,7 +74,7 @@ export default class PicStore extends Component {
      */
     shouldComponentUpdate(nextProps, nextState) {
         let isUpdate = (this.props != nextProps) || (this.state != nextState);
-        console.log("PicStore", "shouldComponentUpdate():" + isUpdate);
+        console.log("NestScrollViewContainer shouldComponentUpdate()", ``);
         return isUpdate;
     }
 
@@ -98,7 +84,7 @@ export default class PicStore extends Component {
      * @param nextState 更新之后的状态
      */
     componentWillUpdate(nextProps, nextState) {
-        console.log("PicStore", "componentWillUpdate()");
+        console.log("NestScrollViewContainer componentWillUpdate()", ``);
     }
 
     /**
@@ -108,7 +94,7 @@ export default class PicStore extends Component {
      * @returns {boolean}
      */
     componentDidUpdate(prevProps, prevState) {
-        console.log("PicStore", "componentDidUpdate()");
+        console.log("NestScrollViewContainer componentDidUpdate()", ``);
     }
 
     /**
@@ -116,32 +102,40 @@ export default class PicStore extends Component {
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
     componentWillUnmount() {
-        console.log("PicStore", "componentWillUnmount()");
+        console.log("NestScrollViewContainer componentWillUnmount()", ``);
 
     }
 
-    /**
-     * 组件更新
-     * @returns {XML}
-     */
     render() {
-        this.renderCount++;
-        console.log("PicStore", "render() renderCount:" + this.renderCount);
+        this.count++;
+        console.log("NestScrollViewContainer render() count:", `${this.count}`);
         return (
-            <View style={PicStoreStyles.container}>
-                <Icon name="home" size={50} color="#900" />
-                <Icon name="home" size={100} color="#999" />
-                <IonIcons name="ios-home" size={30} color="#4F8EF7" />
-                <IonIcons name="ios-home-outline" size={30} color="#4F8EF7" />
+            <View>
+                <Text style={{width,height:100,position:'absolute',zIndex:1}}>adawwd</Text>
+                <ScrollView
+                    style={NestScrollViewContainerStyles.container}>
+                    <View
+                        ref="view"
+                        style={NestScrollViewContainerStyles.nestScrollView}>
+                        <Text ref="text" onPress={()=>{alert('test')}} style={{width,height:100}}>test2222222222</Text>
+                        {this.state.refresh && this.refs['text']}
+                    </View>
+
+                </ScrollView>
             </View>
         );
     }
 
 }
 
-const PicStoreStyles = StyleSheet.create({
+const NestScrollViewContainerStyles = StyleSheet.create({
     container: {
-        flex: 1,
-        paddingTop:100
+        width,height:height*2
+    },
+    nestScrollView: {
+        backgroundColor:"blue",
+        width,
+        minHeight:height*2,
+
     },
 });

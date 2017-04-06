@@ -1,8 +1,8 @@
 /**
  * @Author: liushaobo2005@163.com
- * @Date: 2017.3.7 下午 2:48
- * @Desc: 公共组件 - DataBindingRedux
- * @Name: DataBindingRedux.js
+ * @Date: 2017.3.28 下午 7:34
+ * @Desc: 公共组件 - CustomWebViewContainer
+ * @Name: CustomWebViewContainer.js
  * @LifeCycle：https://github.com/kinshasa/react-native-qatest
  */
 
@@ -11,9 +11,12 @@ import {
     StyleSheet,
     View,
     Text,
+    WebView
 } from 'react-native';
+import TitleBar from '../../../components/bar/TitleBar'
+import * as Progress from 'react-native-progress';
 
-export default class DataBindingRedux extends Component {
+export default class CustomWebViewContainer extends Component {
 
     static propTypes = {
         style: View.propTypes.style,
@@ -28,7 +31,7 @@ export default class DataBindingRedux extends Component {
     };
 
     constructor(props, context) {
-        console.log("DataBindingRedux", `constructor()`);
+        console.log("CustomWebViewContainer constructor()");
         super(props, context);
         this.state = {};
     }
@@ -40,11 +43,11 @@ export default class DataBindingRedux extends Component {
     count = 0;
 
     componentWillMount() {
-        console.log("DataBindingRedux componentWillMount()", ``);
+        console.log("CustomWebViewContainer componentWillMount()", new Date());
     }
 
     componentDidMount() {
-        console.log("DataBindingRedux componentDidMount()", ``);
+        console.log("CustomWebViewContainer componentDidMount()", new Date());
     }
 
     /**
@@ -53,7 +56,7 @@ export default class DataBindingRedux extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("DataBindingRedux componentWillReceiveProps()", newProps);
+        console.log("CustomWebViewContainer componentWillReceiveProps()", newProps);
     }
 
     /**
@@ -64,7 +67,7 @@ export default class DataBindingRedux extends Component {
      */
     shouldComponentUpdate(nextProps, nextState) {
         let isUpdate = (this.props != nextProps) || (this.state != nextState);
-        console.log("DataBindingRedux shouldComponentUpdate()", ``);
+        console.log("CustomWebViewContainer shouldComponentUpdate()", isUpdate);
         return isUpdate;
     }
 
@@ -74,7 +77,7 @@ export default class DataBindingRedux extends Component {
      * @param nextState 更新之后的状态
      */
     componentWillUpdate(nextProps, nextState) {
-        console.log("DataBindingRedux componentWillUpdate()", ``);
+        console.log("CustomWebViewContainer componentWillUpdate()", new Date());
     }
 
     /**
@@ -84,7 +87,7 @@ export default class DataBindingRedux extends Component {
      * @returns {boolean}
      */
     componentDidUpdate(prevProps, prevState) {
-        console.log("DataBindingRedux componentDidUpdate()", ``);
+        console.log("CustomWebViewContainer componentDidUpdate()", new Date());
     }
 
     /**
@@ -92,25 +95,43 @@ export default class DataBindingRedux extends Component {
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
     componentWillUnmount() {
-        console.log("DataBindingRedux componentWillUnmount()", ``);
+        console.log("CustomWebViewContainer componentWillUnmount()");
 
     }
 
     render() {
         this.count++;
-        console.log("DataBindingRedux render() count:", `${this.count}`);
-        console.log("DataBindingRedux render() this.state", this.props.state);
+        console.log("CustomWebViewContainer render() count:", this.count);
         return (
-            <View style={DataBindingReduxStyles.container}>
-
+            <View style={CustomWebViewContainerStyles.container}>
+                <TitleBar label="https://github.com/kinshasa"/>
+                {
+                    !this.state.load &&
+                    <View style={CustomWebViewContainerStyles.container}>
+                        <Progress.Bar
+                            indeterminate
+                            progress={0.2}
+                            borderWidth={1}
+                            width={config.window.width}
+                            style={{position:'absolute'}}
+                        />
+                    </View>
+                }
+                <WebView
+                    onLoad={()=>{this.setState({load:true})}}
+                    source={{uri: 'https://github.com/kinshasa'}}
+                    style={CustomWebViewContainerStyles.webView}/>
             </View>
         );
     }
 
 }
 
-const DataBindingReduxStyles = StyleSheet.create({
+const CustomWebViewContainerStyles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    webView: {
+        flex: 1
     },
 });

@@ -1,8 +1,8 @@
 /**
  * @Author: liushaobo2005@163.com
  * @Date: 2017.3.14 下午 5:32
- * @Desc: 公共组件 - GoodsDetailPage
- * @Name: GoodsDetailPage.js
+ * @Desc: 公共组件 - GoodsDetailPageContainer
+ * @Name: GoodsDetailPageContainer.js
  * @LifeCycle：https://github.com/kinshasa/react-native-qatest
  */
 
@@ -14,9 +14,9 @@ import {
 } from 'react-native';
 import GoodsDetailReact from '../../../components/viewpager/GoodsDetailReact'
 import Settings from '../../set/Setting'
-import TabView from './TabView'
+import TabView from './TabViewContainer'
 
-export default class GoodsDetailPage extends Component {
+export default class GoodsDetailPageContainer extends Component {
 
     static propTypes = {
         style: View.propTypes.style,
@@ -31,7 +31,7 @@ export default class GoodsDetailPage extends Component {
     };
 
     constructor(props, context) {
-        console.log("GoodsDetailPage", `constructor()`);
+        console.log("GoodsDetailPageContainer", `constructor()`);
         super(props, context);
         this.state = {};
     }
@@ -43,11 +43,11 @@ export default class GoodsDetailPage extends Component {
     count = 0;
 
     componentWillMount() {
-        console.log("GoodsDetailPage componentWillMount()", ``);
+        console.log("GoodsDetailPageContainer componentWillMount()", ``);
     }
 
     componentDidMount() {
-        console.log("GoodsDetailPage componentDidMount()", ``);
+        console.log("GoodsDetailPageContainer componentDidMount()", ``);
     }
 
     /**
@@ -56,7 +56,7 @@ export default class GoodsDetailPage extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("GoodsDetailPage componentWillReceiveProps()", newProps);
+        console.log("GoodsDetailPageContainer componentWillReceiveProps()", newProps);
     }
 
     /**
@@ -67,7 +67,7 @@ export default class GoodsDetailPage extends Component {
      */
     shouldComponentUpdate(nextProps, nextState) {
         let isUpdate = (this.props != nextProps) || (this.state != nextState);
-        console.log("GoodsDetailPage shouldComponentUpdate()", ``);
+        console.log("GoodsDetailPageContainer shouldComponentUpdate()", ``);
         return isUpdate;
     }
 
@@ -77,7 +77,7 @@ export default class GoodsDetailPage extends Component {
      * @param nextState 更新之后的状态
      */
     componentWillUpdate(nextProps, nextState) {
-        console.log("GoodsDetailPage componentWillUpdate()", ``);
+        console.log("GoodsDetailPageContainer componentWillUpdate()", ``);
     }
 
     /**
@@ -87,7 +87,7 @@ export default class GoodsDetailPage extends Component {
      * @returns {boolean}
      */
     componentDidUpdate(prevProps, prevState) {
-        console.log("GoodsDetailPage componentDidUpdate()", ``);
+        console.log("GoodsDetailPageContainer componentDidUpdate()", ``);
     }
 
     /**
@@ -95,7 +95,7 @@ export default class GoodsDetailPage extends Component {
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
     componentWillUnmount() {
-        console.log("GoodsDetailPage componentWillUnmount()", ``);
+        console.log("GoodsDetailPageContainer componentWillUnmount()", ``);
 
     }
 
@@ -103,7 +103,7 @@ export default class GoodsDetailPage extends Component {
      * 如果BottomView是scrollableViewPager，取他的TabBar用于置顶
      */
     renderTabBar() {
-        console.log("GoodsDetailPage renderTabBar():");
+        console.log("GoodsDetailPageContainer renderTabBar():");
         try {
             if (!this.refs['tabView'].refs['scrollView'].refs['scrollableTabView']) {
                 return;
@@ -113,12 +113,12 @@ export default class GoodsDetailPage extends Component {
             this.tabBar = ref[0];
             return this.tabBar;
         } catch (e) {
-            console.log("GoodsDetailPage renderTabBar():", e.message);
+            console.log("GoodsDetailPageContainer renderTabBar():", e.message);
         }
     }
 
     onChangeTab(pre,ref,from){
-        //console.log("GoodsDetailPage render() onChangeTab:",this.tabBar);
+        //console.log("GoodsDetailPageContainer render() onChangeTab:",this.tabBar);
         if(this.tabBar && this.tabBar.setTabBarTextProps){
             this.tabBar.setTabBarTextProps(pre.i,{style:{color:"green"}});
         }
@@ -126,9 +126,9 @@ export default class GoodsDetailPage extends Component {
 
     render() {
         this.count++;
-        console.log("GoodsDetailPage render() count:", `${this.count}`);
+        console.log("GoodsDetailPageContainer render() count:", `${this.count}`);
         return (
-            <View style={GoodsDetailPageStyles.container}>
+            <View style={GoodsDetailPageContainerStyles.container}>
                 <GoodsDetailReact
                     //返回BottomView的TabBar
                     renderTabBar={()=>{return this.renderTabBar()}}
@@ -145,7 +145,7 @@ export default class GoodsDetailPage extends Component {
 
 }
 
-const GoodsDetailPageStyles = StyleSheet.create({
+const GoodsDetailPageContainerStyles = StyleSheet.create({
     container: {
         flex: 1,
     },

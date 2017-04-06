@@ -1,8 +1,8 @@
 /**
  * @Author: liushaobo2005@163.com
- * @Date: 2017.3.10 下午 5:47
- * @Desc: 公共组件 - NestScrollView
- * @Name: NestScrollView.js
+ * @Date: 2017.3.28 下午 5:25
+ * @Desc: 公共组件 - BaseContainer
+ * @Name: BaseContainer.js
  * @LifeCycle：https://github.com/kinshasa/react-native-qatest
  */
 
@@ -11,15 +11,10 @@ import {
     StyleSheet,
     View,
     Text,
-    ScrollView,
-    Dimensions
 } from 'react-native';
-import VerticalViewPagerSimple from './VerticalViewPagerSimple'
 
-
-const {height, width} = Dimensions.get('window');
-
-export default class NestScrollView extends Component {
+import * as Progress from 'react-native-progress';
+export default class BaseContainer extends Component {
 
     static propTypes = {
         style: View.propTypes.style,
@@ -34,13 +29,9 @@ export default class NestScrollView extends Component {
     };
 
     constructor(props, context) {
-        console.log("NestScrollView", `constructor()`);
+        console.log("BaseContainer constructor()");
         super(props, context);
-        this.state = {refresh:false};
-        this.refView = {
-            scrollView:{},
-            text:{}
-        }
+        this.state = {lazyLoad: false};
     }
 
     /**
@@ -50,11 +41,11 @@ export default class NestScrollView extends Component {
     count = 0;
 
     componentWillMount() {
-        console.log("NestScrollView componentWillMount()", ``);
+        console.log("BaseContainer componentWillMount()", new Date());
     }
 
     componentDidMount() {
-        //console.log("NestScrollView componentDidMount() this.refs['view'].props.children[0]", this.refs['view'].props.children[0]);
+        console.log("BaseContainer componentDidMount()", new Date());
     }
 
     /**
@@ -63,7 +54,7 @@ export default class NestScrollView extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("NestScrollView componentWillReceiveProps()", newProps);
+        console.log("BaseContainer componentWillReceiveProps()", newProps);
     }
 
     /**
@@ -72,11 +63,11 @@ export default class NestScrollView extends Component {
      * @param nextState 表示组件即将更新的状态值。
      * @returns {boolean} 默认true, 返回值决定是否需要更新组件，如果 true 表示需要更新，继续走后面的更新流程。
      */
-    shouldComponentUpdate(nextProps, nextState) {
+    /*shouldComponentUpdate(nextProps, nextState) {
         let isUpdate = (this.props != nextProps) || (this.state != nextState);
-        console.log("NestScrollView shouldComponentUpdate()", ``);
+        console.log("BaseContainer shouldComponentUpdate()", isUpdate);
         return isUpdate;
-    }
+    }*/
 
     /**
      * 如果组件状态或者属性改变，并且shouldComponentUpdate返回为 true
@@ -84,7 +75,7 @@ export default class NestScrollView extends Component {
      * @param nextState 更新之后的状态
      */
     componentWillUpdate(nextProps, nextState) {
-        console.log("NestScrollView componentWillUpdate()", ``);
+        console.log("BaseContainer componentWillUpdate()", new Date());
     }
 
     /**
@@ -94,7 +85,7 @@ export default class NestScrollView extends Component {
      * @returns {boolean}
      */
     componentDidUpdate(prevProps, prevState) {
-        console.log("NestScrollView componentDidUpdate()", ``);
+        console.log("BaseContainer componentDidUpdate()", new Date());
     }
 
     /**
@@ -102,40 +93,54 @@ export default class NestScrollView extends Component {
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
     componentWillUnmount() {
-        console.log("NestScrollView componentWillUnmount()", ``);
+        console.log("BaseContainer componentWillUnmount()");
 
     }
 
-    render() {
-        this.count++;
-        console.log("NestScrollView render() count:", `${this.count}`);
+    renderLazyView = () => {
         return (
-            <View>
-                <Text style={{width,height:100,position:'absolute',zIndex:1}}>adawwd</Text>
-                <ScrollView
-                    style={NestScrollViewStyles.container}>
-                    <View
-                        ref="view"
-                        style={NestScrollViewStyles.nestScrollView}>
-                        <Text ref="text" onPress={()=>{alert('test')}} style={{width,height:100}}>test2222222222</Text>
-                        {this.state.refresh && this.refs['text']}
-                    </View>
-
-                </ScrollView>
+            <View style={BaseContainerStyles.lazyView}>
+                <Progress.Bar
+                    indeterminate
+                    progress={0.2}
+                    borderWidth={1}
+                    width={config.window.width}
+                    style={{flex: 1}}/>
             </View>
         );
+    };
+
+   /* renderView = () => {
+        return (
+            <View style={BaseContainerStyles.container}>
+                <Text style={BaseContainerStyles.container}>测试数据</Text>
+            </View>
+        );
+    };*/
+
+    render() {
+        this.count++;
+        console.log("BaseContainer render() count:", this.count);
+
+        if (this.state.lazyLoad && this.renderView) {
+            return (
+                <View style={BaseContainerStyles.container}>
+                    {this.renderView()}
+                </View>
+            );
+        }
+        return this.renderLazyView();
     }
 
 }
 
-const NestScrollViewStyles = StyleSheet.create({
+const BaseContainerStyles = StyleSheet.create({
     container: {
-        width,height:height*2
+        flex: 1
     },
-    nestScrollView: {
-        backgroundColor:"blue",
-        width,
-        minHeight:height*2,
-
-    },
+    lazyView: {
+        padding: 3,
+        flexDirection: 'row',
+        backgroundColor: "#eee"
+    }
 });

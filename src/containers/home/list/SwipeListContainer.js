@@ -1,8 +1,8 @@
 /**
  * @Author: liushaobo2005@163.com
  * @Date: 2017.2.21 下午 2:09
- * @Desc: 公共组件 - SwipeList
- * @Name: SwipeList.js
+ * @Desc: 公共组件 - SwipeListContainer
+ * @Name: SwipeListContainer.js
  * @LifeCycle：http://www.tuicool.com/articles/nu6zInB
  */
 
@@ -28,7 +28,7 @@ const img = [
 ];
 const {width} = Dimensions.get('window');
 
-export default class SwipeList extends Component {
+export default class SwipeListContainer extends Component {
 
     /**
      * 父组件传入的属性值
@@ -56,7 +56,7 @@ export default class SwipeList extends Component {
      * @param context
      */
     constructor(props, context) {
-        console.log("SwipeList", "constructor()");
+        console.log("SwipeListContainer", "constructor()");
         super(props, context);
         this.state = {};
     }
@@ -72,7 +72,7 @@ export default class SwipeList extends Component {
      * 生命周期中仅被调用1次，可以使用SetState
      */
     componentWillMount() {
-        console.log("SwipeList", "componentWillMount()");
+        console.log("SwipeListContainer", "componentWillMount()");
     }
 
     /**
@@ -81,7 +81,7 @@ export default class SwipeList extends Component {
      * 用于网络请求和页面渲染
      */
     componentDidMount() {
-        console.log("SwipeList", "componentDidMount()");
+        console.log("SwipeListContainer", "componentDidMount()");
     }
 
     /**
@@ -90,7 +90,7 @@ export default class SwipeList extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("SwipeList", "componentWillReceiveProps():" + newProps);
+        console.log("SwipeListContainer", "componentWillReceiveProps():" + newProps);
     }
 
     /**
@@ -101,7 +101,7 @@ export default class SwipeList extends Component {
      */
     shouldComponentUpdate(nextProps, nextState) {
         let isUpdate = (this.props != nextProps) || (this.state != nextState);
-        console.log("SwipeList", "shouldComponentUpdate():" + isUpdate);
+        console.log("SwipeListContainer", "shouldComponentUpdate():" + isUpdate);
         return isUpdate;
     }
 
@@ -111,7 +111,7 @@ export default class SwipeList extends Component {
      * @param nextState 更新之后的状态
      */
     componentWillUpdate(nextProps, nextState) {
-        console.log("SwipeList", "componentWillUpdate()");
+        console.log("SwipeListContainer", "componentWillUpdate()");
     }
 
     /**
@@ -121,7 +121,7 @@ export default class SwipeList extends Component {
      * @returns {boolean}
      */
     componentDidUpdate(prevProps, prevState) {
-        console.log("SwipeList", "componentDidUpdate()");
+        console.log("SwipeListContainer", "componentDidUpdate()");
     }
 
     /**
@@ -129,7 +129,7 @@ export default class SwipeList extends Component {
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
     componentWillUnmount() {
-        console.log("SwipeList", "componentWillUnmount()");
+        console.log("SwipeListContainer", "componentWillUnmount()");
 
     }
 
@@ -139,19 +139,19 @@ export default class SwipeList extends Component {
      */
     render() {
         this.renderCount++;
-        console.log("SwipeList", "render() renderCount:" + this.renderCount);
+        console.log("SwipeListContainer", "render() renderCount:" + this.renderCount);
         return (
-            <View style={SwipeListStyles.container}>
+            <View style={SwipeListContainerStyles.container}>
                 <TitleBar title="首页" style={{height:45}}/>
-                <Swiper style={SwipeListStyles.wrapper} height={200} bounces autoplayDirection horizontal={false} autoplay>
-                    <View style={SwipeListStyles.slide1}>
-                        <Text style={SwipeListStyles.text}>Hello Swiper</Text>
+                <Swiper style={SwipeListContainerStyles.wrapper} height={200} bounces autoplayDirection horizontal={false} autoplay>
+                    <View style={SwipeListContainerStyles.slide1}>
+                        <Text style={SwipeListContainerStyles.text}>Hello Swiper</Text>
                     </View>
-                    <View style={SwipeListStyles.slide2}>
-                        <Text style={SwipeListStyles.text}>Beautiful</Text>
+                    <View style={SwipeListContainerStyles.slide2}>
+                        <Text style={SwipeListContainerStyles.text}>Beautiful</Text>
                     </View>
-                    <View style={SwipeListStyles.slide3}>
-                        <Text style={SwipeListStyles.text}>And simple</Text>
+                    <View style={SwipeListContainerStyles.slide3}>
+                        <Text style={SwipeListContainerStyles.text}>And simple</Text>
                     </View>
                 </Swiper>
 
@@ -164,21 +164,21 @@ export default class SwipeList extends Component {
                     horizontal={false}
                     autoplay={false}
                     >
-                    <View style={SwipeListStyles.slide}
+                    <View style={SwipeListContainerStyles.slide}
                           title={<Text numberOfLines={1}>Aussie tourist dies at Bali hotel</Text>}>
-                        <Image resizeMode='stretch' style={SwipeListStyles.image} source={{uri:img[0]}}/>
+                        <Image resizeMode='stretch' style={SwipeListContainerStyles.image} source={{uri:img[0]}}/>
                     </View>
-                    <View style={SwipeListStyles.slide}
+                    <View style={SwipeListContainerStyles.slide}
                           title={<Text numberOfLines={1}>Big lie behind Nine’s new show</Text>}>
-                        <Image resizeMode='stretch' style={SwipeListStyles.image} source={{uri:img[1]}}/>
+                        <Image resizeMode='stretch' style={SwipeListContainerStyles.image} source={{uri:img[1]}}/>
                     </View>
-                    <View style={SwipeListStyles.slide}
+                    <View style={SwipeListContainerStyles.slide}
                           title={<Text numberOfLines={1}>Why Stone split from Garfield</Text>}>
-                        <Image resizeMode='stretch' style={SwipeListStyles.image} source={{uri:img[2]}}/>
+                        <Image resizeMode='stretch' style={SwipeListContainerStyles.image} source={{uri:img[2]}}/>
                     </View>
-                    <View style={SwipeListStyles.slide}
+                    <View style={SwipeListContainerStyles.slide}
                           title={<Text numberOfLines={1}>Learn from Kim K to land that job</Text>}>
-                        <Image resizeMode='stretch' style={SwipeListStyles.image} source={{uri:img[3]}}/>
+                        <Image resizeMode='stretch' style={SwipeListContainerStyles.image} source={{uri:img[3]}}/>
                     </View>
                 </SwipeForLoop>
             </View>
@@ -187,7 +187,7 @@ export default class SwipeList extends Component {
 
 }
 
-const SwipeListStyles = StyleSheet.create({
+const SwipeListContainerStyles = StyleSheet.create({
     container: {
         flex: 1,
     },

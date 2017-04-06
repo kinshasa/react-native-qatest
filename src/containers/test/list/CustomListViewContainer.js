@@ -1,8 +1,8 @@
 /**
  * @Author: liushaobo2005@163.com
  * @Date: 2017.3.24 下午 4:58
- * @Desc: 公共组件 - CustomListView
- * @Name: CustomListView.js
+ * @Desc: 公共组件 - CustomListViewContainer
+ * @Name: CustomListViewContainer.js
  * @LifeCycle：https://github.com/kinshasa/react-native-qatest
  */
 
@@ -17,7 +17,7 @@ const ds = new ListView.DataSource({
     sectionHeaderHasChanged: (s1, s2) => s1 !== s2,
 });
 
-export default class CustomListView extends Component {
+export default class CustomListViewContainer extends Component {
 
     static propTypes = {
         style: View.propTypes.style,
@@ -32,7 +32,7 @@ export default class CustomListView extends Component {
     };
 
     constructor(props, context) {
-        console.log("CustomListView constructor()");
+        console.log("CustomListViewContainer constructor()");
         super(props, context);
         this.state = {refresh: false};
     }
@@ -47,11 +47,11 @@ export default class CustomListView extends Component {
     data = {};
 
     componentWillMount() {
-        console.log("CustomListView componentWillMount()", new Date());
+        console.log("CustomListViewContainer componentWillMount()", new Date());
     }
 
     componentDidMount() {
-        console.log("CustomListView componentDidMount()", new Date());
+        console.log("CustomListViewContainer componentDidMount()", new Date());
         InteractionManager.runAfterInteractions(() => {
             // ...耗时较长的同步的任务...
             this.getDataSource();
@@ -66,7 +66,7 @@ export default class CustomListView extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("CustomListView componentWillReceiveProps()", newProps);
+        console.log("CustomListViewContainer componentWillReceiveProps()", newProps);
     }
 
     /**
@@ -77,7 +77,7 @@ export default class CustomListView extends Component {
      */
     shouldComponentUpdate(nextProps, nextState) {
         let isUpdate = (this.props != nextProps) || (this.state != nextState);
-        console.log("CustomListView shouldComponentUpdate()", isUpdate);
+        console.log("CustomListViewContainer shouldComponentUpdate()", isUpdate);
         return isUpdate;
     }
 
@@ -87,7 +87,7 @@ export default class CustomListView extends Component {
      * @param nextState 更新之后的状态
      */
     componentWillUpdate(nextProps, nextState) {
-        console.log("CustomListView componentWillUpdate()");
+        console.log("CustomListViewContainer componentWillUpdate()");
     }
 
     /**
@@ -97,7 +97,7 @@ export default class CustomListView extends Component {
      * @returns {boolean}
      */
     componentDidUpdate(prevProps, prevState) {
-        console.log("CustomListView componentDidUpdate()");
+        console.log("CustomListViewContainer componentDidUpdate()");
     }
 
     /**
@@ -105,12 +105,12 @@ export default class CustomListView extends Component {
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
     componentWillUnmount() {
-        console.log("CustomListView componentWillUnmount()");
+        console.log("CustomListViewContainer componentWillUnmount()");
 
     }
 
     getDataSource() {
-        console.log("CustomListView getDataSource() data",this.data);
+        console.log("CustomListViewContainer getDataSource() data",this.data);
         for (let i = 0; i < 100; i++) {
             this.data['sectionID_'+i] = {};
             for(let j=0;j<100;j++){
@@ -122,7 +122,7 @@ export default class CustomListView extends Component {
 
     renderHeader = () => {
         return (
-            <Text >{JSON.stringify(config)}</Text>
+            <Text >{'1万行数据'}</Text>
         )
     };
 
@@ -145,14 +145,17 @@ export default class CustomListView extends Component {
 
     render() {
         this.count++;
-        console.log("CustomListView render() count:", this.count);
+        console.log("CustomListViewContainer render() count:", this.count);
         return (
-            <View style={CustomListViewStyles.container}>
+            <View style={CustomListViewContainerStyles.container}>
                 <TitleBar
-                    label="ListView测试"
+                    label="大数据量的ListView测试"
                     labelStyle={{backgroundColor: "transparent", color: "black"}}
                     style={{height: 45}}/>
                 <ListView
+                    onEndReachedThreshold={50}
+                    pageSize={30}
+                    initialListSize={30}
                     renderHeader={this.renderHeader}
                     renderSectionHeader={this.renderSectionHeader}
                     renderRow={this.renderRow}
@@ -165,7 +168,7 @@ export default class CustomListView extends Component {
 
 }
 
-const CustomListViewStyles = StyleSheet.create({
+const CustomListViewContainerStyles = StyleSheet.create({
     container: {
         flex: 1,
     },

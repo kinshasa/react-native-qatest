@@ -2,7 +2,7 @@
  * @Author: liushaobo2005@163.com
  * @Date: 2017.2.10 下午 12:04
  * @Desc: 购物车动画
- * @Name: CartAnimation.js
+ * @Name: CartAnimationContainer.js
  * @LifeCycle：http://www.tuicool.com/articles/nu6zInB
  */
 
@@ -26,7 +26,7 @@ import img_logo from '../../../assets/img_logo.png'
 let {width: deviceWidth, height: deviceHeight} = Dimensions.get('window');
 let contentTop = Platform.OS == 'ios' ? 64 : 56;
 
-export default class CartAnimation extends Component {
+export default class CartAnimationContainer extends Component {
 
     /**
      * 父组件传入的属性值
@@ -54,7 +54,7 @@ export default class CartAnimation extends Component {
      * @param context
      */
     constructor(props, context) {
-        console.log("CartAnimation", "constructor()");
+        console.log("CartAnimationContainer", "constructor()");
         super(props, context);
         this.state = {
             isTrigger: false,
@@ -82,7 +82,7 @@ export default class CartAnimation extends Component {
      * 生命周期中仅被调用1次，可以使用SetState
      */
     componentWillMount() {
-        console.log("CartAnimation", "componentWillMount()");
+        console.log("CartAnimationContainer", "componentWillMount()");
     }
 
     /**
@@ -91,7 +91,7 @@ export default class CartAnimation extends Component {
      * 用于网络请求和页面渲染
      */
     componentDidMount() {
-        console.log("CartAnimation", "componentDidMount()");
+        console.log("CartAnimationContainer", "componentDidMount()");
     }
 
     /**
@@ -100,7 +100,7 @@ export default class CartAnimation extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("CartAnimation", "componentWillReceiveProps():" + newProps);
+        console.log("CartAnimationContainer", "componentWillReceiveProps():" + newProps);
     }
 
     /**
@@ -111,7 +111,7 @@ export default class CartAnimation extends Component {
      */
     shouldComponentUpdate(nextProps, nextState) {
         let isUpdate = (this.props != nextProps) || (this.state != nextState);
-        console.log("CartAnimation", "shouldComponentUpdate():" + isUpdate);
+        console.log("CartAnimationContainer", "shouldComponentUpdate():" + isUpdate);
         return isUpdate;
     }
 
@@ -121,7 +121,7 @@ export default class CartAnimation extends Component {
      * @param nextState 更新之后的状态
      */
     componentWillUpdate(nextProps, nextState) {
-        console.log("CartAnimation", "componentWillUpdate()");
+        console.log("CartAnimationContainer", "componentWillUpdate()");
     }
 
     /**
@@ -131,7 +131,7 @@ export default class CartAnimation extends Component {
      * @returns {boolean}
      */
     componentDidUpdate(prevProps, prevState) {
-        console.log("CartAnimation", "componentDidUpdate()");
+        console.log("CartAnimationContainer", "componentDidUpdate()");
     }
 
     /**
@@ -139,7 +139,7 @@ export default class CartAnimation extends Component {
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
     componentDidUnMount() {
-        console.log("CartAnimation", "componentDidUnMount()");
+        console.log("CartAnimationContainer", "componentDidUnMount()");
 
     }
 
@@ -149,10 +149,10 @@ export default class CartAnimation extends Component {
      */
     render() {
         this.renderCount++;
-        console.log("CartAnimation", "render() renderCount:" + this.renderCount);
+        console.log("CartAnimationContainer", "render() renderCount:" + this.renderCount);
         return (
 
-            <View style={CartAnimationStyles.container}>
+            <View style={CartAnimationContainerStyles.container}>
                 <View style={{marginTop: contentTop, flex: 1, }}>
                     <Button
 
@@ -364,7 +364,7 @@ export default class CartAnimation extends Component {
     _onPressHandler_3(key, e) {
 
         this.btn3.measure((x, y, width, height, pageX, pageY) => {
-            console.log("CartAnimation", `${x}, ${y}, ${width}, ${height}, ${pageX}, ${pageY}`)
+            console.log("CartAnimationContainer", `${x}, ${y}, ${width}, ${height}, ${pageX}, ${pageY}`)
             let startPositions = this._startPositions[key]
 
             startPositions.end = this._endPositions['cart-1']
@@ -400,7 +400,7 @@ export default class CartAnimation extends Component {
 
 }
 
-const CartAnimationStyles = StyleSheet.create({
+const CartAnimationContainerStyles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#999"

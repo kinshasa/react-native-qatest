@@ -1,7 +1,10 @@
 package com.android.qatest.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.android.qatest.R;
@@ -16,6 +19,18 @@ public class VerticalViewPagerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_vertical_view_page);
         setTitle("");
         initViewPager();
+
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        if(Intent.ACTION_VIEW.equals(action)) {
+            Uri uri = intent.getData();
+            if (uri != null) {
+                String password = uri.getQueryParameter("password");
+                String username = uri.getQueryParameter("username");
+                Log.v("MainActivity age", username);
+                Log.v("MainActivity name", password);
+            }
+        }
     }
 
     private void initViewPager() {
@@ -33,4 +48,5 @@ public class VerticalViewPagerActivity extends AppCompatActivity {
         //If you setting other scroll mode, the scrolled fade is shown from either side of display.
         viewPager.setOverScrollMode(View.OVER_SCROLL_NEVER);
     }
+
 }

@@ -10,19 +10,25 @@
 import {Dimensions, Platform} from 'react-native';
 const window = Dimensions.get('window');
 
-global.config={
-    log:false,
-    OS:Platform.OS,
+global.config = {
+    log: false,
+    OS: Platform.OS,
     window
 };
+global.width = window.width;
+global.height = window.height;
 
 //disable console.log
 if (!__DEV__) {
     global.console = {
-        info: () => {},
-        log: () => {},
-        warn: () => {},
-        error: () => {},
+        info: () => {
+        },
+        log: () => {
+        },
+        warn: () => {
+        },
+        error: () => {
+        },
     };
 }
 

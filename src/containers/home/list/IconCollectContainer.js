@@ -1,8 +1,8 @@
 /**
  * @Author: liushaobo2005@163.com
- * @Date: 2017.3.2 上午 11:17
- * @Desc: 公共组件 - TabView
- * @Name: TabView.js
+ * @Date: 2017.2.15 下午 2:05
+ * @Desc: 图片库
+ * @Name: IconCollectContainer.js
  * @LifeCycle：http://www.tuicool.com/articles/nu6zInB
  */
 
@@ -11,20 +11,11 @@ import {
     StyleSheet,
     View,
     Text,
-    Dimensions
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import IonIcons from 'react-native-vector-icons/Ionicons';
 
-import ScrollableTabView from'react-native-scrollable-tab-view';
-import ScrollableTabBar from 'react-native-scrollable-tab-view/ScrollableTabBar';
-
-
-import HomePage from '../HomePage'
-import Settings from '../../set/Setting'
-import QATest from '../../test/QATest'
-
-const {height, width} = Dimensions.get('window');
-
-export default class TabView extends Component {
+export default class IconCollectContainer extends Component {
 
     /**
      * 父组件传入的属性值
@@ -52,9 +43,9 @@ export default class TabView extends Component {
      * @param context
      */
     constructor(props, context) {
-        console.log("TabView", "constructor()");
+        console.log("IconCollectContainer", "constructor()");
         super(props, context);
-        this.state = {refresh:false};
+        this.state = {};
     }
 
     /**
@@ -68,7 +59,7 @@ export default class TabView extends Component {
      * 生命周期中仅被调用1次，可以使用SetState
      */
     componentWillMount() {
-        console.log("TabView", "componentWillMount()");
+        console.log("IconCollectContainer", "componentWillMount()");
     }
 
     /**
@@ -77,7 +68,7 @@ export default class TabView extends Component {
      * 用于网络请求和页面渲染
      */
     componentDidMount() {
-        console.log("TabView", "componentDidMount() this.props.children",this.refs['scrollView'].props.children.length);
+        console.log("IconCollectContainer", "componentDidMount()");
     }
 
     /**
@@ -86,7 +77,7 @@ export default class TabView extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("TabView", "componentWillReceiveProps():" + newProps);
+        console.log("IconCollectContainer", "componentWillReceiveProps():" + newProps);
     }
 
     /**
@@ -97,7 +88,7 @@ export default class TabView extends Component {
      */
     shouldComponentUpdate(nextProps, nextState) {
         let isUpdate = (this.props != nextProps) || (this.state != nextState);
-        console.log("TabView", "shouldComponentUpdate():" + isUpdate);
+        console.log("IconCollectContainer", "shouldComponentUpdate():" + isUpdate);
         return isUpdate;
     }
 
@@ -107,7 +98,7 @@ export default class TabView extends Component {
      * @param nextState 更新之后的状态
      */
     componentWillUpdate(nextProps, nextState) {
-        console.log("TabView", "componentWillUpdate()");
+        console.log("IconCollectContainer", "componentWillUpdate()");
     }
 
     /**
@@ -117,7 +108,7 @@ export default class TabView extends Component {
      * @returns {boolean}
      */
     componentDidUpdate(prevProps, prevState) {
-        console.log("TabView", "componentDidUpdate()");
+        console.log("IconCollectContainer", "componentDidUpdate()");
     }
 
     /**
@@ -125,7 +116,7 @@ export default class TabView extends Component {
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
     componentWillUnmount() {
-        console.log("TabView componentWillUnmount()");
+        console.log("IconCollectContainer", "componentWillUnmount()");
 
     }
 
@@ -135,25 +126,22 @@ export default class TabView extends Component {
      */
     render() {
         this.renderCount++;
-        console.log("TabView render() renderCount:",this.renderCount);
+        console.log("IconCollectContainer", "render() renderCount:" + this.renderCount);
         return (
-            <ScrollableTabView
-                {...this.props}
-                renderTabBar={() => <ScrollableTabBar /> }
-                ref='scrollView'
-                contentContainerStyle={TabViewStyles.container}>
-                <HomePage tabLabel="HomePage"/>
-                <Settings tabLabel="Settings"/>
-                <QATest tabLabel="QATest"/>
-            </ScrollableTabView>
+            <View style={IconCollectContainerStyles.container}>
+                <Icon name="home" size={50} color="#900" />
+                <Icon name="home" size={100} color="#999" />
+                <IonIcons name="ios-home" size={30} color="#4F8EF7" />
+                <IonIcons name="ios-home-outline" size={30} color="#4F8EF7" />
+            </View>
         );
     }
 
 }
 
-const TabViewStyles = StyleSheet.create({
+const IconCollectContainerStyles = StyleSheet.create({
     container: {
-        width,
-        minHeight:height+400,
+        flex: 1,
+        paddingTop:100
     },
 });
