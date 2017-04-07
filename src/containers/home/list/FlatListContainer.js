@@ -67,9 +67,11 @@ export default class FlatListContainer extends Component {
             let url = 'https://app.ds.cn/ncar-main-mapp/car-search-mapi/ncar/search?pageNumber=1&pageSize=10&salesModel=1&sortType=2';
             let response = await fetch(url);
             let json = await response.json();
-            let data = [...json.data.list/*, ...json.data.list, ...json.data.list, ...json.data.list*/];
+            let data = [...json.data.list, ...json.data.list, ...json.data.list, ...json.data.list];
             console.log('FlatListContainer getData()', json.data.list.length);
-            !this.unMount && this.setState({data});
+            setTimeout(()=>{
+                !this.unMount && this.setState({data});
+            },200);
         } catch (e) {
 
         }
@@ -165,7 +167,11 @@ export default class FlatListContainer extends Component {
          * data into the item data, or skip this optimization entirely.
          */
         return prev.item !== next.item;
-    }
+    };
+
+    onRefresh = () =>{
+        alert('onRefresh: nothing to refresh :P')
+    };
 
     render() {
         this.count++;
@@ -182,6 +188,7 @@ export default class FlatListContainer extends Component {
                     refreshing={false}
                     data={this.state.data}
                     shouldItemUpdate={this.shouldItemUpdate}
+                    onRefresh={this.onRefresh}
                     keyExtractor={(item: ItemT, index: number) => {
                         return index
                     }}

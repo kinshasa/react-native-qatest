@@ -11,7 +11,8 @@ import {
     StyleSheet,
     View,
     Text,
-    WebView
+    WebView,
+    Button
 } from 'react-native';
 import TitleBar from '../../../components/bar/TitleBar'
 import * as Progress from 'react-native-progress';
@@ -33,7 +34,7 @@ export default class CustomWebViewContainer extends Component {
     constructor(props, context) {
         console.log("CustomWebViewContainer constructor()");
         super(props, context);
-        this.state = {};
+        this.state = {uri:'http://m.ds.cn/special_event/mainvenue1703.html?from=singlemessage&isappinstalled=1'};
     }
 
     /**
@@ -104,7 +105,7 @@ export default class CustomWebViewContainer extends Component {
         console.log("CustomWebViewContainer render() count:", this.count);
         return (
             <View style={CustomWebViewContainerStyles.container}>
-                <TitleBar label="https://github.com/kinshasa"/>
+                <TitleBar label={this.state.uri}/>
                 {
                     !this.state.load &&
                     <View style={CustomWebViewContainerStyles.container}>
@@ -119,7 +120,10 @@ export default class CustomWebViewContainer extends Component {
                 }
                 <WebView
                     onLoad={()=>{this.setState({load:true})}}
-                    source={{uri: 'https://github.com/kinshasa'}}
+                    //source={{uri: 'http://m.ds.cn/special_event/mainvenue1703.html?from=singlemessage&isappinstalled=1'}}
+                    //source={{uri: 'https://github.com/kinshasa'}}
+                    //source={{uri: 'https://baidu.com'}}
+                    source={{uri: 'https://m.ds.cn'}}
                     style={CustomWebViewContainerStyles.webView}/>
             </View>
         );
