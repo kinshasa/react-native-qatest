@@ -76,9 +76,8 @@ export default class FlatListContainer extends Component {
             console.log('FlatListContainer getData()', json);
             let data = [...json.data.list, ...json.data.list, ...json.data.list, ...json.data.list];
             console.log('FlatListContainer getData()', json.data.list.length);
-            setTimeout(() => {
-                !this.unMount && this.setState({data});
-            }, 200);
+            //异步请求刷新需要判断当前组件是否已经Unmount了。
+            !this.unMount && this.setState({data});
         } catch (e) {
             alert(e.message)
         }
@@ -174,18 +173,14 @@ export default class FlatListContainer extends Component {
          * data into the item data, or skip this optimization entirely.
          */
         return prev.item !== next.item;
-    };
-
-    onRefresh = () => {
-        alert('onRefresh: nothing to refresh :P')
-    };
+    }
 
     render() {
         this.count++;
         console.log("FlatListContainer render() count:", this.count);
         return (
             <View style={FlatListContainerStyles.container}>
-                <TitleBar title="首页" style={{height: 45}}/>
+                <TitleBar title="首页" style={{height:45}}/>
                 {
                     false &&
                     this.renderItem(this.simple)
@@ -195,7 +190,6 @@ export default class FlatListContainer extends Component {
                     refreshing={false}
                     data={this.state.data}
                     shouldItemUpdate={this.shouldItemUpdate}
-                    onRefresh={this.onRefresh}
                     keyExtractor={(item: ItemT, index: number) => {
                         return index
                     }}
