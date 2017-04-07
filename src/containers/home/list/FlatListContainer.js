@@ -66,14 +66,21 @@ export default class FlatListContainer extends Component {
         try {
             let url = 'https://app.ds.cn/ncar-main-mapp/car-search-mapi/ncar/search?pageNumber=1&pageSize=10&salesModel=1&sortType=2';
             let response = await fetch(url);
-            let json = await response.json();
+            //let json = await response.json();
+            let json = null;
+            if (response.status == 200) {
+                json = await response.json();
+            } else {
+                throw new Error('Something went wrong on api server!');
+            }
+            console.log('FlatListContainer getData()', json);
             let data = [...json.data.list, ...json.data.list, ...json.data.list, ...json.data.list];
             console.log('FlatListContainer getData()', json.data.list.length);
-            setTimeout(()=>{
+            setTimeout(() => {
                 !this.unMount && this.setState({data});
-            },200);
+            }, 200);
         } catch (e) {
-
+            alert(e.message)
         }
     }
 
@@ -169,7 +176,7 @@ export default class FlatListContainer extends Component {
         return prev.item !== next.item;
     };
 
-    onRefresh = () =>{
+    onRefresh = () => {
         alert('onRefresh: nothing to refresh :P')
     };
 
@@ -178,7 +185,7 @@ export default class FlatListContainer extends Component {
         console.log("FlatListContainer render() count:", this.count);
         return (
             <View style={FlatListContainerStyles.container}>
-                <TitleBar title="首页" style={{height:45}}/>
+                <TitleBar title="首页" style={{height: 45}}/>
                 {
                     false &&
                     this.renderItem(this.simple)
