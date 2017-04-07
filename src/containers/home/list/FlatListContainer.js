@@ -68,7 +68,7 @@ export default class FlatListContainer extends Component {
             let response = await fetch(url);
             //let json = await response.json();
             let json = null;
-            if (response.status == 200) {
+            if (response.status === 200) {
                 json = await response.json();
             } else {
                 throw new Error('Something went wrong on api server!');
