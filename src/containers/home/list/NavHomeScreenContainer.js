@@ -16,12 +16,25 @@ import {
 import {TabNavigator} from 'react-navigation';
 import NavHomePage1Container from './NavHomePage1Container';
 import FlatListContainer from './FlatListContainer';
+import Icon from "react-native-vector-icons/Ionicons";
+
+const LAUNCHER_IMG_HOME = ()=><Icon name="ios-compass-outline" size={25} color="black"/>;
+const LAUNCHER_IMG_HOME_SELECT = ()=><Icon name="ios-compass" size={25} color="#166AF6"/>;
+const LAUNCHER_IMG_TEST = ()=><Icon name="ios-cloud-circle-outline" size={25} color="black"/>;
+const LAUNCHER_IMG_TEST_SELECT = ()=><Icon name="ios-cloud-circle" size={25} color="#166AF6"/>;
+const LAUNCHER_IMG_SETTING = ()=><Icon name="ios-contact-outline" size={25} color="black"/>;
+const LAUNCHER_IMG_SETTING_SELECT = ()=><Icon name="ios-contact" size={25} color="#4F8EF7"/>;
+
 
 class NavHomeScreenContainer extends Component {
-
     static navigationOptions = {
-        title: 'Welcome',
-    };
+        tabBar: {
+            label: 'Home',
+            // Note: By default the icon is only shown on iOS. Search the showIcon option below.
+            icon: LAUNCHER_IMG_HOME,
+        },
+    }
+
 
     static propTypes = {
         style: View.propTypes.style,
@@ -106,6 +119,7 @@ export default SimpleApp = TabNavigator(
     {
         tabBarPosition: 'bottom',
         lazyLoad: true,
+        tabBarOptions:{activeTintColor:'white',activeBackgroundColor:'green',inactiveBackgroundColor:'red'}
     });
 
 const NavHomeScreenContainerStyles = StyleSheet.create({

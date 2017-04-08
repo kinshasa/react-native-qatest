@@ -63,6 +63,7 @@ export default class FlatListContainer extends Component {
     unMount = false;
 
     async getData2() {
+        console.log('FlatListContainer getData()');
         try {
             let url = 'https://app.ds.cn/ncar-main-mapp/car-search-mapi/ncar/search?pageNumber=1&pageSize=10&salesModel=1&sortType=2';
             let response = await fetch(url);
@@ -116,11 +117,11 @@ export default class FlatListContainer extends Component {
 
     componentDidMount() {
         console.log("FlatListContainer componentDidMount()", new Date());
-        this.timer = setTimeout(() => {
-            this.getData2();
-        }, 200);
+
         InteractionManager.runAfterInteractions(() => {
             // ...耗时较长的同步的任务...
+            this.getData2();
+
         });
 
     }
