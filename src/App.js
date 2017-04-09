@@ -9,9 +9,8 @@ import React, {Component} from "react";
 import {AppRegistry, InteractionManager, Linking, StyleSheet, View} from "react-native";
 
 import MainProvider from "./MainProvider";
-import Http from "../common/utils/Http";
 import config from "../common/config";
-import DropdownAlert from "react-native-dropdownalert";
+import DropDownAlert from "react-native-dropdownalert";
 
 
 export default class App extends Component {
@@ -21,7 +20,6 @@ export default class App extends Component {
         super(props);
         // 初始状态
         this.state = {};
-        global.Http = Http;
     }
 
     componentWillMount() {
@@ -29,7 +27,7 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-        console.log('App componentDidMount() config:', config);
+        console.log('App componentDidMount() width:', width);
         InteractionManager.runAfterInteractions(() => {
             // ...耗时较长的同步的任务...
             this.addEventListener();
@@ -77,7 +75,7 @@ export default class App extends Component {
         return (
             <View style={AppStyles.container}>
                 <MainProvider />
-                <DropdownAlert
+                <DropDownAlert
                     ref={(ref) => this.dropdown = ref}
                     titleNumOfLines={0}
                     messageNumOfLines={0}

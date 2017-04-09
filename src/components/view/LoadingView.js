@@ -15,6 +15,8 @@ import {
     Button
 } from 'react-native';
 import * as Indicator from 'react-native-indicator';
+import Spinner from'react-native-spinkit';
+
 const {width, height} = Dimensions.get('window');
 
 export default class LoadingView extends Component {
@@ -101,7 +103,12 @@ export default class LoadingView extends Component {
         if (this.state.visible || this.props.visible) {
             return (
                 <View style={LoadingViewStyles.container}>
-                    <Indicator.NineCubesLoader className="NineCubesLoader"/>
+                    <Spinner size={88} type={'9CubeGrid'} color={'blue'}/>
+                    {
+                        //RN动画实现，与runAfterInteractions冲突，因此禁用
+                        false &&
+                        <Indicator.NineCubesLoader className="NineCubesLoader"/>
+                    }
                 </View>
             );
         }

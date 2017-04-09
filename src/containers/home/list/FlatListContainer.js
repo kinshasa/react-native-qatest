@@ -63,16 +63,24 @@ export default class FlatListContainer extends Component {
     unMount = false;
 
     async getData2() {
+        console.log('FlatListContainer getData()');
         try {
             let url = 'https://app.ds.cn/ncar-main-mapp/car-search-mapi/ncar/search?pageNumber=1&pageSize=10&salesModel=1&sortType=2';
             let response = await fetch(url);
-            let json = await response.json();
-            let data = [...json.data.list/*, ...json.data.list, ...json.data.list, ...json.data.list*/];
+            //let json = await response.json();
+            let json = null;
+            if (response.status === 200) {
+                json = await response.json();
+            } else {
+                throw new Error('Something went wrong on api server!');
+            }
+            console.log('FlatListContainer getData()', json);
+            let data = [...json.data.list, ...json.data.list, ...json.data.list, ...json.data.list];
             console.log('FlatListContainer getData()', json.data.list.length);
             //异步请求刷新需要判断当前组件是否已经Unmount了。
             !this.unMount && this.setState({data});
         } catch (e) {
-
+            alert(e.message)
         }
     }
 
@@ -109,11 +117,11 @@ export default class FlatListContainer extends Component {
 
     componentDidMount() {
         console.log("FlatListContainer componentDidMount()", new Date());
-        this.timer = setTimeout(() => {
-            this.getData2();
-        }, 200);
+
         InteractionManager.runAfterInteractions(() => {
             // ...耗时较长的同步的任务...
+            this.getData2();
+
         });
 
     }
