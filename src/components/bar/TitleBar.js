@@ -7,7 +7,7 @@
 
 'use strict';
 import React, {Component, PropTypes} from "react";
-import {StyleSheet, Text, View,InteractionManager} from "react-native";
+import {StyleSheet, Text, View, InteractionManager} from "react-native";
 import {Actions} from "react-native-router-flux";
 
 export default class TitleBar extends Component {
@@ -43,6 +43,7 @@ export default class TitleBar extends Component {
      * @type {number}
      */
     renderCount = 0;
+
     componentWillMount() {
         console.log("TitleBar componentWillMount()", new Date());
     }
@@ -58,7 +59,7 @@ export default class TitleBar extends Component {
     shouldComponentUpdate(nextProps, nextState) {
         let isUpdate = false;
         isUpdate = this.props != nextProps;
-        if(isUpdate){
+        if (isUpdate) {
             console.log("TitleBar shouldComponentUpdate():props changed.", isUpdate);
             // console.log("TitleBar shouldComponentUpdate()nextProps:", nextProps);
             // console.log("TitleBar shouldComponentUpdate()props:", this.props);
@@ -66,7 +67,7 @@ export default class TitleBar extends Component {
         }
 
         isUpdate = this.state != nextState;
-        if(isUpdate){
+        if (isUpdate) {
             console.log("TitleBar shouldComponentUpdate():state changed.", isUpdate);
             // console.log("TitleBar shouldComponentUpdate()nextState:", nextState);
             // console.log("TitleBar shouldComponentUpdate()state:", this.state);
@@ -87,7 +88,7 @@ export default class TitleBar extends Component {
     componentWillUnmount() {
         console.log("TitleBar componentWillUnmount()");
     }
-    
+
     render() {
         this.renderCount++;
         console.log("TitleBar render() renderCount:", this.renderCount);
@@ -103,16 +104,18 @@ export default class TitleBar extends Component {
         );
     }
 
-    closeContainer = ()=>{
+    closeContainer = () => {
         InteractionManager.runAfterInteractions(() => {
             // ...耗时较长的同步的任务...
             try {
-                Actions.pop()
+                setTimeout(()=>{
+                    Actions.pop()
+                },50)
             } catch (e) {
                 alert(e.message)
             }
         });
-    }
+    };
 
     renderLeftView() {
         if (this.props.leftView) {
@@ -120,7 +123,9 @@ export default class TitleBar extends Component {
         }
         let titleLeft = [TitleBarStyles.leftStyle, this.props.leftStyle];
         return (
-            <Text style={titleLeft} onPress={() => {this.closeContainer()}}> {"返回"} </Text>
+            <Text style={titleLeft} onPress={() => {
+                this.closeContainer()
+            }}> {"返回"} </Text>
         );
     }
 
@@ -160,8 +165,8 @@ const TitleBarStyles = StyleSheet.create({
         backgroundColor: '#EEEEEE',
         flexDirection: "row"
     },
-    leftStyle: {marginLeft: 10},
+    leftStyle: {padding: 10},
     centerStyle: {flex: 1, alignSelf: "center", alignItems: "center"},
-    rightStyle: {marginRight: 10},
+    rightStyle: {padding: 10},
     labelStyle: {backgroundColor: "transparent",},
 });
