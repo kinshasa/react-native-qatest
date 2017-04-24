@@ -9,6 +9,7 @@
 
 package com.android.qatest.rct;
 
+import android.graphics.Color;
 import android.view.View;
 
 import com.facebook.react.bridge.ReadableArray;
@@ -47,8 +48,13 @@ public class RCTViewManager extends SimpleViewManager<View> {
         return new View(context);
     }
 
-    // In JS this is Image.props.source
-    @ReactProp(name = "bg")
-    public void setSource(View view, @Nullable ReadableArray sources) {
+    // In JS this is props
+    @ReactProp(name = "bgColor", customType = "Color")
+    public void setBackGroundColor(View view, @Nullable Integer color) {
+        if (color == null) {
+            view.setBackgroundColor(Color.TRANSPARENT);
+        } else {
+            view.setBackgroundColor(color);
+        }
     }
 }

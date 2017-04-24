@@ -73,6 +73,10 @@ public class RCTImageManager extends SimpleViewManager<ReactImageView> {
     @ReactProp(name = "source")
     public void setSource(ReactImageView view, @Nullable ReadableArray sources) {
         Log.v("RCTImageView2", sources.toString());
-        view.setSource(sources);
+        try{
+            view.setSource(sources);
+        }catch (Exception e){
+
+        }
     }
 }

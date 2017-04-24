@@ -28,7 +28,7 @@ export default class RCTViewsContainer extends Component {
                 <MyImageView
                     style={{margin:20,width:100,height:100,backgroundColor:'red'}}
                     borderRadius={5}
-                    uri={uri}
+                    source={[uri]}
                 />
                 <Image
                     style={{margin:20,width:100,height:100,backgroundColor:'green'}}

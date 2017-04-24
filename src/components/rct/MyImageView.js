@@ -10,7 +10,7 @@ import {
 export default class MyImageView extends Component {
 
     static propTypes = {
-        src: PropTypes.array,
+        source: PropTypes.array,
         ...View.propTypes // 包含默认的View的属性
     };
 
