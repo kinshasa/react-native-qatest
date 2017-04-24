@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 
+import com.android.qatest.rct.RCTImagePackage;
 import com.android.qatest.rct.RCTViewPackage;
 import com.elvishew.xlog.LogLevel;
 import com.elvishew.xlog.XLog;
@@ -38,6 +39,7 @@ public class MainApplication extends Application implements ReactApplication {
                     new VectorIconsPackage(),
                     //react-native-pushy
                     new UpdatePackage(),
+                    new RCTImagePackage(),
                     new RCTViewPackage(),
                     new RNSpinkitPackage()
             );

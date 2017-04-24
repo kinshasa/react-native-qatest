@@ -4,16 +4,13 @@
  * @flow
  */
 
-import React, {Component} from 'react';
-import {
-    StyleSheet,
-    Text,
-    View
-} from 'react-native';
+import React, {Component} from "react";
 
-import App from './src/App';
+import App from "./src/App";
 
 export default class index extends Component {
+    componentWillMount() {
+    }
 
     render() {
         return (

@@ -6,12 +6,13 @@
  * @LIFECYCLE：http://www.tuicool.com/articles/nu6zInB
  */
 import React, {Component} from "react";
-import {AppRegistry, InteractionManager, Linking, StyleSheet, View} from "react-native";
+import {AppRegistry, InteractionManager, Linking, StyleSheet, View,Alert} from "react-native";
 
 import MainProvider from "./MainProvider";
+import * as AppController from "./AppController";
 import config from "../common/config";
-import DropDownAlert from "react-native-dropdownalert";
 
+import DropDownAlert from "react-native-dropdownalert";
 
 export default class App extends Component {
 
@@ -23,7 +24,7 @@ export default class App extends Component {
     }
 
     componentWillMount() {
-
+        AppController.setGlobalHandler();
     }
 
     componentDidMount() {
@@ -31,7 +32,7 @@ export default class App extends Component {
         InteractionManager.runAfterInteractions(() => {
             // ...耗时较长的同步的任务...
             this.addEventListener();
-            this.showDropDownAlert('info','App周期信息','App初始化完成');
+            this.showDropDownAlert('info', 'App周期信息', 'App初始化完成');
         });
 
 
@@ -39,7 +40,7 @@ export default class App extends Component {
 
     addEventListener = () => {
         Linking.addEventListener('url', (event) => {
-            this.showDropDownAlert('info','收到外部调用',JSON.stringify(event));
+            this.showDropDownAlert('info', '收到外部调用', JSON.stringify(event));
         });
     };
 
@@ -56,7 +57,7 @@ export default class App extends Component {
     };
 
 
-    showDropDownAlert = (type,title,msg) => {
+    showDropDownAlert = (type, title, msg) => {
         console.log('App showDropDownAlert() event:', msg);
         setTimeout(() => {
             this.dropdown && this.dropdown.alertWithType(type, title, msg);

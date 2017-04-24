@@ -17,8 +17,9 @@ export default class MyImageView extends Component {
     render() {
         let uri = {uri: 'http://img.ds.cn/none.png'};
         return (
-            <View style={RCTComponentContainerStyles.container}>
+            <View style={MyImageViewStyles.container}>
                 <RCTImageView2
+                    //source={{uri: 'http://img.ds.cn/none.png'}}
                     {...this.props}
                 />
             </View>
@@ -27,7 +28,7 @@ export default class MyImageView extends Component {
 
 }
 
-const RCTComponentContainerStyles = StyleSheet.create({
+const MyImageViewStyles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#eee"
