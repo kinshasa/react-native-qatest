@@ -5,7 +5,6 @@
  * @Name: router.js
  * @LifeCycle：https://github.com/kinshasa/react-native-qatest
  */
-import scenes from '../../src/scenes';
 import * as LauncherController from "../../src/containers/LauncherController";
 
 module.exports = function (state, action) {
