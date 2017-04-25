@@ -34,7 +34,7 @@ import javax.annotation.Nullable;
 @ReactModule(name = RCTImageManager.REACT_CLASS)
 public class RCTImageManager extends SimpleViewManager<ReactImageView> {
 
-    protected static final String REACT_CLASS = "RCTImageView2";
+    protected static final String REACT_CLASS = "RCTImage";
 
     @Override
     public String getName() {
@@ -72,7 +72,7 @@ public class RCTImageManager extends SimpleViewManager<ReactImageView> {
     // In JS this is Image.props.source
     @ReactProp(name = "source")
     public void setSource(ReactImageView view, @Nullable ReadableArray sources) {
-        Log.v("RCTImageView2", sources.toString());
+        Log.v(REACT_CLASS, sources.toString());
         try{
             view.setSource(sources);
         }catch (Exception e){

@@ -7,8 +7,9 @@ import {
     requireNativeComponent
 } from 'react-native';
 
-export default class MyImageView extends Component {
+export default class RCTImage extends Component {
 
+    //必须要申明的
     static propTypes = {
         source: PropTypes.array,
         ...View.propTypes // 包含默认的View的属性
@@ -17,12 +18,7 @@ export default class MyImageView extends Component {
     render() {
         let uri = {uri: 'http://img.ds.cn/none.png'};
         return (
-            <View style={MyImageViewStyles.container}>
-                <RCTImageView2
-                    //source={{uri: 'http://img.ds.cn/none.png'}}
-                    {...this.props}
-                />
-            </View>
+            <RCTImageView2 />
         );
     }
 
@@ -35,4 +31,4 @@ const MyImageViewStyles = StyleSheet.create({
     },
 });
 
-module.exports = requireNativeComponent('RCTImageView2', MyImageView);
+module.exports = requireNativeComponent('RCTImageView2', RCTImage);

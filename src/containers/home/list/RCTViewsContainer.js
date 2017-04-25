@@ -13,7 +13,7 @@ import {
     Text,
     Image,
 } from 'react-native';
-import MyImageView from '../../../components/rct/MyImageView';
+import RCTImage from '../../../components/rct/RCTImage';
 
 export default class RCTViewsContainer extends Component {
 
@@ -25,10 +25,10 @@ export default class RCTViewsContainer extends Component {
                 <Text onPress={()=>{this.ddd()}}>
                     测试测试测试测试测试测试测试
                 </Text>
-                <MyImageView
-                    style={{margin:20,width:100,height:100,backgroundColor:'red'}}
-                    borderRadius={5}
+                <RCTImage
                     source={[uri]}
+                    style={{margin:20,padding:10,width:100,height:100,backgroundColor:'red'}}
+                    borderRadius={5}
                 />
                 <Image
                     style={{margin:20,width:100,height:100,backgroundColor:'green'}}

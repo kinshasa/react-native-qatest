@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.qatest.activity.VerticalPagerActivity;
 import com.facebook.react.ReactActivity;
 
 public class MainActivity extends ReactActivity {
@@ -26,15 +27,15 @@ public class MainActivity extends ReactActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        Intent intent = new Intent();
-//        intent.setClass(this, LoginActivity.class);
-//        context.startActivity(intent);
+        Intent intent = new Intent();
+        intent.setClass(this, VerticalPagerActivity.class);
+        context.startActivity(intent);
 
         //bugly自动升级初始化
         //Bugly.init(getApplicationContext(), "f130c8d4d9", false);
 
         Toast.makeText(this, "onCreate", Toast.LENGTH_LONG).show();
-        Intent intent = getIntent();
+        /*Intent intent = getIntent();
         String action = intent.getAction();
         if(Intent.ACTION_VIEW.equals(action)) {
             Uri uri = intent.getData();
@@ -44,7 +45,7 @@ public class MainActivity extends ReactActivity {
                 Log.v("MainActivity age", username);
                 Log.v("MainActivity name", password);
             }
-        }
+        }*/
     }
 
     @Override
