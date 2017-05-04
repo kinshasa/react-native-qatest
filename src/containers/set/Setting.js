@@ -81,7 +81,7 @@ export default class Setting extends Component {
                     rightView={<Icon.Button name="undo" size={25} color="#999" backgroundColor="transparent"
                                             onPress={()=>{alert("click share icon")}}/>}
                     style={{height: 45}}/>
-                <Text>开发ToolBar工具</Text>
+                <Text>{JSON.stringify(getApp())}</Text>
             </View>
         );
     }

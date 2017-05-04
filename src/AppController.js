@@ -36,7 +36,7 @@ export function init() {
     initLog();
 
 
-    Log('AppController:init() App:', App);
+    Log('AppController:init() App', App);
 }
 
 function getApp(){
@@ -128,7 +128,6 @@ export function getAppConstant(key, value) {
 }
 
 export function showDropDownAlert(type, title, msg) {
-    Log("AppController:showDropDownAlert() App:",App);
     InteractionManager.runAfterInteractions(() => {
         setTimeout(() => {
             if (App.dropdown && App.dropdown.alertWithType) {

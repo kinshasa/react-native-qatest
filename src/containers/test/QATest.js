@@ -80,7 +80,7 @@ class QATest extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("QATest::componentWillReceiveProps():, newProps");
+        console.log("QATest::componentWillReceiveProps()");
     }
 
     /**
@@ -92,7 +92,7 @@ class QATest extends Component {
     shouldComponentUpdate(nextProps, nextState) {
         let isUpdate = (this.props != nextProps) || (this.state != nextState);
         //let isUpdate = this.state != nextState;
-        console.log("QATest::shouldComponentUpdate():", isUpdate);
+        console.log("QATest::shouldComponentUpdate()", isUpdate);
         return isUpdate;
     }
 
@@ -124,9 +124,6 @@ class QATest extends Component {
 
     }
 
-    onPress = () => {
-    };
-
     renderRow = (rowData, sectionId, rowId) => {
 
         return (
@@ -150,7 +147,7 @@ class QATest extends Component {
      */
     render() {
         this.renderCount++;
-        console.log("QATest::render() renderCount:", this.renderCount);
+        console.log("QATest::render() renderCount", this.renderCount);
         return (
             <View style={[QATestStyles.container, this.props.style]}>
                 <TitleBar
@@ -167,7 +164,6 @@ class QATest extends Component {
                             onPress={() => alert("click share icon")}/>
                     }
                     style={{height: 45}}/>
-                <Text onPress={() => this.onPress()}>{JSON.stringify(getApp())}</Text>
 
                 <ListView
                     enableEmptySections={true}
