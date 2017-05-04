@@ -5,9 +5,9 @@
  * @NAME: MainRouter.js
  * @LIFECYCLE：http://www.tuicool.com/articles/nu6zInB
  */
-import React, {Component} from 'react';
-import {Actions, Scene, Router} from 'react-native-router-flux';
-import scenes from './scenes';
+import React, {Component} from "react";
+import {Router} from "react-native-router-flux";
+import scenes from "./scenes";
 // import {bindActionCreators} from 'redux';
 // import {connect} from 'react-redux';
 // import * as actions from '../common/actions';

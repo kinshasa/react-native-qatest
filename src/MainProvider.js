@@ -5,13 +5,13 @@
  * @NAME: MainProvider.js
  * @LIFECYCLE：http://www.tuicool.com/articles/nu6zInB
  */
-import React, {Component} from 'react';
+import React, {Component} from "react";
 
-import {Provider} from 'react-redux';
-import {createStore, applyMiddleware, combineReducers} from 'redux';
-import thunk from 'redux-thunk';
-import * as reducers from '../common/reducers';
-import MainRouter from './MainRouter';
+import {Provider} from "react-redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
+import thunk from "redux-thunk";
+import * as reducers from "../common/reducers";
+import MainRouter from "./MainRouter";
 
 //拿到后面定义的所有state的读取的权力
 const createStoreWithThunk = applyMiddleware(thunk)(createStore);

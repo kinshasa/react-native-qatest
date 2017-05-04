@@ -5,11 +5,11 @@
  * @NAME: App.js
  * @LIFECYCLE：http://www.tuicool.com/articles/nu6zInB
  */
+
 import React, {Component} from "react";
 import {AppRegistry, InteractionManager, Linking, StyleSheet, View} from "react-native";
-
-import MainProvider from "./MainProvider";
 import * as AppController from "./AppController";
+import MainProvider from "./MainProvider";
 
 import DropDownAlert from "react-native-dropdownalert";
 
@@ -27,7 +27,7 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-        console.log('App::componentDidMount() App:',App);
+        Log('App::componentDidMount()');
         this.showDropDownAlert('info', 'App周期信息', 'App初始化完成');
         this.addEventListener();
     }
@@ -40,7 +40,7 @@ export default class App extends Component {
 
     removeListener() {
         Linking.removeEventListener('url', (event) => {
-            console.log('App::rmEventListener() event:', event);
+            Log('App::rmEventListener() event:', event);
         });
     }
 
@@ -51,7 +51,7 @@ export default class App extends Component {
                 if (this.dropdown && this.dropdown.alertWithType) {
                     this.dropdown && this.dropdown.alertWithType(type, title, msg);
                 } else {
-                    console.log("AppController:showDropDownAlert() App.dropdown is null.");
+                    Log("AppController:showDropDownAlert() App.dropdown is null.");
                 }
             }, timeout);
         });
@@ -66,22 +66,22 @@ export default class App extends Component {
 
 
     setRefAppDropDown(ref){
-        console.log('App::setRefAppDropDown()');
+        Log('App::setRefAppDropDown()');
         if(!this.dropdown){
             this.dropdown = ref;
         }
     }
 
     componentWillUnmount() {
-        console.log('App::componentWillUnmount()');
+        Log('App::componentWillUnmount()');
         this.removeListener();
     }
 
 
     render() {
-        console.log('App::render()');
+        Log('App::render()');
         return (
-            <View ref={(ref) => console.log('App::render() set refs.')} style={AppStyles.container}>
+            <View ref={(ref) => Log('App::render() set refs.')} style={AppStyles.container}>
                 <MainProvider />
                 <DropDownAlert
                     ref={(ref) => this.setRefAppDropDown(ref)}

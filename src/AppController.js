@@ -7,16 +7,20 @@
  */
 import {Alert, InteractionManager} from "react-native";
 
+// init App.
+if (!global.App) {
+    global.App = {};
+    global.getApp = getApp;
+}
+//init Crash.
+initGlobalHandler();
+
+//init platform.
+initPlatform();
+
+
 export function init() {
     Log("AppController:init()");
-
-    // init App.
-    if (!global.App) {
-        global.App = {};
-    }
-
-    //init Crash.
-    initGlobalHandler();
 
     //init Http.
     if (!App.Http) {
@@ -28,22 +32,22 @@ export function init() {
         App.infoLog = require('infoLog');
     }
 
-    //init logUtils.
-    App.Log = Log;
-
     //init logs.
     initLog();
 
-    //init platform.
-    initPlatform();
 
     Log('AppController:init() App:', App);
 }
 
+function getApp(){
+    return global.App;
+}
+
+
 /**
  * 设置全局崩溃采集
  */
-export function initGlobalHandler() {
+function initGlobalHandler() {
     Log("AppController:initGlobalHandler()");
 
     ErrorUtils.setGlobalHandler(error => {
@@ -66,12 +70,14 @@ export function initGlobalHandler() {
     });
 }
 
-export function Log(...args) {
+function Log(...args) {
     console.log(...args)
 }
 
-export function initLog() {
+function initLog() {
     Log("AppController:initLog()");
+    //init logUtils.
+    global.Log = Log;
     let config = require('../common/config');
     if (!config._APP_LOG_ || !__DEV__) {
         console = {
@@ -88,7 +94,7 @@ export function initLog() {
     Log("AppController:initLog() test Log() enable.");
 }
 
-export function initPlatform() {
+function initPlatform() {
     Log("AppController:initPlatform()");
     let reactNative = require('react-native');
     if (!App.Platform) {

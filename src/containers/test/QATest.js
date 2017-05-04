@@ -7,7 +7,7 @@
  */
 
 import React, {Component, PropTypes} from "react";
-import {Dimensions, ListView, StyleSheet, Text, View} from "react-native";
+import {ListView, StyleSheet, Text, View} from "react-native";
 import {Actions} from "react-native-router-flux";
 import TitleBar from "../../components/bar/TitleBar";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -15,7 +15,6 @@ import * as actions from "../../../common/actions";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 
-const {height, width} = Dimensions.get('window');
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 class QATest extends Component {
@@ -46,7 +45,7 @@ class QATest extends Component {
      * @param context
      */
     constructor(props, context) {
-        console.log("QATest constructor()");
+        console.log("QATest::constructor()");
         super(props, context);
         this.state = {};
     }
@@ -62,7 +61,7 @@ class QATest extends Component {
      * 生命周期中仅被调用1次，可以使用SetState
      */
     componentWillMount() {
-        console.log("QATest componentWillMount()");
+        console.log("QATest::componentWillMount()");
     }
 
     /**
@@ -71,7 +70,7 @@ class QATest extends Component {
      * 用于网络请求和页面渲染
      */
     componentDidMount() {
-        console.log("QATest componentDidMount()");
+        console.log("QATest::componentDidMount()");
         this.props.actions.getQATestScenesList();
     }
 
@@ -81,7 +80,7 @@ class QATest extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("QATest componentWillReceiveProps():, newProps");
+        console.log("QATest::componentWillReceiveProps():, newProps");
     }
 
     /**
@@ -93,7 +92,7 @@ class QATest extends Component {
     shouldComponentUpdate(nextProps, nextState) {
         let isUpdate = (this.props != nextProps) || (this.state != nextState);
         //let isUpdate = this.state != nextState;
-        console.log("QATest shouldComponentUpdate():" , isUpdate);
+        console.log("QATest::shouldComponentUpdate():", isUpdate);
         return isUpdate;
     }
 
@@ -103,7 +102,7 @@ class QATest extends Component {
      * @param nextState 更新之后的状态
      */
     componentWillUpdate(nextProps, nextState) {
-        console.log("QATest componentWillUpdate()");
+        console.log("QATest::componentWillUpdate()");
     }
 
     /**
@@ -113,7 +112,7 @@ class QATest extends Component {
      * @returns {boolean}
      */
     componentDidUpdate(prevProps, prevState) {
-        console.log("QATest componentDidUpdate()");
+        console.log("QATest::componentDidUpdate()");
     }
 
     /**
@@ -121,14 +120,14 @@ class QATest extends Component {
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
     componentDidUnMount() {
-        console.log("QATest componentDidUnMount()");
+        console.log("QATest::componentDidUnMount()");
 
     }
 
-    onPress = ()=> {
+    onPress = () => {
     };
 
-    renderRow = (rowData, sectionId, rowId)=>{
+    renderRow = (rowData, sectionId, rowId) => {
 
         return (
             <View style={QATestStyles.btnList}>
@@ -151,18 +150,24 @@ class QATest extends Component {
      */
     render() {
         this.renderCount++;
-        console.log("QATest render() renderCount:" , this.renderCount);
+        console.log("QATest::render() renderCount:", this.renderCount);
         return (
-            <View style={[QATestStyles.container,this.props.style]}>
+            <View style={[QATestStyles.container, this.props.style]}>
                 <TitleBar
                     label="品质测试"
-                    labelStyle={{backgroundColor:"transparent",color:"black"}}
-                    leftView={<Icon.Button name="list-ul" size={25} color="#166AF6" backgroundColor="transparent"
-                                           onPress={()=>{alert("click android logo")}}/>}
-                    rightView={<Icon.Button name="undo" size={25} color="#999" backgroundColor="transparent"
-                                            onPress={()=>{alert("click share icon")}}/>}
+                    labelStyle={{backgroundColor: "transparent", color: "black"}}
+                    leftView={
+                        <Icon.Button
+                            name="list-ul" size={25} color="#166AF6" backgroundColor="transparent"
+                            onPress={() => alert("click android logo")}/>
+                    }
+                    rightView={
+                        <Icon.Button
+                            name="undo" size={25} color="#999" backgroundColor="transparent"
+                            onPress={() => alert("click share icon")}/>
+                    }
                     style={{height: 45}}/>
-                    <Text onPress={()=>{this.onPress()}}>{JSON.stringify(config)}</Text>
+                <Text onPress={() => this.onPress()}>{JSON.stringify(getApp())}</Text>
 
                 <ListView
                     enableEmptySections={true}
@@ -177,11 +182,11 @@ class QATest extends Component {
 
 const QATestStyles = StyleSheet.create({
     container: {
-        flex:1,
+        flex: 1,
     },
     scrollView: {
-        width:width,
-        height:height*2
+        width: getApp().Window.width,
+        height: getApp().Window.height * 2
     },
     btnList: {
         margin: 3,
