@@ -1,13 +1,7 @@
-import React, {Component, PropTypes} from 'react';
-import {
-    StyleSheet,
-    View,
-    Text,
-    Image,
-    requireNativeComponent
-} from 'react-native';
+import React, {Component, PropTypes} from "react";
+import {requireNativeComponent, StyleSheet, View} from "react-native";
 
-export default class RCTImage extends Component {
+export default class RNImage extends Component {
 
     //必须要申明的
     static propTypes = {
@@ -18,7 +12,7 @@ export default class RCTImage extends Component {
     render() {
         let uri = {uri: 'http://img.ds.cn/none.png'};
         return (
-            <RCTImageView2 />
+            <RCTImage />
         );
     }
 
@@ -31,4 +25,4 @@ const MyImageViewStyles = StyleSheet.create({
     },
 });
 
-module.exports = requireNativeComponent('RCTImageView2', RCTImage);
+module.exports = requireNativeComponent('RCTImage', RNImage);

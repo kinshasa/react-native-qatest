@@ -113,7 +113,7 @@ export default class CustomWebViewContainer extends Component {
                             indeterminate
                             progress={0.2}
                             borderWidth={1}
-                            width={config.window.width}
+                            width={Window.width}
                             style={{position:'absolute'}}
                         />
                     </View>

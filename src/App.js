@@ -6,11 +6,10 @@
  * @LIFECYCLE：http://www.tuicool.com/articles/nu6zInB
  */
 import React, {Component} from "react";
-import {AppRegistry, InteractionManager, Linking, StyleSheet, View,Alert} from "react-native";
+import {AppRegistry, InteractionManager, Linking, StyleSheet, View} from "react-native";
 
 import MainProvider from "./MainProvider";
 import * as AppController from "./AppController";
-import config from "../common/config";
 
 import DropDownAlert from "react-native-dropdownalert";
 
@@ -24,63 +23,71 @@ export default class App extends Component {
     }
 
     componentWillMount() {
-        AppController.setGlobalHandler();
+        AppController.init();
     }
 
     componentDidMount() {
-        console.log('App componentDidMount() width:', width);
-        InteractionManager.runAfterInteractions(() => {
-            // ...耗时较长的同步的任务...
-            this.addEventListener();
-            this.showDropDownAlert('info', 'App周期信息', 'App初始化完成');
-        });
-
-
+        console.log('App::componentDidMount() App:',App);
+        this.showDropDownAlert('info', 'App周期信息', 'App初始化完成');
+        this.addEventListener();
     }
 
-    addEventListener = () => {
+    addEventListener() {
         Linking.addEventListener('url', (event) => {
             this.showDropDownAlert('info', '收到外部调用', JSON.stringify(event));
         });
-    };
-
-
-    componentWillUnmount() {
-        console.log('App componentWillUnmount()');
-        this.rmEventListener();
     }
 
-    rmEventListener = () => {
+    removeListener() {
         Linking.removeEventListener('url', (event) => {
-            console.log('App rmEventListener() event:', event);
+            console.log('App::rmEventListener() event:', event);
         });
-    };
+    }
 
 
-    showDropDownAlert = (type, title, msg) => {
-        console.log('App showDropDownAlert() event:', msg);
-        setTimeout(() => {
-            this.dropdown && this.dropdown.alertWithType(type, title, msg);
-        }, 500);
+    showDropDownAlert(type, title, msg,timeout=500) {
+        InteractionManager.runAfterInteractions(() => {
+            setTimeout(() => {
+                if (this.dropdown && this.dropdown.alertWithType) {
+                    this.dropdown && this.dropdown.alertWithType(type, title, msg);
+                } else {
+                    console.log("AppController:showDropDownAlert() App.dropdown is null.");
+                }
+            }, timeout);
+        });
 
-    };
+    }
 
-    closeDropDownAlert(data) {
-        console.log('App closeDropDownAlert() data:', data);
+    closeDropDownAlert(timeout = 2000) {
         setTimeout(() => {
             this.dropdown && this.dropdown.onClose();
-        }, 2000);
+        }, timeout);
     }
 
+
+    setRefAppDropDown(ref){
+        console.log('App::setRefAppDropDown()');
+        if(!this.dropdown){
+            this.dropdown = ref;
+        }
+    }
+
+    componentWillUnmount() {
+        console.log('App::componentWillUnmount()');
+        this.removeListener();
+    }
+
+
     render() {
+        console.log('App::render()');
         return (
-            <View style={AppStyles.container}>
+            <View ref={(ref) => console.log('App::render() set refs.')} style={AppStyles.container}>
                 <MainProvider />
                 <DropDownAlert
-                    ref={(ref) => this.dropdown = ref}
+                    ref={(ref) => this.setRefAppDropDown(ref)}
                     titleNumOfLines={0}
                     messageNumOfLines={0}
-                    closeInterval={4000}
+                    closeInterval={2000}
                     showCancel={false}
                     imageSrc={'https://facebook.github.io/react/img/logo_og.png'}
                     containerStyle={{backgroundColor: '#6441A4'}}

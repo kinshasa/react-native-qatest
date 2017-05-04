@@ -183,7 +183,7 @@ export default class FlatListContainer extends Component {
             <View style={FlatListContainerStyles.container}>
                 <TitleBar title="首页" style={{height:45}}/>
                 {
-                    false &&
+                    true &&
                     this.renderItem(this.simple)
                 }
                 <FlatList

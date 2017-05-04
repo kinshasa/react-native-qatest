@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.Toast;
 
 import com.android.qatest.activity.VerticalPagerActivity;
@@ -27,9 +28,9 @@ public class MainActivity extends ReactActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent intent = new Intent();
+        /*Intent intent = new Intent();
         intent.setClass(this, VerticalPagerActivity.class);
-        context.startActivity(intent);
+        context.startActivity(intent);*/
 
         //bugly自动升级初始化
         //Bugly.init(getApplicationContext(), "f130c8d4d9", false);
@@ -47,6 +48,8 @@ public class MainActivity extends ReactActivity {
             }
         }*/
     }
+
+
 
     @Override
     protected void onDestroy() {

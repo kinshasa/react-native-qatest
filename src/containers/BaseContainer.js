@@ -104,7 +104,7 @@ export default class BaseContainer extends Component {
                     indeterminate
                     progress={0.2}
                     borderWidth={1}
-                    width={config.window.width}
+                    width={Window.width}
                     style={{flex: 1}}/>
             </View>
         );

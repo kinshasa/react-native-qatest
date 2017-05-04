@@ -6,14 +6,9 @@
  * @LifeCycle：https://github.com/kinshasa/react-native-qatest
  */
 
-import React, {Component, PropTypes} from 'react';
-import {
-    StyleSheet,
-    View,
-    Text,
-    Image,
-} from 'react-native';
-import RCTImage from '../../../components/rct/RCTImage';
+import React, {Component} from "react";
+import {Image, StyleSheet, Text, View} from "react-native";
+import RNImage from "../../../components/rct/RNImage";
 
 export default class RCTViewsContainer extends Component {
 
@@ -23,9 +18,9 @@ export default class RCTViewsContainer extends Component {
         return (
             <View style={RCTViewsContainerStyles.container}>
                 <Text onPress={()=>{this.ddd()}}>
-                    测试测试测试测试测试测试测试
+                    测试全局崩溃收集
                 </Text>
-                <RCTImage
+                <RNImage
                     source={[uri]}
                     style={{margin:20,padding:10,width:100,height:100,backgroundColor:'red'}}
                     borderRadius={5}
