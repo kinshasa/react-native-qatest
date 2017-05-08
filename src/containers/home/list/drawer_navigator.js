@@ -1,25 +1,19 @@
 /**
  * @Author: liushaobo2005@163.com
- * @Date: 2017.4.6 上午 11:57
- * @Desc: 公共组件 - ReactNavigationContainer
- * @Name: ReactNavigationContainer.js
+ * @Date: 2017.5.8 下午 2:36
+ * @Desc: 公共组件 - drawer_navigator
+ * @Name: drawer_navigator.js
  * @LifeCycle：https://github.com/kinshasa/react-native-qatest
  */
-
 import {TabNavigator} from "react-navigation";
 import HomePage from "../HomePage";
 import QATest from "../../test/QATest";
 import Setting from "../../set/Setting";
 
 
-export default tab_navigator = TabNavigator(
+export default drawer_navigator = TabNavigator(
     {
-        HomePage: {
-            screen: HomePage,
-            navigationOptions: ({navigation}) => ({
-                title: `HomePage'`,
-            }),
-        },
+        HomePage: {screen: HomePage},
         QATest: {screen: QATest},
         Setting: {
             // `ProfileScreen` is a React component that will be the main content of the screen.
@@ -32,7 +26,7 @@ export default tab_navigator = TabNavigator(
 
             // Optional: Override the `navigationOptions` for the screen
             navigationOptions: ({navigation}) => ({
-                title: `Profile'`,
+                title: `${navigation.state.params.username}'s Profile'`,
             }),
         },
     },

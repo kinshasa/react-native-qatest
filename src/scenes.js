@@ -22,7 +22,7 @@ import HotFixPushyContainer from "./containers/home/list/HotFixPushyContainer";
 import RCTViewsContainer from "./containers/home/list/RCTViewsContainer";
 import tab_navigator from "./containers/home/list/tab_navigator";
 import stack_navigator from "./containers/home/list/stack_navigator";
-import NavHomePage1Container from "./containers/home/list/NavHomePage1Container";
+import drawer_navigator from "./containers/home/list/drawer_navigator";
 import FlatListContainer from "./containers/home/list/FlatListContainer";
 
 import CustomListViewContainer from "./containers/test/list/CustomListViewContainer";
@@ -43,17 +43,13 @@ export default  scenes = Actions.create(
         <Scene role="home" key="GoodsDetailPage" component={GoodsDetailPageContainer} des={"商品详情页"}/>
         <Scene role="home" key="DropDownAlert" component={DropDownAlertContainer}
                des={"DropDownAlertContainer"}/>
-        <Scene role="home" key="HotFixPushy" component={HotFixPushyContainer} des={"react-native-pushy"}/>
+        <Scene role="home" key="HotFixPushy" component={HotFixPushyContainer} des={"HotFixPushy"}/>
         <Scene role="home" key="RCTViewsContainer" component={RCTViewsContainer} des={"RCTViewsContainer"}/>
-        <Scene role="home" key="tab_navigator" component={tab_navigator} des={"tab_navigator"}
-               initial hideNavBar/>
-        <Scene role="home" key="stack_navigator" component={stack_navigator} des={"stack_navigator"}
-               hideNavBar/>
-
-        <Scene role="home" key="NavHomePage1Container" component={NavHomePage1Container}
-               des={"NavHomePage1Container"}/>
+        <Scene role="home" key="tab_navigator" component={tab_navigator} des={"tab_navigator"} hideNavBar/>
+        <Scene role="home" key="stack_navigator" component={stack_navigator} des={"stack_navigator"} hideNavBar
+               initial/>
+        <Scene role="home" key="drawer_navigator" component={drawer_navigator} des={"drawer_navigator"} hideNavBar/>
         <Scene role="home" key="FlatListContainer" component={FlatListContainer} des={"FlatListContainer"}/>
-
         <Scene role="QATest" key="CustomListView" component={CustomListViewContainer} des={"大数据量的ListView"}/>
         <Scene role="QATest" key="Inheritance" component={InheritanceBaseContainer} des={"继承BaseContainer"}/>
         <Scene role="QATest" key="WebView" component={CustomWebViewContainer} des={"webView"}/>
