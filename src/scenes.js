@@ -20,7 +20,8 @@ import NestScrollViewContainer from "./containers/home/list/NestScrollViewContai
 import GoodsDetailPageContainer from "./containers/home/list/GoodsDetailPageContainer";
 import HotFixPushyContainer from "./containers/home/list/HotFixPushyContainer";
 import RCTViewsContainer from "./containers/home/list/RCTViewsContainer";
-import NavHomeScreenContainer from "./containers/home/list/NavHomeScreenContainer";
+import tab_navigator from "./containers/home/list/tab_navigator";
+import stack_navigator from "./containers/home/list/stack_navigator";
 import NavHomePage1Container from "./containers/home/list/NavHomePage1Container";
 import FlatListContainer from "./containers/home/list/FlatListContainer";
 
@@ -44,8 +45,11 @@ export default  scenes = Actions.create(
                des={"DropDownAlertContainer"}/>
         <Scene role="home" key="HotFixPushy" component={HotFixPushyContainer} des={"react-native-pushy"}/>
         <Scene role="home" key="RCTViewsContainer" component={RCTViewsContainer} des={"RCTViewsContainer"}/>
-        <Scene role="home" key="NavHomeScreenContainer" component={NavHomeScreenContainer}
-               des={"NavHomeScreenContainer"}/>
+        <Scene role="home" key="tab_navigator" component={tab_navigator} des={"tab_navigator"}
+               initial hideNavBar/>
+        <Scene role="home" key="stack_navigator" component={stack_navigator} des={"stack_navigator"}
+               hideNavBar/>
+
         <Scene role="home" key="NavHomePage1Container" component={NavHomePage1Container}
                des={"NavHomePage1Container"}/>
         <Scene role="home" key="FlatListContainer" component={FlatListContainer} des={"FlatListContainer"}/>

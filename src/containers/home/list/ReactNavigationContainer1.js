@@ -1,8 +1,8 @@
 /**
  * @Author: liushaobo2005@163.com
  * @Date: 2017.4.6 上午 11:57
- * @Desc: 公共组件 - NavHomeScreenContainer
- * @Name: NavHomeScreenContainer.js
+ * @Desc: 公共组件 - ReactNavigationContainer
+ * @Name: ReactNavigationContainer.js
  * @LifeCycle：https://github.com/kinshasa/react-native-qatest
  */
 
@@ -26,7 +26,7 @@ const LAUNCHER_IMG_SETTING = ()=><Icon name="ios-contact-outline" size={25} colo
 const LAUNCHER_IMG_SETTING_SELECT = ()=><Icon name="ios-contact" size={25} color="#4F8EF7"/>;
 
 
-class NavHomeScreenContainer extends Component {
+class ReactNavigationContainer extends Component {
     static navigationOptions = {
         tabBar: {
             label: 'Home',
@@ -49,7 +49,7 @@ class NavHomeScreenContainer extends Component {
     };
 
     constructor(props, context) {
-        console.log("NavHomeScreenContainer constructor()");
+        console.log("ReactNavigationContainer constructor()");
         super(props, context);
         this.state = {};
     }
@@ -61,11 +61,11 @@ class NavHomeScreenContainer extends Component {
     count = 0;
 
     componentWillMount() {
-        console.log("NavHomeScreenContainer componentWillMount()", new Date());
+        console.log("ReactNavigationContainer componentWillMount()", new Date());
     }
 
     componentDidMount() {
-        console.log("NavHomeScreenContainer componentDidMount()", new Date());
+        console.log("ReactNavigationContainer componentDidMount()", new Date());
     }
 
 
@@ -74,20 +74,20 @@ class NavHomeScreenContainer extends Component {
      * 在这个函数中，可以做一些组件相关的清理工作，例如取消计时器、网络请求等。
      */
     componentWillUnmount() {
-        console.log("NavHomeScreenContainer componentWillUnmount()");
+        console.log("ReactNavigationContainer componentWillUnmount()");
 
     }
 
     render() {
         this.count++;
-        console.log("NavHomeScreenContainer render() count:", this.count);
+        console.log("ReactNavigationContainer render() count:", this.count);
 
         const {navigate} = this.props.navigation;
         return (
-            <View style={NavHomeScreenContainerStyles.container}>
+            <View style={ReactNavigationContainerStyles.container}>
                 <Text>Hello, Navigation!</Text>
                 <View
-                    style={NavHomeScreenContainerStyles.btn}
+                    style={ReactNavigationContainerStyles.btn}
                 >
                     <Button
                         onPress={() => navigate('HomePage1')}
@@ -95,10 +95,10 @@ class NavHomeScreenContainer extends Component {
                     />
                 </View>
                 <View
-                    style={NavHomeScreenContainerStyles.btn}
+                    style={ReactNavigationContainerStyles.btn}
                 >
                     <Button
-                        style={NavHomeScreenContainerStyles.btn}
+                        style={ReactNavigationContainerStyles.btn}
                         onPress={() => navigate('FlatList')}
                         title="FlatListContainer"
                     />
@@ -112,8 +112,8 @@ class NavHomeScreenContainer extends Component {
 
 export default SimpleApp = TabNavigator(
     {
-        Home: {screen: NavHomeScreenContainer},
-        HomePage1: {screen: FlatListContainer},
+        Home: {screen: ReactNavigationContainer},
+        second: {screen: FlatListContainer},
         FlatList: {screen: FlatListContainer},
     },
     {
@@ -122,7 +122,7 @@ export default SimpleApp = TabNavigator(
         tabBarOptions:{activeTintColor:'white',activeBackgroundColor:'green',inactiveBackgroundColor:'red'}
     });
 
-const NavHomeScreenContainerStyles = StyleSheet.create({
+const ReactNavigationContainerStyles = StyleSheet.create({
     container: {
         flex: 1,
     },

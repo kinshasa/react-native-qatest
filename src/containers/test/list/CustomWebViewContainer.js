@@ -34,7 +34,7 @@ export default class CustomWebViewContainer extends Component {
     constructor(props, context) {
         console.log("CustomWebViewContainer constructor()");
         super(props, context);
-        this.state = {uri:'http://m.ds.cn/special_event/mainvenue1703.html?from=singlemessage&isappinstalled=1'};
+        this.state = {uri:'https://github.com/kinshasa'};
     }
 
     /**
@@ -113,17 +113,17 @@ export default class CustomWebViewContainer extends Component {
                             indeterminate
                             progress={0.2}
                             borderWidth={1}
-                            width={Window.width}
+                            width={App.Window.width}
                             style={{position:'absolute'}}
                         />
                     </View>
                 }
                 <WebView
-                    onLoad={()=>{this.setState({load:true})}}
+                    onLoad={() => this.setState({load: true})}
                     //source={{uri: 'http://m.ds.cn/special_event/mainvenue1703.html?from=singlemessage&isappinstalled=1'}}
-                    //source={{uri: 'https://github.com/kinshasa'}}
+                    source={{uri: 'https://github.com/kinshasa'}}
                     //source={{uri: 'https://baidu.com'}}
-                    source={{uri: 'https://m.ds.cn'}}
+                    //source={{uri: 'https://m.ds.cn'}}
                     style={CustomWebViewContainerStyles.webView}/>
             </View>
         );

@@ -68,18 +68,22 @@ class HomePage extends Component {
         console.log("HomePage componentWillUnmount()");
     }
 
+    jumpPage(rowData, sectionId, rowId){
+        try {
+            console.log(rowId);
+            Actions[rowId]()
+        } catch (e) {
+            alert(rowData)
+        }
+    }
+
     renderRow = (rowData, sectionId, rowId) => {
 
         return (
             <View style={HomePageStyles.btnList}>
-                <Icon.Button name="star" backgroundColor="#aaa" onPress={() => {
-                    try {
-                        console.log(rowId);
-                        Actions[rowId]()
-                    } catch (e) {
-                        alert(e.message)
-                    }
-                }}>
+                <Icon.Button
+                    name="star" backgroundColor="#aaa"
+                    onPress={() => this.jumpPage(rowData, sectionId, rowId)}>
                     <Text style={{fontFamily: 'Arial', fontSize: 15}}>{rowData}</Text>
                 </Icon.Button>
             </View>
