@@ -11,7 +11,7 @@ import tab_navigator from "./tab_navigator";
 import Setting from "../../set/Setting";
 tab_navigator.navigationOptions = ({navigation}) => {
     return {
-        header: null,
+        //header: null,
         title: 'Now you see me',
     };
 };
@@ -19,6 +19,9 @@ export default stack_navigator = StackNavigator(
     {
         tab: {
             screen: tab_navigator,
+            navigationOptions:({navigation}) => ({
+                title: `Profile'`,
+            }),
         },
         Setting: {
             // `ProfileScreen` is a React component that will be the main content of the screen.
@@ -31,8 +34,10 @@ export default stack_navigator = StackNavigator(
 
             // Optional: Override the `navigationOptions` for the screen
             navigationOptions: ({navigation}) => ({
-                title: `${navigation.state.params.username}'s Profile'`,
-                header: null,
+                title: `Profile'`,
+                //header: null,
+                headerTitle:'',
+                headerBackTitle:'',
             }),
         },
     }, {

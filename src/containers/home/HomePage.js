@@ -24,6 +24,14 @@ class HomePage extends Component {
 
     static defaultProps = {};
 
+    static navigationOptions = {
+        tabBarLabel: 'Home',
+        // tabBar: () => ({
+        //     label: 'Home',
+        // }),
+
+    };
+
     constructor(props, context) {
         console.log("HomePage constructor()");
         super(props, context);
