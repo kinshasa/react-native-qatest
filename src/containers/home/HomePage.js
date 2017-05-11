@@ -12,7 +12,7 @@ import TitleBar from "../../components/bar/TitleBar";
 import Icon from "react-native-vector-icons/FontAwesome";
 import * as actions from "../../../common/actions";
 import {bindActionCreators} from "redux";
-import {connect} from "react-redux";
+// import {connect} from "react-redux";
 import * as LauncherController from "../LauncherController";
 
 

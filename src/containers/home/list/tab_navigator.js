@@ -30,17 +30,17 @@ export default tab_navigator = TabNavigator({
             navigationOptions: {
                 tabBar: () => ({
                     label: 'HomePage',
-                    title: () => 'HomePagetitle',
+                    title: () => 'HomePage',
                     icon: LAUNCHER_IMG_HOME,
                 }),
             }
         },
         QATest: {
-            screen: QATest,
+            screen: Setting,
             navigationOptions: {
                 tabBar: () => ({
-                    label: 'QATest',
-                    title: () => 'QATesttitle',
+                    label: 'Setting',
+                    title: () => 'Setting',
                     icon: LAUNCHER_IMG_TEST,
                 }),
             }
@@ -57,8 +57,8 @@ export default tab_navigator = TabNavigator({
             // Optional: Override the `navigationOptions` for the screen
             navigationOptions: {
                 tabBar: () => ({
-                    label: 'QATest',
-                    title: () => 'QATest',
+                    label: 'Setting',
+                    title: () => 'Setting',
                     icon: LAUNCHER_IMG_SETTING,
                 }),
             }
