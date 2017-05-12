@@ -5,41 +5,58 @@
  * @Name: LauncherController.js
  * @LifeCycle：https://github.com/kinshasa/react-native-qatest
  */
-import {Alert, InteractionManager} from "react-native";
+import {Alert,Platform,Dimensions} from "react-native";
+import * as Logger from '../common/utils/Logger';
 
-// init App.
-if (!global.App) {
-    global.App = {};
-    global.getApp = getApp;
+preInit();
+
+/**
+ * 1. 预加载，Application生命周期内，只调用一次
+ */
+function preInit() {
+    // init App.
+    if (!global.getApp)
+        global.getApp = getApp;
+
+    //init Crash.
+    initGlobalHandler();
+
+    //init platform.
+    initPlatform();
+
 }
-//init Crash.
-initGlobalHandler();
 
-//init platform.
-initPlatform();
-
-
+/**
+ * 2. 初始化，启动App就会初始化一次
+ */
 export function init() {
-    Log("AppController:init()");
+    Logger.Log("AppController:init()");
 
     //init Http.
-    if (!App.Http) {
-        App.Http = require('../common/utils/Http');
+    if (!getApp().Http) {
+        getApp().Http = require('../common/utils/Http');
     }
 
     //init infoLog.
-    if (!App.infoLog) {
-        App.infoLog = require('infoLog');
+    if (!getApp().infoLog) {
+        getApp().infoLog = require('infoLog');
     }
 
     //init logs.
     initLog();
 
 
-    Log('AppController:init() App', App);
+    Logger.Log('AppController:init() App', getApp());
 }
 
-function getApp(){
+/**
+ * 3. 获取APP单例
+ * @returns {{}|*}
+ */
+function getApp() {
+    if (!global.App) {
+        global.App = {};
+    }
     return global.App;
 }
 
@@ -48,36 +65,36 @@ function getApp(){
  * 设置全局崩溃采集
  */
 function initGlobalHandler() {
-    Log("AppController:initGlobalHandler()");
+    Logger.Log("AppController:initGlobalHandler()");
 
     ErrorUtils.setGlobalHandler(error => {
 
         let msg = error && error.message || 'undefined';
-        Log('AppController:setGlobalHandler()', msg);
-        if (App.msg === msg) {
-            return;
-        }
-        App.msg = msg;
+        Logger.Log('AppController:setGlobalHandler()', msg);
+        errAlert(msg);
+        /*if (getApp().msg === msg) {
+         return;
+         }
+         getApp().msg = msg;
 
-        Alert.alert(
-            '捕捉异常信息',
-            msg,
-            [
-                {text: 'Cancel', onPress: () => Log('Cancel Pressed'), style: 'cancel'},
-                {text: 'OK', onPress: () => Log('OK Pressed')},
-            ],
-        );
+         Alert.alert(
+         '捕捉异常信息',
+         msg,
+         [
+         {text: 'Cancel', onPress: () => Log('Cancel Pressed'), style: 'cancel'},
+         {text: 'OK', onPress: () => Log('OK Pressed')},
+         ],
+         );*/
     });
 }
 
-function Log(...args) {
-    console.log(...args)
-}
-
 function initLog() {
-    Log("AppController:initLog()");
+    Logger.Log("AppController:initLog()");
     //init logUtils.
-    global.Log = Log;
+
+    if (!global.Log)
+        global.Log = Logger.Log;
+
     let config = require('../common/config');
     if (!config._APP_LOG_ || !__DEV__) {
         console = {
@@ -91,17 +108,26 @@ function initLog() {
             },
         };
     }
-    Log("AppController:initLog() test Log() enable.");
+
+    if (!getApp().Logger) {
+        getApp().Logger = Logger;
+    }
+
+    if (!getApp().logQueue) {
+        getApp().logQueue = [];
+    }
+    Logger.Log("AppController:initLog() test Log() enable.");
 }
 
 function initPlatform() {
-    Log("AppController:initPlatform()");
-    let reactNative = require('react-native');
-    if (!App.Platform) {
-        App.Platform = reactNative.Platform;
+    Logger.Log("AppController:initPlatform()");
+    if (!getApp().Platform) {
+        Logger.Log("AppController:initPlatform() init Platform");
+        getApp().Platform = Platform;
     }
-    if (!App.Window) {
-        App.Window = reactNative.Dimensions.get('window');
+    if (!getApp().Window) {
+        Logger.Log("AppController:initPlatform() init Window");
+        getApp().Window = Dimensions.get('window');
     }
 }
 
@@ -127,21 +153,49 @@ export function getAppConstant(key, value) {
     return "";
 }
 
-export function showDropDownAlert(type, title, msg) {
-    InteractionManager.runAfterInteractions(() => {
-        setTimeout(() => {
-            if (App.dropdown && App.dropdown.alertWithType) {
-                App.dropdown && App.dropdown.alertWithType(type, title, msg);
-            } else {
-                Log("AppController:showDropDownAlert() App.dropdown is null.");
-            }
-        }, 500);
-    });
+var isShowAlert = false;
+
+export function errAlert(value) {
+    getApp().msg = value;
+
+    if (isShowAlert)
+        return;
+
+    Alert.alert(
+        '捕捉异常信息',
+        getApp().msg,
+        [
+            {text: 'Cancel', onPress: () => isShowAlert = true, style: 'cancel'},
+            {text: 'OK', onPress: () => isShowAlert = false},
+        ],
+    );
+    isShowAlert = false;
+}
+
+export function alert(value, cancel, ok) {
+    Alert.alert(
+        'Info',
+        value,
+        [
+            {text: 'Cancel', onPress: () => cancel && cancel(), style: 'cancel'},
+            {text: 'OK', onPress: () => ok && ok()},
+        ],
+    );
+}
+
+export function Toast(key, value) {
+
 
 }
 
-export function closeDropDownAlert(timeout = 2000) {
-    setTimeout(() => {
-        App.dropdown && App.dropdown.onClose();
-    }, timeout);
+/**
+ * 初始化日志系统
+ * @returns {Array}
+ */
+export function initLogger() {
+
+    if (!getApp().logger) {
+        getApp().logger = [];
+    }
+    return getApp().logger;
 }

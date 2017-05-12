@@ -7,10 +7,13 @@
  */
 
 import React, {Component, PropTypes} from "react";
-import {Dimensions, StyleSheet, Text, View} from "react-native";
+import {Dimensions, StyleSheet, Text, View, ScrollView} from "react-native";
 
 import TitleBar from "../../components/bar/TitleBar";
 import Icon from "react-native-vector-icons/FontAwesome";
+import JSONTree from 'react-native-json-tree'
+
+
 const {height, width} = Dimensions.get('window');
 
 export default class Setting extends Component {
@@ -30,13 +33,13 @@ export default class Setting extends Component {
         super(props, context);
         this.state = {};
     }
-    
+
     /**
      * 当前组件渲染次数
      * @type {number}
      */
     renderCount = 0;
-    
+
     componentWillMount() {
         console.log("Setting componentWillMount()");
     }
@@ -51,7 +54,7 @@ export default class Setting extends Component {
 
     shouldComponentUpdate(nextProps, nextState) {
         let isUpdate = (this.state != nextState);
-        console.log("Setting shouldComponentUpdate() :" , isUpdate);
+        console.log("Setting shouldComponentUpdate() :", isUpdate);
         return isUpdate;
     }
 
@@ -70,18 +73,27 @@ export default class Setting extends Component {
 
     render() {
         this.renderCount++;
-        console.log("Setting render() renderCount:" , this.renderCount);
+        console.log("Setting render() renderCount:", this.renderCount);
         return (
-            <View {...this.props} style={[SettingStyles.container,this.props.style]}>
+            <View {...this.props} style={[SettingStyles.container, this.props.style]}>
                 <TitleBar
                     label="其他设置"
-                    labelStyle={{backgroundColor:"transparent",color:"black"}}
+                    labelStyle={{backgroundColor: "transparent", color: "black"}}
                     leftView={<Icon.Button name="list-ul" size={25} color="#166AF6" backgroundColor="transparent"
-                                           onPress={()=>{alert("click android logo")}}/>}
+                                           onPress={() => {
+                                               alert("click android logo")
+                                           }}/>}
                     rightView={<Icon.Button name="undo" size={25} color="#999" backgroundColor="transparent"
-                                            onPress={()=>{alert("click share icon")}}/>}
+                                            onPress={() => {
+                                                alert("click share icon")
+                                            }}/>}
                     style={{height: 45}}/>
-                <Text>{JSON.stringify(getApp())}</Text>
+                <ScrollView style={SettingStyles.container}>
+                    <ScrollView horizontal style={SettingStyles.container}>
+                        <JSONTree hideRoot data={getApp()}/>
+                    </ScrollView>
+                </ScrollView>
+
             </View>
         );
     }
@@ -89,7 +101,6 @@ export default class Setting extends Component {
 
 const SettingStyles = StyleSheet.create({
     container: {
-        width,minHeight:height+height,
-        backgroundColor:"#aaa"
+        flex: 1,
     },
 });

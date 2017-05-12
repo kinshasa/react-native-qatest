@@ -7,16 +7,21 @@
  */
 
 import React, {Component} from "react";
-import {PanResponder, StyleSheet, View} from "react-native";
+import {PanResponder, StyleSheet, View, Dimensions,Text} from "react-native";
 import Util from "../../../common/utils/Util";
 
-var _previousLeft = 0;
-var _previousTop = 0;
-
-var lastLeft = 0;
-var lastTop = 0;
+const window = Dimensions.get('window');
 
 const CIRCLE_SIZE = 45;
+
+const BTN_BACKGROUND_COLOR = '#B6B6B6';
+const BTN_BACKGROUND_COLOR_TOUCH = '#838383';
+var _previousLeft = window.width - CIRCLE_SIZE;
+var _previousTop = window.height/2;
+
+var lastLeft = _previousLeft;
+var lastTop = _previousTop;
+
 
 /**
  自定义拖拽菜单
@@ -28,7 +33,7 @@ export default class FloatButton extends Component {
 
         this.state = {
             style: {
-                backgroundColor: '#46b680',
+                backgroundColor: BTN_BACKGROUND_COLOR,
             },
         }
 
@@ -54,7 +59,7 @@ export default class FloatButton extends Component {
         console.log('onPanResponderGrant...');
         this.setState({
             style: {
-                backgroundColor: '#245f42',
+                backgroundColor: BTN_BACKGROUND_COLOR_TOUCH,
                 left: _previousLeft,
                 top: _previousTop,
             }
@@ -82,7 +87,7 @@ export default class FloatButton extends Component {
         //实时更新
         this.setState({
             style: {
-                backgroundColor: '#46b680',
+                backgroundColor: BTN_BACKGROUND_COLOR_TOUCH,
                 left: _previousLeft,
                 top: _previousTop,
             }
@@ -110,6 +115,7 @@ export default class FloatButton extends Component {
 
             this.setState({
                 style: {
+                    backgroundColor: BTN_BACKGROUND_COLOR,
                     left: _previousLeft,
                     top: _previousTop,
                 }
@@ -141,7 +147,9 @@ export default class FloatButton extends Component {
         return (
             <View
                 {...this._panResponder.panHandlers}
-                style={[FloatButtonStyles.circle, this.state.style]}/>
+                style={[FloatButtonStyles.circle, this.state.style]}>
+                <Text style={FloatButtonStyles.text}>Dev</Text>
+            </View>
         );
     }
 }
@@ -151,7 +159,14 @@ const FloatButtonStyles = StyleSheet.create({
         width: CIRCLE_SIZE,
         height: CIRCLE_SIZE,
         borderRadius: CIRCLE_SIZE / 2,
-        backgroundColor: '#46b680',
+        backgroundColor: BTN_BACKGROUND_COLOR,
         position: 'absolute',
+        top: _previousTop,
+        left: _previousLeft,
+        alignItems:'center',
+        justifyContent:'center',
+        opacity:0.7
+    },
+    text:{
     }
 });

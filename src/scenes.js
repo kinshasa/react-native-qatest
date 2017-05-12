@@ -24,6 +24,7 @@ import tab_navigator from "./containers/home/list/tab_navigator";
 import stack_navigator from "./containers/home/list/stack_navigator";
 import drawer_navigator from "./containers/home/list/drawer_navigator";
 import FlatListContainer from "./containers/home/list/FlatListContainer";
+import LoggerContainer from "./containers/home/list/LoggerContainer";
 
 import CustomListViewContainer from "./containers/test/list/CustomListViewContainer";
 import InheritanceBaseContainer from "./containers/test/list/InheritanceBaseContainer";
@@ -48,6 +49,9 @@ export default  scenes = Actions.create(
         <Scene role="home" key="stack_navigator" component={stack_navigator} des="stack_navigator" hideNavBar initial/>
         <Scene role="home" key="drawer_navigator" component={drawer_navigator} des="drawer_navigator" hideNavBar/>
         <Scene role="home" key="FlatListContainer" component={FlatListContainer} des="FlatListContainer"/>
+        <Scene role="home" key="LoggerContainer" component={LoggerContainer} des="LoggerContainer"/>
+
+
         <Scene role="QATest" key="CustomListView" component={CustomListViewContainer} des="大数据量的ListView"/>
         <Scene role="QATest" key="Inheritance" component={InheritanceBaseContainer} des="继承BaseContainer"/>
         <Scene role="QATest" key="WebView" component={CustomWebViewContainer} des="webView"/>

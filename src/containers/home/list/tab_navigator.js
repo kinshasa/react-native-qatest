@@ -36,11 +36,11 @@ export default tab_navigator = TabNavigator({
             }
         },
         QATest: {
-            screen: Setting,
+            screen: QATest,
             navigationOptions: {
                 tabBar: () => ({
-                    label: 'Setting',
-                    title: () => 'Setting',
+                    label: 'QATest',
+                    title: () => 'QATest',
                     icon: LAUNCHER_IMG_TEST,
                 }),
             }
@@ -75,7 +75,7 @@ export default tab_navigator = TabNavigator({
         //- whether to animate when changing tabs
         animationEnabled: true,
         //- whether to lazily render tabs as needed as opposed to rendering them upfront
-        lazyLoad: true,
+        lazyLoad: false,
         tabBarOptions: {
             //tabBarOptions for TabBarBottom (default tab bar on iOS) #
             // - label and icon color of the active tab
