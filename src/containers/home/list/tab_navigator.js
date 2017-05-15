@@ -75,7 +75,7 @@ export default tab_navigator = TabNavigator({
         //- whether to animate when changing tabs
         animationEnabled: true,
         //- whether to lazily render tabs as needed as opposed to rendering them upfront
-        lazyLoad: false,
+        lazyLoad: true,
         tabBarOptions: {
             //tabBarOptions for TabBarBottom (default tab bar on iOS) #
             // - label and icon color of the active tab
