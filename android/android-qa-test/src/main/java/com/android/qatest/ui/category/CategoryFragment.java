@@ -1,4 +1,4 @@
-package com.android.qatest.ui.fragment;
+package com.android.qatest.ui.category;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,7 +11,9 @@ import com.android.qatest.R;
 
 
 /**
- * Created by linhonghong on 2015/8/11.
+ * Created by lshaobo@gmai.com on 2017/5/16.
+ *
+ * 商品二级分类
  */
 public class CategoryFragment extends Fragment {
 
