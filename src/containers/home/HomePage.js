@@ -78,8 +78,14 @@ class HomePage extends Component {
 
     jumpPage(rowData, sectionId, rowId){
         try {
+            if(this.props.navigation){
+                const { navigate } = this.props.navigation;
+                navigate(rowId);
+            }else{
+                Actions[rowId]()
+            }
+
             console.log(rowId);
-            Actions[rowId]()
         } catch (e) {
             alert(rowData)
         }

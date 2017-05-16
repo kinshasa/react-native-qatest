@@ -12,6 +12,7 @@ import {Dimensions, StyleSheet, Text, View, ScrollView} from "react-native";
 import TitleBar from "../../components/bar/TitleBar";
 import Icon from "react-native-vector-icons/FontAwesome";
 import JSONTree from 'react-native-json-tree'
+import List from '../home/list/index'
 
 
 const {height, width} = Dimensions.get('window');
@@ -29,7 +30,7 @@ export default class Setting extends Component {
     static defaultProps = {};
 
     constructor(props, context) {
-        console.log("Setting constructor()");
+        console.log("Setting::constructor()");
         super(props, context);
         this.state = {};
     }
@@ -41,39 +42,41 @@ export default class Setting extends Component {
     renderCount = 0;
 
     componentWillMount() {
-        console.log("Setting componentWillMount()");
+        console.log("Setting::componentWillMount()");
     }
 
     componentDidMount() {
-        console.log("Setting componentDidMount()");
+        console.log("Setting::componentDidMount()");
     }
 
     componentWillReceiveProps(newProps) {
-        console.log("Setting componentWillReceiveProps()");
+        console.log("Setting::componentWillReceiveProps()");
     }
 
     shouldComponentUpdate(nextProps, nextState) {
         let isUpdate = (this.state != nextState);
-        console.log("Setting shouldComponentUpdate() :", isUpdate);
+        console.log("Setting::shouldComponentUpdate() :", isUpdate);
         return isUpdate;
     }
 
     componentWillUpdate(nextProps, nextState) {
-        console.log("Setting componentWillUpdate()");
+        console.log("Setting::componentWillUpdate()");
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log("Setting componentDidUpdate()");
+        console.log("Setting::componentDidUpdate()");
     }
 
     componentDidUnMount() {
-        console.log("Setting componentDidUnMount()");
+        console.log("Setting::componentDidUnMount()");
 
     }
 
     render() {
         this.renderCount++;
-        console.log("Setting render() renderCount:", this.renderCount);
+        console.log("Setting::render() renderCount:", this.renderCount);
+        //console.log("Setting::render() List:", List.AnimationDemoContainer);
+
         return (
             <View {...this.props} style={[SettingStyles.container, this.props.style]}>
                 <TitleBar

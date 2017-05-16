@@ -7,22 +7,75 @@
  */
 
 import {StackNavigator} from "react-navigation";
-import tab_navigator from "./tab_navigator";
+
 import Setting from "../../set/Setting";
-tab_navigator.navigationOptions = ({navigation}) => {
-    return {
-        //header: null,
-        title: 'Now you see me',
-    };
-};
+import AnimationDemoContainer from './AnimationDemoContainer';
+import CartAnimationContainer from './CartAnimationContainer';
+import drawer_navigator from './drawer_navigator';
+import DropDownAlertContainer from './DropDownAlertContainer';
+import FlatListContainer from './FlatListContainer';
+import GoodsDetailPageContainer from './GoodsDetailPageContainer';
+import HotFixPushyContainer from './HotFixPushyContainer';
+import IconCollectContainer from './IconCollectContainer';
+import LayoutXYDemoContainer from './LayoutXYDemoContainer';
+import LoggerContainer from './LoggerContainer';
+import NestScrollViewContainer from './NestScrollViewContainer';
+import RCTViewsContainer from './RCTViewsContainer';
+import RNTabViewContainer from './RNTabViewContainer';
+// import stack_navigator from'./stack_navigator';
+import SwipeListContainer from'./SwipeListContainer';
+import tab_navigator from'./tab_navigator';
+import TabViewContainer from'./TabViewContainer';
+import VerticalViewPagerContainer from'./VerticalViewPagerContainer';
+
 export default stack_navigator = StackNavigator(
     {
         tab: {
             screen: tab_navigator,
             navigationOptions:({navigation}) => ({
-                title: `Profile'`,
+                title: 'tab_navigator',
+                header:null,
             }),
         },
+        RNTabViewContainer: {
+            screen: RNTabViewContainer,
+            navigationOptions: ({navigation}) => ({
+                title: 'RNTabViewContainer1',
+                //header: null,
+                headerTitle:'RNTabViewContainer',
+                headerBackTitle:'<<',
+            }),
+        },
+        AnimationDemoContainer: {
+            screen: RNTabViewContainer,
+            navigationOptions: ({navigation}) => ({ headerTitle:'AnimationDemoContainer',headerBackTitle:'<<',}),
+        },
+        CartAnimationContainer: {
+            screen: CartAnimationContainer,
+            navigationOptions: ({navigation}) => ({ headerTitle:'CartAnimationContainer',headerBackTitle:'<<',}),
+        },
+        drawer_navigator: {
+            screen: drawer_navigator,
+            navigationOptions: ({navigation}) => ({ headerTitle:'drawer_navigator',headerBackTitle:'<<',}),
+        },
+        DropDownAlertContainer: {
+            screen: DropDownAlertContainer,
+            navigationOptions: ({navigation}) => ({ headerTitle:'DropDownAlertContainer',headerBackTitle:'<<',}),
+        },
+        FlatListContainer: {
+            screen: FlatListContainer,
+            navigationOptions: ({navigation}) => ({ headerTitle:'FlatListContainer',headerBackTitle:'<<',}),
+        },
+        GoodsDetailPageContainer: {
+            screen: GoodsDetailPageContainer,
+            navigationOptions: ({navigation}) => ({ headerTitle:'GoodsDetailPageContainer',headerBackTitle:'<<',}),
+        },
+        HotFixPushyContainer: {
+            screen: HotFixPushyContainer,
+            navigationOptions: ({navigation}) => ({ headerTitle:'HotFixPushyContainer',headerBackTitle:'<<',}),
+        },
+
+
         Setting: {
             // `ProfileScreen` is a React component that will be the main content of the screen.
             screen: Setting,
@@ -34,10 +87,10 @@ export default stack_navigator = StackNavigator(
 
             // Optional: Override the `navigationOptions` for the screen
             navigationOptions: ({navigation}) => ({
-                title: `Profile'`,
+                title: 'Setting',
                 //header: null,
-                headerTitle:'',
-                headerBackTitle:'',
+                headerTitle:'Setting',
+                headerBackTitle:'<<',
             }),
         },
     }, {
@@ -54,8 +107,8 @@ export default stack_navigator = StackNavigator(
         //Visual options:
         // - Defines the style for rendering and transitions:
         mode: 'card',
-        //- Specifies how the header should be rendered:
-        headerMode: 'none',
+        //- Specifies how the header should be rendered:{float,screen,none,}
+        headerMode: 'screen',
         //- Use this prop to override or extend the default style for an individual card in stack.
         cardStyle: {},
         // - Function to return an object that overrides default screen transitions.

@@ -33,8 +33,8 @@ import CustomWebViewContainer from "./containers/test/list/CustomWebViewContaine
 export default  scenes = Actions.create(
     <Scene key="root">
         <Scene role="root" key="Launcher" component={Launcher} des="启动器" hideNavBar/>
-        <Scene role="home" key="CartAnimation" component={CartAnimationContainer} des="购物车动画" hideNavBar/>
-        <Scene role="home" key="AnimationDemo" component={AnimationDemoContainer} des="动画Demo" hideNavBar/>
+        <Scene role="home" key="CartAnimationContainer" component={CartAnimationContainer} des="购物车动画" hideNavBar/>
+        <Scene role="home" key="AnimationDemoContainer" component={AnimationDemoContainer} des="动画Demo" hideNavBar/>
         <Scene role="home" key="LayoutXYDemo" component={LayoutXYDemoContainer} des="Layout布局" hideNavBar/>
         <Scene role="home" key="IconCollect" component={IconCollectContainer} des="图标库" hideNavBar={false}/>
         <Scene role="home" key="SwipeList" component={SwipeListContainer} des={"Swipe组件"}/>
@@ -46,7 +46,7 @@ export default  scenes = Actions.create(
         <Scene role="home" key="HotFixPushy" component={HotFixPushyContainer} des="HotFixPushy"/>
         <Scene role="home" key="RCTViewsContainer" component={RCTViewsContainer} des="RCTViewsContainer"/>
         <Scene role="home" key="tab_navigator" component={tab_navigator} des="tab_navigator" hideNavBar/>
-        <Scene role="home" key="stack_navigator" component={stack_navigator} des="stack_navigator" hideNavBar initial/>
+        <Scene role="home" key="stack_navigator" component={stack_navigator} des="stack_navigator" hideNavBar /*initial*//>
         <Scene role="home" key="drawer_navigator" component={drawer_navigator} des="drawer_navigator" hideNavBar/>
         <Scene role="home" key="FlatListContainer" component={FlatListContainer} des="FlatListContainer"/>
         <Scene role="home" key="LoggerContainer" component={LoggerContainer} des="LoggerContainer"/>
