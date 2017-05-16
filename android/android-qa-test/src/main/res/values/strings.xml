@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Android-JD-Client</string>
+    <string name="app_name">QATest</string>
     <string name="title_nav_home">首页</string>
     <string name="title_nav_category">分类</string>
     <string name="title_nav_find">发现</string>

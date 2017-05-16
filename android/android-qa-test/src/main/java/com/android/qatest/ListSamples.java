@@ -39,7 +39,7 @@ public class ListSamples extends ListActivity {
         List<Map<String, Object>> myData = new ArrayList<Map<String, Object>>();
 
         Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
-        mainIntent.addCategory("com.android.demo.SAMPLE");
+        mainIntent.addCategory("com.android.qatest.list");
 
         PackageManager pm = getPackageManager();
         List<ResolveInfo> list = pm.queryIntentActivities(mainIntent, 0);
