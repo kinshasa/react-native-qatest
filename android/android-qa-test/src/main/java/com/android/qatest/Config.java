@@ -8,5 +8,15 @@ package com.android.qatest;
 
 public class Config {
 
+    /**
+     * 点击扩展ListView筛选页，用于商品列表筛选
+     */
+    static final String GoodsListMenu = "https://github.com/JayFang1993/DropDownMenu";
+
+    /**
+     * 点击浮出列表按钮
+     */
+    static final String BoomMenu = "https://github.com/Nightonke/BoomMenu";
+
 
 }

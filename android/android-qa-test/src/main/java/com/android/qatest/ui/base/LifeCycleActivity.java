@@ -1,4 +1,4 @@
-package com.android.qatest.ui;
+package com.android.qatest.ui.base;
 
 import android.content.Context;
 import android.content.Intent;

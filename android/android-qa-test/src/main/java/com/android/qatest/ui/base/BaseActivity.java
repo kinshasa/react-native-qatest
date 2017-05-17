@@ -1,4 +1,4 @@
-package com.android.qatest.ui;
+package com.android.qatest.ui.base;
 
 /**
  * Created by liusp@gagc.com.cn on 2016.10.25.

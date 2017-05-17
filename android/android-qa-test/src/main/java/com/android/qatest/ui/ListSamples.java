@@ -1,4 +1,4 @@
-package com.android.qatest;
+package com.android.qatest.ui;
 
 import java.text.Collator;
 import java.util.ArrayList;
