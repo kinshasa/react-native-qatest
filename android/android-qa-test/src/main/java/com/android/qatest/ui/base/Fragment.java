@@ -1,4 +1,4 @@
-package com.android.qatest.ui.fragment;
+package com.android.qatest.ui.base;
 
 import android.app.Activity;
 

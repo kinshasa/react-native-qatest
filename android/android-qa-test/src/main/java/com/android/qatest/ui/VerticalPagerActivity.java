@@ -1,4 +1,4 @@
-package com.android.qatest.activity;
+package com.android.qatest.ui;
 
 import android.content.Context;
 import android.os.Bundle;

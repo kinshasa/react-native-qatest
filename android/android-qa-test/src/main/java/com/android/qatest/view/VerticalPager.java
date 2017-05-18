@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.android.qatest.R;
-import com.android.qatest.activity.ContentFragment;
-import com.android.qatest.activity.ContentFragmentAdapter;
+import com.android.qatest.ui.ContentFragment;
+import com.android.qatest.ui.ContentFragmentAdapter;
 
 import me.kaelaela.verticalviewpager.VerticalViewPager;
 

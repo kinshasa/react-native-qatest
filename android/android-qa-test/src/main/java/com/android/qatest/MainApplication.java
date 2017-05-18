@@ -34,8 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
                     new VectorIconsPackage(),
-                    //react-native-pushy
-                    new UpdatePackage(),
+                    new UpdatePackage(),//react-native-pushy
                     new RCTImagePackage(),
                     new RCTViewPackage(),
                     new RNSpinkitPackage()

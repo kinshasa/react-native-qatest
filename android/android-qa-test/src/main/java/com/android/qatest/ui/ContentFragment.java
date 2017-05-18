@@ -1,4 +1,4 @@
-package com.android.qatest.activity;
+package com.android.qatest.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

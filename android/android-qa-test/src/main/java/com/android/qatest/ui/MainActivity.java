@@ -108,7 +108,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
      */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
+        /*if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (System.currentTimeMillis() - time > 1000) {
                 Toast.makeText(this, "再按一次返回桌面", Toast.LENGTH_SHORT).show();
                 time = System.currentTimeMillis();
@@ -120,8 +120,8 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
             return true;
         } else {
             return super.onKeyDown(keyCode, event);
-        }
-
+        }*/
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override

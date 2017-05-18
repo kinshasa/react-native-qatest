@@ -82,7 +82,7 @@
         </activity>
         <!--垂直ViewPager-->
         <activity
-            android:name=".activity.VerticalViewPagerActivity"
+            android:name=".ui.VerticalViewPagerActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:label="垂直ViewPager"
             android:launchMode="singleTop">
@@ -93,7 +93,7 @@
         </activity>
         <!--垂直ViewPager2-->
         <activity
-            android:name=".activity.VerticalPagerActivity"
+            android:name=".ui.VerticalPagerActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:label="垂直ViewPager2"
             android:launchMode="singleTop">
