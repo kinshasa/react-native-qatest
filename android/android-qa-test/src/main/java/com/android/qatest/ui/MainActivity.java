@@ -1,6 +1,5 @@
 package com.android.qatest.ui;
 
-import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,7 +14,7 @@ import com.android.qatest.R;
 import com.android.qatest.ui.base.BaseActivity;
 import com.lhh.apst.library.AdvancedPagerSlidingTabStrip;
 
-import com.android.qatest.ui.fragment.CartFragment;
+import com.android.qatest.ui.cart.CartFragment;
 import com.android.qatest.ui.category.CategoryFragment;
 import com.android.qatest.ui.fragment.MineFragment;
 import com.android.qatest.ui.fragment.NewsFragment;

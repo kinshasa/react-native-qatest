@@ -157,6 +157,9 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.0.0'
     compile 'com.facebook.react:react-native:+'
 
+    //
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
     // 多dex配置
     //support multidex
     compile 'com.android.support:multidex:1.0.1'

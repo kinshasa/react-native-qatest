@@ -21,7 +21,7 @@ public class Lw {
     private static final char SHOW_WARN_LOG = 0x08;//0000 1000	0x01 << 3
     private static final char SHOW_ERROR_LOG = 0x16;//0001 0000	0x01 << 4
     private static final char SHOW_NONE_LOG = 0x32;//0000 0000
-    private static final int SDCARD_LOG_FILE_SAVE_DAYS = 2;
+    private static final int SDCARD_LOG_FILE_SAVE_DAYS = SHOW_NONE_LOG;
     private static final boolean _APP_ROUTE = false;
    
     /*
