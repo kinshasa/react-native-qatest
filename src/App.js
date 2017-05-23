@@ -96,7 +96,10 @@ export default class App extends Component {
                     }}
                     onClose={(data) => {
                     }}/>
-                <FloatButton/>
+                {
+                    false &&
+                    <FloatButton style={{}}/>
+                }
             </View>
         );
     }

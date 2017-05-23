@@ -106,6 +106,7 @@ export default class CustomListViewContainer extends Component {
      */
     componentWillUnmount() {
         console.log("CustomListViewContainer componentWillUnmount()");
+        this.data = null;
 
     }
 

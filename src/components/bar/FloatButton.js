@@ -147,7 +147,7 @@ export default class FloatButton extends Component {
         return (
             <View
                 {...this._panResponder.panHandlers}
-                style={[FloatButtonStyles.circle, this.state.style]}>
+                style={[FloatButtonStyles.circle, this.state.style,this.props.style]}>
                 <Text style={FloatButtonStyles.text}>Dev</Text>
             </View>
         );
