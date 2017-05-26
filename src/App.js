@@ -16,6 +16,19 @@ import FloatButton from './components/bar/FloatButton';
 
 export default class App extends Component {
 
+    /**
+     * 父组件传入的属性值
+     * @type {{style: *, account: *, name: *, isTrue: *, callback: *}}
+     */
+    static propTypes = {};
+
+    /**
+     * 父组件传入的数据
+     * @type {{data: {}}}
+     */
+    static defaultProps = {
+        data: {}
+    };
 
     constructor(props) {
         super(props);
@@ -28,7 +41,7 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-        Log('App::componentDidMount()');
+        Log('App::componentDidMount() this.props.key1:',this.props.key1);
         this.showDropDownAlert('info', 'App周期信息', 'App初始化完成');
         this.addEventListener();
     }
