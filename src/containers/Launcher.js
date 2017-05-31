@@ -16,6 +16,7 @@ import HomePage from "../containers/home/HomePage";
 import Setting from "./set/Setting";
 import QATest from "./test/QATest";
 import Icon from "react-native-vector-icons/Ionicons";
+import FloatButton from '../components/bar/FloatButton';
 
 const LAUNCHER_IMG_HOME = ()=><Icon name="ios-compass-outline" size={25} color="black"/>;
 const LAUNCHER_IMG_HOME_SELECT = ()=><Icon name="ios-compass" size={25} color="#166AF6"/>;
@@ -173,16 +174,19 @@ export default class Launcher extends Component {
      */
     renderTable() {
         return (
-            <TabNavigator
-                tabBarShadowStyle={{backgroundColor:"black"}}
-                sceneStyle={LauncherStyles.sceneStyle}
-                tabBarStyle={LauncherStyles.tabBarStyle}
-                hidesTabTouch={true}
-            >
-                {this.renderTabItem("T1", "组件开发", LAUNCHER_IMG_HOME, LAUNCHER_IMG_HOME_SELECT,<HomePage />,0)}
-                {this.renderTabItem("T2", "品质测试", LAUNCHER_IMG_TEST, LAUNCHER_IMG_TEST_SELECT, <QATest />,0)}
-                {this.renderTabItem("T3", "其他设置", LAUNCHER_IMG_SETTING, LAUNCHER_IMG_SETTING_SELECT, <Setting />,1)}
-            </TabNavigator>
+            <View style={{flex:1}}>
+                <TabNavigator
+                    tabBarShadowStyle={{backgroundColor:"black"}}
+                    sceneStyle={LauncherStyles.sceneStyle}
+                    tabBarStyle={LauncherStyles.tabBarStyle}
+                    hidesTabTouch={true}
+                >
+                    {this.renderTabItem("T1", "组件开发", LAUNCHER_IMG_HOME, LAUNCHER_IMG_HOME_SELECT,<HomePage />,0)}
+                    {this.renderTabItem("T2", "品质测试", LAUNCHER_IMG_TEST, LAUNCHER_IMG_TEST_SELECT, <QATest />,0)}
+                    {this.renderTabItem("T3", "其他设置", LAUNCHER_IMG_SETTING, LAUNCHER_IMG_SETTING_SELECT, <Setting />,1)}
+                </TabNavigator>
+                <FloatButton />
+            </View>
         );
     }
 

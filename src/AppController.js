@@ -5,8 +5,9 @@
  * @Name: LauncherController.js
  * @LifeCycle：https://github.com/kinshasa/react-native-qatest
  */
-import {Alert,Platform,Dimensions} from "react-native";
+import {Alert,Platform,Dimensions,AsyncStorage} from "react-native";
 import * as Logger from '../common/utils/Logger';
+import Storage from 'react-native-storage';
 
 preInit();
 
@@ -45,6 +46,8 @@ export function init() {
     //init logs.
     initLog();
 
+    //init Storage
+    initStorage();
 
     Logger.Log('AppController:init() App', getApp());
 }
@@ -129,6 +132,18 @@ function initPlatform() {
         Logger.Log("AppController:initPlatform() init Window");
         getApp().Window = Dimensions.get('window');
     }
+}
+
+function initStorage() {
+    if (!getApp().storage) {
+        getApp().storage = new Storage({
+            size: 1000,
+            storageBackend: AsyncStorage,
+            defaultExpires: null,
+            enableCache: true
+        });
+    }
+
 }
 
 /**

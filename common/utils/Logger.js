@@ -33,25 +33,6 @@ export function getLog() {
     return getApp().logQueue;
 }
 
-class OneLog {
-
-    tag;
-    data;
-
-    setTag(t){
-        this.tag = t;
-    }
-
-    getTag(){
-        return this.tag;
-    }
-
-    setData(d){
-        this.data = d;
-    }
-
-    getData(){
-        return this.data;
-    }
+export function cleanLog() {
 
 }

@@ -77,6 +77,16 @@ export default class Setting extends Component {
         console.log("Setting::render() renderCount:", this.renderCount);
         //console.log("Setting::render() List:", List.AnimationDemoContainer);
 
+        let str = {};
+        let mobile = ['13710000','132','133',144,144,144];
+
+        mobile.map((idx,i)=>{
+            console.log("Setting::render() idx:", idx);
+            str[idx] = i;
+        });
+
+        console.log("Setting::render() str:",JSON.stringify(str));
+
         return (
             <View {...this.props} style={[SettingStyles.container, this.props.style]}>
                 <TitleBar

@@ -13,7 +13,8 @@ import {
     Text,
     TouchableNativeFeedback,
     Dimensions,
-    ScrollView
+    ScrollView,
+    StatusBar
 } from 'react-native';
 
 let {width: deviceWidth, height: deviceHeight} = Dimensions.get('window');
@@ -214,6 +215,9 @@ export default class LayoutXYDemoContainer extends Component {
                         </View>
                     </ScrollView>
                 </View>
+                <View style={[LayoutXYDemoContainerStyles.child1,{position:'absolute',bottom:0}]}>
+                    <Text style={{position:'absolute',bottom:0}}>2222222222222222222222222</Text>
+                </View>
             </View>
         );
     }
@@ -222,7 +226,9 @@ export default class LayoutXYDemoContainer extends Component {
 
 const LayoutXYDemoContainerStyles = StyleSheet.create({
     container: {
-        flex: 1,
+        height:getApp().Window.height-StatusBar.currentHeight,
+        width:getApp().Window.width,
+        backgroundColor:'red'
     },
     body: {
         flex: 1,
