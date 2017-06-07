@@ -33,6 +33,8 @@ public class CategoryFragment extends Fragment {
     private ClassifyMoreAdapter classifyMoreAdapter;
     private ClassifyMainAdapter classifyMainAdapter;
 
+    private CategoryInteractor interactor;
+
     private int mainSelectPostion = 0;
 
 
@@ -44,7 +46,6 @@ public class CategoryFragment extends Fragment {
 
     public static CategoryFragment instance() {
         CategoryFragment view = new CategoryFragment();
-
 
         return view;
     }

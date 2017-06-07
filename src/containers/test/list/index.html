@@ -1,0 +1,68 @@
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>js调用java</title>
+</head>
+<body>
+<p>
+
+</p>
+
+<p>
+
+</p>
+
+<p>
+    <input type="button" value="登录" onclick="onLogin();"
+    />
+</p>
+<p>
+    <input type="button" value="注册" onclick="onRegister();"
+    />
+</p>
+
+<p>
+    <input type="button" value="用户信息" onclick="getUserInfo();"
+    />
+</p>
+
+<p>
+    <input type="file" value="打开文件"/>
+</p>
+</body>
+<script>
+
+    (function () {
+        var count = 0;
+        document.addEventListener('message', function (e) {
+            //console.log("Browser::message()",e);
+            count++;
+            document.getElementsByTagName('p')[0].innerHTML = 'Messages recieved from React Native: ' + count;
+            document.getElementsByTagName('p')[1].innerHTML = e.data;
+        });
+
+        document.getElementsByTagName('input')[0].addEventListener('click', function () {
+            window.postMessage('getElementsByTagName');
+        });
+    })();
+
+    function onLogin() {
+        //console.log("Browser::onLogin()");
+        let params = {username: 'admin', passwd: '123456'};
+        window.postMessage(JSON.stringify({action: 'onLogin', params}));
+    }
+
+    function onRegister() {
+        //console.log("Browser::onLogin()");
+        let params = {username: 'admin', passwd: '123456'};
+        window.postMessage(JSON.stringify({action: 'onRegister', params}));
+    }
+
+    function getUserInfo() {
+        //console.log("Browser::onLogin()");
+        let params = {username: 'admin', passwd: '123456'};
+        window.postMessage(JSON.stringify({action: 'getUserInfo', params}));
+    }
+
+</script>
+</html>

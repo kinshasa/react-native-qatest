@@ -47,7 +47,7 @@
         <!--MainActivity程序入口-->
         <activity
             android:name=".ui.MainActivity"
-            android:label="QATest程序入口">
+            android:label="主程序入口">
             <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,0 +1,121 @@
+<html lang="en">
+<head>
+    <title>js调用java</title>
+</head>
+<body>
+<p>
+    <xmp id="show">
+    </xmp>
+</p>
+
+
+<p>
+    <input type="button"  value="登录" onclick="onLogin();"
+    />
+</p>
+<p>
+    <input type="button"  value="注册" onclick="onRegister();"
+    />
+</p>
+
+<p>
+    <input type="button"  value="用户信息" onclick="getUserInfo();"
+    />
+</p>
+
+<p>
+    <input type="file" value="打开文件" />
+</p>
+</body>
+<script>
+
+
+    function onLogin() {
+        console.log("Browser callback:"+window.WebViewJavascriptBridge);
+
+        //请求原生登录方法
+        window.WebViewJavascriptBridge.callHandler(
+            'osOnLogin'
+            , {'mobile': '13700000000'}
+            , function(responseData) {
+                console.log("Browser :"+responseData);
+                document.getElementById("show").innerHTML = "登录信息 = " + responseData
+            }
+        );
+
+    }
+
+    function onRegister() {
+
+        //请求原生注册方法
+        window.WebViewJavascriptBridge.callHandler(
+            'osOnRegister'
+            , {'mobile': '13700000000'}
+            , function(responseData) {
+                console.log("Browser callback:"+responseData);
+                document.getElementById("show").innerHTML = "注册信息 = " + responseData
+            }
+        );
+    }
+
+    function getUserInfo() {
+        console.log('getUserInfo');
+        //请求原生获取用户信息方法
+        window.WebViewJavascriptBridge.callHandler(
+            'osGetUserInfo'
+            , {'param': '中文测试'}
+            , function(responseData) {
+                console.log("Browser callback:"+responseData);
+                document.getElementById("show").innerHTML = "用户信息: " + responseData
+            }
+        );
+    }
+
+    //JSBridge初始化监听
+    function connectWebViewJavascriptBridge(callback) {
+        if (window.WebViewJavascriptBridge) {
+            console.log('Browser window.WebViewJavascriptBridge init success');
+            callback(WebViewJavascriptBridge)
+        } else {
+            console.log('Browser window.WebViewJavascriptBridge not init success');
+            document.addEventListener(
+                'WebViewJavascriptBridgeReady'
+                , function() {
+                    //隐藏标题栏，获取用户信息
+                    callback(WebViewJavascriptBridge)
+                },
+                false
+            );
+        }
+    }
+
+    //注入JS接口供原生调用
+    connectWebViewJavascriptBridge(function(bridge) {
+
+        //注册Bridge默认方法，不可缺少
+        bridge.init(function(message, responseCallback) {
+            console.log('Browser JS got a message', message);
+            var data = {
+                'Javascript Responds': '测试中文!'
+            };
+            console.log('Browser JS responding with', message);
+            responseCallback(data);
+        });
+
+        /**以下为新增JS接口*/
+        getUserInfo();
+        //提供原生调用的更新接口
+        bridge.registerHandler("Browser jsUpdateUserInfo", function(data, responseCallback) {
+
+            document.getElementById("show").innerHTML = ("更新用户信息： = " + data);
+
+            //获取原生传来的数据data，处理给原生的回调
+            if(data == ""){
+                responseCallback("jsUpdateUserInfo更新用户信息失败");
+            }else{
+                responseCallback("jsUpdateUserInfo更新用户信息成功");
+            }
+        });
+    })
+</script>
+</html>

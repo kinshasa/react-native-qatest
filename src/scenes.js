@@ -29,6 +29,8 @@ import LoggerContainer from "./containers/home/list/LoggerContainer";
 import CustomListViewContainer from "./containers/test/list/CustomListViewContainer";
 import InheritanceBaseContainer from "./containers/test/list/InheritanceBaseContainer";
 import CustomWebViewContainer from "./containers/test/list/CustomWebViewContainer";
+import InjectWebViewContainer from "./containers/test/list/InjectWebViewContainer";
+import WebViewExample from "./containers/test/list/WebViewExample";
 
 export default  scenes = Actions.create(
     <Scene key="root">
@@ -46,7 +48,7 @@ export default  scenes = Actions.create(
         <Scene role="home" key="HotFixPushy" component={HotFixPushyContainer} des="HotFixPushy"/>
         <Scene role="home" key="RCTViewsContainer" component={RCTViewsContainer} des="RCTViewsContainer"/>
         <Scene role="home" key="tab_navigator" component={tab_navigator} des="tab_navigator" hideNavBar/>
-        <Scene role="home" key="stack_navigator" component={stack_navigator} des="stack_navigator" hideNavBar /*initial*//>
+        <Scene role="home" key="stack_navigator" component={stack_navigator} des="stack_navigator" hideNavBar/>
         <Scene role="home" key="drawer_navigator" component={drawer_navigator} des="drawer_navigator" hideNavBar/>
         <Scene role="home" key="FlatListContainer" component={FlatListContainer} des="FlatListContainer"/>
         <Scene role="home" key="LoggerContainer" component={LoggerContainer} des="LoggerContainer"/>
@@ -55,5 +57,7 @@ export default  scenes = Actions.create(
         <Scene role="QATest" key="CustomListView" component={CustomListViewContainer} des="大数据量的ListView"/>
         <Scene role="QATest" key="Inheritance" component={InheritanceBaseContainer} des="继承BaseContainer"/>
         <Scene role="QATest" key="WebView" component={CustomWebViewContainer} des="webView"/>
+        <Scene role="QATest" key="InjectWebView" component={InjectWebViewContainer} des={'InjectWebViewContainer'}/>
+        <Scene role="QATest" key="WebViewExample" component={WebViewExample} des={'WebViewExample'}/>
     </Scene>
 );

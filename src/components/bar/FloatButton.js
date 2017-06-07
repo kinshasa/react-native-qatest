@@ -146,7 +146,7 @@ export default class FloatButton extends Component {
         }
     }
 
-    componentWillMount(evt, gestureState) {
+    componentWillMount() {
         this._panResponder = PanResponder.create({
             onStartShouldSetPanResponder: this.onStartShouldSetPanResponder,
             onMoveShouldSetPanResponder: this.onMoveShouldSetPanResponder,
