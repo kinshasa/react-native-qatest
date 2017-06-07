@@ -12,15 +12,35 @@ import {
     View,
     Text,
     WebView,
-    TouchableHighlight
+    TouchableHighlight,
+    TouchableNativeFeedback
 } from 'react-native';
 import TitleBar from '../../../components/bar/TitleBar'
+// import Menu, {MenuContext, MenuOptions, MenuOption, MenuTrigger} from 'react-native-menu';
+import {MenuContext, Menu, MenuOptions, MenuOption, MenuTrigger,} from 'react-native-popup-menu';
 
+
+//申明更改原有 postMessage 函数为 patchedPostMessage
+const patchPostMessageFunction = function () {
+    var originalPostMessage = window.postMessage;
+
+    var patchedPostMessage = function (message, targetOrigin, transfer) {
+        originalPostMessage(message, targetOrigin, transfer);
+    };
+
+    patchedPostMessage.toString = function () {
+        return String(Object.hasOwnProperty).replace('hasOwnProperty', 'postMessage');
+    };
+
+    window.postMessage = patchedPostMessage;
+};
+
+//注入脚本
+const patchPostMessageJsCode = '(' + String(patchPostMessageFunction) + ')();';
 
 export default class InjectWebViewContainer extends Component {
 
-    static propTypes = {
-    };
+    static propTypes = {};
 
     static defaultProps = {
         data: {}
@@ -55,15 +75,19 @@ export default class InjectWebViewContainer extends Component {
         this.count++;
         console.log("InjectWebViewContainer render() count:", this.count);
         return (
-            <View style={InjectWebViewContainerStyles.container}>
-                <TitleBar label={'InjectWebViewContainer'}/>
-                <TouchableHighlight onPress={this.postMessage} underlayColor='transparent'>
-                    <Text>Send message to WebView</Text>
-                </TouchableHighlight>
+            <MenuContext style={InjectWebViewContainerStyles.container}>
+                <TitleBar
+                    label={'InjectWebViewContainer'}
+                    leftView={this.renderTitleLeftView()}
+                    rightView={this.renderTitleRightView()}
+                />
                 <WebView
                     ref='injectWeb'
-                    automaticallyAdjustContentInsets={false}
                     style={InjectWebViewContainerStyles.webView}
+                    injecteJavaScript={`alert('12')`}
+                    injectedJavaScript={patchPostMessageJsCode}
+                    automaticallyAdjustContentInsets={false}
+                    onNavigationStateChange={this.onNavigationStateChange}
                     source={require('./index.html')}
                     javaScriptEnabled={true}
                     domStorageEnabled={true}
@@ -77,9 +101,77 @@ export default class InjectWebViewContainer extends Component {
                 />
 
 
+            </MenuContext>
+        );
+    }
+
+    renderTitleLeftView() {
+        return (
+            <View style={InjectWebViewContainerStyles.titleLeftView}>
+                <TouchableNativeFeedback onPress={this.onBackPress}>
+                    <View style={InjectWebViewContainerStyles.titleLeftIconView}>
+                        <Text style={InjectWebViewContainerStyles.titleLeftIconText}>{'<'}</Text>
+                        <Text style={InjectWebViewContainerStyles.titleLeftText}>{'返回'}</Text>
+                    </View>
+                </TouchableNativeFeedback>
+                <TouchableNativeFeedback onPress={this.onExitPress}>
+                    <View>
+                        <Text style={InjectWebViewContainerStyles.titleLeftText}>{'关闭'}</Text>
+                    </View>
+                </TouchableNativeFeedback>
             </View>
         );
     }
+
+    renderTitleRightView = () => {
+        return (
+            /*<TouchableNativeFeedback onPress={this.onRightPress}>
+             <Text style={InjectWebViewContainerStyles.titleRightText}>发给WebView</Text>
+             </TouchableNativeFeedback>*/
+            <Menu>
+                <MenuTrigger text='Select action'/>
+                <MenuOptions>
+                    <MenuOption text='发给WebView' onSelect={() => this.onRightPress} />
+                    <MenuOption onSelect={() => this.onLoadUri}>
+                        <Text style={{color: 'red'}}>打开GitHub</Text>
+                    </MenuOption>
+                    <MenuOption onSelect={() => alert(`Not called`)} disabled={true} text='Disabled'/>
+                </MenuOptions>
+            </Menu>
+        );
+    }
+
+    onBackPress = () => {
+        if (this.refs['injectWeb'] && this.refs['injectWeb'].goBack) {
+            this.refs['injectWeb'].goBack();
+        }
+    };
+    onExitPress = () => {
+        if (this.refs['injectWeb'] && this.refs['injectWeb'].goForward) {
+            this.refs['injectWeb'].goForward();
+        }
+    };
+
+    onReloadPress = () => {
+        if (this.refs['injectWeb'] && this.refs['injectWeb'].reload) {
+            this.refs['injectWeb'].reload();
+        }
+    };
+
+    onLoadUri = (uri='https://github.com/kinshasa') => {
+        alert(1243)
+        this.refs['injectWeb'].setNativeProps({source:{uri}});
+        this.refs['injectWeb'].load();
+        if (this.refs['injectWeb'] && this.refs['injectWeb'].setNativeProps) {
+
+        }else{
+            alert('this.refs is not undefined')
+        }
+    };
+
+    onRightPress = () => {
+        this.postMessage();
+    };
 
     onMessage = (e) => {
         let data = e.nativeEvent.data;
@@ -90,8 +182,20 @@ export default class InjectWebViewContainer extends Component {
         console.log('InjectWebViewContainer::postMessage()');
         if (this.refs['injectWeb'] && this.refs['injectWeb'].postMessage) {
             let params = {username: 'admin', passwd: '123456'};
-            this.refs['injectWeb'].postMessage(JSON.stringify({action: 'Login',params}));
+            this.refs['injectWeb'].postMessage(JSON.stringify({action: 'Login', params}));
         }
+    };
+
+    onNavigationStateChange = (navState) => {
+        console.log('InjectWebViewContainer::onNavigationStateChange() navState:', navState);
+        this.setState({
+            backButtonEnabled: navState.canGoBack,
+            forwardButtonEnabled: navState.canGoForward,
+            url: navState.url,
+            status: navState.title,
+            loading: navState.loading,
+            scalesPageToFit: true
+        });
     };
 
 }
@@ -100,4 +204,34 @@ const InjectWebViewContainerStyles = StyleSheet.create({
     container: {
         flex: 1,
     },
+    titleRightText: {
+        height: 30,
+        fontSize: 12,
+        //textAlign:'center',
+        textAlignVertical: 'center',
+        marginLeft: 10,
+        marginRight: 10,
+    },
+    titleLeftView: {
+        flexDirection: 'row',
+    },
+    titleLeftIconView: {
+        flexDirection: 'row',
+        marginLeft: 10,
+        marginRight: 5,
+    },
+    titleLeftIconText: {
+        height: 30,
+        fontSize: 18,
+        textAlignVertical: 'center',
+        alignSelf: 'center',
+    },
+    titleLeftText: {
+        height: 30,
+        fontSize: 12,
+        textAlignVertical: 'center',
+        alignSelf: 'center',
+        margin: 3,
+        fontWeight: 'bold',
+    }
 });

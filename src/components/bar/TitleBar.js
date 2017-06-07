@@ -30,7 +30,7 @@ export default class TitleBar extends Component {
         //标题栏的样式
         style: null,
         //标题栏的标题
-        title: ""
+        label: ""
     };
 
     constructor(props, context) {
@@ -97,9 +97,13 @@ export default class TitleBar extends Component {
         let styles = [TitleBarStyles.container, style];
         return (
             <View{...other} style={styles}>
-                {this.renderLeftView()}
+                <View style={{position:'absolute',left:0,height:50,justifyContent:'center'}}>
+                    {this.renderLeftView()}
+                </View>
                 {this.renderCenterView()}
+                <View style={{position:'absolute',right:0,height:50,justifyContent:'center'}}>
                 {this.renderRightView()}
+                </View>
             </View>
         );
     }
@@ -150,9 +154,7 @@ export default class TitleBar extends Component {
         }
         let titleRight = [TitleBarStyles.rightStyle, this.props.rightStyle];
         return (
-            <Text style={titleRight} onPress={() => {
-                alert("菜单")
-            }}> {"菜单"} </Text>
+            <Text style={titleRight} onPress={() => alert("菜单")}> {"菜单"} </Text>
         );
     }
 }

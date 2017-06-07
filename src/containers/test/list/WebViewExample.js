@@ -513,6 +513,4 @@ export default  [
     ()=><ScaledWebView />,
     ()=><InjectJS />
 ];*/
-export default {
-    MessagingTest
-}
+export default WebViewExample
