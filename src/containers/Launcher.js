@@ -16,14 +16,13 @@ import HomePage from "../containers/home/HomePage";
 import Setting from "./set/Setting";
 import QATest from "./test/QATest";
 import Icon from "react-native-vector-icons/Ionicons";
-import FloatButton from '../components/bar/FloatButton';
 
-const LAUNCHER_IMG_HOME = ()=><Icon name="ios-compass-outline" size={25} color="black"/>;
-const LAUNCHER_IMG_HOME_SELECT = ()=><Icon name="ios-compass" size={25} color="#166AF6"/>;
-const LAUNCHER_IMG_TEST = ()=><Icon name="ios-cloud-circle-outline" size={25} color="black"/>;
-const LAUNCHER_IMG_TEST_SELECT = ()=><Icon name="ios-cloud-circle" size={25} color="#166AF6"/>;
-const LAUNCHER_IMG_SETTING = ()=><Icon name="ios-contact-outline" size={25} color="black"/>;
-const LAUNCHER_IMG_SETTING_SELECT = ()=><Icon name="ios-contact" size={25} color="#4F8EF7"/>;
+const LAUNCHER_IMG_HOME = () => <Icon name="ios-compass-outline" size={25} color="black"/>;
+const LAUNCHER_IMG_HOME_SELECT = () => <Icon name="ios-compass" size={25} color="#166AF6"/>;
+const LAUNCHER_IMG_TEST = () => <Icon name="ios-cloud-circle-outline" size={25} color="black"/>;
+const LAUNCHER_IMG_TEST_SELECT = () => <Icon name="ios-cloud-circle" size={25} color="#166AF6"/>;
+const LAUNCHER_IMG_SETTING = () => <Icon name="ios-contact-outline" size={25} color="black"/>;
+const LAUNCHER_IMG_SETTING_SELECT = () => <Icon name="ios-contact" size={25} color="#4F8EF7"/>;
 
 export default class Launcher extends Component {
 
@@ -65,7 +64,7 @@ export default class Launcher extends Component {
      * 生命周期中仅被调用1次，可以使用SetState
      */
     componentWillMount() {
-        console.log("Launcher componentWillMount()",new Date());
+        console.log("Launcher componentWillMount()", new Date());
     }
 
     /**
@@ -74,7 +73,7 @@ export default class Launcher extends Component {
      * 用于网络请求和页面渲染
      */
     componentDidMount() {
-        console.log("Launcher componentDidMount()",new Date());
+        console.log("Launcher componentDidMount()", new Date());
     }
 
     /**
@@ -95,7 +94,7 @@ export default class Launcher extends Component {
     shouldComponentUpdate(nextProps, nextState) {
         //let isUpdate = (this.props != nextProps) || (this.state != nextState);
         let isUpdate = (this.state != nextState);
-        console.log("Launcher shouldComponentUpdate():" ,isUpdate);
+        console.log("Launcher shouldComponentUpdate():", isUpdate);
         return isUpdate;
     }
 
@@ -132,7 +131,7 @@ export default class Launcher extends Component {
      */
     render() {
         this.renderCount++;
-        console.log("Launcher render() renderCount:" , this.renderCount);
+        console.log("Launcher render() renderCount:", this.renderCount);
 
         return (
             <View style={LauncherStyles.container}>
@@ -150,19 +149,19 @@ export default class Launcher extends Component {
      * @param childView TableItem中的View
      * @returns {XML}
      */
-    renderTabItem(tag, title, img, selectedImg, childView,badgeNum) {
+    renderTabItem(tag, title, img, selectedImg, childView, badgeNum) {
         return (
             <TabNavigator.Item
                 selected={this.state.selectedTab === tag}
                 title={title}
-                titleStyle={{color:"black"}}
-                selectedTitleStyle={{color:"#166AF6"}}
+                titleStyle={{color: "black"}}
+                selectedTitleStyle={{color: "#166AF6"}}
                 renderIcon={img}
                 renderSelectedIcon={selectedImg}
                 badgeText={badgeNum}
                 tabStyle={LauncherStyles.tabStyle}
                 allowFontScaling={false}
-                onPress={() => this.setState({ selectedTab: tag})}>
+                onPress={() => this.setState({selectedTab: tag})}>
                 {childView}
             </TabNavigator.Item>
         );
@@ -174,19 +173,16 @@ export default class Launcher extends Component {
      */
     renderTable() {
         return (
-            <View style={{flex:1}}>
-                <TabNavigator
-                    tabBarShadowStyle={{backgroundColor:"black"}}
-                    sceneStyle={LauncherStyles.sceneStyle}
-                    tabBarStyle={LauncherStyles.tabBarStyle}
-                    hidesTabTouch={true}
-                >
-                    {this.renderTabItem("T1", "组件开发", LAUNCHER_IMG_HOME, LAUNCHER_IMG_HOME_SELECT,<HomePage />,0)}
-                    {this.renderTabItem("T2", "品质测试", LAUNCHER_IMG_TEST, LAUNCHER_IMG_TEST_SELECT, <QATest />,0)}
-                    {this.renderTabItem("T3", "其他设置", LAUNCHER_IMG_SETTING, LAUNCHER_IMG_SETTING_SELECT, <Setting />,1)}
-                </TabNavigator>
-                <FloatButton />
-            </View>
+            <TabNavigator
+                tabBarShadowStyle={{backgroundColor: "black"}}
+                sceneStyle={LauncherStyles.sceneStyle}
+                tabBarStyle={LauncherStyles.tabBarStyle}
+                hidesTabTouch={true}
+            >
+                {this.renderTabItem("T1", "组件开发", LAUNCHER_IMG_HOME, LAUNCHER_IMG_HOME_SELECT, <HomePage />, 0)}
+                {this.renderTabItem("T2", "品质测试", LAUNCHER_IMG_TEST, LAUNCHER_IMG_TEST_SELECT, <QATest />, 0)}
+                {this.renderTabItem("T3", "其他设置", LAUNCHER_IMG_SETTING, LAUNCHER_IMG_SETTING_SELECT, <Setting />, 1)}
+            </TabNavigator>
         );
     }
 
@@ -201,7 +197,7 @@ export default class Launcher extends Component {
                 style={LauncherStyles.container}
                 contentProps={{}}
                 initialPage={0}
-                renderTabBar={() =>  <ScrollableTabBar/>}
+                renderTabBar={() => <ScrollableTabBar/>}
             >
                 <View tabLabel="12354"><Text >123</Text></View>
                 <View tabLabel="12354"><Text >123</Text></View>
@@ -216,7 +212,7 @@ const LauncherStyles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    sceneStyle:{
+    sceneStyle: {
         backgroundColor: '#fff',
     },
     tabBarStyle: {
@@ -224,7 +220,7 @@ const LauncherStyles = StyleSheet.create({
         backgroundColor: '#eee',
         alignItems: 'center',
     },
-    tabStyle:{height:50, backgroundColor:"#eee"},
+    tabStyle: {height: 50, backgroundColor: "#eee"},
     tabIcon: {
         width: 30,
         height: 30,

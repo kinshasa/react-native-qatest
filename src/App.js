@@ -10,6 +10,7 @@ import React, {Component} from "react";
 import {AppRegistry, InteractionManager, Linking, StyleSheet, View} from "react-native";
 import * as AppController from "./AppController";
 import MainProvider from "./MainProvider";
+import FloatButton from './components/bar/FloatButton';
 
 import DropDownAlert from "react-native-dropdownalert";
 export default class App extends Component {
@@ -107,6 +108,7 @@ export default class App extends Component {
                     }}
                     onClose={(data) => {
                     }}/>
+                <FloatButton />
             </View>
         );
     }
