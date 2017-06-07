@@ -38,6 +38,7 @@ const patchPostMessageFunction = function () {
 //注入脚本
 const patchPostMessageJsCode = '(' + String(patchPostMessageFunction) + ')();';
 
+const html = require('./index.html');
 export default class InjectWebViewContainer extends Component {
 
     static propTypes = {};
@@ -49,7 +50,7 @@ export default class InjectWebViewContainer extends Component {
     constructor(props, context) {
         console.log("InjectWebViewContainer constructor()");
         super(props, context);
-        this.state = {};
+        this.state = {source:html};
     }
 
     /**
@@ -88,7 +89,7 @@ export default class InjectWebViewContainer extends Component {
                     injectedJavaScript={patchPostMessageJsCode}
                     automaticallyAdjustContentInsets={false}
                     onNavigationStateChange={this.onNavigationStateChange}
-                    source={require('./index.html')}
+                    source={this.state.source}
                     javaScriptEnabled={true}
                     domStorageEnabled={true}
                     decelerationRate="normal"
@@ -123,17 +124,18 @@ export default class InjectWebViewContainer extends Component {
         );
     }
 
-    renderTitleRightView = () => {
+    renderTitleRightView() {
         return (
-            /*<TouchableNativeFeedback onPress={this.onRightPress}>
-             <Text style={InjectWebViewContainerStyles.titleRightText}>发给WebView</Text>
-             </TouchableNativeFeedback>*/
+            /**/
             <Menu>
                 <MenuTrigger text='Select action'/>
                 <MenuOptions>
-                    <MenuOption text='发给WebView' onSelect={() => this.onRightPress} />
-                    <MenuOption onSelect={() => this.onLoadUri}>
+                    <MenuOption text='发给WebView' onSelect={this.onRightPress}/>
+                    <MenuOption onSelect={()=>this.onLoadUri({uri:'https://github.com/kinshasa'})}>
                         <Text style={{color: 'red'}}>打开GitHub</Text>
+                    </MenuOption>
+                    <MenuOption onSelect={()=>this.onLoadUri(html)}>
+                        <Text style={{color: 'green'}}>打开index.html</Text>
                     </MenuOption>
                     <MenuOption onSelect={() => alert(`Not called`)} disabled={true} text='Disabled'/>
                 </MenuOptions>
@@ -158,15 +160,8 @@ export default class InjectWebViewContainer extends Component {
         }
     };
 
-    onLoadUri = (uri='https://github.com/kinshasa') => {
-        alert(1243)
-        this.refs['injectWeb'].setNativeProps({source:{uri}});
-        this.refs['injectWeb'].load();
-        if (this.refs['injectWeb'] && this.refs['injectWeb'].setNativeProps) {
-
-        }else{
-            alert('this.refs is not undefined')
-        }
+    onLoadUri = (source = {uri:'https://github.com/kinshasa'}) => {
+        this.setState({source})
     };
 
     onRightPress = () => {
