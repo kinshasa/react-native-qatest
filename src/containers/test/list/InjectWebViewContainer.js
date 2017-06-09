@@ -15,10 +15,14 @@ import {
     TouchableHighlight,
     TouchableNativeFeedback
 } from 'react-native';
-import TitleBar from '../../../components/bar/TitleBar'
+import {Actions} from "react-native-router-flux";
+
+
+import warning from 'fbjs/lib/warning';
 // import Menu, {MenuContext, MenuOptions, MenuOption, MenuTrigger} from 'react-native-menu';
 import {MenuContext, Menu, MenuOptions, MenuOption, MenuTrigger,} from 'react-native-popup-menu';
 
+import TitleBar from '../../../components/bar/TitleBar'
 
 //申明更改原有 postMessage 函数为 patchedPostMessage
 const patchPostMessageFunction = function () {
@@ -38,7 +42,7 @@ const patchPostMessageFunction = function () {
 //注入脚本
 const patchPostMessageJsCode = '(' + String(patchPostMessageFunction) + ')();';
 
-const html = require('./index.html');
+
 export default class InjectWebViewContainer extends Component {
 
     static propTypes = {};
@@ -50,7 +54,6 @@ export default class InjectWebViewContainer extends Component {
     constructor(props, context) {
         console.log("InjectWebViewContainer constructor()");
         super(props, context);
-        this.state = {source:html};
     }
 
     /**
@@ -58,6 +61,27 @@ export default class InjectWebViewContainer extends Component {
      * @type {number}
      */
     count = 0;
+
+    /**
+     * 当前Web的Url
+     */
+    url: '';
+
+    //当前WebView的导航数据
+    navState:{
+        canGoForward: false,
+        canGoBack: false,
+        loading: false,
+        title: 'js调用java',
+        url: './index.html',
+        target: 1946
+    };
+
+    html = require('./index.html');
+
+    state={
+        source:this.html
+    };
 
     componentWillMount() {
         console.log("InjectWebViewContainer componentWillMount()", new Date());
@@ -90,15 +114,16 @@ export default class InjectWebViewContainer extends Component {
                     automaticallyAdjustContentInsets={false}
                     onNavigationStateChange={this.onNavigationStateChange}
                     source={this.state.source}
-                    javaScriptEnabled={true}
-                    domStorageEnabled={true}
+                    javaScriptEnabled
+                    domStorageEnabled
+                    saveFormDataDisabled
                     decelerationRate="normal"
-                    onShouldStartLoadWithRequest={true}
-                    startInLoadingState={true}
-                    scalesPageToFit={true}
+                    onShouldStartLoadWithRequest
+                    startInLoadingState
+                    scalesPageToFit
                     onMessage={this.onMessage}
                     onLoad={() => console.log('InjectWebViewContainer::onLoad()')}
-                    onLoadEnd={() => console.log('InjectWebViewContainer::onLoadEnd()')}
+                    onLoadEnd={() =>warning(false, 'Uri: %s',this.navState.url)}
                 />
 
 
@@ -108,19 +133,10 @@ export default class InjectWebViewContainer extends Component {
 
     renderTitleLeftView() {
         return (
-            <View style={InjectWebViewContainerStyles.titleLeftView}>
-                <TouchableNativeFeedback onPress={this.onBackPress}>
-                    <View style={InjectWebViewContainerStyles.titleLeftIconView}>
-                        <Text style={InjectWebViewContainerStyles.titleLeftIconText}>{'<'}</Text>
-                        <Text style={InjectWebViewContainerStyles.titleLeftText}>{'返回'}</Text>
-                    </View>
-                </TouchableNativeFeedback>
-                <TouchableNativeFeedback onPress={this.onExitPress}>
-                    <View>
-                        <Text style={InjectWebViewContainerStyles.titleLeftText}>{'关闭'}</Text>
-                    </View>
-                </TouchableNativeFeedback>
-            </View>
+            <NavRect
+                ref='navRect'
+                onBackPress={this.onBackPress}
+                onExitPress={this.onExitPress}/>
         );
     }
 
@@ -130,11 +146,14 @@ export default class InjectWebViewContainer extends Component {
             <Menu>
                 <MenuTrigger text='Select action'/>
                 <MenuOptions>
-                    <MenuOption text='发给WebView' onSelect={this.onRightPress}/>
-                    <MenuOption onSelect={()=>this.onLoadUri({uri:'https://github.com/kinshasa'})}>
+                    <MenuOption text='发数据给Web' onSelect={this.postMessage}/>
+                    <MenuOption text='从Web获取数据' onSelect={this.postMessage}/>
+                    <MenuOption text='自动跳转页面' onSelect={()=>this.onLoadUri({uri:'http://10.8.75.12/my/page'})}/>
+
+                    <MenuOption onSelect={() => this.onLoadUri({uri: 'https://github.com/kinshasa'})}>
                         <Text style={{color: 'red'}}>打开GitHub</Text>
                     </MenuOption>
-                    <MenuOption onSelect={()=>this.onLoadUri(html)}>
+                    <MenuOption onSelect={() => this.onLoadUri(this.html)}>
                         <Text style={{color: 'green'}}>打开index.html</Text>
                     </MenuOption>
                     <MenuOption onSelect={() => alert(`Not called`)} disabled={true} text='Disabled'/>
@@ -144,13 +163,24 @@ export default class InjectWebViewContainer extends Component {
     }
 
     onBackPress = () => {
+        console.log('InjectWebViewContainer::onBackPress() uri:', this.url);
+
+
         if (this.refs['injectWeb'] && this.refs['injectWeb'].goBack) {
             this.refs['injectWeb'].goBack();
         }
+        if (this.refs['navRect'] && this.refs['navRect'].showExit) {
+            this.refs['navRect'].showExit();
+        }
+        if (!this.navState.canGoBack) {
+            this.onExitPress();
+        }
+
     };
     onExitPress = () => {
-        if (this.refs['injectWeb'] && this.refs['injectWeb'].goForward) {
-            this.refs['injectWeb'].goForward();
+        try {
+            Actions.pop();
+        } catch (e) {
         }
     };
 
@@ -160,19 +190,23 @@ export default class InjectWebViewContainer extends Component {
         }
     };
 
-    onLoadUri = (source = {uri:'https://github.com/kinshasa'}) => {
-        this.setState({source})
+    onLoadUri = (source = {uri: 'https://github.com/kinshasa'}) => {
+        this.setState({source});
     };
 
-    onRightPress = () => {
-        this.postMessage();
-    };
-
+    /**
+     * 自动获取Web发起的数据，可以postMessage回调通知Web
+     * @param e data为e.nativeEvent.data;
+     */
     onMessage = (e) => {
         let data = e.nativeEvent.data;
         console.log('InjectWebViewContainer::onMessage() e.nativeEvent:', e.nativeEvent);
+        alert('InjectWebViewContainer::onMessage() data:',data);
     };
 
+    /**
+     * 发数据给Web端,可以发起请求后在onMessage监听回调
+     */
     postMessage = () => {
         console.log('InjectWebViewContainer::postMessage()');
         if (this.refs['injectWeb'] && this.refs['injectWeb'].postMessage) {
@@ -183,17 +217,56 @@ export default class InjectWebViewContainer extends Component {
 
     onNavigationStateChange = (navState) => {
         console.log('InjectWebViewContainer::onNavigationStateChange() navState:', navState);
-        this.setState({
-            backButtonEnabled: navState.canGoBack,
-            forwardButtonEnabled: navState.canGoForward,
-            url: navState.url,
-            status: navState.title,
-            loading: navState.loading,
-            scalesPageToFit: true
-        });
+        this.url = navState.url;
+        this.navState = {
+            canGoForward: true,
+            canGoBack: false,
+            loading: false,
+            title: 'js调用java',
+            url: 'http://10.8.73.32:8082/assets/src/containers/test/list/index.html?platform=android&hash=f59797250ebe7759ec6c9faa29f0d0f0',
+            target: 1946
+        };
+        this.navState = navState;
     };
 
 }
+
+/**
+ * 页面返回导航按钮
+ */
+class NavRect extends Component {
+
+    state = {
+        exit: false,
+    };
+
+    showExit() {
+        this.setState({exit: true})
+    }
+
+    render() {
+
+        return (
+            <View style={InjectWebViewContainerStyles.titleLeftView}>
+                <TouchableNativeFeedback onPress={this.props.onBackPress}>
+                    <View style={InjectWebViewContainerStyles.titleLeftIconView}>
+                        <Text style={InjectWebViewContainerStyles.titleLeftIconText}>{'<'}</Text>
+                        <Text style={InjectWebViewContainerStyles.titleLeftText}>{'返回'}</Text>
+                    </View>
+                </TouchableNativeFeedback>
+                {
+                    this.state.exit &&
+                    <TouchableNativeFeedback onPress={this.props.onExitPress}>
+                        <View>
+                            <Text style={InjectWebViewContainerStyles.titleLeftText}>{'关闭'}</Text>
+                        </View>
+                    </TouchableNativeFeedback>
+                }
+            </View>
+        );
+    }
+}
+
 
 const InjectWebViewContainerStyles = StyleSheet.create({
     container: {
