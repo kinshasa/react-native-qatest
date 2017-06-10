@@ -73,7 +73,7 @@ public class UniPayActivity extends Activity {
             e.printStackTrace();
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
             if (PayModule.callback != null){
-                PayModule.callback.invoke(new PayModule.PayResult(-1,"支付异常:“"+e.getMessage()+"”"));
+                PayModule.callback.invoke(new PayModule.PayResult(-1,"支付异常:“"+e.getMessage()+"”").toString());
                 PayModule.callback = null;
             }
             finish();
@@ -135,7 +135,7 @@ public class UniPayActivity extends Activity {
                     msg = "支付成功！";
                 }
                 if (PayModule.callback != null){
-                    PayModule.callback.invoke(new PayModule.PayResult(0,msg));
+                    PayModule.callback.invoke(new PayModule.PayResult(0,msg).toString());
                     PayModule.callback = null;
                 }
             } else if (str.equalsIgnoreCase("fail")) {
@@ -147,7 +147,7 @@ public class UniPayActivity extends Activity {
                 msg = "服务器异常";
             }
             if (PayModule.callback != null){
-                PayModule.callback.invoke(new PayModule.PayResult(200,msg));
+                PayModule.callback.invoke(new PayModule.PayResult(200,msg).toString());
                 PayModule.callback = null;
             }
         }

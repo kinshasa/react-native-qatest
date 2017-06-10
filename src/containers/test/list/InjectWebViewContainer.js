@@ -216,7 +216,10 @@ export default class InjectWebViewContainer extends Component {
                    payId =  JSON.stringify(payId);
                 }
                 console.log('InjectWebViewContainer::onMessage()', payId, plat);
-                Pay.switchPayMethod(payId, plat, callback => this.postMessage('pay', callback));
+                Pay.payForResoult(payId, plat, callback => {
+                    console.log('InjectWebViewContainer::postMessage()',callback);
+                    this.postMessage('pay', callback);
+                });
                 break;
             default:
                 warning(false,'没有收到具体的Action:%s',data.actionName);

@@ -37,7 +37,7 @@ public class AliPayActivity extends Activity {
                     if (TextUtils.equals(resultStatus, "9000")) {
                         Toast.makeText(getApplicationContext(), "支付成功", Toast.LENGTH_SHORT).show();
                         if (PayModule.callback != null){
-                            PayModule.callback.invoke(new PayModule.PayResult(0,"支付成功"));
+                            PayModule.callback.invoke(new PayModule.PayResult(0,"支付成功").toString());
                             PayModule.callback = null;
                         }
 
@@ -68,7 +68,7 @@ public class AliPayActivity extends Activity {
 
                         Toast.makeText(getApplicationContext(), errmsg, Toast.LENGTH_SHORT).show();
                         if (PayModule.callback != null){
-                            PayModule.callback.invoke(new PayModule.PayResult(Integer.valueOf(resultStatus),errmsg));
+                            PayModule.callback.invoke(new PayModule.PayResult(Integer.valueOf(resultStatus),errmsg).toString());
                             PayModule.callback = null;
                         }
                     }

@@ -9,6 +9,7 @@ import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.WritableNativeArray;
 import com.pay.AliPayActivity;
 import com.pay.UniPayActivity;
 import com.pay.WxPayActivity;
@@ -31,11 +32,28 @@ public class PayModule extends ReactContextBaseJavaModule {
 
     public static class PayResult {
 
-        public PayResult(){
+        public int code;//0成功，非0失败，-1异常
+        public String data;//成功后返回的数据
+        public String msg;//失败返回的错误信息
 
+        @Override
+        public String toString() {
+            return "{"+
+                    "code:"+code+
+                    "data:"+data+
+                    "msg:"+msg+
+                    "}";
         }
 
-        public PayResult(int c,String info){
+        public WritableNativeArray toNativeArray(){
+            WritableNativeArray arr = new WritableNativeArray();
+            arr.pushInt(code);
+            arr.pushString(data);
+            arr.pushString(msg);
+            return arr;
+        }
+
+        public PayResult(int c, String info){
             code = c;
             if(code == 0){
                 data = info;
@@ -43,10 +61,6 @@ public class PayModule extends ReactContextBaseJavaModule {
                 msg = info;
             }
         }
-
-        public int code;//0成功，非0失败，-1异常
-        public String data;//成功后返回的数据
-        public String msg;//失败返回的错误信息
 
     }
 

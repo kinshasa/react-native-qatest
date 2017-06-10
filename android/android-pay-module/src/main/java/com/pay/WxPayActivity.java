@@ -92,7 +92,7 @@ public class WxPayActivity extends Activity {
             Log.e("WxPay", "异常：" + e.getMessage());
             Toast.makeText(getApplicationContext(), "异常：" + e.getMessage(), Toast.LENGTH_SHORT).show();
             if (PayModule.callback != null){
-                PayModule.callback.invoke(new PayResult(-1,"支付异常:“"+e.getMessage()+"”"));
+                PayModule.callback.invoke(new PayResult(-1,"支付异常:“"+e.getMessage()+"”").toString());
                 PayModule.callback = null;
             }
             finish();
@@ -108,12 +108,12 @@ public class WxPayActivity extends Activity {
         Log.i("WxPayActivity", "onWXPayCompletedEvent, message = " + event.getMessage());
         if (event.getCode() == BaseResp.ErrCode.ERR_OK) {
             if (PayModule.callback != null){
-                PayModule.callback.invoke(new PayResult(0,event.getMessage()));
+                PayModule.callback.invoke(new PayResult(0,event.getMessage()).toString());
                 PayModule.callback = null;
             }
         } else {
             if (PayModule.callback != null){
-                PayModule.callback.invoke(new PayResult(event.getCode(),event.getMessage()));
+                PayModule.callback.invoke(new PayResult(event.getCode(),event.getMessage()).toString());
                 PayModule.callback = null;
             }
         }
