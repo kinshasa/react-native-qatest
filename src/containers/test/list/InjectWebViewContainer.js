@@ -109,14 +109,14 @@ export default class InjectWebViewContainer extends Component {
                 <WebView
                     ref='injectWeb'
                     style={InjectWebViewContainerStyles.webView}
-                    injecteJavaScript={`alert('12')`}
+                    //injecteJavaScript={`alert('12')`}
                     injectedJavaScript={patchPostMessageJsCode}
                     automaticallyAdjustContentInsets={false}
                     onNavigationStateChange={this.onNavigationStateChange}
                     source={this.state.source}
                     javaScriptEnabled
                     domStorageEnabled
-                    saveFormDataDisabled
+                    //saveFormDataDisabled
                     decelerationRate="normal"
                     onShouldStartLoadWithRequest
                     startInLoadingState
@@ -200,18 +200,49 @@ export default class InjectWebViewContainer extends Component {
      */
     onMessage = (e) => {
         let data = e.nativeEvent.data;
-        console.log('InjectWebViewContainer::onMessage() e.nativeEvent:', e.nativeEvent);
-        alert('InjectWebViewContainer::onMessage() data:',data);
+        if(!isJson(e.nativeEvent.data)){
+            data = JSON.parse(e.nativeEvent.data)
+        }
+        console.log('InjectWebViewContainer::onMessage() e.nativeEvent:', data);
+        if(!data || !data.actionName){
+            warning(false,'数据异常:%s',data.actionName);
+            return;
+        }
+        switch (data.actionName){
+
+            case 'pay':
+                let {payId, plat} = data;
+                if(isJson(payId)){
+                   payId =  JSON.stringify(payId);
+                }
+                console.log('InjectWebViewContainer::onMessage() payId:%s,plat:%s', payId, plat);
+                Pay.switchPayMethod(payId, plat)
+                    .then(success => {
+                        console.log('InjectWebViewContainer::switchPayMethod()', success);
+                        postMessage(success);
+                    }, fail => {
+                        console.log('InjectWebViewContainer::switchPayMethod()', fail);
+                        postMessage(fail)
+                    })
+                    .then(err => {
+                        console.log('InjectWebViewContainer::switchPayMethod()', err);
+                        postMessage(err)
+                    });
+                break;
+            default:
+                warning(false,'没有收到具体的Action:%s',data.actionName);
+                break;
+        }
     };
 
     /**
      * 发数据给Web端,可以发起请求后在onMessage监听回调
      */
-    postMessage = () => {
+    postMessage = (action='Index',msg={username: 'admin', passwd: '123456'}) => {
         console.log('InjectWebViewContainer::postMessage()');
         if (this.refs['injectWeb'] && this.refs['injectWeb'].postMessage) {
-            let params = {username: 'admin', passwd: '123456'};
-            this.refs['injectWeb'].postMessage(JSON.stringify({action: 'Login', params}));
+            let data = {action: 'Login', msg};
+            this.refs['injectWeb'].postMessage(JSON.stringify(data));
         }
     };
 

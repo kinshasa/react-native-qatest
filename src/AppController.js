@@ -8,6 +8,17 @@
 import {Alert,Platform,Dimensions,AsyncStorage} from "react-native";
 import * as Logger from '../common/utils/Logger';
 import Storage from 'react-native-storage';
+import { NativeModules } from 'react-native';
+
+let AppConfig = global;
+
+AppConfig.Pay = NativeModules.Pay;
+
+AppConfig.isJson = function (o) {
+    let isJson = typeof(o) === "object" && Object.prototype.toString.call(o).toLowerCase() === "[object object]" && !o.length;
+    return isJson;
+};
+
 
 preInit();
 
@@ -15,6 +26,7 @@ preInit();
  * 1. 预加载，Application生命周期内，只调用一次
  */
 function preInit() {
+    console.log('AppController::preInit()');
     // init App.
     if (!global.getApp)
         global.getApp = getApp;
@@ -214,3 +226,4 @@ export function initLogger() {
     }
     return getApp().logger;
 }
+

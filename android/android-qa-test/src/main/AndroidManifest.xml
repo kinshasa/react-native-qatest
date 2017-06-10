@@ -133,6 +133,14 @@
             </intent-filter>
         </activity>
 
+        <!--第三方支付-->
+        <!--微信支付-->
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:theme="@android:style/Theme.Dialog" />
+
         <!-- hotFix -->
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"

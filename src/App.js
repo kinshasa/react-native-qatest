@@ -36,6 +36,7 @@ export default class App extends Component {
     }
 
     componentWillMount() {
+        console.log('App::componentWillMount()');
         AppController.init();
     }
 

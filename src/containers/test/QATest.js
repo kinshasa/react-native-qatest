@@ -154,7 +154,7 @@ class QATest extends Component {
         this.renderCount++;
         console.log("QATest::render() renderCount", this.renderCount);
         return (
-            <View style={[QATestStyles.container, this.props.style]}>
+            <View style={[QATestStyles.test, this.props.style]}>
                 <TitleBar
                     label="品质测试"
                     labelStyle={{backgroundColor: "transparent", color: "black"}}
@@ -181,6 +181,8 @@ class QATest extends Component {
 
 }
 
+
+
 const QATestStyles = StyleSheet.create({
     container: {
         flex: 1,
@@ -191,8 +193,9 @@ const QATestStyles = StyleSheet.create({
     },
     btnList: {
         margin: 3,
-    }
-});
+    },
+    test: ()=>{console.log("QATestStyles::create()");return {flex: 1,}}
+    });
 
 /**
  * 把this.state关联到this.props.state
