@@ -36,10 +36,11 @@ public class AliPayActivity extends Activity {
                     // 判断resultStatus 为“9000”则代表支付成功，具体状态码代表含义可参考接口文档
                     if (TextUtils.equals(resultStatus, "9000")) {
                         Toast.makeText(getApplicationContext(), "支付成功", Toast.LENGTH_SHORT).show();
-                        if (PayModule.promise != null) {
-                            PayModule.promise.resolve("支付成功");
-                            PayModule.promise = null;
+                        if (PayModule.callback != null){
+                            PayModule.callback.invoke(new PayModule.PayResult(0,"支付成功"));
+                            PayModule.callback = null;
                         }
+
                         Toast.makeText(getApplicationContext(), "支付成功", Toast.LENGTH_SHORT).show();
                     } else {
                         String errmsg = "";
@@ -66,9 +67,9 @@ public class AliPayActivity extends Activity {
                         //CanclOder(order);
 
                         Toast.makeText(getApplicationContext(), errmsg, Toast.LENGTH_SHORT).show();
-                        if (PayModule.promise != null) {
-                            PayModule.promise.reject("0", errmsg);
-                            PayModule.promise = null;
+                        if (PayModule.callback != null){
+                            PayModule.callback.invoke(new PayModule.PayResult(Integer.valueOf(resultStatus),errmsg));
+                            PayModule.callback = null;
                         }
                     }
                     finish();

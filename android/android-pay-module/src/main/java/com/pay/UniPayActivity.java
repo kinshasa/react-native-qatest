@@ -72,10 +72,11 @@ public class UniPayActivity extends Activity {
             // TODO Auto-generated catch block
             e.printStackTrace();
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            if (PayModule.promise != null) {
-                PayModule.promise.reject("0", e.getMessage());
-                PayModule.promise = null;
+            if (PayModule.callback != null){
+                PayModule.callback.invoke(new PayModule.PayResult(-1,"支付异常:“"+e.getMessage()+"”"));
+                PayModule.callback = null;
             }
+            finish();
         }
     }
 
@@ -133,32 +134,25 @@ public class UniPayActivity extends Activity {
                     // 建议通过商户后台查询支付结果
                     msg = "支付成功！";
                 }
-                if (PayModule.promise != null){
-                    PayModule.promise.resolve(msg);
-                    PayModule.promise = null;
+                if (PayModule.callback != null){
+                    PayModule.callback.invoke(new PayModule.PayResult(0,msg));
+                    PayModule.callback = null;
                 }
             } else if (str.equalsIgnoreCase("fail")) {
                 msg = "支付失败！";
-                if (PayModule.promise != null){
-                    PayModule.promise.reject("0", msg);
-                    PayModule.promise = null;
-                }
+
             } else if (str.equalsIgnoreCase("cancel")) {
                 msg = "用户取消了支付";
-                if (PayModule.promise != null) {
-                    PayModule.promise.reject("0", msg);
-                    PayModule.promise = null;
-                }
             }else{
                 msg = "服务器异常";
-                if (PayModule.promise != null) {
-                    PayModule.promise.reject("0", msg);
-                    PayModule.promise = null;
-                }
             }
-            //回调成功后，关闭页面
-            finish();
+            if (PayModule.callback != null){
+                PayModule.callback.invoke(new PayModule.PayResult(200,msg));
+                PayModule.callback = null;
+            }
         }
+        //回调成功后，关闭页面
+        finish();
     }
 
     private boolean verify(String msg, String sign64, String mode) {

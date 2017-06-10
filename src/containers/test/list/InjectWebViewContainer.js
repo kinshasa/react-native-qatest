@@ -215,19 +215,8 @@ export default class InjectWebViewContainer extends Component {
                 if(isJson(payId)){
                    payId =  JSON.stringify(payId);
                 }
-                console.log('InjectWebViewContainer::onMessage() payId:%s,plat:%s', payId, plat);
-                Pay.switchPayMethod(payId, plat)
-                    .then(success => {
-                        console.log('InjectWebViewContainer::switchPayMethod()', success);
-                        postMessage(success);
-                    }, fail => {
-                        console.log('InjectWebViewContainer::switchPayMethod()', fail);
-                        postMessage(fail)
-                    })
-                    .then(err => {
-                        console.log('InjectWebViewContainer::switchPayMethod()', err);
-                        postMessage(err)
-                    });
+                console.log('InjectWebViewContainer::onMessage()', payId, plat);
+                Pay.switchPayMethod(payId, plat, callback => this.postMessage('pay', callback));
                 break;
             default:
                 warning(false,'没有收到具体的Action:%s',data.actionName);
@@ -238,10 +227,10 @@ export default class InjectWebViewContainer extends Component {
     /**
      * 发数据给Web端,可以发起请求后在onMessage监听回调
      */
-    postMessage = (action='Index',msg={username: 'admin', passwd: '123456'}) => {
-        console.log('InjectWebViewContainer::postMessage()');
+    postMessage = (action='Index',callback=undefined) => {
         if (this.refs['injectWeb'] && this.refs['injectWeb'].postMessage) {
-            let data = {action: 'Login', msg};
+            let data = {action, callback};
+            console.log('InjectWebViewContainer::postMessage()',data);
             this.refs['injectWeb'].postMessage(JSON.stringify(data));
         }
     };

@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.pay.event.WXPayCompletedEvent;
 import com.pay.module.PayModule;
+import com.pay.module.PayModule.PayResult;
 import com.tencent.mm.sdk.modelbase.BaseResp;
 import com.tencent.mm.sdk.modelpay.PayReq;
 import com.tencent.mm.sdk.openapi.IWXAPI;
@@ -90,9 +91,9 @@ public class WxPayActivity extends Activity {
         } catch (Exception e) {
             Log.e("WxPay", "异常：" + e.getMessage());
             Toast.makeText(getApplicationContext(), "异常：" + e.getMessage(), Toast.LENGTH_SHORT).show();
-            if (PayModule.promise != null) {
-                PayModule.promise.reject("0", e.getMessage());
-                PayModule.promise = null;
+            if (PayModule.callback != null){
+                PayModule.callback.invoke(new PayResult(-1,"支付异常:“"+e.getMessage()+"”"));
+                PayModule.callback = null;
             }
             finish();
         }
@@ -104,16 +105,16 @@ public class WxPayActivity extends Activity {
      */
     @Subscribe
     public void onWXPayCompletedEvent(WXPayCompletedEvent event) {
-        Log.i("WxPayActivity", "onWXPayCompletedEvent, message = " + event.message);
-        if (event.code == BaseResp.ErrCode.ERR_OK) {
-            if (PayModule.promise != null) {
-                PayModule.promise.resolve(event.message);
-                PayModule.promise = null;
+        Log.i("WxPayActivity", "onWXPayCompletedEvent, message = " + event.getMessage());
+        if (event.getCode() == BaseResp.ErrCode.ERR_OK) {
+            if (PayModule.callback != null){
+                PayModule.callback.invoke(new PayResult(0,event.getMessage()));
+                PayModule.callback = null;
             }
         } else {
-            if (PayModule.promise != null) {
-                PayModule.promise.reject("0", event.message);
-                PayModule.promise = null;
+            if (PayModule.callback != null){
+                PayModule.callback.invoke(new PayResult(event.getCode(),event.getMessage()));
+                PayModule.callback = null;
             }
         }
         finish();

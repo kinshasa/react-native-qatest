@@ -6,7 +6,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.facebook.react.bridge.Callback;
-import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -28,8 +27,28 @@ public class PayModule extends ReactContextBaseJavaModule {
 
     private static final String DURATION_SHORT_KEY = "SHORT";
     private static final String DURATION_LONG_KEY = "LONG";
-    public static Promise promise;
+    public static Callback callback;
 
+    public static class PayResult {
+
+        public PayResult(){
+
+        }
+
+        public PayResult(int c,String info){
+            code = c;
+            if(code == 0){
+                data = info;
+            }else{
+                msg = info;
+            }
+        }
+
+        public int code;//0成功，非0失败，-1异常
+        public String data;//成功后返回的数据
+        public String msg;//失败返回的错误信息
+
+    }
 
     public PayModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -48,6 +67,7 @@ public class PayModule extends ReactContextBaseJavaModule {
         return constants;
     }
 
+    @ReactMethod
     public void trade(final String order, final String type, final Callback successCallback, final Callback errorCallback) {
     }
 
@@ -58,20 +78,23 @@ public class PayModule extends ReactContextBaseJavaModule {
      * @param type
      */
     @ReactMethod
-    public void switchPayMethod(final String prePayNo, final String type, final Promise promise) {
+    public void payForResoult(final String prePayNo, final String type, final Callback cb) {
+        //public void switchPayMethod(final String prePayNo, final String type, final Promise promise) {
         Log.v("PayModule", "prePayNo:" + prePayNo);
         Log.v("PayModule", "type:" + type);
-
+        PayModule.callback = cb;
         if ("alipay".equals(type)) {
-            Alipay(prePayNo, promise);
+            Alipay(prePayNo);
         } else if ("unionpay".equals(type)) {
-            UniPay(prePayNo, promise);
+            UniPay(prePayNo);
         } else if ("wechat".equals(type)) {
-            WXPay(prePayNo, promise);
-        }else {
-            Toast.makeText(getReactApplicationContext(), "无法找到支付方式" + type, Toast.LENGTH_SHORT).show();
-            if (promise != null)
-                promise.reject("0", "无法找到支付方式" + type);
+            WXPay(prePayNo);
+        } else {
+            Toast.makeText(getReactApplicationContext(), "无法找到“" + type + "”的支付方式" + type, Toast.LENGTH_SHORT).show();
+            if (PayModule.callback != null) {
+                PayModule.callback.invoke(new PayResult(-1,"无法找到“" + type + "”的支付方式"));
+                PayModule.callback = null;
+            }
         }
     }
 
@@ -80,10 +103,8 @@ public class PayModule extends ReactContextBaseJavaModule {
      * 支付宝支付方法
      *
      * @param payInfo
-     * @param promise
      */
-    private void Alipay(final String payInfo, final Promise promise) {
-        PayModule.promise = promise;
+    private void Alipay(final String payInfo) {
         Context context = getCurrentActivity();
         Intent intent = new Intent();
         intent.setClass(getCurrentActivity(), AliPayActivity.class);
@@ -96,10 +117,8 @@ public class PayModule extends ReactContextBaseJavaModule {
      * 微信支付
      *
      * @param payInfo
-     * @param promise
      */
-    private void WXPay(final String payInfo, final Promise promise) {
-        PayModule.promise = promise;
+    private void WXPay(final String payInfo) {
         Context context = getCurrentActivity();
         Intent intent = new Intent();
         intent.setClass(getCurrentActivity(), WxPayActivity.class);
@@ -111,15 +130,13 @@ public class PayModule extends ReactContextBaseJavaModule {
      * 银联支付
      *
      * @param payInfo
-     * @param promise
      */
-    private void UniPay(final String payInfo, final Promise promise) {
+    private void UniPay(final String payInfo) {
 
-        PayModule.promise = promise;
         Context context = getCurrentActivity();
         Intent intent = new Intent();
         intent.setClass(getCurrentActivity(), UniPayActivity.class);
-        intent.putExtra(WxPayActivity.EXTRA, payInfo);
+        intent.putExtra(UniPayActivity.EXTRA, payInfo);
         context.startActivity(intent);
 
     }

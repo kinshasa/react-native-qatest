@@ -35,6 +35,4 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.0.0'
     //react native
     compile 'com.facebook.react:react-native:0.20.+'
-    compile files('libs/org.apache.http.legacy.jar')
-    compile files('libs/payecoplugin.jar')
 }
