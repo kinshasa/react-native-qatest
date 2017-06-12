@@ -103,7 +103,7 @@ export default class Setting extends Component {
                     style={{height: 45}}/>
                 <ScrollView style={SettingStyles.container}>
                     <ScrollView horizontal style={SettingStyles.container}>
-                        <JSONTree hideRoot data={getApp()}/>
+                        <JSONTree hideRoot data={[]}/>
                     </ScrollView>
                 </ScrollView>
 

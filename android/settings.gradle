@@ -1,5 +1,5 @@
 rootProject.name = 'QATest'
-include ':react-native-spinkit'
+include ':react-native-spinkit', ':android-pay-module'
 include ':android-http-module'
 include ':android-log-module'
 //include ':android-volley-master'

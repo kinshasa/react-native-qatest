@@ -219,6 +219,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.6.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
 
+    compile project(path: ':android-pay-module')
 }
 
 // Run this once to be able to run the application with BUCK

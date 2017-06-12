@@ -74,7 +74,7 @@ export default class FlatListContainer extends Component {
             } else {
                 throw new Error('Something went wrong on api server!');
             }
-            getApp().Logger.saveLog('FlatList',json);
+            //getApp().Logger.saveLog('FlatList',json);
             console.log('FlatListContainer getData()', json);
             let data = [...json.data.list, ...json.data.list, ...json.data.list, ...json.data.list];
             console.log('FlatListContainer getData()', json.data.list.length);

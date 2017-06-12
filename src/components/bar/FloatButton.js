@@ -181,7 +181,7 @@ const FloatButtonStyles = StyleSheet.create({
         left: _previousLeft,
         alignItems: 'center',
         justifyContent: 'center',
-        opacity: 0.7
+        opacity: 0.7,
     },
     text: {}
 });

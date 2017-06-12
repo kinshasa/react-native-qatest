@@ -11,28 +11,30 @@
  * @param args
  * @constructor
  */
-export function Log(...args) {
+const Log = function (...args) {
     console.log(...args)
-}
+};
 
 
-export function saveLog(tag, data) {
+const save = function (tag, data) {
 
     let log = new OneLog();
     log.setTag(tag);
     log.setData(data);
 
-    if(!getApp().logQueue){
-        getApp().logQueue = [];
-    }
-    getApp().logQueue.push(log)
-}
+    // if (!getApp().logQueue) {
+    //     getApp().logQueue = [];
+    // }
+    // getApp().logQueue.push(log)
+};
 
-export function getLog() {
+const get = function () {
 
-    return getApp().logQueue;
-}
+    //return getApp().logQueue;
+};
 
-export function cleanLog() {
+const clear = function () {
 
-}
+};
+
+export default Logger = {Log, save, get, clear}

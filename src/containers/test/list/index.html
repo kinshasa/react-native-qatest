@@ -11,7 +11,10 @@
 <p>
 
 </p>
-
+<p>
+    <input type="button" value="支付" onclick="onPay();"
+    />
+</p>
 <p>
     <input type="button" value="登录" onclick="onLogin();"
     />
@@ -32,19 +35,24 @@
 </body>
 <script>
 
-    (function () {
-        var count = 0;
-        document.addEventListener('message', function (e) {
-            //console.log("Browser::message()",e);
-            count++;
-            document.getElementsByTagName('p')[0].innerHTML = 'Messages recieved from React Native: ' + count;
-            document.getElementsByTagName('p')[1].innerHTML = e.data;
-        });
+    function onPay() {
+        try {
+            let payId = {
+                appid: 'wxc4d47d3d98bad159',
+                noncestr: '8241339728',
+                package: 'Sign=WXPay',
+                partnerid: '1401664002',
+                prepayid: 'wx20170609154945ecc68978af0859874924',
+                sign: '0CAAD12690DDFF3CA094914B85E25E14',
+                timestamp: '1496994585'
+            };
 
-        document.getElementsByTagName('input')[0].addEventListener('click', function () {
-            window.postMessage('getElementsByTagName');
-        });
-    })();
+            var info = {actionName:'pay', payId, plat:'wechat'};
+            var str = JSON.stringify(info);
+            window.postMessage(str);
+        } catch (e) {
+        }
+    }
 
     function onLogin() {
         //console.log("Browser::onLogin()");
@@ -63,6 +71,15 @@
         let params = {username: 'admin', passwd: '123456'};
         window.postMessage(JSON.stringify({action: 'getUserInfo', params}));
     }
+
+    document.addEventListener('message', function (e) {
+        console.log("Browser::message()"+JSON.stringify(e.data));
+        document.getElementsByTagName('p')[0].innerHTML = 'Messages recieved from React Native: ';
+        document.getElementsByTagName('p')[1].innerHTML = e.data;
+    });
+    /*document.getElementsByTagName('input')[0].addEventListener('click', function () {
+     window.postMessage('getElementsByTagName');
+     });*/
 
 </script>
 </html>

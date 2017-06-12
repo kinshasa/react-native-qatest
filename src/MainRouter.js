@@ -13,15 +13,17 @@ import scenes from "./scenes";
 // import * as actions from '../common/actions';
 
 export default class MainRouter extends Component {
-
-
     constructor(props) {
         super(props);
         // 初始状态
         this.state = {};
     }
 
-    data = {}
+    data = {};
+
+    componentWillMount() {
+        console.log('MainRouter::componentWillMount()');
+    }
 
     componentDidMount() {
         console.log('#MainRouter componentDidMount this.props:,this.props.actions');

@@ -35,12 +35,12 @@ export default class LoggerContainer extends Component {
     constructor(props, context) {
         console.log("LoggerContainer constructor()");
         super(props, context);
-        getApp().Logger.saveLog(getApp().Logger.getLog().length,getApp().Http);
-        getApp().Logger.saveLog(getApp().Logger.getLog().length,getApp().Http);
-        getApp().Logger.saveLog(getApp().Logger.getLog().length,getApp().Http);
-        getApp().Logger.saveLog(getApp().Logger.getLog().length,getApp().Http);
-        getApp().Logger.saveLog(getApp().Logger.getLog().length,getApp().Http);
-        this.state = {data: getApp().Logger.getLog()};
+        // Logger.save(Logger.getLog().length,getApp().Http);
+        // Logger.save(Logger.getLog().length,getApp().Http);
+        // Logger.save(Logger.getLog().length,getApp().Http);
+        // Logger.save(getApp().Logger.getLog().length,getApp().Http);
+        // Logger.save(getApp().Logger.get().length,getApp().Http);
+        // this.state = {data: Logger.get()};
     }
 
     /**
@@ -131,7 +131,7 @@ const LoggerContainerStyles = StyleSheet.create({
     },
     scrollView: {
         backgroundColor:'#888',
-        width:getApp().Window.width,
-        height:getApp().Window.height,
+        width:getWidth(),
+        height:getHeight(),
     },
 });

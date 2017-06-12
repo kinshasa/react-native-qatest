@@ -226,8 +226,8 @@ export default class LayoutXYDemoContainer extends Component {
 
 const LayoutXYDemoContainerStyles = StyleSheet.create({
     container: {
-        height:getApp().Window.height-StatusBar.currentHeight,
-        width:getApp().Window.width,
+        height:getHeight()-StatusBar.currentHeight,
+        width:getWidth(),
         backgroundColor:'red'
     },
     body: {
