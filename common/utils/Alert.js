@@ -12,14 +12,14 @@ import {Alert} from "react-native";
 var isShowAlert = false;
 
 export function errAlert(value) {
-    getApp().msg = value;
+    //getApp().msg = value;
 
     if (isShowAlert)
         return;
 
     Alert.alert(
         '捕捉异常信息',
-        getApp().msg,
+        value,
         [
             {text: 'Cancel', onPress: () => isShowAlert = true, style: 'cancel'},
             {text: 'OK', onPress: () => isShowAlert = false},

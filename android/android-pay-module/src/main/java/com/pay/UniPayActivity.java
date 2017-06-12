@@ -18,9 +18,9 @@ import org.json.JSONObject;
  */
 public class UniPayActivity extends Activity {
 
-    public static final String EXTRA = "payInfo";
+    public static final String EXTRA = "prePayMsg";
 
-    private String payInfo = "";
+    private String prePayMsg = "";
     /*****************************************************************
      * mMode参数解释： "00" - 启动银联正式环境 ，"01" - 连接银联测试环境
      *****************************************************************/
@@ -31,11 +31,11 @@ public class UniPayActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        payInfo = getIntent().getStringExtra(EXTRA);
-        if (TextUtils.isEmpty(payInfo)) {
+        prePayMsg = getIntent().getStringExtra(EXTRA);
+        if (TextUtils.isEmpty(prePayMsg)) {
             finish();
         }
-        UniPay(payInfo);
+        UniPay(prePayMsg);
 
     }
 
@@ -72,9 +72,9 @@ public class UniPayActivity extends Activity {
             // TODO Auto-generated catch block
             e.printStackTrace();
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            if (PayModule.callback != null){
-                PayModule.callback.invoke(new PayModule.PayResult(-1,"支付异常:“"+e.getMessage()+"”").toString());
-                PayModule.callback = null;
+            if (PayModule.exception != null){
+                PayModule.exception.invoke(new PayModule.PayResult(-1,"支付异常:“"+e.getMessage()+"”").toString());
+                PayModule.exception = PayModule.exception = null;
             }
             finish();
         }
@@ -136,7 +136,7 @@ public class UniPayActivity extends Activity {
                 }
                 if (PayModule.callback != null){
                     PayModule.callback.invoke(new PayModule.PayResult(0,msg).toString());
-                    PayModule.callback = null;
+                    PayModule.callback = PayModule.exception = null;
                 }
             } else if (str.equalsIgnoreCase("fail")) {
                 msg = "支付失败！";
@@ -148,7 +148,7 @@ public class UniPayActivity extends Activity {
             }
             if (PayModule.callback != null){
                 PayModule.callback.invoke(new PayModule.PayResult(200,msg).toString());
-                PayModule.callback = null;
+                PayModule.callback = PayModule.exception = null;
             }
         }
         //回调成功后，关闭页面

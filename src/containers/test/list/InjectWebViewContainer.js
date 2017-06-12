@@ -216,7 +216,7 @@ export default class InjectWebViewContainer extends Component {
                    payId =  JSON.stringify(payId);
                 }
                 console.log('InjectWebViewContainer::onMessage()', payId, plat);
-                Pay.payForResoult(payId, plat, callback => {
+                start3rdPay(payId, plat, callback => {
                     console.log('InjectWebViewContainer::postMessage()',callback);
                     this.postMessage('pay', callback);
                 });
@@ -245,9 +245,9 @@ export default class InjectWebViewContainer extends Component {
             canGoForward: true,
             canGoBack: false,
             loading: false,
-            title: 'js调用java',
-            url: 'http://10.8.73.32:8082/assets/src/containers/test/list/index.html?platform=android&hash=f59797250ebe7759ec6c9faa29f0d0f0',
-            target: 1946
+            title: '',
+            url: '',
+            target: 0
         };
         this.navState = navState;
     };

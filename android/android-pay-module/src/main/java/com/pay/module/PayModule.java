@@ -29,6 +29,7 @@ public class PayModule extends ReactContextBaseJavaModule {
     private static final String DURATION_SHORT_KEY = "SHORT";
     private static final String DURATION_LONG_KEY = "LONG";
     public static Callback callback;
+    public static Callback exception;
 
     public static class PayResult {
 
@@ -85,29 +86,32 @@ public class PayModule extends ReactContextBaseJavaModule {
     public void trade(final String order, final String type, final Callback successCallback, final Callback errorCallback) {
     }
 
+
     /**
-     * 切换支付方式
-     *
-     * @param prePayNo
+     * 唤起三方支付
+     * @param prePayMsg
      * @param type
+     * @param cb
+     * @param exp
      */
     @ReactMethod
-    public void payForResoult(final String prePayNo, final String type, final Callback cb) {
+    public void start3rdPay(final String prePayMsg, final String type, final Callback cb,final Callback exp) {
         //public void switchPayMethod(final String prePayNo, final String type, final Promise promise) {
-        Log.v("PayModule", "prePayNo:" + prePayNo);
+        Log.v("PayModule", "prePayNo:" + prePayMsg);
         Log.v("PayModule", "type:" + type);
         PayModule.callback = cb;
+        PayModule.exception = exp;
         if ("alipay".equals(type)) {
-            Alipay(prePayNo);
+            Alipay(prePayMsg);
         } else if ("unionpay".equals(type)) {
-            UniPay(prePayNo);
+            UniPay(prePayMsg);
         } else if ("wechat".equals(type)) {
-            WXPay(prePayNo);
+            WXPay(prePayMsg);
         } else {
             Toast.makeText(getReactApplicationContext(), "无法找到“" + type + "”的支付方式" + type, Toast.LENGTH_SHORT).show();
-            if (PayModule.callback != null) {
-                PayModule.callback.invoke(new PayResult(-1,"无法找到“" + type + "”的支付方式"));
-                PayModule.callback = null;
+            if (PayModule.exception != null) {
+                PayModule.exception.invoke(new PayResult(-1,"无法找到“" + type + "”的支付方式"));
+                PayModule.callback = PayModule.exception = null;
             }
         }
     }

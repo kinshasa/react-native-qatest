@@ -17,8 +17,8 @@ import com.pay.module.PayModule;
  */
 public class AliPayActivity extends Activity {
 
-    public static final String EXTRA = "payInfo";
-    private String payInfo = "";
+    public static final String EXTRA = "prePayMsg";
+    private String prePayMsg = "";
 
     private Handler payHandler = new Handler(/*getApplicationContext().getMainLooper()*/) {
 
@@ -38,7 +38,7 @@ public class AliPayActivity extends Activity {
                         Toast.makeText(getApplicationContext(), "支付成功", Toast.LENGTH_SHORT).show();
                         if (PayModule.callback != null){
                             PayModule.callback.invoke(new PayModule.PayResult(0,"支付成功").toString());
-                            PayModule.callback = null;
+                            PayModule.callback = PayModule.exception = null;
                         }
 
                         Toast.makeText(getApplicationContext(), "支付成功", Toast.LENGTH_SHORT).show();
@@ -69,7 +69,7 @@ public class AliPayActivity extends Activity {
                         Toast.makeText(getApplicationContext(), errmsg, Toast.LENGTH_SHORT).show();
                         if (PayModule.callback != null){
                             PayModule.callback.invoke(new PayModule.PayResult(Integer.valueOf(resultStatus),errmsg).toString());
-                            PayModule.callback = null;
+                            PayModule.callback = PayModule.exception = null;
                         }
                     }
                     finish();
@@ -85,11 +85,15 @@ public class AliPayActivity extends Activity {
         super.onCreate(savedInstanceState);
 
 
-        payInfo = getIntent().getStringExtra(EXTRA);
-        if (TextUtils.isEmpty(payInfo)) {
+        prePayMsg = getIntent().getStringExtra(EXTRA);
+        if (TextUtils.isEmpty(prePayMsg)) {
+            if (PayModule.callback != null){
+                PayModule.exception.invoke(new PayModule.PayResult(-1,"支付异常 prePayId为空").toString());
+                PayModule.callback = PayModule.exception = null;
+            }
             finish();
         }
-        Alipay(payInfo);
+        Alipay(prePayMsg);
     }
 
     @Override

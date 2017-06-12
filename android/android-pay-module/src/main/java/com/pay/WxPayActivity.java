@@ -24,20 +24,20 @@ import org.json.JSONObject;
  */
 public class WxPayActivity extends Activity {
 
-    public static final String EXTRA = "payInfo";
+    public static final String EXTRA = "prePayMsg";
 
-    private String payInfo = "";
+    private String prePayMsg = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        payInfo = getIntent().getStringExtra(EXTRA);
-        if (TextUtils.isEmpty(payInfo)) {
+        prePayMsg = getIntent().getStringExtra(EXTRA);
+        if (TextUtils.isEmpty(prePayMsg)) {
             finish();
         }
 
-        WXPay(payInfo);
+        WXPay(prePayMsg);
 
     }
 
@@ -91,9 +91,9 @@ public class WxPayActivity extends Activity {
         } catch (Exception e) {
             Log.e("WxPay", "异常：" + e.getMessage());
             Toast.makeText(getApplicationContext(), "异常：" + e.getMessage(), Toast.LENGTH_SHORT).show();
-            if (PayModule.callback != null){
-                PayModule.callback.invoke(new PayResult(-1,"支付异常:“"+e.getMessage()+"”").toString());
-                PayModule.callback = null;
+            if (PayModule.exception != null){
+                PayModule.exception.invoke(new PayResult(-1,"支付异常:“"+e.getMessage()+"”").toString());
+                PayModule.callback = PayModule.exception = null;
             }
             finish();
         }
@@ -109,12 +109,12 @@ public class WxPayActivity extends Activity {
         if (event.getCode() == BaseResp.ErrCode.ERR_OK) {
             if (PayModule.callback != null){
                 PayModule.callback.invoke(new PayResult(0,event.getMessage()).toString());
-                PayModule.callback = null;
+                PayModule.callback = PayModule.exception = null;
             }
         } else {
             if (PayModule.callback != null){
                 PayModule.callback.invoke(new PayResult(event.getCode(),event.getMessage()).toString());
-                PayModule.callback = null;
+                PayModule.callback = PayModule.exception = null;
             }
         }
         finish();

@@ -188,8 +188,8 @@ const QATestStyles = StyleSheet.create({
         flex: 1,
     },
     scrollView: {
-        width: getApp().Window.width,
-        height: getApp().Window.height * 2
+        width: getWidth(),
+        height: getHeight() * 2
     },
     btnList: {
         margin: 3,
