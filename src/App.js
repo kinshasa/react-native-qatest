@@ -38,12 +38,12 @@ export default class App extends Component {
     }
 
     componentWillMount() {
-        console.log('App::componentWillMount()');
+        Loggers.s('App::componentWillMount()',global.onerror);
         //AppController.init();
     }
 
     componentDidMount() {
-        console.log('App::componentDidMount() this.props.key1:',this.props.key1);
+        Loggers.s('App::componentDidMount() this.props.key1:',this.props.key1);
         this.showDropDownAlert('info', 'App周期信息', 'App初始化完成');
         this.addEventListener();
     }
@@ -90,12 +90,13 @@ export default class App extends Component {
 
     componentWillUnmount() {
         console.log('App::componentWillUnmount()');
+        Loggers.c();
         this.removeListener();
     }
 
 
     render() {
-        console.log('App::render()',Log);
+        console.log('App::render()');
         return (
             <View ref={(ref) => console.log('App::render() set refs.')} style={AppStyles.container}>
                 <MainProvider />

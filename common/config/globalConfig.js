@@ -7,10 +7,10 @@
  */
 
 import {Alert, Platform, Dimensions} from "react-native";
-import LocalStorage from "./LocalStorage";
-import Dialog from "./Dialog";
+import LocalStorage from "../utils/LocalStorage";
+import Dialog from "../../src/components/Dialog";
 import NativeModules from "../../src/components/native/NativeModules";
-import * as Logger from '../utils/Logger';
+import Loggers from '../utils/Loggers';
 
 
 let globalConfig = global;
@@ -41,12 +41,9 @@ globalConfig.getOS = function () {
 
 /**
  * 本地存储
- * @returns {{save: save, load: load, clear: clear}}
+ * @type {{save, saveById, load, loadById, getIdsForKey, getAllDataForKey, clearMapForKey, clear}}
  */
-globalConfig.getStorage = function () {
-
-    return LocalStorage;
-};
+globalConfig.LocalStorage = LocalStorage;
 
 //交互系统
 
@@ -83,11 +80,8 @@ globalConfig.isJson = function (o): boolean {
 /**
  * 日志系统
  */
-// globalConfig.Logger = Logger;
-globalConfig.Log = function (...args) {
-    //Logger.Log(...args);
-};
-
+globalConfig.Loggers = Loggers;
+globalConfig.Log = Loggers.v;
 /**
  * 网络请求
  * @param callback
@@ -118,3 +112,5 @@ globalConfig.start3rdPay = function (prePay, type, callback, excption) {
 globalConfig.init = function () {
     console.log('globalConfig:init() success','GLOBAL','err');
 };
+
+Loggers.s('globalConfig init success',1234567);

@@ -6,18 +6,13 @@
  * @LifeCycle：https://github.com/kinshasa/react-native-qatest
  */
 
-import React, {Component, PropTypes} from 'react';
-import {
-    StyleSheet,
-    View,
-    Text,
-    ScrollView,
-} from 'react-native';
+import React, {Component, PropTypes} from "react";
+import {ScrollView, StyleSheet, View, Text, TouchableNativeFeedback,InteractionManager} from "react-native";
+import JSONTree from "react-native-json-tree";
 import TitleBar from "../../../components/bar/TitleBar";
 import FlatList from "../../../components/listview/flatList/FlatList";
-import LoadingView from '../../../components/view/LoadingView'
-// import {getLog,saveLog} from "../../../../common/utils/Logger";
-import JSONTree from 'react-native-json-tree'
+import LoadingView from "../../../components/view/LoadingView";
+
 export default class LoggerContainer extends Component {
 
     static propTypes = {
@@ -35,12 +30,7 @@ export default class LoggerContainer extends Component {
     constructor(props, context) {
         console.log("LoggerContainer constructor()");
         super(props, context);
-        // Logger.save(Logger.getLog().length,getApp().Http);
-        // Logger.save(Logger.getLog().length,getApp().Http);
-        // Logger.save(Logger.getLog().length,getApp().Http);
-        // Logger.save(getApp().Logger.getLog().length,getApp().Http);
-        // Logger.save(getApp().Logger.get().length,getApp().Http);
-        // this.state = {data: Logger.get()};
+        this.state = {data: []};
     }
 
     /**
@@ -51,10 +41,14 @@ export default class LoggerContainer extends Component {
 
     componentWillMount() {
         console.log("LoggerContainer::componentWillMount()");
+
     }
 
     componentDidMount() {
-        console.log("LoggerContainer::componentDidMount()", new Date());
+        InteractionManager.runAfterInteractions(() => {
+            // ...耗时较长的同步的任务...
+            this.initData()
+        });
     }
 
     componentWillReceiveProps(newProps) {
@@ -87,17 +81,8 @@ export default class LoggerContainer extends Component {
          * data into the item data, or skip this optimization entirely.
          */
         return prev.item !== next.item;
-    }
-
-    renderItem = (item: ItemT, index: number) => {
-        return (
-            <View style={{marginLeft: 10,marginRight: 10, paddingBottom: 10, borderBottomWidth: 1, borderColor: '#eee'}}>
-                <ScrollView horizontal contentContainerStyle={{flex:1}}>
-                    <JSONTree hideRoot data={item}/>
-                </ScrollView>
-            </View>
-        );
     };
+
 
     render() {
         this.count++;
@@ -105,6 +90,7 @@ export default class LoggerContainer extends Component {
         return (
             <View style={LoggerContainerStyles.container}>
                 <TitleBar label="日志系统"/>
+                {this.renderHeader()}
                 <FlatList
                     legacyImplementation={false}
                     shouldItemUpdate={this.shouldItemUpdate}
@@ -123,15 +109,80 @@ export default class LoggerContainer extends Component {
         );
     }
 
+    renderHeader = () => {
+        return (
+            <View style={LoggerContainerStyles.headerView}>
+                <TouchableNativeFeedback onPress={() => this.clear()}>
+                    <View style={LoggerContainerStyles.headerViewBtn}>
+                        <Text>清空缓存</Text>
+                    </View>
+                </TouchableNativeFeedback>
+                <TouchableNativeFeedback onPress={() => this.add()}>
+                    <View style={LoggerContainerStyles.headerViewBtn}>
+                        <Text>新增一条数据对象</Text>
+                    </View>
+                </TouchableNativeFeedback>
+                <TouchableNativeFeedback >
+                    <View style={LoggerContainerStyles.headerViewBtn}>
+                        <Text>删除一条数据对象</Text>
+                    </View>
+                </TouchableNativeFeedback>
+            </View>
+        )
+    };
+
+    renderItem = (item: ItemT, index: number) => {
+        console.log("LoggerContainer::renderItem() item:", item);
+        return (
+            <View
+                style={{marginLeft: 10, marginRight: 10, paddingBottom: 10, borderBottomWidth: 1, borderColor: '#eee'}}>
+                <ScrollView horizontal contentContainerStyle={{flex: 1}}>
+                    <JSONTree hideRoot data={item}/>
+                </ScrollView>
+            </View>
+        );
+    };
+
+    async initData() {
+        let data = await LocalStorage.getAllDataForKey('logger');
+        this.setState({data})
+    }
+
+    async clear() {
+        await Loggers.c();
+        await this.reStore();
+    }
+
+    async add(data = {key: 'key1', value: 'value1'}) {
+        await Loggers.s(data);
+        await this.reStore();
+    }
+
+    async reStore() {
+        let data = await Loggers.g();
+        this.setState({data});
+    }
 }
 
 const LoggerContainerStyles = StyleSheet.create({
     container: {
-        flex:1
+        flex: 1
     },
     scrollView: {
-        backgroundColor:'#888',
-        width:getWidth(),
-        height:getHeight(),
+        backgroundColor: '#888',
+        width: getWidth(),
+        height: getHeight(),
     },
+    headerView: {
+        flexDirection: 'row',
+        marginTop: 20,
+        marginBottom: 10
+    },
+    headerViewBtn: {
+        flex: 1,
+        backgroundColor: 'green',
+        margin: 3,
+        paddingTop: 15,
+        paddingBottom: 15,
+    }
 });
