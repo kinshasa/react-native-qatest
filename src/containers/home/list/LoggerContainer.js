@@ -7,7 +7,7 @@
  */
 
 import React, {Component, PropTypes} from "react";
-import {ScrollView, StyleSheet, View, Text, TouchableNativeFeedback,InteractionManager} from "react-native";
+import {ScrollView, StyleSheet, View, Text, TouchableNativeFeedback, InteractionManager} from "react-native";
 import JSONTree from "react-native-json-tree";
 import TitleBar from "../../../components/bar/TitleBar";
 import FlatList from "../../../components/listview/flatList/FlatList";
@@ -93,23 +93,21 @@ export default class LoggerContainer extends Component {
                 {this.renderHeader()}
                 <FlatList
                     legacyImplementation={false}
+                    showsVerticalScrollIndicator={false}
                     shouldItemUpdate={this.shouldItemUpdate}
                     refreshing={false}
                     data={this.state.data}
-                    keyExtractor={(item: ItemT, index: number) => {
-                        return index
-                    }}
-                    renderItem={({item: ItemT, index: number}) => this.renderItem(ItemT, number)}
+                    keyExtractor={(item, index) => index}
+                    renderItem={({item, index}) => this.renderItem(item, index)}
                 />
                 <LoadingView
-                    visible={false} ref={(ref) => {
-                    this.loadingView = ref
-                }}/>
+                    visible={!this.state.data || this.state.data.length<=0}
+                    ref="loading"/>
             </View>
         );
     }
 
-    renderHeader = () => {
+    renderHeader() {
         return (
             <View style={LoggerContainerStyles.headerView}>
                 <TouchableNativeFeedback onPress={() => this.clear()}>
@@ -119,29 +117,32 @@ export default class LoggerContainer extends Component {
                 </TouchableNativeFeedback>
                 <TouchableNativeFeedback onPress={() => this.add()}>
                     <View style={LoggerContainerStyles.headerViewBtn}>
-                        <Text>新增一条数据对象</Text>
+                        <Text style={LoggerContainerStyles.headerViewText}>新增数据</Text>
                     </View>
                 </TouchableNativeFeedback>
                 <TouchableNativeFeedback >
                     <View style={LoggerContainerStyles.headerViewBtn}>
-                        <Text>删除一条数据对象</Text>
+                        <Text style={LoggerContainerStyles.headerViewText}>删除数据</Text>
                     </View>
                 </TouchableNativeFeedback>
             </View>
         )
-    };
+    }
 
-    renderItem = (item: ItemT, index: number) => {
+    renderItem(item, index) {
         console.log("LoggerContainer::renderItem() item:", item);
         return (
-            <View
-                style={{marginLeft: 10, marginRight: 10, paddingBottom: 10, borderBottomWidth: 1, borderColor: '#eee'}}>
-                <ScrollView horizontal contentContainerStyle={{flex: 1}}>
-                    <JSONTree hideRoot data={item}/>
-                </ScrollView>
-            </View>
+            <ScrollView key={index} horizontal contentContainerStyle={LoggerContainerStyles.scrollView}>
+
+                <JSONTree ref={'tree' + index} hideRoot data={item}/>
+                <TouchableNativeFeedback onPress={() => this.togoExpend('tree' + index)}>
+                    <View style={LoggerContainerStyles.rowViewBtn}>
+                        <Text style={LoggerContainerStyles.rowViewText}>+</Text>
+                    </View>
+                </TouchableNativeFeedback>
+            </ScrollView>
         );
-    };
+    }
 
     async initData() {
         let data = await LocalStorage.getAllDataForKey('logger');
@@ -162,16 +163,25 @@ export default class LoggerContainer extends Component {
         let data = await Loggers.g();
         this.setState({data});
     }
+
+    togoExpend(name) {
+        if (this.refs[name]) {
+            console.log(name);
+        }
+    }
 }
+
 
 const LoggerContainerStyles = StyleSheet.create({
     container: {
         flex: 1
     },
     scrollView: {
-        backgroundColor: '#888',
-        width: getWidth(),
-        height: getHeight(),
+        padding: 10,
+        minWidth: getWidth(),
+        borderBottomWidth: 1,
+        borderColor: '#ccc',
+        backgroundColor: '#eee',
     },
     headerView: {
         flexDirection: 'row',
@@ -184,8 +194,21 @@ const LoggerContainerStyles = StyleSheet.create({
         margin: 3,
         paddingTop: 15,
         paddingBottom: 15,
-        alignItems:'center',
+        alignItems: 'center',
     },
-    headerViewText:{
-    }
+    headerViewText: {color: '#eee', fontSize: 14, fontWeight: 'bold'},
+    rowViewBtn: {
+        position: 'absolute',
+        right: 10,
+        top: 10,
+        borderRadius: 10,
+        backgroundColor: '#fff',
+        borderColor: '#eee',
+        borderWidth: StyleSheet.hairlineWidth,
+        width: 20,
+        height: 20,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    rowViewText: {color: '#999', fontSize: 16, fontWeight: 'bold'},
 });
