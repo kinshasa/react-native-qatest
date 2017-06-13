@@ -114,7 +114,7 @@ export default class LoggerContainer extends Component {
             <View style={LoggerContainerStyles.headerView}>
                 <TouchableNativeFeedback onPress={() => this.clear()}>
                     <View style={LoggerContainerStyles.headerViewBtn}>
-                        <Text>清空缓存</Text>
+                        <Text style={LoggerContainerStyles.headerViewText}>清空缓存</Text>
                     </View>
                 </TouchableNativeFeedback>
                 <TouchableNativeFeedback onPress={() => this.add()}>
@@ -184,5 +184,8 @@ const LoggerContainerStyles = StyleSheet.create({
         margin: 3,
         paddingTop: 15,
         paddingBottom: 15,
+        alignItems:'center',
+    },
+    headerViewText:{
     }
 });
