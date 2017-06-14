@@ -51,8 +51,6 @@ public class ClassifyMainAdapter extends BaseAdapter {
     }
 
 
-
-
     @Override
     public int getCount() {
         return list.size();
@@ -71,8 +69,7 @@ public class ClassifyMainAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
         if (convertView == null) {
-            convertView = View.inflate(mContext,
-                    R.layout.item_classify_mainlist, null);
+            convertView = View.inflate(mContext, R.layout.item_classify_mainlist, null);
             hoder = new Hoder(convertView);
             // 把数据存储到convertView当中去
             convertView.setTag(hoder);
@@ -81,8 +78,7 @@ public class ClassifyMainAdapter extends BaseAdapter {
         }
 
         if (isLoadingImage == true) {
-            hoder.imageView.setImageResource(Integer.parseInt(list
-                    .get(position).get("img").toString()));
+            hoder.imageView.setImageResource(Integer.parseInt(list.get(position).get("img").toString()));
 
         }
 

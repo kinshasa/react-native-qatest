@@ -149,7 +149,7 @@ project.ext.vectoricons = [
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 // 依赖插件脚本
-apply from: 'tinker-support.gradle'
+//apply from: 'tinker-support.gradle'
 
 dependencies {
     compile fileTree(dir: "libs", include: ["*.jar"])
@@ -173,16 +173,16 @@ dependencies {
     //@https://github.com/maxs15/react-native-spinkit
     compile project(':react-native-spinkit')
 
-    //react-native-pushy
+    //upgrade and native hotFix module.
     compile project(':android-upgrade-module')
+    //react-native-pushy
     compile project(':react-native-update')
     compile project(':android-log-module')
 
     compile project(':android-http-module')
 
     // 升级SDK
-    //upgrade and native hotFix module.
-    compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
+    //compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
 
     //verticalViewPager
     compile 'me.kaelaela:verticalviewpager:1.0.0@aar'

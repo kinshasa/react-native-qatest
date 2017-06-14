@@ -1,5 +1,7 @@
 package com.android.qatest.ui.category;
 
+import android.os.AsyncTask;
+
 import com.android.qatest.R;
 
 import java.util.ArrayList;
@@ -13,7 +15,7 @@ import java.util.Map;
 
 public class CategoryInteractorImp implements CategoryInteractor {
 
-    private List<Map<String, Object>> mainList;
+    private List<Map<String, Object>> mCategoryList;
     public static String[] LISTVIEWTXT = new String[]{"热门分类", "美食", "购物",
             "休闲娱乐", "运动健身", "丽人", "结婚", "酒店", "爱车", "亲子"};
     public static int[] LISTVIEWIMG = new int[]{
@@ -25,17 +27,17 @@ public class CategoryInteractorImp implements CategoryInteractor {
     };
 
     @Override
-    public void onRequest(onCategoryRequestListener listener) {
+    public void onRequest(final onCategoryRequestListener listener) {
 
-        mainList = new ArrayList<Map<String, Object>>();
+        mCategoryList = new ArrayList<>();
         for (int i = 0; i < CategoryInteractorImp.LISTVIEWTXT.length; i++) {
-            Map<String, Object> map = new HashMap<String, Object>();
+            Map<String, Object> map = new HashMap<>();
             // 根据键值对存储到HashMap中去
             map.put("img", CategoryInteractorImp.LISTVIEWIMG[i]);
             map.put("txt", CategoryInteractorImp.LISTVIEWTXT[i]);
-            mainList.add(map);
+            mCategoryList.add(map);
         }
 
-        listener.onSuccess(mainList);
+        listener.onSuccess(mCategoryList);
     }
 }

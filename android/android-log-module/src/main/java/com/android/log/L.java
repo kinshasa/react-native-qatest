@@ -26,7 +26,7 @@ public class L {
 	public static final int NOLOG = 6;
 	
 	private static int LEVEL_PRINTF = VERBOSE;//<LEVEL_PRINTF,打印Log等级
-	private static int LEVEL_WRITE = VERBOSE;//>LEVEL_WRITE,写入Log文件等级
+	private static int LEVEL_WRITE = NOLOG;//>LEVEL_WRITE,写入Log文件等级
 
 	private static final String SEPARATOR = " ";
 

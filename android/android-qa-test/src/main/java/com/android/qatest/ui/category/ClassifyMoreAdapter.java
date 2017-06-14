@@ -28,6 +28,7 @@ public class ClassifyMoreAdapter extends BaseAdapter {
     public void setSelectItem(int position) {
         this.selectPosition = position;
     }
+
     public int getSelectItem() {
         return this.selectPosition;
     }
@@ -49,6 +50,7 @@ public class ClassifyMoreAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         if (convertView == null) {
             convertView = View.inflate(mContext, R.layout.item_classify_morelist, null);
             hoder = new Hoder(convertView);

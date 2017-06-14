@@ -19,7 +19,7 @@
         android:orientation="horizontal">
 
         <ListView
-            android:id="@+id/main_view"
+            android:id="@+id/mainListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2"
@@ -32,7 +32,7 @@
             android:scrollbars="none" />
 
         <ListView
-            android:id="@+id/more_view"
+            android:id="@+id/moreListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"

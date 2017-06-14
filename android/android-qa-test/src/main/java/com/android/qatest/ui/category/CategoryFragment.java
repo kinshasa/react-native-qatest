@@ -9,11 +9,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.android.log.L;
 import com.android.qatest.Config;
 import com.android.qatest.R;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,26 +23,26 @@ import butterknife.ButterKnife;
 
 /**
  * Created by lshaobo@gmai.com on 2017/5/16.
- *
+ * <p>
  * 商品二级分类
  */
-public class CategoryFragment extends Fragment {
+public class CategoryFragment extends Fragment implements CategoryView {
 
     private View view;
-    private List<Map<String, Object>> mainList;
+    private List<Map<String, Object>> mCategoryList;
     private ClassifyMoreAdapter classifyMoreAdapter;
     private ClassifyMainAdapter classifyMainAdapter;
 
-    private CategoryInteractor interactor;
+    private CategoryPresenter presenter;
 
     private int mainSelectPostion = 0;
 
 
-    @BindView(R.id.main_view)
-    ListView mainlist;
+    @BindView(R.id.mainListView)
+    ListView mainListView;
 
-    @BindView(R.id.more_view)
-    ListView morelist;
+    @BindView(R.id.moreListView)
+    ListView moreListView;
 
     public static CategoryFragment instance() {
         CategoryFragment view = new CategoryFragment();
@@ -54,25 +54,21 @@ public class CategoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_category_list, null);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         initData();
-
         initView();
         return view;
     }
 
-    private void initView(){
-        classifyMainAdapter = new ClassifyMainAdapter(getContext(), mainList);
+    private void initView() {
 
-        mainlist = (ListView)view.findViewById(R.id.main_view);
-        morelist = (ListView)view.findViewById(R.id.more_view);
         // 默认选中第一个选项
-        mainlist.setSelection(0);
+        mainListView.setSelection(0);
         // 建立数据适配
-        mainlist.setAdapter(classifyMainAdapter);
+        mainListView.setAdapter(classifyMainAdapter);
 
         // 设置listView当中的每个单项点击的事件变化逻辑处理
-        mainlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mainListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             // 主目录的点击事件发生后，就要为侧目进行数据的交互
             @Override
@@ -93,23 +89,46 @@ public class CategoryFragment extends Fragment {
 
     /**
      * 为侧目录(详细目录)进行数据的匹配处理
+     *
      * @param array
      */
     private void inintAdapter(String[] array) {
         classifyMoreAdapter = new ClassifyMoreAdapter(getContext(), array);
-        morelist.setAdapter(classifyMoreAdapter);
+        moreListView.setAdapter(classifyMoreAdapter);
         classifyMoreAdapter.notifyDataSetChanged();
     }
 
-    private void initData(){
-        mainList = new ArrayList<Map<String, Object>>();
-        for (int i = 0; i < Config.LISTVIEWTXT.length; i++) {
-            Map<String, Object> map = new HashMap<String, Object>();
-            // 根据键值对存储到HashMap中去
-            map.put("img", Config.LISTVIEWIMG[i]);
-            map.put("txt", Config.LISTVIEWTXT[i]);
-            mainList.add(map);
-        }
+    private void initData() {
+        mCategoryList = new ArrayList<Map<String, Object>>();
+        classifyMainAdapter = new ClassifyMainAdapter(getContext(), mCategoryList);
+        presenter = new CategoryPresenterImp(this);
+        presenter.getCategoryData(new CategoryInteractor.onCategoryRequestListener() {
+            @Override
+            public void onFail() {
+
+            }
+
+            @Override
+            public void onSuccess(List<Map<String, Object>> list) {
+                L.v(list);
+                mCategoryList.addAll(list);
+                classifyMainAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void setRightListView() {
+
+    }
 }

@@ -9,7 +9,7 @@
         android:id="@+id/moreItem_layout"
         android:layout_width="match_parent"
         android:layout_height="55dip"
-        android:background="#ffffffff"
+        android:background="#eee"
         android:orientation="vertical" >
 
         <TextView
@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="55dip"
             android:text="全部分类"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:textColor="#666666"
             android:textSize="17sp" />
     </LinearLayout>
