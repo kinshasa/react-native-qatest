@@ -4,9 +4,14 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.qatest.R;
+import com.android.qatest.ui.base.Fragment;
+
+import java.util.ArrayList;
 
 /**
  * Created by lshaobocsu@gmail.com on 2017.5.17.
@@ -18,11 +23,20 @@ public class ClassifyMoreAdapter extends BaseAdapter {
     private Context mContext;
 
     private int selectPosition = 0;
-    private Hoder hoder;
+    private Holder holder;
+    private ArrayList<CategoryItemModel> categoryItemModels;
+
+//    private CategoryItemsLinearLayout mCategoryItemsLayout ;
+
+    private View item;
 
     public ClassifyMoreAdapter(Context context, String[] list) {
         this.listMore = list;
         this.mContext = context;
+//        mCategoryItemsLayout = new CategoryItemsLinearLayout(context);
+        categoryItemModels.add(new CategoryItemModel("img1","name1"));
+        categoryItemModels.add(new CategoryItemModel("img2","name2"));
+        categoryItemModels.add(new CategoryItemModel("img3","name3"));
     }
 
     public void setSelectItem(int position) {
@@ -53,26 +67,32 @@ public class ClassifyMoreAdapter extends BaseAdapter {
 
         if (convertView == null) {
             convertView = View.inflate(mContext, R.layout.item_classify_morelist, null);
-            hoder = new Hoder(convertView);
-            convertView.setTag(hoder);
+            holder = new Holder(convertView);
+            convertView.setTag(holder);
         } else {
-            hoder = (Hoder) convertView.getTag();
+            holder = (Holder) convertView.getTag();
         }
-        hoder.textView.setText(listMore[position]);
-        hoder.textView.setTextColor(0xFF666666);
+        holder.textView.setText(listMore[position]);
+        holder.textView.setTextColor(0xFF666666);
         if (position == selectPosition) {
-            hoder.textView.setTextColor(0xFFFF8C00);
+            holder.textView.setTextColor(0xFFFF8C00);
         }
-
+//        mCategoryItemsLayout.addItemsView(categoryItemModels);
+//        holder.layout.addView(mCategoryItemsLayout);
+        if(item == null){
+            item = View.inflate(mContext, R.layout.item_category_image, null);
+        }
+        holder.layout.addView(item);
         return convertView;
     }
 
-    private static class Hoder {
+    private static class Holder {
         private TextView textView;
+        private ViewGroup layout;
 
-        public Hoder(View view) {
+        public Holder(View view) {
             textView = (TextView) view.findViewById(R.id.moreItem_text);
+            layout = (ViewGroup) view.findViewById(R.id.category_list_layout);
         }
-
     }
 }
