@@ -83,13 +83,14 @@ public class ClassifyMainAdapter extends BaseAdapter {
         if (isLoadingImage == true) {
             hoder.imageView.setImageResource(Integer.parseInt(list
                     .get(position).get("img").toString()));
-
         }
 
-        hoder.layout.setBackgroundColor(0xFFEEEEEE);
+
         hoder.textView.setText(list.get(position).get("txt").toString());
         if (position == selectPosition) {
-            hoder.layout.setBackgroundColor(0x99999999);
+            hoder.layout.setBackgroundColor(0xFF999999);
+        }else{
+            hoder.layout.setBackgroundColor(0xFFEEEEEE);
         }
         return convertView;
 
