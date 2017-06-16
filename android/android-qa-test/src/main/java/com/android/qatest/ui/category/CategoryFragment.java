@@ -61,7 +61,7 @@ public class CategoryFragment extends Fragment implements CategoryView {
     }
 
     private void initView() {
-
+        L.v();
         // 默认选中第一个选项
         mainListView.setSelection(0);
         // 建立数据适配
@@ -73,6 +73,7 @@ public class CategoryFragment extends Fragment implements CategoryView {
             // 主目录的点击事件发生后，就要为侧目进行数据的交互
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                L.v();
                 mainSelectPostion = position;
                 // 主目录一位数组的大小和侧目录二维数组的行的数目是一致的
                 // 点击传入二维数组的一行的数据
@@ -93,12 +94,14 @@ public class CategoryFragment extends Fragment implements CategoryView {
      * @param array
      */
     private void inintAdapter(String[] array) {
+        L.v();
         classifyMoreAdapter = new ClassifyMoreAdapter(getContext(), array);
         moreListView.setAdapter(classifyMoreAdapter);
         classifyMoreAdapter.notifyDataSetChanged();
     }
 
     private void initData() {
+        L.v();
         mCategoryList = new ArrayList<Map<String, Object>>();
         classifyMainAdapter = new ClassifyMainAdapter(getContext(), mCategoryList);
         presenter = new CategoryPresenterImp(this);

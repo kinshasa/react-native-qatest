@@ -87,11 +87,11 @@ public class ClassifyMainAdapter extends BaseAdapter {
 
 
         hoder.textView.setText(list.get(position).get("txt").toString());
-        if (position == selectPosition) {
+        /*if (position == selectPosition) {
             hoder.layout.setBackgroundColor(0xFF999999);
         }else{
             hoder.layout.setBackgroundColor(0xFFEEEEEE);
-        }
+        }*/
         return convertView;
 
     }

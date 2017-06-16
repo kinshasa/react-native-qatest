@@ -8,6 +8,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.log.L;
 import com.android.qatest.R;
 import com.android.qatest.ui.base.Fragment;
 
@@ -28,16 +29,17 @@ public class ClassifyMoreAdapter extends BaseAdapter {
 
 //    private CategoryItemsLinearLayout mCategoryItemsLayout ;
 
-    private View item;
-
     public ClassifyMoreAdapter(Context context, String[] list) {
         this.listMore = list;
         this.mContext = context;
 //        mCategoryItemsLayout = new CategoryItemsLinearLayout(context);
+        categoryItemModels = new ArrayList<>();
         categoryItemModels.add(new CategoryItemModel("img1","name1"));
         categoryItemModels.add(new CategoryItemModel("img2","name2"));
         categoryItemModels.add(new CategoryItemModel("img3","name3"));
     }
+
+    private View item;
 
     public void setSelectItem(int position) {
         this.selectPosition = position;
@@ -79,10 +81,17 @@ public class ClassifyMoreAdapter extends BaseAdapter {
         }
 //        mCategoryItemsLayout.addItemsView(categoryItemModels);
 //        holder.layout.addView(mCategoryItemsLayout);
-        if(item == null){
-            item = View.inflate(mContext, R.layout.item_category_image, null);
+        try{
+            if(item == null){
+                item = View.inflate(mContext, R.layout.item_category_image, null);
+                item.setTag(position);
+            }else {
+
+            }
+            holder.layout.addView(item);
+        }catch (Exception e){
+            L.e(e.getMessage());
         }
-        holder.layout.addView(item);
         return convertView;
     }
 

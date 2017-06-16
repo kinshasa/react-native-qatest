@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Toast;
 
+import com.android.log.L;
 import com.android.qatest.R;
 import com.android.qatest.ui.base.BaseActivity;
 import com.lhh.apst.library.AdvancedPagerSlidingTabStrip;
@@ -49,6 +50,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        L.v();
         setContentView(R.layout.activity_main);
         //加载广告页
         showSplashView();
@@ -61,6 +63,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
 
     private void initViews() {
 
+        L.v();
         mAPSTS = (AdvancedPagerSlidingTabStrip) findViewById(R.id.tabs);
         mVP = (APSTSViewPager) findViewById(R.id.vp_main);
 
