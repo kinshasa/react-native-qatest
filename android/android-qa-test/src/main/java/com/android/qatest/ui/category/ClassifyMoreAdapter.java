@@ -27,12 +27,11 @@ public class ClassifyMoreAdapter extends BaseAdapter {
     private Holder holder;
     private ArrayList<CategoryItemModel> categoryItemModels;
 
-//    private CategoryItemsLinearLayout mCategoryItemsLayout ;
+    private CategoryItemsLinearLayout mCategoryItemsLayout ;
 
     public ClassifyMoreAdapter(Context context, String[] list) {
         this.listMore = list;
         this.mContext = context;
-//        mCategoryItemsLayout = new CategoryItemsLinearLayout(context);
         categoryItemModels = new ArrayList<>();
         categoryItemModels.add(new CategoryItemModel("img1","name1"));
         categoryItemModels.add(new CategoryItemModel("img2","name2"));
@@ -79,9 +78,11 @@ public class ClassifyMoreAdapter extends BaseAdapter {
         if (position == selectPosition) {
             holder.textView.setTextColor(0xFFFF8C00);
         }
-//        mCategoryItemsLayout.addItemsView(categoryItemModels);
-//        holder.layout.addView(mCategoryItemsLayout);
-        try{
+        mCategoryItemsLayout = new CategoryItemsLinearLayout(mContext);
+        mCategoryItemsLayout.addItemsView(categoryItemModels);
+        holder.layout.removeView(mCategoryItemsLayout);
+        holder.layout.addView(mCategoryItemsLayout);
+        /*try{
             if(item == null){
                 item = View.inflate(mContext, R.layout.item_category_image, null);
                 item.setTag(position);
@@ -91,7 +92,7 @@ public class ClassifyMoreAdapter extends BaseAdapter {
             holder.layout.addView(item);
         }catch (Exception e){
             L.e(e.getMessage());
-        }
+        }*/
         return convertView;
     }
 

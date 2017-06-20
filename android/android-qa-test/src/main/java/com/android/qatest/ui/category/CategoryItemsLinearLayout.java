@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,38 +22,44 @@ public class CategoryItemsLinearLayout extends LinearLayout {
     private ArrayList<CategoryItemModel> mCategoryItems;
     private LinearLayout mCateItemsLayout;
     private CategoryItemsHolder holder;
+    private LinearLayout view;
+    private Context mContext;
 
     public CategoryItemsLinearLayout(Context context) {
-        super(context);
+        this(context,null);
     }
 
     public CategoryItemsLinearLayout(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs,0);
     }
 
     public CategoryItemsLinearLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+        this(context, attrs, defStyleAttr,0);
     }
 
     public CategoryItemsLinearLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        init();
+        init(context);
     }
 
-    public void init() {
+    public void init(Context context) {
+        mContext = context;
         mCategoryItems = new ArrayList<>();
-        mCateItemsLayout = (LinearLayout) View.inflate(getContext(), R.layout.item_category_image, null);
-        holder = new CategoryItemsHolder(mCateItemsLayout);
-        mCateItemsLayout.setTag(mCateItemsLayout);
+        view = new LinearLayout(context);
     }
 
     public void addItemsView(ArrayList<CategoryItemModel> data) {
+
+        if(data == null){
+            return;
+        }
         mCategoryItems.addAll(data);
         for(CategoryItemModel item : mCategoryItems){
-            holder = (CategoryItemsHolder)mCateItemsLayout.getTag();
-            holder.textView.setText(item.name);
-            addView(mCateItemsLayout);
+            mCateItemsLayout = (LinearLayout) View.inflate(getContext(), R.layout.item_category_image, null);
+            ((TextView)mCateItemsLayout.findViewById(R.id.cateItemText)).setText(item.name);
+            view.addView(mCateItemsLayout);
         }
+        addView(view);
     }
 
 

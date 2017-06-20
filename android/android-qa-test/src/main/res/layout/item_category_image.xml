@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    android:layout_height="wrap_content"
     android:layout_weight="1"
     android:background="@color/white"
     android:gravity="center"
-    android:minWidth="100dip"
+    android:minWidth="10dp"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="5dp">
 
     <ImageView
         android:id="@+id/cateItemImage"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
         android:src='@mipmap/ic_launcher' />
 
     <TextView
