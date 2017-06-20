@@ -4,13 +4,11 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
+import android.widget.GridView;
 import android.widget.TextView;
 
 import com.android.log.L;
 import com.android.qatest.R;
-import com.android.qatest.ui.base.Fragment;
 
 import java.util.ArrayList;
 
@@ -27,15 +25,15 @@ public class ClassifyMoreAdapter extends BaseAdapter {
     private Holder holder;
     private ArrayList<CategoryItemModel> categoryItemModels;
 
-    private CategoryItemsLinearLayout mCategoryItemsLayout ;
+    private CategoryItemsLinearLayout mCategoryItemsLayout;
 
     public ClassifyMoreAdapter(Context context, String[] list) {
         this.listMore = list;
         this.mContext = context;
         categoryItemModels = new ArrayList<>();
-        categoryItemModels.add(new CategoryItemModel("img1","name1"));
-        categoryItemModels.add(new CategoryItemModel("img2","name2"));
-        categoryItemModels.add(new CategoryItemModel("img3","name3"));
+        categoryItemModels.add(new CategoryItemModel("img1", "name1"));
+        categoryItemModels.add(new CategoryItemModel("img2", "name2"));
+        categoryItemModels.add(new CategoryItemModel("img3", "name3"));
     }
 
     private View item;
@@ -69,6 +67,9 @@ public class ClassifyMoreAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = View.inflate(mContext, R.layout.item_classify_morelist, null);
             holder = new Holder(convertView);
+            CategoryItemsAdapter adapter = new CategoryItemsAdapter(mContext,categoryItemModels);
+            holder.gridView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
             convertView.setTag(holder);
         } else {
             holder = (Holder) convertView.getTag();
@@ -78,31 +79,23 @@ public class ClassifyMoreAdapter extends BaseAdapter {
         if (position == selectPosition) {
             holder.textView.setTextColor(0xFFFF8C00);
         }
-        mCategoryItemsLayout = new CategoryItemsLinearLayout(mContext);
+        L.v();
+        /*mCategoryItemsLayout = new CategoryItemsLinearLayout(mContext);
         mCategoryItemsLayout.addItemsView(categoryItemModels);
         holder.layout.removeView(mCategoryItemsLayout);
-        holder.layout.addView(mCategoryItemsLayout);
-        /*try{
-            if(item == null){
-                item = View.inflate(mContext, R.layout.item_category_image, null);
-                item.setTag(position);
-            }else {
-
-            }
-            holder.layout.addView(item);
-        }catch (Exception e){
-            L.e(e.getMessage());
-        }*/
+        holder.layout.addView(mCategoryItemsLayout);*/
         return convertView;
     }
 
     private static class Holder {
-        private TextView textView;
-        private ViewGroup layout;
+        public TextView textView;
+        public ViewGroup layout;
+        public GridView gridView;
 
         public Holder(View view) {
             textView = (TextView) view.findViewById(R.id.moreItem_text);
             layout = (ViewGroup) view.findViewById(R.id.category_list_layout);
+            gridView = (GridView) view.findViewById(R.id.category_grid_view);
         }
     }
 }

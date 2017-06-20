@@ -26,9 +26,18 @@
         android:id="@+id/category_list_layout"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <include layout="@layout/item_category_image" />
     </LinearLayout>
+
+    <GridView
+        android:numColumns="4"
+        android:id="@+id/category_grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </GridView>
 
 </LinearLayout>
