@@ -2,6 +2,7 @@ package com.android.qatest;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.android.qatest.rct.RCTImagePackage;
 import com.android.qatest.rct.RCTViewPackage;
@@ -68,7 +69,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         // you must install multiDex whatever tinker is installed!
-//        MultiDex.install(base);
+       MultiDex.install(base);
 
 
         // 安装tinker

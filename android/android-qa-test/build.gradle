@@ -173,16 +173,15 @@ dependencies {
     //@https://github.com/maxs15/react-native-spinkit
     compile project(':react-native-spinkit')
 
-    //upgrade and native hotFix module.
+    //bugly upgrade and tinker native hotFix module.
     compile project(':android-upgrade-module')
+
     //react-native-pushy
     compile project(':react-native-update')
+
     compile project(':android-log-module')
 
     compile project(':android-http-module')
-
-    // 升级SDK
-    //compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
 
     //verticalViewPager
     compile 'me.kaelaela:verticalviewpager:1.0.0@aar'
