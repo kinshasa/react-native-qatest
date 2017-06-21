@@ -34,6 +34,10 @@ public class ClassifyMoreAdapter extends BaseAdapter {
         categoryItemModels.add(new CategoryItemModel("img1", "name1"));
         categoryItemModels.add(new CategoryItemModel("img2", "name2"));
         categoryItemModels.add(new CategoryItemModel("img3", "name3"));
+        categoryItemModels.add(new CategoryItemModel("img3", "name4"));
+        categoryItemModels.add(new CategoryItemModel("img3", "name5"));
+        categoryItemModels.add(new CategoryItemModel("img3", "name6"));
+        categoryItemModels.add(new CategoryItemModel("img3", "name7"));
     }
 
     private View item;
