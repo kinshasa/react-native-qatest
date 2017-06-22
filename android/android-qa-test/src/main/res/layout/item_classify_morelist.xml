@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:descendantFocusability="afterDescendants"
     android:orientation="vertical"
     android:paddingLeft="10dip">
 
@@ -25,19 +26,25 @@
     <LinearLayout
         android:id="@+id/category_list_layout"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
-        android:visibility="gone">
+        android:layout_height="wrap_content"
+        android:background="#d5e2cd12"
+        android:orientation="vertical">
 
-        <include layout="@layout/item_category_image" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="嵌套girdView"
+            android:textSize="14dp" />
+
+        <com.android.qatest.ui.widget.NestGridView
+            android:id="@+id/category_grid_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#d5e26912"
+            android:columnWidth="80dp"
+            android:numColumns="auto_fit"
+            android:stretchMode="columnWidth" />
     </LinearLayout>
 
-    <GridView
-        android:numColumns="4"
-        android:id="@+id/category_grid_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </GridView>
 
 </LinearLayout>

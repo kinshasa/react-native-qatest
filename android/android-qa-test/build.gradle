@@ -90,6 +90,7 @@ android {
         targetSdkVersion 25
         versionCode 2
         versionName "1.1.03131130"
+        multiDexEnabled true
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -160,12 +161,12 @@ dependencies {
     //
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
-    // 多dex配置
+    // 多dex配置，Dalvik 可执行文件分包，用于Instant Run,Tinker
     //support multidex
     compile 'com.android.support:multidex:1.0.1'
 
     //loginActivity used
-    compile 'com.android.support:design:25.2.0'
+    compile 'com.android.support:design:25.0.0'
 
     // From node_modules
     compile project(':react-native-vector-icons')
@@ -196,9 +197,9 @@ dependencies {
     //PageIndicatorView will simplify your life while you working with Android ViewPager and need to indicate selected page. It's easy to setup and customize as you need with run-time preview rendering.
     //https://github.com/romandanylyk/PageIndicatorView
     compile 'com.romandanylyk:pageindicatorview:0.1.2'
-    compile 'com.android.support:support-annotations:25.3.0'
-    compile 'com.android.support:support-compat:25.3.0'
-    compile 'com.android.support:support-core-ui:25.3.0'
+    compile 'com.android.support:support-annotations:25.0.0'
+    compile 'com.android.support:support-compat:25.0.0'
+    compile 'com.android.support:support-core-ui:25.0.0'
 
     /** Fresco from facebook @https://github.com/facebook/fresco. add by@liusp@gagc.com.cn  **/
     //If your app supports Android versions before Ice Cream Sandwich (API level 14)
@@ -208,11 +209,9 @@ dependencies {
     ////facebook picture load.
     //compile 'com.facebook.fresco:fresco:0.10.0'
 
-
     //Android developers should collect the following utils(updating)
     //https://github.com/kinshasa/AndroidUtilCode
     compile 'com.blankj:utilcode:1.3.6'
-
 
     //https://github.com/JakeWharton/butterknife
     compile 'com.jakewharton:butterknife:8.6.0'

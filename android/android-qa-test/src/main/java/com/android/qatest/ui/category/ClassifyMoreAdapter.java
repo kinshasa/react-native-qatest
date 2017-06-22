@@ -5,10 +5,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.android.log.L;
 import com.android.qatest.R;
+import com.android.qatest.ui.widget.ImageTextItemsLayout;
+import com.android.qatest.ui.widget.NestGridView;
 
 import java.util.ArrayList;
 
@@ -25,22 +29,12 @@ public class ClassifyMoreAdapter extends BaseAdapter {
     private Holder holder;
     private ArrayList<CategoryItemModel> categoryItemModels;
 
-    private CategoryItemsLinearLayout mCategoryItemsLayout;
 
     public ClassifyMoreAdapter(Context context, String[] list) {
         this.listMore = list;
         this.mContext = context;
-        categoryItemModels = new ArrayList<>();
-        categoryItemModels.add(new CategoryItemModel("img1", "name1"));
-        categoryItemModels.add(new CategoryItemModel("img2", "name2"));
-        categoryItemModels.add(new CategoryItemModel("img3", "name3"));
-        categoryItemModels.add(new CategoryItemModel("img3", "name4"));
-        categoryItemModels.add(new CategoryItemModel("img3", "name5"));
-        categoryItemModels.add(new CategoryItemModel("img3", "name6"));
-        categoryItemModels.add(new CategoryItemModel("img3", "name7"));
+        categoryItemModels = CategoryItemModel.initArrayData();
     }
-
-    private View item;
 
     public void setSelectItem(int position) {
         this.selectPosition = position;
@@ -69,37 +63,63 @@ public class ClassifyMoreAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if (convertView == null) {
+            L.v(position);
+
             convertView = View.inflate(mContext, R.layout.item_classify_morelist, null);
-            holder = new Holder(convertView);
-            CategoryItemsAdapter adapter = new CategoryItemsAdapter(mContext,categoryItemModels);
-            holder.gridView.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
+            holder = new Holder(convertView, mContext);
             convertView.setTag(holder);
         } else {
             holder = (Holder) convertView.getTag();
         }
+
+        holder.gridView.setAdapter(new CategoryItemsAdapter(mContext, categoryItemModels));
+
+        holder.imageTextItemsLayout.setData(categoryItemModels);
+
+
         holder.textView.setText(listMore[position]);
         holder.textView.setTextColor(0xFF666666);
         if (position == selectPosition) {
             holder.textView.setTextColor(0xFFFF8C00);
         }
-        L.v();
-        /*mCategoryItemsLayout = new CategoryItemsLinearLayout(mContext);
-        mCategoryItemsLayout.addItemsView(categoryItemModels);
-        holder.layout.removeView(mCategoryItemsLayout);
-        holder.layout.addView(mCategoryItemsLayout);*/
+        holder.mCategoryItemsLayout.addItemsView(categoryItemModels);
         return convertView;
     }
 
     private static class Holder {
         public TextView textView;
-        public ViewGroup layout;
+        //父组件
+        public LinearLayout layout;
+        //嵌套girdView
         public GridView gridView;
 
-        public Holder(View view) {
+        //布局拷贝
+        public CategoryItemsLinearLayout mCategoryItemsLayout;
+        //自定义view嵌套GridView
+        public ImageTextItemsLayout<CategoryItemModel> imageTextItemsLayout;
+
+        public Holder(View view, Context context) {
             textView = (TextView) view.findViewById(R.id.moreItem_text);
-            layout = (ViewGroup) view.findViewById(R.id.category_list_layout);
-            gridView = (GridView) view.findViewById(R.id.category_grid_view);
+            layout = (LinearLayout) view.findViewById(R.id.category_list_layout);
+
+            mCategoryItemsLayout = new CategoryItemsLinearLayout(context);
+
+            gridView = (NestGridView) view.findViewById(R.id.category_grid_view);
+            imageTextItemsLayout = new ImageTextItemsLayout<CategoryItemModel>(context) {
+                @Override
+                public String getCateName(CategoryItemModel data) {
+                    return data.name;
+                }
+            };
+            TextView textView = new TextView(context);
+            textView.setText("京东淘宝的布局拷贝");
+            textView.setTextSize(14);
+            layout.addView(textView);
+            layout.addView(mCategoryItemsLayout, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+
+            layout.addView(imageTextItemsLayout, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+
+
         }
     }
 }

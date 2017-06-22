@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.log.L;
 import com.android.qatest.Config;
@@ -85,6 +86,19 @@ public class CategoryFragment extends Fragment implements CategoryView {
 
             }
 
+        });
+        /**
+         * android:descendantFocusability="blocksDescendants"
+         * beforeDescendants：viewgroup会优先其子类控件而获取到焦点
+         afterDescendants：viewgroup只有当其子类控件不需要获取焦点时才获取焦点
+         blocksDescendants：viewgroup会覆盖子类控件而直接获得焦点
+         */
+        moreListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getContext(),position+"",Toast.LENGTH_LONG).show();
+            }
         });
     }
 

@@ -22,7 +22,6 @@ public class CategoryItemsLinearLayout extends LinearLayout {
     private ArrayList<CategoryItemModel> mCategoryItems;
     private LinearLayout mCateItemsLayout;
     private CategoryItemsHolder holder;
-    private LinearLayout view;
     private Context mContext;
 
     public CategoryItemsLinearLayout(Context context) {
@@ -45,7 +44,9 @@ public class CategoryItemsLinearLayout extends LinearLayout {
     public void init(Context context) {
         mContext = context;
         mCategoryItems = new ArrayList<>();
-        view = new LinearLayout(context);
+        setPadding(2,2,2,2);
+        setOrientation(LinearLayout.HORIZONTAL);
+
     }
 
     public void addItemsView(ArrayList<CategoryItemModel> data) {
@@ -53,13 +54,13 @@ public class CategoryItemsLinearLayout extends LinearLayout {
         if(data == null){
             return;
         }
+
         mCategoryItems.addAll(data);
         for(CategoryItemModel item : mCategoryItems){
             mCateItemsLayout = (LinearLayout) View.inflate(getContext(), R.layout.item_category_image, null);
             ((TextView)mCateItemsLayout.findViewById(R.id.cateItemText)).setText(item.name);
-            view.addView(mCateItemsLayout);
+            addView(mCateItemsLayout);
         }
-        addView(view);
     }
 
 

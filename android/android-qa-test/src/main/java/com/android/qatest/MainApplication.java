@@ -41,7 +41,7 @@ public class MainApplication extends Application implements ReactApplication {
                     new RCTViewPackage(),
                     new RNSpinkitPackage(),
                     new PayReactPackage()
-                    );
+            );
         }
 
         @Override
@@ -66,10 +66,11 @@ public class MainApplication extends Application implements ReactApplication {
     }
 
     @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
+    protected void attachBaseContext(Context context) {
+        super.attachBaseContext(context);
         // you must install multiDex whatever tinker is installed!
-       MultiDex.install(base);
+        //Dalvik 可执行文件分包，用于Instant Run,Tinker
+        MultiDex.install(context);
 
 
         // 安装tinker
