@@ -21,7 +21,7 @@ public class SectionModel {
 
         ArrayList<SectionModel> sectionModels = new ArrayList<>();
         for (int i = 3; i < length; i++) {
-            sectionModels.add(new SectionModel("SectionTitle" + i , CateModel.initArrayData(i+10)));
+            sectionModels.add(new SectionModel("SectionTitle" + length + "" + i, CateModel.initArrayData(i + 10)));
         }
         return sectionModels;
     }

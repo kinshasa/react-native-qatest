@@ -23,7 +23,7 @@ public class DivisionModel {
 
         ArrayList<DivisionModel> divisionModels = new ArrayList<>();
         for (int i = 0; i < length; i++) {
-            divisionModels.add(new DivisionModel("DivisionTitle" + i, "DivisionAdStr" + i, SectionModel.initArrayData(i+5)));
+            divisionModels.add(new DivisionModel("DivisionTitle"  + length + "" + i, "DivisionAdStr" + i, SectionModel.initArrayData(i+5)));
         }
 
         return divisionModels;

@@ -15,7 +15,7 @@ public class CateModel {
     static ArrayList<CateModel> initArrayData(int length) {
         ArrayList<CateModel> cateModels = new ArrayList<>();
         for (int i = 6; i < length; i++) {
-            cateModels.add(new CateModel("img" + length, "CateName" + length));
+            cateModels.add(new CateModel("img" + length, "CateName"  + length + "" + i));
         }
         return cateModels;
     }
