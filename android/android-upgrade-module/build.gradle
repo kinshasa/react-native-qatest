@@ -24,6 +24,8 @@ android {
         }
     }
 }
+// 依赖插件脚本
+//apply from: 'tinker-support.gradle'
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')

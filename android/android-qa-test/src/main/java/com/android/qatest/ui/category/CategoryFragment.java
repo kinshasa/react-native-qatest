@@ -11,12 +11,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.log.L;
-import com.android.qatest.Config;
 import com.android.qatest.R;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,20 +27,21 @@ import butterknife.ButterKnife;
 public class CategoryFragment extends Fragment implements CategoryView {
 
     private View view;
-    private List<Map<String, Object>> mCategoryList;
-    private ClassifyMoreAdapter classifyMoreAdapter;
-    private ClassifyMainAdapter classifyMainAdapter;
+    private ArrayList<DivisionModel> divisionData;
+    private ArrayList<SectionModel> sectionData;
+    private SectionAdapter sectionAdapter;
+    private DivisionAdapter divisionAdapter;
 
     private CategoryPresenter presenter;
 
     private int mainSelectPostion = 0;
 
 
-    @BindView(R.id.mainListView)
-    ListView mainListView;
+    @BindView(R.id.divisionListView)
+    ListView divisionListView;
 
-    @BindView(R.id.moreListView)
-    ListView moreListView;
+    @BindView(R.id.sectionListView)
+    ListView sectionListView;
 
     public static CategoryFragment instance() {
         CategoryFragment view = new CategoryFragment();
@@ -64,12 +62,13 @@ public class CategoryFragment extends Fragment implements CategoryView {
     private void initView() {
         L.v();
         // 默认选中第一个选项
-        mainListView.setSelection(0);
-        // 建立数据适配
-        mainListView.setAdapter(classifyMainAdapter);
+        divisionListView.setSelection(0);
+        // 建立左侧数据适配
+        divisionListView.setAdapter(divisionAdapter);
+
 
         // 设置listView当中的每个单项点击的事件变化逻辑处理
-        mainListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        divisionListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             // 主目录的点击事件发生后，就要为侧目进行数据的交互
             @Override
@@ -77,12 +76,18 @@ public class CategoryFragment extends Fragment implements CategoryView {
                 L.v();
                 mainSelectPostion = position;
                 // 主目录一位数组的大小和侧目录二维数组的行的数目是一致的
-                // 点击传入二维数组的一行的数据
-                inintAdapter(Config.MORELISTVIEWTXT[position]);
+
                 // 设置选中的选的id
-                classifyMainAdapter.setSelectItem(position);
-                // 更新数据的变更
-                classifyMainAdapter.notifyDataSetChanged();
+                divisionAdapter.setSelectItem(position);
+                // 更新左侧选中样式
+                divisionAdapter.notifyDataSetChanged();
+
+                // 更新右侧数据
+                sectionData = divisionData.get(position).sectionModels;
+                sectionAdapter = new SectionAdapter(getContext(), sectionData);
+                // 建立右侧数据适配
+                sectionListView.setAdapter(sectionAdapter);
+                sectionAdapter.notifyDataSetChanged();
 
             }
 
@@ -90,35 +95,30 @@ public class CategoryFragment extends Fragment implements CategoryView {
         /**
          * android:descendantFocusability="blocksDescendants"
          * beforeDescendants：viewgroup会优先其子类控件而获取到焦点
-         afterDescendants：viewgroup只有当其子类控件不需要获取焦点时才获取焦点
-         blocksDescendants：viewgroup会覆盖子类控件而直接获得焦点
+         * afterDescendants：viewgroup只有当其子类控件不需要获取焦点时才获取焦点
+         * blocksDescendants：viewgroup会覆盖子类控件而直接获得焦点
          */
-        moreListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        sectionListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getContext(),position+"",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), position + "", Toast.LENGTH_LONG).show();
             }
         });
     }
 
-    /**
-     * 为侧目录(详细目录)进行数据的匹配处理
-     *
-     * @param array
-     */
-    private void inintAdapter(String[] array) {
-        L.v();
-        classifyMoreAdapter = new ClassifyMoreAdapter(getContext(), array);
-        moreListView.setAdapter(classifyMoreAdapter);
-        classifyMoreAdapter.notifyDataSetChanged();
-    }
 
     private void initData() {
         L.v();
-        mCategoryList = new ArrayList<Map<String, Object>>();
-        classifyMainAdapter = new ClassifyMainAdapter(getContext(), mCategoryList);
+        divisionData = new ArrayList<>();
+        divisionAdapter = new DivisionAdapter(getContext(), divisionData);
+//        sectionData = new ArrayList<>();
+//        sectionAdapter = new SectionAdapter(getContext(), sectionData);
+
+        //初始化presenter
         presenter = new CategoryPresenterImp(this);
+
+        //获取数据
         presenter.getCategoryData(new CategoryInteractor.onCategoryRequestListener() {
             @Override
             public void onFail() {
@@ -126,10 +126,18 @@ public class CategoryFragment extends Fragment implements CategoryView {
             }
 
             @Override
-            public void onSuccess(List<Map<String, Object>> list) {
+            public void onSuccess(ArrayList<DivisionModel> list) {
                 L.v(list);
-                mCategoryList.addAll(list);
-                classifyMainAdapter.notifyDataSetChanged();
+                divisionData.addAll(list);
+                divisionAdapter.notifyDataSetChanged();
+
+                // 更新右侧数据
+                sectionData = divisionData.get(0).sectionModels;
+                sectionAdapter = new SectionAdapter(getContext(), sectionData);
+                // 建立右侧数据适配
+                sectionListView.setAdapter(sectionAdapter);
+                sectionAdapter.notifyDataSetChanged();
+                //divisionListView.performItemClick(divisionListView.getAdapter().getView(0, null, null), 0, divisionListView.getItemIdAtPosition(0));
             }
         });
     }

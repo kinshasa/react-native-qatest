@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.android.qatest.R;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,12 +21,12 @@ import java.util.Map;
  * 左侧的数据适配器
  */
 
-public class ClassifyMainAdapter extends BaseAdapter {
+public class DivisionAdapter extends BaseAdapter {
 
 
     private Context mContext;
 
-    private List<Map<String, Object>> list;
+    private ArrayList<DivisionModel> list;
 
     private Hoder hoder;
     /**
@@ -39,12 +40,12 @@ public class ClassifyMainAdapter extends BaseAdapter {
     private int selectPosition = 0;
 
 
-    public ClassifyMainAdapter(Context context, List<Map<String, Object>> list) {
+    public DivisionAdapter(Context context, ArrayList<DivisionModel> list) {
         this.mContext = context;
         this.list = list;
     }
 
-    public ClassifyMainAdapter(Context context, List<Map<String, Object>> list, boolean isLoadingImage) {
+    public DivisionAdapter(Context context, ArrayList<DivisionModel> list, boolean isLoadingImage) {
         this.mContext = context;
         this.list = list;
         this.isLoadingImage = isLoadingImage;
@@ -81,12 +82,12 @@ public class ClassifyMainAdapter extends BaseAdapter {
         }
 
         if (isLoadingImage == true) {
-            hoder.imageView.setImageResource(Integer.parseInt(list
-                    .get(position).get("img").toString()));
+           /* hoder.imageView.setImageResource(Integer.parseInt(list
+                    .get(position).get("img").toString()));*/
         }
 
 
-        hoder.textView.setText(list.get(position).get("txt").toString());
+        hoder.textView.setText(list.get(position).title);
         /*if (position == selectPosition) {
             hoder.layout.setBackgroundColor(0xFF999999);
         }else{

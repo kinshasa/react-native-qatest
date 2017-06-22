@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.android.log.L;
 import com.android.qatest.R;
-import com.android.qatest.ui.widget.ImageTextItemsLayout;
 import com.android.qatest.ui.widget.NestGridView;
 
 import java.util.ArrayList;
@@ -20,20 +19,17 @@ import java.util.ArrayList;
  * Created by lshaobocsu@gmail.com on 2017.5.17.
  */
 
-public class ClassifyMoreAdapter extends BaseAdapter {
+public class SectionAdapter extends BaseAdapter {
 
-    private String[] listMore;
     private Context mContext;
 
     private int selectPosition = 0;
     private Holder holder;
-    private ArrayList<CategoryItemModel> categoryItemModels;
+    private ArrayList<SectionModel> sectionModels;
 
-
-    public ClassifyMoreAdapter(Context context, String[] list) {
-        this.listMore = list;
+    public SectionAdapter(Context context, ArrayList<SectionModel> data) {
         this.mContext = context;
-        categoryItemModels = CategoryItemModel.initArrayData();
+        sectionModels = data;
     }
 
     public void setSelectItem(int position) {
@@ -46,12 +42,12 @@ public class ClassifyMoreAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return listMore.length;
+        return sectionModels.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return listMore[position];
+        return sectionModels.get(position);
     }
 
     @Override
@@ -60,7 +56,7 @@ public class ClassifyMoreAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         if (convertView == null) {
             L.v(position);
@@ -68,21 +64,32 @@ public class ClassifyMoreAdapter extends BaseAdapter {
             convertView = View.inflate(mContext, R.layout.item_classify_morelist, null);
             holder = new Holder(convertView, mContext);
             convertView.setTag(holder);
+
+            //嵌套girdView
+            //holder.gridView.setAdapter(new CategoryItemsAdapter(mContext, categoryItemModels));
+
+            //布局拷贝
+            //holder.mCategoryItemsLayout.addItemsView(categoryItemModels);
+
+            //自定义view嵌套GridView
+            //holder.imageTextItemsLayout.setData(categoryItemModels);
         } else {
             holder = (Holder) convertView.getTag();
         }
+        L.v(position+";"+sectionModels.get(position).cateModels.size());
+        holder.imageTextItemsLayout.setData(sectionModels.get(position).cateModels);
 
-        holder.gridView.setAdapter(new CategoryItemsAdapter(mContext, categoryItemModels));
-
-        holder.imageTextItemsLayout.setData(categoryItemModels);
-
-
-        holder.textView.setText(listMore[position]);
+        /*holder.mCategoryItemsLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                holder.imageTextItemsLayout.setData(sectionModels.get(position).cateModels);
+            }
+        });*/
+        holder.textView.setText(sectionModels.get(position).title);
         holder.textView.setTextColor(0xFF666666);
         if (position == selectPosition) {
             holder.textView.setTextColor(0xFFFF8C00);
         }
-        holder.mCategoryItemsLayout.addItemsView(categoryItemModels);
         return convertView;
     }
 
@@ -96,7 +103,7 @@ public class ClassifyMoreAdapter extends BaseAdapter {
         //布局拷贝
         public CategoryItemsLinearLayout mCategoryItemsLayout;
         //自定义view嵌套GridView
-        public ImageTextItemsLayout<CategoryItemModel> imageTextItemsLayout;
+        public ImageTextItemsLayout<CateModel> imageTextItemsLayout;
 
         public Holder(View view, Context context) {
             textView = (TextView) view.findViewById(R.id.moreItem_text);
@@ -105,9 +112,9 @@ public class ClassifyMoreAdapter extends BaseAdapter {
             mCategoryItemsLayout = new CategoryItemsLinearLayout(context);
 
             gridView = (NestGridView) view.findViewById(R.id.category_grid_view);
-            imageTextItemsLayout = new ImageTextItemsLayout<CategoryItemModel>(context) {
+            imageTextItemsLayout = new ImageTextItemsLayout<CateModel>(context) {
                 @Override
-                public String getCateName(CategoryItemModel data) {
+                public String getCateName(CateModel data) {
                     return data.name;
                 }
             };

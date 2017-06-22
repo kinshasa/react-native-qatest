@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,7 +18,7 @@ import java.util.ArrayList;
 
 public class CategoryItemsLinearLayout extends LinearLayout {
 
-    private ArrayList<CategoryItemModel> mCategoryItems;
+    private ArrayList<CateModel> mCategoryItems;
     private LinearLayout mCateItemsLayout;
     private CategoryItemsHolder holder;
     private Context mContext;
@@ -49,16 +48,27 @@ public class CategoryItemsLinearLayout extends LinearLayout {
 
     }
 
-    public void addItemsView(ArrayList<CategoryItemModel> data) {
+    public void addItemsView(ArrayList<CateModel> data) {
 
         if(data == null){
             return;
         }
 
         mCategoryItems.addAll(data);
-        for(CategoryItemModel item : mCategoryItems){
+        //必须remove，不然会内存泄漏
+        removeAllViews();
+
+        for(CateModel item : mCategoryItems){
+            /*if(mCateItemsLayout == null){
+                mCateItemsLayout = (LinearLayout) View.inflate(getContext(), R.layout.item_category_image, null);
+                holder = new CategoryItemsHolder(mCateItemsLayout);
+                mCateItemsLayout.setTag(holder);
+            }else{
+                holder = (CategoryItemsHolder)mCateItemsLayout.getTag();
+            }
+
+            holder.textView.setText(item.name);*/
             mCateItemsLayout = (LinearLayout) View.inflate(getContext(), R.layout.item_category_image, null);
-            ((TextView)mCateItemsLayout.findViewById(R.id.cateItemText)).setText(item.name);
             addView(mCateItemsLayout);
         }
     }

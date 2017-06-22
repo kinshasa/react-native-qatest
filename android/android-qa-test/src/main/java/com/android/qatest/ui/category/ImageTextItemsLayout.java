@@ -1,4 +1,4 @@
-package com.android.qatest.ui.widget;
+package com.android.qatest.ui.category;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.qatest.R;
+import com.android.qatest.ui.widget.NestGridView;
 
 import java.util.ArrayList;
 
@@ -60,13 +61,13 @@ public abstract class ImageTextItemsLayout<T> extends LinearLayout {
         gridView.setNumColumns(NestGridView.AUTO_FIT);
         gridView.setStretchMode(NestGridView.STRETCH_COLUMN_WIDTH);
         arrayData = new ArrayList<>();
-        adapter = new ImageTextItemsAdapter<T>(context, arrayData) {
+        /*adapter = new ImageTextItemsAdapter<T>(context, arrayData) {
             @Override
             String getName(T data) {
                 return getCateName(data);
             }
         };
-        gridView.setAdapter(adapter);
+        gridView.setAdapter(adapter);*/
 
         addView(gridView);
     }
@@ -74,20 +75,28 @@ public abstract class ImageTextItemsLayout<T> extends LinearLayout {
     public abstract String getCateName(T data);
 
     public void setData(ArrayList<T> datas) {
-        arrayData = datas;
-        adapter.setData(arrayData);
+        arrayData.clear();
+        arrayData.addAll(datas);
+        adapter = new ImageTextItemsAdapter<T>(mContext, arrayData) {
+            @Override
+            String getName(T data) {
+                return getCateName(data);
+            }
+        };
+        gridView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
     }
 
     public int addData(ArrayList<T> datas) {
         arrayData.addAll(datas);
-        adapter.setData(arrayData);
+        adapter.notifyDataSetChanged();
         return arrayData.size();
     }
 
     public void clearData() {
         arrayData.clear();
-        adapter.setData(arrayData);
+        adapter.notifyDataSetChanged();
     }
 
     public void initData() {
@@ -111,11 +120,6 @@ public abstract class ImageTextItemsLayout<T> extends LinearLayout {
                 models = new ArrayList<>();
             }
             arrayList = models;
-        }
-
-        public void setData(ArrayList<T> models) {
-            arrayList = models;
-            notifyDataSetChanged();
         }
 
         @Override
