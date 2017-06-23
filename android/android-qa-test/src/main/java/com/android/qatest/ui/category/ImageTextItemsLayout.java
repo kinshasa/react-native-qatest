@@ -51,7 +51,7 @@ public abstract class ImageTextItemsLayout<T> extends LinearLayout {
         TextView textView = new TextView(mContext);
         textView.setText("自定义view嵌套GridView");
         textView.setTextSize(14);
-        setPadding(2,2,2,2);
+        setPadding(2, 2, 2, 2);
         addView(textView);
 
         gridView = new NestGridView(context);
@@ -61,35 +61,29 @@ public abstract class ImageTextItemsLayout<T> extends LinearLayout {
         gridView.setNumColumns(NestGridView.AUTO_FIT);
         gridView.setStretchMode(NestGridView.STRETCH_COLUMN_WIDTH);
         arrayData = new ArrayList<>();
-        /*adapter = new ImageTextItemsAdapter<T>(context, arrayData) {
-            @Override
-            String getName(T data) {
-                return getCateName(data);
-            }
-        };
-        gridView.setAdapter(adapter);*/
-
-        addView(gridView);
-    }
-
-    public abstract String getCateName(T data);
-
-    public void setData(ArrayList<T> datas) {
-        arrayData.clear();
-        arrayData.addAll(datas);
-        adapter = new ImageTextItemsAdapter<T>(mContext, arrayData) {
+        adapter = new ImageTextItemsAdapter<T>(context, arrayData) {
             @Override
             String getName(T data) {
                 return getCateName(data);
             }
         };
         gridView.setAdapter(adapter);
+
+        addView(gridView);
+    }
+
+    public abstract String getCateName(T data);
+
+    public void setData(ArrayList<T> data) {
+        //使用addAll是不希望更改sectionData的内存地址，不然会解绑adapter数据。
+        arrayData.clear();
+        arrayData.addAll(data);
         adapter.notifyDataSetChanged();
 
     }
 
-    public int addData(ArrayList<T> datas) {
-        arrayData.addAll(datas);
+    public int addData(ArrayList<T> data) {
+        arrayData.addAll(data);
         adapter.notifyDataSetChanged();
         return arrayData.size();
     }
@@ -142,15 +136,23 @@ public abstract class ImageTextItemsLayout<T> extends LinearLayout {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
+            Holder holder = new Holder();
             if (convertView == null) {
                 convertView = View.inflate(mContext, R.layout.item_category_image, null);
+                holder.textView = (TextView) convertView.findViewById(R.id.cateItemText);
+                convertView.setTag(holder);
+            } else {
+                holder = (Holder) convertView.getTag();
             }
-            TextView textView = (TextView) convertView.findViewById(R.id.cateItemText);
             String text = getName(arrayList.get(position));
-            textView.setText(text);
+            holder.textView.setText(text);
 
             return convertView;
         }
 
+    }
+
+    private static class Holder {
+        TextView textView;
     }
 }

@@ -66,6 +66,9 @@ public class CategoryFragment extends Fragment implements CategoryView {
         // 建立左侧数据适配
         divisionListView.setAdapter(divisionAdapter);
 
+        // 建立右侧数据适配
+        sectionAdapter = new SectionAdapter(getContext(), sectionData);
+        sectionListView.setAdapter(sectionAdapter);
 
         // 设置listView当中的每个单项点击的事件变化逻辑处理
         divisionListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -82,11 +85,9 @@ public class CategoryFragment extends Fragment implements CategoryView {
                 // 更新左侧选中样式
                 divisionAdapter.notifyDataSetChanged();
 
-                // 更新右侧数据
-                sectionData = divisionData.get(position).sectionModels;
-                sectionAdapter = new SectionAdapter(getContext(), sectionData);
-                // 建立右侧数据适配
-                sectionListView.setAdapter(sectionAdapter);
+                // 更新右侧数据,使用addAll是不希望更改sectionData的内存地址，不然会解绑sectionAdapter数据。
+                sectionData.clear();
+                sectionData.addAll(divisionData.get(position).sectionModels);
                 sectionAdapter.notifyDataSetChanged();
 
             }
