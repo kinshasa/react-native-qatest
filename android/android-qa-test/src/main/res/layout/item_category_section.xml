@@ -1,48 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:background="#F3F5F7"
     android:descendantFocusability="afterDescendants"
-    android:orientation="vertical"
-    android:paddingLeft="10dip">
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/moreItem_layout"
         android:layout_width="match_parent"
-        android:layout_height="55dip"
-        android:background="#eee"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/moreItem_text"
             android:layout_width="match_parent"
-            android:layout_height="55dip"
-            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
+            android:paddingTop="15dp"
             android:text="全部分类"
-            android:textColor="#666666"
-            android:textSize="17sp" />
+            android:textColor="#000"
+            android:textSize="11sp" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/category_list_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#d5e2cd12"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="嵌套girdView"
-            android:textSize="14dp" />
+            android:textSize="13dp"
+            android:visibility="gone" />
 
         <com.android.qatest.ui.widget.NestGridView
             android:id="@+id/category_grid_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="#d5e26912"
-            android:columnWidth="80dp"
-            android:numColumns="auto_fit"
+            android:numColumns="3"
             android:stretchMode="columnWidth" />
     </LinearLayout>
 

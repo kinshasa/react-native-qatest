@@ -3,14 +3,14 @@ package com.android.qatest.ui.category;
 import android.content.Context;
 
 import com.alibaba.fastjson.TypeReference;
-import com.alibaba.fastjson.parser.deserializer.ObjectDeserializer;
 import com.android.http.Http;
 import com.android.http.HttpBase;
 import com.android.log.L;
-import com.android.qatest.Config;
 import com.android.qatest.model.Response;
 
 import java.util.ArrayList;
+
+import static com.android.qatest.Config.UrlList;
 
 /**
  * Created by lshaobocsu@gmail.com on 2017.5.17.
@@ -43,12 +43,12 @@ public class CategoryInteractorImp implements CategoryInteractor {
     public void fetchCateDataById(Context context, int cateId, final Http.onHttpListener listener) {
 
         //判断商品类型范围，防止数据越界
-        if (cateId > Config.UrlList.catelogyList.length || cateId < 0) {
+        if (cateId > UrlList.categoryList.length || cateId < 0) {
             cateId = 0;
         }
 
         //如果没有缓存数据，则需要网络请求
-        HttpBase.getDefaultInstance().request(context, Config.UrlList.catelogyList[cateId], null, new Http.onHttpListener<String>() {
+        HttpBase.getDefaultInstance().request(context, UrlList.categoryList[cateId], null, new Http.onHttpListener<String>() {
             @Override
             public void onComplete(String values) {
                 Response<String> response = Response.getResponseStr(values);

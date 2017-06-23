@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 /**
  * Created by lshaobocsu@gmail.com on 2017.6.15.
+ * 组件拷贝
  */
 
 public class CategoryItemsLinearLayout extends LinearLayout {
@@ -79,8 +80,8 @@ public class CategoryItemsLinearLayout extends LinearLayout {
         public TextView textView;
 
         CategoryItemsHolder(View view){
-            imageView = (ImageView)view.findViewById(R.id.cateItemImage);
-            textView = (TextView)view.findViewById(R.id.cateItemText);
+            imageView = (ImageView)view.findViewById(R.id.image);
+            textView = (TextView)view.findViewById(R.id.text);
         }
     }
 }

@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
-import com.android.log.L;
 import com.android.qatest.R;
 import com.android.qatest.ui.widget.NestGridView;
 
@@ -59,47 +58,66 @@ public class SectionAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
 
         if (convertView == null) {
-            convertView = View.inflate(mContext, R.layout.item_classify_morelist, null);
+            convertView = View.inflate(mContext, R.layout.item_category_section, null);
             holder = new Holder();
             holder.textView = (TextView) convertView.findViewById(R.id.moreItem_text);
             holder.layout = (LinearLayout) convertView.findViewById(R.id.category_list_layout);
 
-            holder.mCategoryItemsLayout = new CategoryItemsLinearLayout(mContext);
+            //holder.mCategoryItemsLayout = new CategoryItemsLinearLayout(mContext);
+            //holder.mCategoryItemsLayout.setVisibility(View.GONE);
 
             holder.gridView = (NestGridView) convertView.findViewById(R.id.category_grid_view);
+            //holder.gridView.setVisibility(View.GONE);
+
+
             holder.imageTextItemsLayout = new ImageTextItemsLayout<CateModel>(mContext) {
                 @Override
-                public String getCateName(CateModel data) {
+                public String getTextName(CateModel data) {
                     return data.name;
                 }
+
+                @Override
+                public String getImageStr(CateModel data) {
+                    return data.icon;
+                }
             };
+
+
             TextView textView = new TextView(mContext);
             textView.setText("京东淘宝的布局拷贝");
             textView.setTextSize(14);
+            textView.setVisibility(View.GONE);
+
             holder.layout.addView(textView);
-            holder.layout.addView(holder.mCategoryItemsLayout, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+            //holder.layout.addView(holder.mCategoryItemsLayout, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
             holder.layout.addView(holder.imageTextItemsLayout, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 
             convertView.setTag(holder);
 
-            //嵌套girdView
             //holder.gridView.setAdapter(new CategoryItemsAdapter(mContext, categoryItemModels));
+            /****嵌套girdView****/
+            /*holder.gridView.setAdapter(new ImageTextItemsAdapter<CateModel>(mContext, sectionModels.get(position).catelogyList) {
 
-            //布局拷贝
+                @Override
+                String getName(CateModel data) {
+                    return data.name;
+                }
+
+                @Override
+                String getImage(CateModel data) {
+                    return data.icon;
+                }
+            });*/
+            /****布局拷贝****/
             //holder.mCategoryItemsLayout.addItemsView(categoryItemModels);
 
             //自定义view嵌套GridView
-            //holder.imageTextItemsLayout.setData(categoryItemModels);
+            //holder.imageTextItemsLayout.setData(sectionModels.get(position).catelogyList);
+
         } else {
             holder = (Holder) convertView.getTag();
         }
-
-        holder.mCategoryItemsLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                holder.imageTextItemsLayout.setData(sectionModels.get(position).catelogyList);
-            }
-        });
+        holder.imageTextItemsLayout.setData(sectionModels.get(position).catelogyList);
 
         holder.textView.setText(sectionModels.get(position).name);
         holder.textView.setTextColor(0xFF666666);
@@ -121,31 +139,8 @@ public class SectionAdapter extends BaseAdapter {
         //自定义view嵌套GridView
         public ImageTextItemsLayout<CateModel> imageTextItemsLayout;
 
-        public Holder(){
+        public Holder() {
 
         }
-        /*public Holder(View view, Context context) {
-
-            textView = (TextView) view.findViewById(R.id.moreItem_text);
-            layout = (LinearLayout) view.findViewById(R.id.category_list_layout);
-
-            mCategoryItemsLayout = new CategoryItemsLinearLayout(context);
-
-            gridView = (NestGridView) view.findViewById(R.id.category_grid_view);
-            imageTextItemsLayout = new ImageTextItemsLayout<CateModel>(context) {
-                @Override
-                public String getCateName(CateModel data) {
-                    return data.name;
-                }
-            };
-            TextView textView = new TextView(context);
-            textView.setText("京东淘宝的布局拷贝");
-            textView.setTextSize(14);
-            layout.addView(textView);
-            layout.addView(mCategoryItemsLayout, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-
-            layout.addView(imageTextItemsLayout, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-
-        }*/
     }
 }

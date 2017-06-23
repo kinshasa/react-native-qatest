@@ -1,15 +1,11 @@
 package com.android.qatest.ui.category;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.qatest.R;
 import com.android.qatest.ui.widget.NestGridView;
 
 import java.util.ArrayList;
@@ -45,34 +41,40 @@ public abstract class ImageTextItemsLayout<T> extends LinearLayout {
 
     public void init(Context context) {
         mContext = context;
-        setBackgroundColor(Color.RED);
-        setOrientation(LinearLayout.VERTICAL);
 
         TextView textView = new TextView(mContext);
         textView.setText("自定义view嵌套GridView");
         textView.setTextSize(14);
-        setPadding(2, 2, 2, 2);
+        textView.setVisibility(View.GONE);
         addView(textView);
 
         gridView = new NestGridView(context);
-        gridView.setBackgroundColor(Color.GREEN);
+        gridView.setBackgroundColor(0XFFFFFFFF);
         gridView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-        gridView.setColumnWidth(80);
-        gridView.setNumColumns(NestGridView.AUTO_FIT);
+        gridView.setNumColumns(3);
+        //gridView.setNumColumns(NestGridView.AUTO_FIT);
         gridView.setStretchMode(NestGridView.STRETCH_COLUMN_WIDTH);
         arrayData = new ArrayList<>();
         adapter = new ImageTextItemsAdapter<T>(context, arrayData) {
             @Override
             String getName(T data) {
-                return getCateName(data);
+                return getTextName(data);
+            }
+
+            @Override
+            String getImage(T data) {
+                return getImageStr(data);
             }
         };
+
         gridView.setAdapter(adapter);
 
         addView(gridView);
     }
 
-    public abstract String getCateName(T data);
+    public abstract String getTextName(T data);
+
+    public abstract String getImageStr(T data);
 
     public void setData(ArrayList<T> data) {
         //使用addAll是不希望更改sectionData的内存地址，不然会解绑adapter数据。
@@ -103,56 +105,4 @@ public abstract class ImageTextItemsLayout<T> extends LinearLayout {
         return datas == null;
     }
 
-    public abstract class ImageTextItemsAdapter<T> extends BaseAdapter {
-
-        private ArrayList<T> arrayList;
-        private Context mContext;
-
-        ImageTextItemsAdapter(Context context, ArrayList<T> models) {
-            mContext = context;
-            if (models == null) {
-                models = new ArrayList<>();
-            }
-            arrayList = models;
-        }
-
-        @Override
-        public int getCount() {
-            return arrayList.size();
-        }
-
-        @Override
-        public T getItem(int position) {
-            return arrayList.get(position);
-        }
-
-        abstract String getName(T data);
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            Holder holder = new Holder();
-            if (convertView == null) {
-                convertView = View.inflate(mContext, R.layout.item_category_image, null);
-                holder.textView = (TextView) convertView.findViewById(R.id.cateItemText);
-                convertView.setTag(holder);
-            } else {
-                holder = (Holder) convertView.getTag();
-            }
-            String text = getName(arrayList.get(position));
-            holder.textView.setText(text);
-
-            return convertView;
-        }
-
-    }
-
-    private static class Holder {
-        TextView textView;
-    }
 }

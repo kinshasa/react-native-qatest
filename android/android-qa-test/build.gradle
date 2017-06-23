@@ -217,13 +217,21 @@ dependencies {
 
     //react-native-pushy
     compile project(':react-native-update')
-    /** Fresco from facebook @https://github.com/facebook/fresco. add by@liusp@gagc.com.cn  **/
-    //If your app supports Android versions before Ice Cream Sandwich (API level 14)
-    //compile 'com.facebook.fresco:animated-base-support:0.10.0'
-    //For animated GIF support
-    //compile 'com.facebook.fresco:animated-gif:0.10.0'
-    ////facebook picture load.
-    //compile 'com.facebook.fresco:fresco:0.10.0'
+    /** Fresco from facebook @https://github.com/facebook/fresco**/
+
+    //facebook Fresco.
+    compile 'com.facebook.fresco:fresco:0.12.0'
+
+    // 在 API < 14 上的机器支持 WebP 时，需要添加
+    compile 'com.facebook.fresco:animated-base-support:0.12.0'
+
+    // 支持 GIF 动图，需要添加
+    compile 'com.facebook.fresco:animated-gif:0.12.0'
+
+    // 支持 WebP 动图
+    compile 'com.facebook.fresco:animated-webp:0.12.0'
+    // 支持 WebP 静态图
+    compile 'com.facebook.fresco:webpsupport:0.12.0'
 
 
 

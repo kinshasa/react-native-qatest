@@ -70,15 +70,9 @@ public class CategoryFragment extends Fragment implements CategoryView {
         // 设置listView当中的每个单项点击的事件变化逻辑处理
         divisionListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            // 主目录的点击事件发生后，就要为侧目进行数据的交互
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 L.v();
-                // 设置选中的选的id
-                divisionAdapter.setSelectItem(position);
-                // 更新左侧选中样式
-                divisionAdapter.notifyDataSetChanged();
-
                 updateSectionAdapter(position);
 
             }

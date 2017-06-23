@@ -12,8 +12,6 @@ import android.widget.TextView;
 import com.android.qatest.R;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * author：anumbrella
@@ -73,7 +71,7 @@ public class DivisionAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup viewGroup) {
         if (convertView == null) {
             convertView = View.inflate(mContext,
-                    R.layout.item_classify_mainlist, null);
+                    R.layout.item_category_division, null);
             hoder = new Hoder(convertView);
             // 把数据存储到convertView当中去
             convertView.setTag(hoder);
