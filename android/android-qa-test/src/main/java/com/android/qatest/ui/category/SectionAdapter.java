@@ -59,10 +59,27 @@ public class SectionAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
 
         if (convertView == null) {
-            L.v(position);
-
             convertView = View.inflate(mContext, R.layout.item_classify_morelist, null);
-            holder = new Holder(convertView, mContext);
+            holder = new Holder();
+            holder.textView = (TextView) convertView.findViewById(R.id.moreItem_text);
+            holder.layout = (LinearLayout) convertView.findViewById(R.id.category_list_layout);
+
+            holder.mCategoryItemsLayout = new CategoryItemsLinearLayout(mContext);
+
+            holder.gridView = (NestGridView) convertView.findViewById(R.id.category_grid_view);
+            holder.imageTextItemsLayout = new ImageTextItemsLayout<CateModel>(mContext) {
+                @Override
+                public String getCateName(CateModel data) {
+                    return data.name;
+                }
+            };
+            TextView textView = new TextView(mContext);
+            textView.setText("京东淘宝的布局拷贝");
+            textView.setTextSize(14);
+            holder.layout.addView(textView);
+            holder.layout.addView(holder.mCategoryItemsLayout, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+            holder.layout.addView(holder.imageTextItemsLayout, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+
             convertView.setTag(holder);
 
             //嵌套girdView
@@ -76,16 +93,15 @@ public class SectionAdapter extends BaseAdapter {
         } else {
             holder = (Holder) convertView.getTag();
         }
-        L.v(position+";"+sectionModels.get(position).cateModels.size());
-        holder.imageTextItemsLayout.setData(sectionModels.get(position).cateModels);
 
-        /*holder.mCategoryItemsLayout.post(new Runnable() {
+        holder.mCategoryItemsLayout.post(new Runnable() {
             @Override
             public void run() {
-                holder.imageTextItemsLayout.setData(sectionModels.get(position).cateModels);
+                holder.imageTextItemsLayout.setData(sectionModels.get(position).catelogyList);
             }
-        });*/
-        holder.textView.setText(sectionModels.get(position).title);
+        });
+
+        holder.textView.setText(sectionModels.get(position).name);
         holder.textView.setTextColor(0xFF666666);
         if (position == selectPosition) {
             holder.textView.setTextColor(0xFFFF8C00);
@@ -105,7 +121,11 @@ public class SectionAdapter extends BaseAdapter {
         //自定义view嵌套GridView
         public ImageTextItemsLayout<CateModel> imageTextItemsLayout;
 
-        public Holder(View view, Context context) {
+        public Holder(){
+
+        }
+        /*public Holder(View view, Context context) {
+
             textView = (TextView) view.findViewById(R.id.moreItem_text);
             layout = (LinearLayout) view.findViewById(R.id.category_list_layout);
 
@@ -126,7 +146,6 @@ public class SectionAdapter extends BaseAdapter {
 
             layout.addView(imageTextItemsLayout, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 
-
-        }
+        }*/
     }
 }

@@ -21,7 +21,7 @@ public class HomeInteractorImpl implements HomeInteractor{
 
     @Override
     public void request(Context context, final onFetchListener listener) {
-        HttpBase.getDefaultInstance().request(context, url, null, new Http.onHttpListener() {
+        HttpBase.getDefaultInstance().request(context, url, null, new Http.onHttpListener<String>() {
             @Override
             public void onComplete(String values) {
                 homePage = new HomePage(values);

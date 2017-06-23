@@ -10,5 +10,6 @@ public interface CategoryView {
 
     void hideLoading();
 
-    void setRightListView();
+    void updateSectionList();
+
 }

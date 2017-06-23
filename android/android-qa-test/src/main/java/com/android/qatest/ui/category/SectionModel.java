@@ -8,13 +8,21 @@ import java.util.ArrayList;
 
 public class SectionModel {
 
-    public String title;
+    public String icon;
+    public String special_ui;
+    public String name;
+    public String columNum;
+    public String cid;
+    public String isBook;
+    public String rankingFlag;
 
-    public ArrayList<CateModel> cateModels;
+    public ArrayList<CateModel> catelogyList;
+
+    SectionModel(){}
 
     SectionModel(String a, ArrayList<CateModel> data) {
-        title = a;
-        cateModels = data;
+        name = a;
+        catelogyList = data;
     }
 
     static ArrayList<SectionModel> initArrayData(int length) {

@@ -24,13 +24,13 @@ public interface Http {
     void request(final Context context, final int method, final String url, final HashMap<String, String> params,
                  final onHttpListener listener);
 
-    interface onHttpListener {
+    interface onHttpListener<T> {
         /**
          * 当请求成功的时候执行该方法
          *
          * @param values
          */
-        void onComplete(String values);
+        void onComplete(T values);
 
         /**
          * 发生异常的时候执行该方法

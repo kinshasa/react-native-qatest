@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.http.Http;
 import com.android.log.L;
 import com.android.qatest.R;
 
@@ -31,11 +32,7 @@ public class CategoryFragment extends Fragment implements CategoryView {
     private ArrayList<SectionModel> sectionData;
     private SectionAdapter sectionAdapter;
     private DivisionAdapter divisionAdapter;
-
     private CategoryPresenter presenter;
-
-    private int mainSelectPostion = 0;
-
 
     @BindView(R.id.divisionListView)
     ListView divisionListView;
@@ -77,18 +74,12 @@ public class CategoryFragment extends Fragment implements CategoryView {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 L.v();
-                mainSelectPostion = position;
-                // 主目录一位数组的大小和侧目录二维数组的行的数目是一致的
-
                 // 设置选中的选的id
                 divisionAdapter.setSelectItem(position);
                 // 更新左侧选中样式
                 divisionAdapter.notifyDataSetChanged();
 
-                // 更新右侧数据,使用addAll是不希望更改sectionData的内存地址，不然会解绑sectionAdapter数据。
-                sectionData.clear();
-                sectionData.addAll(divisionData.get(position).sectionModels);
-                sectionAdapter.notifyDataSetChanged();
+                updateSectionAdapter(position);
 
             }
 
@@ -108,19 +99,39 @@ public class CategoryFragment extends Fragment implements CategoryView {
         });
     }
 
+    private void updateSectionAdapter(final int pos) {
+        // 更新右侧数据,使用addAll是不希望更改sectionData的内存地址，不然会解绑sectionAdapter数据。
+        //获取数据
+        presenter.getSectionDataById(getContext(), pos, new Http.onHttpListener<ArrayList<SectionModel>>() {
+            @Override
+            public void onComplete(ArrayList<SectionModel> values) {
+                sectionData.clear();
+                sectionData.addAll(values);
+                sectionAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onException(Object exceptionInfo) {
+
+            }
+        });
+
+    }
+
 
     private void initData() {
         L.v();
         divisionData = new ArrayList<>();
         divisionAdapter = new DivisionAdapter(getContext(), divisionData);
-//        sectionData = new ArrayList<>();
-//        sectionAdapter = new SectionAdapter(getContext(), sectionData);
+        sectionData = new ArrayList<>();
+        sectionAdapter = new SectionAdapter(getContext(), sectionData);
 
         //初始化presenter
         presenter = new CategoryPresenterImp(this);
 
-        //获取数据
-        presenter.getCategoryData(new CategoryInteractor.onCategoryRequestListener() {
+
+
+        presenter.getCategoryData(getContext(),0,new CategoryInteractor.onCategoryRequestListener() {
             @Override
             public void onFail() {
 
@@ -129,15 +140,11 @@ public class CategoryFragment extends Fragment implements CategoryView {
             @Override
             public void onSuccess(ArrayList<DivisionModel> list) {
                 L.v(list);
+                divisionData.clear();
                 divisionData.addAll(list);
                 divisionAdapter.notifyDataSetChanged();
 
-                // 更新右侧数据
-                sectionData = divisionData.get(0).sectionModels;
-                sectionAdapter = new SectionAdapter(getContext(), sectionData);
-                // 建立右侧数据适配
-                sectionListView.setAdapter(sectionAdapter);
-                sectionAdapter.notifyDataSetChanged();
+                updateSectionAdapter(0);
                 //divisionListView.performItemClick(divisionListView.getAdapter().getView(0, null, null), 0, divisionListView.getItemIdAtPosition(0));
             }
         });
@@ -154,7 +161,12 @@ public class CategoryFragment extends Fragment implements CategoryView {
     }
 
     @Override
-    public void setRightListView() {
+    public void updateSectionList() {
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 }

@@ -2,7 +2,7 @@ package com.android.qatest;
 
 /**
  * Created by lshaobocsu@gmail.com on 2017.4.11.
- *
+ * <p>
  * 全局配置文件
  */
 
@@ -18,50 +18,18 @@ public class Config {
      */
     static final String BoomMenu = "https://github.com/Nightonke/BoomMenu";
 
-    /**
-     * 第一个listView的图片资源数组(10张图片)
-     */
-    public static int[] LISTVIEWIMG = new int[]{
-            R.mipmap.ic_category_15, R.mipmap.ic_category_20,
-            R.mipmap.ic_category_25, R.mipmap.ic_category_30,
-            R.mipmap.ic_category_35, R.mipmap.ic_category_40,
-            R.mipmap.ic_category_45, R.mipmap.ic_category_50,
-            R.mipmap.ic_category_55, R.mipmap.ic_category_60
-    };
-    /**
-     * 第一个listView的文本数据数组(10个数据文本)
-     */
-    public static String[] LISTVIEWTXT = new String[]{"热门分类", "美食", "购物",
-            "休闲娱乐", "运动健身", "丽人", "结婚", "酒店", "爱车", "亲子"};
+    public static class UrlList {
+        public static final String[] catelogyList = new String[]{
+                //name=母婴玩具
+                "http://api.m.jd.com/client.action?functionId=newSubCatalog&area=19_1601_3633_0&body=%7B%22catelogyId%22%3A%22300000009%22%7D&build=139045&client=apple&clientVersion=6.1.0&d_brand=apple&d_model=iPhone7%2C2&isBackground=N&networkType=wifi&networklibtype=JDNetworkBaseAF&openudid=7394f89a346949e58908ae7b0f63a4dbba4b6e3e&osVersion=10.3.2&partner=apple&screen=750%2A1334&sign=2502609ea4556cdaabdf26269824349c&st=1498184535076&sv=110&uuid=hjudwgohxzVu96krv/T6Hg%3D%3D",
+                //name=热卖选购
+                "http://api.m.jd.com/client.action?functionId=newSubCatalog&area=19_1601_3633_0&body=%7B%22catelogyId%22%3A%22100001852%22%7D&build=139045&client=apple&clientVersion=6.1.0&d_brand=apple&d_model=iPhone7%2C2&isBackground=N&networkType=wifi&networklibtype=JDNetworkBaseAF&openudid=7394f89a346949e58908ae7b0f63a4dbba4b6e3e&osVersion=10.3.2&partner=apple&screen=750%2A1334&sign=a6f14cfb6df00e633f0b8fc4f866936e&st=1498185853100&sv=120&uuid=hjudwgohxzVu96krv/T6Hg%3D%3D",
+                //name=时尚女装
+                "http://api.m.jd.com/client.action?functionId=newSubCatalog&area=19_1601_3633_0&body=%7B%22catelogyId%22%3A%22100001851%22%7D&build=139045&client=apple&clientVersion=6.1.0&d_brand=apple&d_model=iPhone7%2C2&isBackground=N&networkType=wifi&networklibtype=JDNetworkBaseAF&openudid=7394f89a346949e58908ae7b0f63a4dbba4b6e3e&osVersion=10.3.2&partner=apple&screen=750%2A1334&sign=28bf067a993686d711523b242290dc07&st=1498186017769&sv=111&uuid=hjudwgohxzVu96krv/T6Hg%3D%3D",
+                // "name": "二手优品",
+                "http://api.m.jd.com/client.action?functionId=newSubCatalog&area=19_1601_3633_0&body=%7B%22catelogyId%22%3A%22300014870%22%7D&build=139045&client=apple&clientVersion=6.1.0&d_brand=apple&d_model=iPhone7%2C2&isBackground=N&networkType=wifi&networklibtype=JDNetworkBaseAF&openudid=7394f89a346949e58908ae7b0f63a4dbba4b6e3e&osVersion=10.3.2&partner=apple&screen=750%2A1334&sign=2b339f8d7c1ae717c9f4d51352dac9f7&st=1498186802053&sv=112&uuid=hjudwgohxzVu96krv/T6Hg%3D%3D",
+        };
+    }
 
-
-    /**
-     * 第二个listView文本数据数组(10,..)
-     */
-    public static String[][] MORELISTVIEWTXT = new String[][]{
-            {"全部分类", "小吃快餐", "咖啡厅", "电影院", "KTV", "茶馆", "足疗按摩", "超市/便利店",
-                    "银行", "经济型酒店", "景点/郊游", "公园", "美发"},
-            {"全部美食", "小吃快餐", "西餐", "火锅", "北京菜", "川菜", "日本", "面包甜点", "粤菜",
-                    "韩国料理", "自助餐", "浙江菜", "云南菜", "湘菜", "东南亚菜", "西北菜", "鲁菜",
-                    "东北菜", "素菜", "新疆菜", "海鲜", "清真菜", "贵州菜", "湖北菜", "其他"},
-            {"全部购物", "综合商场", "服饰鞋包", "超市/便利店", "特色集市", "品牌折扣店", "眼镜店", "珠宝饰品",
-                    "化妆品", "运动户外", "食品茶酒", "书店", "数码产品", "药店", "京味儿购物", "亲子购物",
-                    "花店", "家具建材", "更多购物场所"},
-            {"全部休闲娱乐", "咖啡厅", "KTV", "景点/郊游", "电影院", "酒吧", "公园", "温泉", "文化艺术",
-                    "足疗按摩", "洗浴", "茶馆", "游乐游艺", "密室", "采摘/农家乐", "桌面游戏", "台球馆",
-                    "DIY手工坊", "休闲网吧", "真人CS", "棋牌室", "轰趴馆", "私人影院", "更多休闲娱乐"},
-            {"全部运动健身", "健身中心", "游泳馆", "瑜伽", "羽毛球馆", "台球馆", "舞蹈", "体育场馆",
-                    "高尔夫场", "网球场", "武术场馆", "篮球场", "保龄球馆", "足球场", "乒乓球馆",
-                    "更多体育运动"},
-            {"全部丽人", "美发", "美容/SPA", "齿科", "美甲", "化妆品", "瑜伽", "瘦身纤体", "舞蹈",
-                    "个性写真", "整形"},
-            {"全部结婚", "婚纱摄影", "婚宴酒店", "婚纱礼服", "婚庆公司", "婚戒首饰", "个性写真", "彩妆造型",
-                    "婚礼小礼品", "婚礼跟拍", "婚车租赁", "司仪主持", "婚房装修", "更多婚礼服务"},
-            {"全部酒店", "经济型酒店", "五星级酒店", "度假村", "四星级酒店", "三星级酒店", "农家院",
-                    "公寓式酒店", "青年旅社", "精品酒店", "更多酒店住宿"},
-            {"全部爱车", "维修保养", "驾校", "停车场", "4S店/汽车销售", "加油站", "配件/车饰", "汽车租赁",
-                    "汽车保险"},
-            {"全部亲子", "亲子摄影", "幼儿教育", "亲子游乐", "孕产护理", "亲子购物", "更多亲子服务"}
-    };
 
 }

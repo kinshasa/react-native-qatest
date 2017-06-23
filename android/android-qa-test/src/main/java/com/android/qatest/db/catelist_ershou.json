@@ -1,0 +1,465 @@
+{
+  "data": [
+    {
+      "icon": "",
+      "special_ui": false,
+      "name": "特色业务",
+      "catelogyList": [
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t5059/321/1828476761/4300/d1b7cb38/58f46613N8070a55c.jpg.webp",
+          "isIndividual": false,
+          "name": "二手优品",
+          "isMerger": false,
+          "path": "300014870_300014871_300014877",
+          "action": "https://pro.m.jd.com/mall/active/LHGZv1DrGkva1jNpUkKFuNFN6oo/index.html",
+          "virtualFlag": 3,
+          "cid": 300014877,
+          "destination": "car_to"
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t4387/329/2923515582/6303/3b4f9baa/58f46620N3ef24dd0.jpg.webp",
+          "isIndividual": false,
+          "name": "回收",
+          "isMerger": false,
+          "path": "300014870_300014871_300014878",
+          "action": "https://pro.m.jd.com/mall/active/YJCfnT76eNXBc3oNUorUhgrEfTA/index.html",
+          "virtualFlag": 3,
+          "cid": 300014878,
+          "destination": "car_to"
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t4873/365/1772364252/9409/10dbb5cd/58f4662cN1e25aa4d.jpg.webp",
+          "isIndividual": false,
+          "name": "租赁",
+          "isMerger": false,
+          "path": "300014870_300014871_300014879",
+          "action": "https://pro.m.jd.com/mall/active/2iJkz2PXpyLdswhuLBuHxmduqyaf/index.html",
+          "virtualFlag": 3,
+          "cid": 300014879,
+          "destination": "car_to"
+        }
+      ],
+      "columNum": 3,
+      "cid": 300014871,
+      "isBook": false,
+      "rankingFlag": false
+    },
+    {
+      "icon": "",
+      "special_ui": false,
+      "name": "二手手机数码",
+      "catelogyList": [
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t4633/115/2909057325/10834/2e83e8c5/58f46707Nc5bfc367.jpg.webp",
+          "isIndividual": false,
+          "searchKey": "二手手机",
+          "name": "二手手机",
+          "isMerger": false,
+          "path": "300014870_300014872_300014880",
+          "virtualFlag": 1,
+          "cid": 300014880
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t4792/66/1783540568/10960/78f67f89/58f4671dN35e0e63c.jpg.webp",
+          "isIndividual": false,
+          "searchKey": "二手单反相机",
+          "name": "单反相机",
+          "isMerger": false,
+          "path": "300014870_300014872_300014881",
+          "virtualFlag": 1,
+          "cid": 300014881
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t4792/145/1786961154/7874/df6750cf/58f46733N6a907eb5.jpg.webp",
+          "isIndividual": false,
+          "searchKey": "二手数码相机",
+          "name": "数码相机",
+          "isMerger": false,
+          "path": "300014870_300014872_300014882",
+          "virtualFlag": 1,
+          "cid": 300014882
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t4474/334/2856783824/9725/3cddb652/58f46744N09a7ffa8.jpg.webp",
+          "isIndividual": false,
+          "searchKey": "二手镜头",
+          "name": "镜头",
+          "isMerger": false,
+          "path": "300014870_300014872_300014883",
+          "virtualFlag": 1,
+          "cid": 300014883
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t4558/351/4105427322/8344/548ec69e/5909c294Ncec2cdbb.jpg.webp",
+          "isIndividual": false,
+          "searchKey": "二手微单相机",
+          "name": "微单相机",
+          "isMerger": false,
+          "path": "300014870_300014872_300014912",
+          "virtualFlag": 1,
+          "cid": 300014912
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t4603/290/2881321184/10432/709402fa/58f46757Nb265d6a1.jpg.webp",
+          "isIndividual": false,
+          "searchKey": "二手耳机耳麦",
+          "name": "耳机耳麦",
+          "isMerger": false,
+          "path": "300014870_300014872_300014884",
+          "virtualFlag": 1,
+          "cid": 300014884
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t4405/123/823520852/6012/ac246299/5909c314N3fdf71a2.jpg.webp",
+          "isIndividual": false,
+          "searchKey": "二手音箱音响",
+          "name": "音箱/音响",
+          "isMerger": false,
+          "path": "300014870_300014872_300014913",
+          "virtualFlag": 1,
+          "cid": 300014913
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t5470/241/967889016/10741/8b5ccccf/5909c340N54b95394.jpg.webp",
+          "isIndividual": false,
+          "name": "游戏机",
+          "isMerger": false,
+          "path": "300014870_300014872_300014914",
+          "action": "https://duobao.m.jd.com/duobao/classify/classify.html?jdcate3=12801",
+          "virtualFlag": 3,
+          "cid": 300014914,
+          "destination": "car_to"
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t4660/20/2887453348/7292/15b6daa4/58f46766N358577a4.jpg.webp",
+          "isIndividual": false,
+          "name": "路由器",
+          "isMerger": false,
+          "path": "300014870_300014872_300014885",
+          "action": "https://duobao.m.jd.com/duobao/classify/classify.html?jdcate3=700",
+          "virtualFlag": 3,
+          "cid": 300014885,
+          "destination": "car_to"
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t5110/9/956259048/5931/622d78a6/5909c379N85786001.jpg.webp",
+          "isIndividual": false,
+          "name": "网络盒子",
+          "isMerger": false,
+          "path": "300014870_300014872_300014915",
+          "action": "https://duobao.m.jd.com/duobao/classify/classify.html?jdcate3=11304",
+          "virtualFlag": 3,
+          "cid": 300014915,
+          "destination": "car_to"
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t5431/156/982079676/7290/c9b502e3/5909c3aeNb192a9af.jpg.webp",
+          "isIndividual": false,
+          "name": "智能家居",
+          "isMerger": false,
+          "path": "300014870_300014872_300014916",
+          "action": "https://duobao.m.jd.com/duobao/classify/classify.html?jdcate3=12353",
+          "virtualFlag": 3,
+          "cid": 300014916,
+          "destination": "car_to"
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t4993/135/1778738678/11532/3ab02105/58f46776N21fb6a06.jpg.webp",
+          "isIndividual": false,
+          "searchKey": "二手智能手表",
+          "name": "智能手表",
+          "isMerger": false,
+          "path": "300014870_300014872_300014886",
+          "virtualFlag": 1,
+          "cid": 300014886
+        }
+      ],
+      "columNum": 3,
+      "cid": 300014872,
+      "isBook": false,
+      "rankingFlag": false
+    },
+    {
+      "icon": "",
+      "special_ui": false,
+      "name": "二手电脑办公",
+      "catelogyList": [
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t4498/285/2880682905/11474/d184b9c2/58f46c01N866089af.jpg.webp",
+          "isIndividual": false,
+          "searchKey": "二手笔记本",
+          "name": "笔记本",
+          "isMerger": false,
+          "path": "300014870_300014873_300014887",
+          "virtualFlag": 1,
+          "cid": 300014887
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t4831/121/1784970393/11869/e1c635db/58f46c9dN788b052a.jpg.webp",
+          "isIndividual": false,
+          "searchKey": "二手台式机",
+          "name": "台式机",
+          "isMerger": false,
+          "path": "300014870_300014873_300014888",
+          "virtualFlag": 1,
+          "cid": 300014888
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t4987/355/1769606111/13688/ba50431c/58f46caaNe2e1e6e8.jpg.webp",
+          "isIndividual": false,
+          "searchKey": "二手平板电脑",
+          "name": "平板电脑",
+          "isMerger": false,
+          "path": "300014870_300014873_300014889",
+          "virtualFlag": 1,
+          "cid": 300014889
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t4504/148/4092466780/14231/b4b3e0d7/5909c416N1c13d7e1.jpg.webp",
+          "isIndividual": false,
+          "name": "显示器",
+          "isMerger": false,
+          "path": "300014870_300014873_300014917",
+          "action": "https://duobao.m.jd.com/duobao/classify/classify.html?jdcate3=688",
+          "virtualFlag": 3,
+          "cid": 300014917,
+          "destination": "car_to"
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t4495/165/2948204284/11475/77027eab/58f46cb5Nfcc70983.jpg.webp",
+          "isIndividual": false,
+          "name": "键盘",
+          "isMerger": false,
+          "path": "300014870_300014873_300014890",
+          "action": "https://duobao.m.jd.com/duobao/classify/classify.html?jdcate3=689",
+          "virtualFlag": 3,
+          "cid": 300014890,
+          "destination": "car_to"
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t5416/79/988976379/6929/faa6c38/5909c4a4N9a750dc8.jpg.webp",
+          "isIndividual": false,
+          "name": "鼠标",
+          "isMerger": false,
+          "path": "300014870_300014873_300014918",
+          "action": "https://duobao.m.jd.com/duobao/classify/classify.html?jdcate3=690",
+          "virtualFlag": 3,
+          "cid": 300014918,
+          "destination": "car_to"
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t5167/51/985320022/10539/3e10f4f1/5909c4c9Nab0b5179.jpg.webp",
+          "isIndividual": false,
+          "name": "显卡",
+          "isMerger": false,
+          "path": "300014870_300014873_300014919",
+          "action": "https://pro.m.jd.com/mall/active/2k5GeQnkxSmqJQzYw2o6XxACab1V/index.html",
+          "virtualFlag": 3,
+          "cid": 300014919,
+          "destination": "car_to"
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t4609/19/3930236191/17454/15020559/5909c4ecN132c400b.jpg.webp",
+          "isIndividual": false,
+          "name": "主板",
+          "isMerger": false,
+          "path": "300014870_300014873_300014920",
+          "action": "https://pro.m.jd.com/mall/active/2nwtoepxCNLwr6uv5611FPm61PLk/index.html",
+          "virtualFlag": 3,
+          "cid": 300014920,
+          "destination": "car_to"
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t4624/198/2895968785/8414/56bebe89/58f46d00N55cf48bf.jpg.webp",
+          "isIndividual": false,
+          "name": "多功能一体机",
+          "isMerger": false,
+          "path": "300014870_300014873_300014892",
+          "action": "https://duobao.m.jd.com/duobao/classify/classify.html?jdcate3=720",
+          "virtualFlag": 3,
+          "cid": 300014892,
+          "destination": "car_to"
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t4447/14/4049594751/9425/38208bbd/5909c52fN920f65b2.jpg.webp",
+          "isIndividual": false,
+          "searchKey": "二手打印机",
+          "name": "打印机",
+          "isMerger": false,
+          "path": "300014870_300014873_300014921",
+          "virtualFlag": 1,
+          "cid": 300014921
+        }
+      ],
+      "columNum": 3,
+      "cid": 300014873,
+      "isBook": false,
+      "rankingFlag": false
+    },
+    {
+      "icon": "",
+      "special_ui": false,
+      "name": "二手母婴玩具",
+      "catelogyList": [
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t4951/228/1806427680/14888/939c3476/58f46d85Nc5f0c04f.jpg.webp",
+          "isIndividual": false,
+          "name": "尿不湿",
+          "isMerger": false,
+          "path": "300014870_300014874_300014895",
+          "action": "https://duobao.m.jd.com/duobao/classify/classify.html?jdcate2=1525",
+          "virtualFlag": 3,
+          "cid": 300014895,
+          "destination": "car_to"
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t4729/158/1801382880/18049/446807b5/58f46d72Naaf26186.jpg.webp",
+          "isIndividual": false,
+          "name": "婴儿用品",
+          "isMerger": false,
+          "path": "300014870_300014874_300014893",
+          "action": "https://duobao.m.jd.com/duobao/classify/classify.html?firstCateId=7000&productCateId=92",
+          "virtualFlag": 3,
+          "cid": 300014893,
+          "destination": "car_to"
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t4918/106/1786169955/21534/4bab1b0b/58f46d7fNf85cf8d7.jpg.webp",
+          "isIndividual": false,
+          "name": "玩具乐器",
+          "isMerger": false,
+          "path": "300014870_300014874_300014894",
+          "action": "https://duobao.m.jd.com/duobao/classify/classify.html?firstCateId=7000&productCateId=93",
+          "virtualFlag": 3,
+          "cid": 300014894,
+          "destination": "car_to"
+        }
+      ],
+      "columNum": 3,
+      "cid": 300014874,
+      "isBook": false,
+      "rankingFlag": false
+    },
+    {
+      "icon": "",
+      "special_ui": false,
+      "name": "二手运动户外",
+      "catelogyList": [
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t5272/252/982538533/6810/a0303471/5909c6adNa47bb867.jpg.webp",
+          "isIndividual": false,
+          "name": "运动鞋包",
+          "isMerger": false,
+          "path": "300014870_300014875_300014897",
+          "action": "https://duobao.m.jd.com/duobao/classify/classify.html?jdcate2=12099",
+          "virtualFlag": 3,
+          "cid": 300014897,
+          "destination": "car_to"
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t4639/132/4114394093/7251/3d8de6c6/5909c6bfN5dcccd70.jpg.webp",
+          "isIndividual": false,
+          "name": "运动服饰",
+          "isMerger": false,
+          "path": "300014870_300014875_300014896",
+          "action": "https://duobao.m.jd.com/duobao/classify/classify.html?jdcate2=12102",
+          "virtualFlag": 3,
+          "cid": 300014896,
+          "destination": "car_to"
+        }
+      ],
+      "columNum": 3,
+      "cid": 300014875,
+      "isBook": false,
+      "rankingFlag": false
+    },
+    {
+      "icon": "",
+      "special_ui": false,
+      "name": "二手钟表奢侈品",
+      "catelogyList": [
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t4507/307/4095878874/7370/94f563c/5909c6edN2d0eae6f.jpg.webp",
+          "isIndividual": false,
+          "searchKey": "二手钟表",
+          "name": "钟表",
+          "isMerger": false,
+          "path": "300014870_300014923_300014924",
+          "virtualFlag": 1,
+          "cid": 300014924
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t5341/25/973907156/9345/2cb8b1bf/5909c6feN2016f349.jpg.webp",
+          "isIndividual": false,
+          "name": "奢侈品",
+          "isMerger": false,
+          "path": "300014870_300014923_300014925",
+          "action": "https://duobao.m.jd.com/duobao/classify/classify.html?jdcate2=2615",
+          "virtualFlag": 3,
+          "cid": 300014925,
+          "destination": "car_to"
+        }
+      ],
+      "columNum": 3,
+      "cid": 300014923,
+      "isBook": false,
+      "rankingFlag": false
+    },
+    {
+      "icon": "",
+      "special_ui": false,
+      "name": "二手家用电器",
+      "catelogyList": [
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t4729/45/1766593305/9486/790dd5db/58f46e28N8f4c0483.jpg.webp",
+          "isIndividual": false,
+          "name": "家用电器",
+          "isMerger": false,
+          "path": "300014870_300014876_300014898",
+          "action": "https://duobao.m.jd.com/duobao/classify/classify.html?firstCateId=1000&productCateId=44",
+          "virtualFlag": 3,
+          "cid": 300014898,
+          "destination": "car_to"
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t4627/224/2918064376/7067/ebd25fa/58f46e3bN96e3040a.jpg.webp",
+          "isIndividual": false,
+          "name": "电吹风/剃须刀",
+          "isMerger": false,
+          "path": "300014870_300014876_300014899",
+          "action": "https://duobao.m.jd.com/duobao/classify/classify.html?firstCateId=1000&productCateId=41",
+          "virtualFlag": 3,
+          "cid": 300014899,
+          "destination": "car_to"
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t4486/79/2897300257/6482/7a0fb223/58f46e48N642e873c.jpg.webp",
+          "isIndividual": false,
+          "name": "加湿器",
+          "isMerger": false,
+          "path": "300014870_300014876_300014900",
+          "action": "https://duobao.m.jd.com/duobao/classify/classify.html?firstCateId=1000&productCateId=43",
+          "virtualFlag": 3,
+          "cid": 300014900,
+          "destination": "car_to"
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t4618/363/4140444326/5885/d349e990/5909c75dN9db046d9.jpg.webp",
+          "isIndividual": false,
+          "name": "净化器",
+          "isMerger": false,
+          "path": "300014870_300014876_300014922",
+          "action": "https://duobao.m.jd.com/duobao/classify/classify.html?jdcate3=6807",
+          "virtualFlag": 3,
+          "cid": 300014922,
+          "destination": "car_to"
+        }
+      ],
+      "columNum": 3,
+      "cid": 300014876,
+      "isBook": false,
+      "rankingFlag": false
+    }
+  ],
+  "code": "0"
+}
