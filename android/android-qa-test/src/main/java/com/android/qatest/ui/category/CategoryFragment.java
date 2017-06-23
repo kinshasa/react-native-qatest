@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -91,6 +93,35 @@ public class CategoryFragment extends Fragment implements CategoryView {
                 Toast.makeText(getContext(), position + "", Toast.LENGTH_LONG).show();
             }
         });
+
+        sectionListView.setOnScrollListener(new OnScrollListener() {
+
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                //0离开并停止，1触摸并滚动，2离开并滚动
+                sectionAdapter.isScrolling = scrollState != 0;
+                L.v("setScrollState:"+sectionAdapter.isScrolling);
+                switch (scrollState) {
+                    case AbsListView.OnScrollListener.SCROLL_STATE_FLING:
+                        //syncImageLoader.lock();
+                        break;
+                    case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
+                        //loadImage();
+                        break;
+                    case AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
+                        //syncImageLoader.lock();
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+            }
+        });
     }
 
     private void updateSectionAdapter(final int pos) {
@@ -124,8 +155,7 @@ public class CategoryFragment extends Fragment implements CategoryView {
         presenter = new CategoryPresenterImp(this);
 
 
-
-        presenter.getCategoryData(getContext(),0,new CategoryInteractor.onCategoryRequestListener() {
+        presenter.getCategoryData(getContext(), 0, new CategoryInteractor.onCategoryRequestListener() {
             @Override
             public void onFail() {
 

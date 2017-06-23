@@ -3,9 +3,12 @@ package com.android.qatest.ui.category;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.log.L;
 import com.android.qatest.ui.widget.NestGridView;
 
 import java.util.ArrayList;
@@ -52,7 +55,17 @@ public abstract class ImageTextItemsLayout<T> extends LinearLayout {
         gridView.setBackgroundColor(0XFFFFFFFF);
         gridView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         gridView.setNumColumns(3);
-        //gridView.setNumColumns(NestGridView.AUTO_FIT);
+        gridView.setOnScrollListener(new OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                L.v("gridView");
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+            }
+        });
         gridView.setStretchMode(NestGridView.STRETCH_COLUMN_WIDTH);
         arrayData = new ArrayList<>();
         adapter = new ImageTextItemsAdapter<T>(context, arrayData) {
@@ -75,6 +88,11 @@ public abstract class ImageTextItemsLayout<T> extends LinearLayout {
     public abstract String getTextName(T data);
 
     public abstract String getImageStr(T data);
+
+    public void setScrollState(boolean isSCrolling){
+        adapter.isScrolling = isSCrolling;
+        L.v(adapter.isScrolling);
+    }
 
     public void setData(ArrayList<T> data) {
         //使用addAll是不希望更改sectionData的内存地址，不然会解绑adapter数据。

@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
+import com.android.log.L;
 import com.android.qatest.R;
 import com.android.qatest.ui.widget.NestGridView;
 
@@ -23,7 +24,7 @@ public class SectionAdapter extends BaseAdapter {
     private Context mContext;
 
     private int selectPosition = 0;
-    private Holder holder;
+    public boolean isScrolling;
     private ArrayList<SectionModel> sectionModels;
 
     public SectionAdapter(Context context, ArrayList<SectionModel> data) {
@@ -57,6 +58,7 @@ public class SectionAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
+        Holder holder;
         if (convertView == null) {
             convertView = View.inflate(mContext, R.layout.item_category_section, null);
             holder = new Holder();
@@ -81,7 +83,6 @@ public class SectionAdapter extends BaseAdapter {
                     return data.icon;
                 }
             };
-
 
             TextView textView = new TextView(mContext);
             textView.setText("京东淘宝的布局拷贝");
@@ -117,7 +118,10 @@ public class SectionAdapter extends BaseAdapter {
         } else {
             holder = (Holder) convertView.getTag();
         }
+        L.v("setScrollState:"+isScrolling);
+        holder.imageTextItemsLayout.setScrollState(isScrolling);
         holder.imageTextItemsLayout.setData(sectionModels.get(position).catelogyList);
+
 
         holder.textView.setText(sectionModels.get(position).name);
         holder.textView.setTextColor(0xFF666666);

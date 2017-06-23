@@ -19,7 +19,8 @@ public abstract class ImageTextItemsAdapter<T> extends BaseAdapter {
 
     private ArrayList<T> arrayList;
     private Context mContext;
-    private Holder holder;
+    public boolean isScrolling;
+
 
     ImageTextItemsAdapter(Context context, ArrayList<T> models) {
         mContext = context;
@@ -51,7 +52,7 @@ public abstract class ImageTextItemsAdapter<T> extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-
+        Holder holder;
         if (convertView == null) {
             holder = new Holder();
             convertView = View.inflate(mContext, R.layout.item_category_image, null);
@@ -63,6 +64,13 @@ public abstract class ImageTextItemsAdapter<T> extends BaseAdapter {
         }
         String text = getName(arrayList.get(position));
         holder.textView.setText(text);
+        //滚动中，不需要加载图片
+        //只需要设置Image的tag，停止后加载tag的图片
+        //仅设置可见范围的图片，实现懒加载图片
+        if(!isScrolling){
+
+        }
+
         Uri uri = Uri.parse(getImage(arrayList.get(position)));
         holder.image.setImageURI(uri);
         return convertView;
