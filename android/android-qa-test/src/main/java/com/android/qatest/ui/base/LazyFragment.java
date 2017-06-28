@@ -52,8 +52,14 @@ public abstract class LazyFragment extends Fragment implements ILazyLayout {
     @Nullable
     @Override
     final public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        L.v();
+
         if (mInflater == null) {
-            //mInflater = inflater;
+            mInflater = inflater;
+        }
+
+        if (mInflater == null) {
+            throw new NullPointerException("mInflater cannot be null");
         }
         showLoadingView();
 
@@ -126,6 +132,7 @@ public abstract class LazyFragment extends Fragment implements ILazyLayout {
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
+        L.v(isVisibleToUser);
         super.setUserVisibleHint(isVisibleToUser);
 
         if (getUserVisibleHint()) {
@@ -133,6 +140,12 @@ public abstract class LazyFragment extends Fragment implements ILazyLayout {
         } else {
             setState(State.INVISIBLE);
         }
+    }
+
+    @Override
+    public boolean getUserVisibleHint() {
+        L.v();
+        return super.getUserVisibleHint();
     }
 
     @Override

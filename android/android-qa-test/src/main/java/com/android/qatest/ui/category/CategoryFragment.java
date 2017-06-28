@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.android.http.Http;
 import com.android.log.L;
 import com.android.qatest.R;
+import com.android.qatest.ui.base.ILazyLayout;
 import com.android.qatest.ui.base.LazyFragment;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ import butterknife.ButterKnife;
  * <p>
  * 商品二级分类
  */
-public class CategoryFragment extends LazyFragment implements CategoryView {
+public class CategoryFragment extends LazyFragment implements CategoryView,ILazyLayout.OnVisibleListener {
 
     private View view;
     private ArrayList<DivisionModel> divisionData;
@@ -199,4 +200,13 @@ public class CategoryFragment extends LazyFragment implements CategoryView {
         super.onDestroy();
     }
 
+    @Override
+    public void onVisible() {
+
+    }
+
+    @Override
+    public void onInvisible() {
+        removeContextView();
+    }
 }

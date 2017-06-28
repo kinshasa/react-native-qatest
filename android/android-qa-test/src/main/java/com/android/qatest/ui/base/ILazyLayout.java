@@ -8,6 +8,7 @@ import android.view.View;
  */
 
 public interface ILazyLayout {
+
     public enum State {
         NONE,
         VISIBLE,

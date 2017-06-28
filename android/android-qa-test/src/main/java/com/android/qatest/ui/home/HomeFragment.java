@@ -1,20 +1,26 @@
 package com.android.qatest.ui.home;
 
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.android.log.L;
-import com.android.qatest.R;
-import com.android.qatest.ui.base.LazyFragment;
-import com.android.qatest.ui.home.model.HomePage;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.rd.Orientation;
 import com.rd.PageIndicatorView;
 import com.rd.animation.AnimationType;
+
+import com.android.qatest.R;
+import com.android.qatest.ui.home.model.FloorList;
+import com.android.qatest.ui.home.model.HomePage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +29,7 @@ import java.util.List;
 /**
  * Created by linhonghong on 2015/8/11.
  */
-public class HomeFragment extends LazyFragment implements HomeView {
+public class HomeFragment extends Fragment implements HomeView {
 
     private View view;
 
@@ -36,19 +42,15 @@ public class HomeFragment extends LazyFragment implements HomeView {
 		return view;
 	}
 
-
+    @Nullable
     @Override
-    public View createLoadingView() {
-        return null;
-    }
-
-    @Override
-    public View setContextView() {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         L.v();
-        view = mInflater.inflate(R.layout.fragment_home, null);
+        view = inflater.inflate(R.layout.fragment_home, null);
         initViews();
         return view;
     }
+
     @SuppressWarnings("ConstantConditions")
     private void initViews() {
 
@@ -128,5 +130,4 @@ public class HomeFragment extends LazyFragment implements HomeView {
         adapter.setData(createPageList());
 
     }
-
 }
