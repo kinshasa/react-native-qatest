@@ -1,15 +1,11 @@
 package com.android.qatest.ui.cart;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.log.L;
 import com.android.qatest.R;
+import com.android.qatest.ui.base.LazyFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,7 +14,7 @@ import butterknife.ButterKnife;
 /**
  * Created by linhonghong on 2015/8/11.
  */
-public class CartFragment extends Fragment {
+public class CartFragment extends LazyFragment {
 
     protected View view;
 
@@ -30,10 +26,15 @@ public class CartFragment extends Fragment {
         return view;
     }
 
-    @Nullable
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_cart, null);
+    public View createLoadingView() {
+        return null;
+    }
+
+    @Override
+    public View setContextView() {
+        view = mInflater.inflate(R.layout.fragment_cart, null);
         ButterKnife.bind(this, view);
         initView();
         initData();
@@ -54,4 +55,5 @@ public class CartFragment extends Fragment {
 
     private void initView() {
     }
+
 }

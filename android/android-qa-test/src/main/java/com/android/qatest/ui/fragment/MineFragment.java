@@ -1,29 +1,29 @@
 package com.android.qatest.ui.fragment;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.android.qatest.R;
+import com.android.qatest.ui.base.LazyFragment;
 
 
 /**
  * Created by linhonghong on 2015/8/11.
  */
-public class MineFragment extends Fragment {
+public class MineFragment extends LazyFragment {
 
     public static MineFragment instance() {
         MineFragment view = new MineFragment();
         return view;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_base, null);
+    public View createLoadingView() {
+        return null;
+    }
+
+    @Override
+    public View setContextView() {
+        View view = mInflater.inflate(R.layout.fragment_base, null);
         return view;
     }
 }

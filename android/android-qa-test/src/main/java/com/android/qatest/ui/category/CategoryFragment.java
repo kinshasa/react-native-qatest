@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.android.http.Http;
 import com.android.log.L;
 import com.android.qatest.R;
+import com.android.qatest.ui.base.LazyFragment;
 
 import java.util.ArrayList;
 
@@ -27,7 +28,7 @@ import butterknife.ButterKnife;
  * <p>
  * 商品二级分类
  */
-public class CategoryFragment extends Fragment implements CategoryView {
+public class CategoryFragment extends LazyFragment implements CategoryView {
 
     private View view;
     private ArrayList<DivisionModel> divisionData;
@@ -48,10 +49,14 @@ public class CategoryFragment extends Fragment implements CategoryView {
         return view;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_category_list, null);
+    public View createLoadingView() {
+        return null;
+    }
+
+    @Override
+    public View setContextView() {
+        view = mInflater.inflate(R.layout.fragment_category_list, null);
         ButterKnife.bind(this, view);
         initData();
         initView();
@@ -193,4 +198,5 @@ public class CategoryFragment extends Fragment implements CategoryView {
     public void onDestroy() {
         super.onDestroy();
     }
+
 }

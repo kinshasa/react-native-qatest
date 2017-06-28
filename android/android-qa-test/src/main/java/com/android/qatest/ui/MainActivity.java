@@ -41,11 +41,11 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
 
     private static final int VIEW_SIZE = 5;
 
-    private HomeFragment mHomeFragment = null;
-    private CategoryFragment mCategoryFragment = null;
-    private NewsFragment mNewsFragment = null;
-    private CartFragment mCartFragment = null;
-    private MineFragment mMineFragment = null;
+    private Fragment mHomeFragment = null;
+    private Fragment mCategoryFragment = null;
+    private Fragment mNewsFragment = null;
+    private Fragment mCartFragment = null;
+    private Fragment mMineFragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,10 +79,9 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         mAPSTS.showDot(VIEW_HOME, "99+");
 
 
-
     }
 
-    void showSplashView(){
+    void showSplashView() {
         SplashView.showSplashView(this, 6, R.drawable.default_img, new SplashView.OnSplashViewActionListener() {
             @Override
             public void onSplashImageClick(String actionUrl) {
@@ -102,8 +101,10 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     }
 
     private long time = 0;
+
     /**
      * 双击返回桌面
+     *
      * @param keyCode
      * @param event
      * @return
@@ -174,7 +175,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
                     case VIEW_MINE:
                     default:
                         if (null == mMineFragment)
-                            mMineFragment = mMineFragment.instance();
+                            mMineFragment = MineFragment.instance();
                         return mMineFragment;
                 }
             }
