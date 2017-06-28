@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.log.L;
+import com.android.qatest.R;
+import com.android.qatest.ui.home.model.HomePage;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -18,17 +20,11 @@ import com.rd.Orientation;
 import com.rd.PageIndicatorView;
 import com.rd.animation.AnimationType;
 
-import com.android.qatest.R;
-import com.android.qatest.ui.home.model.FloorList;
-import com.android.qatest.ui.home.model.HomePage;
-
 import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * Created by linhonghong on 2015/8/11.
- */
+
 public class HomeFragment extends Fragment implements HomeView {
 
     private View view;

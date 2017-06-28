@@ -24,8 +24,10 @@ public class HttpRequestThinkAndroidImpl extends HttpRequestImpl {
 
     private RequestQueue mRequestQueue;
     private synchronized RequestQueue getRequestQueue(Context context) {
-        if (mRequestQueue == null) {
-            mRequestQueue = Volley.newRequestQueue(context);
+        synchronized (this) {
+            if (mRequestQueue == null) {
+                mRequestQueue = Volley.newRequestQueue(context);
+            }
         }
         return mRequestQueue;
     }
