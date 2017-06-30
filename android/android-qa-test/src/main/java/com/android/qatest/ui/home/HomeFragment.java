@@ -1,6 +1,5 @@
 package com.android.qatest.ui.home;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,34 +8,37 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.android.log.L;
 import com.android.qatest.R;
 import com.android.qatest.ui.home.model.HomePage;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
-import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.rd.Orientation;
 import com.rd.PageIndicatorView;
+import com.rd.RtlMode;
 import com.rd.animation.AnimationType;
+import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class HomeFragment extends Fragment implements HomeView {
 
     private View view;
+    private Banner banner;
 
     private HomePresenter presenter;
     private HomeAdapter adapter = new HomeAdapter();
+    private ArrayList<String> imgs;
     GenericDraweeHierarchy hierarchy;
 
     public static HomeFragment instance() {
         HomeFragment view = new HomeFragment();
-		return view;
-	}
+        return view;
+    }
 
     @Nullable
     @Override
@@ -47,24 +49,38 @@ public class HomeFragment extends Fragment implements HomeView {
         return view;
     }
 
-    @SuppressWarnings("ConstantConditions")
     private void initViews() {
+
+        HomeAdapter adapter = new HomeAdapter();
+        adapter.setData(createPageList());
 
         ViewPager pager = (ViewPager) view.findViewById(R.id.viewPager);
         pager.setAdapter(adapter);
 
         PageIndicatorView indicatorView = (PageIndicatorView) view.findViewById(R.id.pageindicatorview);
         indicatorView.setViewPager(pager);
-        indicatorView.setAnimationType(AnimationType.WORM);
         indicatorView.setOrientation(Orientation.HORIZONTAL);
-        indicatorView.setRadius(5);
+        indicatorView.setAnimationType(AnimationType.WORM);
+        indicatorView.setAutoVisibility(true);
+        indicatorView.setRtlMode(RtlMode.Auto);
+
         presenter = new HomePresenterImpl(this);
         presenter.fetch(getContext());
-        GenericDraweeHierarchyBuilder builder =
-                new GenericDraweeHierarchyBuilder(getResources());
-        hierarchy = builder
-                .setFadeDuration(300)
-                .build();
+
+        imgs = new ArrayList<>();
+        imgs.add("http://img.ds.cn/none.png");
+        imgs.add("http://img.ds.cn/none.png");
+        imgs.add("http://img.ds.cn/none.png");
+        banner = (Banner) view.findViewById(R.id.banner);
+        //简单使用
+        banner.setImages(imgs)
+                .setImageLoader(new FrescoImageLoader())
+                .setOnBannerListener(new OnBannerListener() {
+                    @Override
+                    public void OnBannerClick(int position) {
+                    }
+                })
+                .start();
     }
 
     @NonNull
@@ -86,13 +102,6 @@ public class HomeFragment extends Fragment implements HomeView {
         return view;
     }
 
-    private View createPageView(String imgUrl) {
-        View view = new View(getContext());
-        SimpleDraweeView simpleDraweeView = new SimpleDraweeView(getContext());
-        simpleDraweeView.setImageURI(Uri.parse(imgUrl),hierarchy);
-        view.setBackgroundColor(getResources().getColor(R.color.red));
-        return view;
-    }
 
     @Override
     public void showLoading() {
@@ -124,6 +133,18 @@ public class HomeFragment extends Fragment implements HomeView {
 
         }*/
         adapter.setData(createPageList());
-
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        banner.startAutoPlay();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        banner.stopAutoPlay();
+    }
+
 }

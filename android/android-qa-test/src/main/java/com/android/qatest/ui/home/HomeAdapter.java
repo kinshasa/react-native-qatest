@@ -61,4 +61,5 @@ class HomeAdapter extends PagerAdapter {
 
         return viewList;
     }
+
 }

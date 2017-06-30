@@ -42,20 +42,20 @@
         <activity
             android:name=".ui.ListSamples"
             android:label="@string/app_name">
-            <!--<intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
         </activity>
         <!--MainActivity程序入口-->
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/app_name">
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.qatest.list" />
