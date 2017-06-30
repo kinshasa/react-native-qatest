@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:background="#3D86FC"
+        android:visibility="gone"
         android:orientation="horizontal">
 
         <android.support.v4.view.ViewPager
