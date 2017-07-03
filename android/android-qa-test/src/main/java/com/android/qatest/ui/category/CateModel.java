@@ -13,14 +13,15 @@ public class CateModel {
     public String virtualFlag;
     public String cid;
 
-    CateModel() {}
+    CateModel() {
+    }
 
     CateModel(String a, String b) {
         icon = a;
         name = b;
     }
 
-    static ArrayList<CateModel> initArrayData(int length) {
+    public static ArrayList<CateModel> initArrayData(int length) {
         ArrayList<CateModel> cateModels = new ArrayList<>();
         for (int i = 6; i < length; i++) {
             cateModels.add(new CateModel("img" + length, "CateName" + length + "" + i));

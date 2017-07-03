@@ -9,16 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.android.log.L;
 import com.android.qatest.R;
+import com.android.qatest.ui.category.CateModel;
+import com.android.qatest.ui.category.ImageTextItemsLayout;
 import com.android.qatest.ui.home.model.HomePage;
 import com.android.qatest.ui.widget.BannerLayout;
 import com.viewpagerindicator.CirclePageIndicator;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ public class HomeFragment extends Fragment implements HomeView {
     private HomePresenter mPresenter;
 
     //Banner图
-    private FrameLayout mFrameLayout;
+    private FrameLayout mBannerFrameLayout;
     private BannerLayout mBannerLayout;
     private ArrayList<String> mImgList;
 
@@ -40,7 +40,8 @@ public class HomeFragment extends Fragment implements HomeView {
     private GridViewPageAdapter mGridViewPageAdapter;
     private List<View> viewList;
     private CirclePageIndicator mIndicator;
-
+    private ImageTextItemsLayout mImageTextLayout;
+    private FrameLayout mAppActionsLayout;
 
     public static HomeFragment instance() {
         HomeFragment view = new HomeFragment();
@@ -61,13 +62,13 @@ public class HomeFragment extends Fragment implements HomeView {
         mContext = getContext();
 
         //Banner图
-        mFrameLayout = (FrameLayout) mView.findViewById(R.id.bannerLayout);
+        mBannerFrameLayout = (FrameLayout) mView.findViewById(R.id.bannerLayout);
         mBannerLayout = new BannerLayout(mContext) {
             @Override
             public void OnBannerLayoutClick(int pos) {
             }
         };
-        mFrameLayout.addView(mBannerLayout);
+        mBannerFrameLayout.addView(mBannerLayout);
         mImgList = new ArrayList<>();
         mImgList.add("http://img.ds.cn/none.png");
         mImgList.add("http://img.ds.cn/none.png");
@@ -76,19 +77,35 @@ public class HomeFragment extends Fragment implements HomeView {
 
         //金刚位
         mViewPager = (ViewPager) mView.findViewById(R.id.viewPager);
+        mAppActionsLayout = (FrameLayout) mView.findViewById(R.id.appActionsLayout);
+        mImageTextLayout = new ImageTextItemsLayout<CateModel>(mContext) {
+            @Override
+            public String getTextName(CateModel data) {
+                return data.name;
+            }
+
+            @Override
+            public String getImageStr(CateModel data) {
+                return data.icon;
+            }
+        };
+        ArrayList<CateModel> data = CateModel.initArrayData(10);
+        mImageTextLayout.setData(data);
+        mAppActionsLayout.addView(mImageTextLayout, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+
         viewList = new ArrayList<>();
-        for(int i=0;i<5;i++){
+        for (int i = 0; i < 5; i++) {
             FrameLayout view = new FrameLayout(mContext);
             TextView textView = new TextView(mContext);
-            textView.setText("测试"+i);
+            textView.setText("测试" + i);
             view.addView(textView);
             viewList.add(view);
         }
-        mGridViewPageAdapter = new GridViewPageAdapter(mContext,viewList);
+        mGridViewPageAdapter = new GridViewPageAdapter(mContext, viewList);
         mViewPager.setAdapter(mGridViewPageAdapter);
         mPresenter = new HomePresenterImpl(this);
         mPresenter.fetch(mContext);
-        mIndicator = (CirclePageIndicator)mView.findViewById(R.id.indicator);
+        mIndicator = (CirclePageIndicator) mView.findViewById(R.id.indicator);
         mIndicator.setViewPager(mViewPager);
 
     }

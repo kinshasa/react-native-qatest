@@ -168,7 +168,14 @@ dependencies {
     //loginActivity used
     compile 'com.android.support:design:25.0.0'
 
-    /****原生依赖库*****/
+    /***************************************************
+     *                                                 *
+     *                                                 *
+     *                  Native 依赖库                   *
+     *                                                 *
+     *                                                 *
+     *                                                 *
+     ***************************************************/
     //bugly upgrade and tinker native hotFix module.
     compile project(':android-upgrade-module')
 
@@ -222,7 +229,14 @@ dependencies {
     //原生JOSN解析
     compile 'com.alibaba:fastjson:1.1.58.android'
 
-    /****ReactNative依赖库*****/
+    /***************************************************
+     *                                                 *
+     *                                                 *
+     *                  ReactNative 依赖库              *
+     *                                                 *
+     *                                                 *
+     *                                                 *
+     ***************************************************/
     compile project(':react-native-vector-icons')
 
     //A collection of animated loading indicators for React Native
