@@ -16,6 +16,7 @@ import com.android.log.L;
 import com.android.qatest.R;
 import com.android.qatest.ui.home.model.HomePage;
 import com.android.qatest.ui.widget.BannerLayout;
+import com.viewpagerindicator.CirclePageIndicator;
 
 import org.w3c.dom.Text;
 
@@ -38,6 +39,8 @@ public class HomeFragment extends Fragment implements HomeView {
     private ViewPager mViewPager;
     private GridViewPageAdapter mGridViewPageAdapter;
     private List<View> viewList;
+    private CirclePageIndicator mIndicator;
+
 
     public static HomeFragment instance() {
         HomeFragment view = new HomeFragment();
@@ -85,6 +88,8 @@ public class HomeFragment extends Fragment implements HomeView {
         mViewPager.setAdapter(mGridViewPageAdapter);
         mPresenter = new HomePresenterImpl(this);
         mPresenter.fetch(mContext);
+        mIndicator = (CirclePageIndicator)mView.findViewById(R.id.indicator);
+        mIndicator.setViewPager(mViewPager);
 
     }
 

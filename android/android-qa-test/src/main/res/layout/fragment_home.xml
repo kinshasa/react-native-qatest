@@ -6,15 +6,6 @@
     android:orientation="vertical"
     tools:context=".ui.MainActivity">
 
-    <com.youth.banner.Banner
-        android:id="@+id/banner"
-        indicator_height="20dp"
-        indicator_margin="10dp"
-        indicator_width="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="#999" />
-
     <FrameLayout
         android:id="@+id/bannerLayout"
         android:layout_width="match_parent"
@@ -22,10 +13,23 @@
         android:background="#888"
         android:minHeight="200dp" />
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_gravity="center" />
+        android:layout_height="wrap_content">
 
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:background="#ff0000" />
+
+        <com.viewpagerindicator.CirclePageIndicator
+            android:id="@+id/indicator"
+            android:layout_width="fill_parent"
+            android:layout_height="20dp"
+            android:layout_alignBottom="@+id/viewPager"
+            android:background="#00000000"
+            android:padding="10dip" />
+    </RelativeLayout>
 </LinearLayout>
