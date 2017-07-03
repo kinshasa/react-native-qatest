@@ -1,15 +1,20 @@
 rootProject.name = 'QATest'
-include ':react-native-spinkit', ':android-pay-module'
+
+//native module
+include ':android-pay-module'
 include ':android-http-module'
 include ':android-log-module'
 //include ':android-volley-master'
+include ':android-viewpager-indicator'
 include ':android-js-bridge-module'
 include ':android-qa-test'
 include ':react-native-vector-icons'
-include ':react-native-update'
 include ':android-upgrade-module'
+
+//react-native module
+include ':react-native-spinkit'
+include ':react-native-update'
 
 project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vector-icons/android')
 project(':react-native-update').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-update/android')
 project(':react-native-spinkit').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-spinkit/android')
-

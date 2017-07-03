@@ -176,9 +176,10 @@ dependencies {
 
     compile project(':android-http-module')
 
+    compile project(':android-viewpager-indicator')
+
     //Pay Module
     compile project(path: ':android-pay-module')
-
 
     //verticalViewPager
     compile 'me.kaelaela:verticalviewpager:1.0.0@aar'
@@ -191,19 +192,28 @@ dependencies {
 
     //StatusBarUtil 状态栏工具类（实现沉浸式状态栏/变色状态栏）
     //https://github.com/laobie/StatusBarUtil
-    //compile 'com.jaeger.statusbaruitl:library:1.3.6'
+    compile 'com.jaeger.statusbaruitl:library:1.3.6'
 
-    //PageIndicatorView will simplify your life while you working with Android ViewPager and need to indicate selected page. It's easy to setup and customize as you need with run-time preview rendering.
-    //https://github.com/romandanylyk/PageIndicatorView
-    compile 'com.romandanylyk:pageindicatorview:0.1.2'
-
-    compile 'com.android.support:support-annotations:25.0.0'
-    compile 'com.android.support:support-compat:25.0.0'
-    compile 'com.android.support:support-core-ui:25.0.0'
+    //Android Activity 滑动返回https://github.com/bingoogolapple/BGASwipeBackLayout-Android
+    compile 'cn.bingoogolapple:bga-swipebacklayout:1.0.8@aar'
 
     //Android developers should collect the following utils(updating)
     //https://github.com/kinshasa/AndroidUtilCode
     compile 'com.blankj:utilcode:1.3.6'
+
+    // Android 万能的Adapter for ListView,RecyclerView,GridView等，支持多种Item类型的情况。
+    // https://github.com/hongyangAndroid/baseAdapter
+    compile 'com.zhy:base-rvadapter:3.0.3'
+    compile 'com.zhy:base-adapter:3.0.3'
+
+    // Android屏幕适配方案，直接填写设计图上的像素尺寸即可完成适配。
+    // http://blog.csdn.net/lmj623565791/article/details/45460089
+    // https://github.com/hongyangAndroid/AndroidAutoLayout
+    compile 'com.zhy:autolayout:1.4.5'
+
+    // Android流式布局，支持单选、多选等，适合用于产品标签等。
+    // https://github.com/hongyangAndroid/FlowLayout
+    compile 'com.zhy:flowlayout-lib:1.0.3'
 
     //https://github.com/JakeWharton/butterknife
     compile 'com.jakewharton:butterknife:8.6.0'
@@ -236,7 +246,6 @@ dependencies {
     compile 'com.facebook.fresco:animated-webp:1.3.0'
     // 支持 WebP 静态图
     compile 'com.facebook.fresco:webpsupport:1.3.0'
-
 
 
 }

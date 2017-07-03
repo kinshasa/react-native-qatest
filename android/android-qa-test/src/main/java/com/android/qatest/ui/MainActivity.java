@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.android.log.L;
 import com.android.qatest.R;
 import com.android.qatest.ui.base.BaseActivity;
+import com.jaeger.library.StatusBarUtil;
 import com.lhh.apst.library.AdvancedPagerSlidingTabStrip;
 
 import com.android.qatest.ui.cart.CartFragment;
@@ -31,7 +32,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
 
 
     public AdvancedPagerSlidingTabStrip mAPSTS;
-    public APSTSViewPager mVP;
+    public APSTSViewPager mApstsViewPager;
 
     private static final int VIEW_HOME = 0;
     private static final int VIEW_CATEGORY = 1;
@@ -56,8 +57,8 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         showSplashView();
         //初始化页面
         initViews();
-        //StatusBarUtil.setTransparent(this);
         // call after setContentView(R.layout.activity_sample);
+        StatusBarUtil.setTranslucent(this);
     }
 
 
@@ -65,17 +66,17 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
 
         L.v();
         mAPSTS = (AdvancedPagerSlidingTabStrip) findViewById(R.id.tabs);
-        mVP = (APSTSViewPager) findViewById(R.id.vp_main);
+        mApstsViewPager = (APSTSViewPager) findViewById(R.id.vp_main);
 
-        mVP.setOffscreenPageLimit(VIEW_SIZE);
+        mApstsViewPager.setOffscreenPageLimit(VIEW_SIZE);
         FragmentAdapter adapter = new FragmentAdapter(getSupportFragmentManager());
 
-        mVP.setAdapter(new FragmentAdapter(getSupportFragmentManager()));
+        mApstsViewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager()));
 
         adapter.notifyDataSetChanged();
-        mAPSTS.setViewPager(mVP);
+        mAPSTS.setViewPager(mApstsViewPager);
         mAPSTS.setOnPageChangeListener(this);
-        mVP.setCurrentItem(VIEW_HOME);
+        mApstsViewPager.setCurrentItem(VIEW_HOME);
         mAPSTS.showDot(VIEW_HOME, "99+");
 
 

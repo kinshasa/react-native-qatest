@@ -6,6 +6,7 @@ import android.support.multidex.MultiDex;
 
 import com.android.qatest.rct.RCTImagePackage;
 import com.android.qatest.rct.RCTViewPackage;
+import com.blankj.utilcode.utils.Utils;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
@@ -66,6 +67,9 @@ public class MainApplication extends Application implements ReactApplication {
         Bugly.init(this, "f130c8d4d9", false);
 
         Fresco.initialize(this);
+
+        //初始化工具类
+        Utils.init(this);
     }
 
     @Override
