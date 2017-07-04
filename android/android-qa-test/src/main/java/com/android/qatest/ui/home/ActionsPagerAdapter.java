@@ -5,6 +5,8 @@ import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.qatest.ui.widget.NestGridView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,12 +14,12 @@ import java.util.List;
  * Created by lshaobocsu@gmail.com on 2017.7.3.
  */
 
-public class GridViewPageAdapter extends PagerAdapter {
+public class ActionsPagerAdapter extends PagerAdapter {
 
     public List<View> mListViews;
     protected Context mContext;
 
-    GridViewPageAdapter(Context context, List<View> views) {
+    ActionsPagerAdapter(Context context, List<View> views) {
         mContext = context;
         mListViews = new ArrayList<>();
         if(views == null){

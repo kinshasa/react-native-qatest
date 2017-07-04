@@ -118,7 +118,6 @@ public class SectionAdapter extends BaseAdapter {
         } else {
             holder = (Holder) convertView.getTag();
         }
-        L.v("setScrollState:"+isScrolling);
         holder.imageTextItemsLayout.setScrollState(isScrolling);
         holder.imageTextItemsLayout.setData(sectionModels.get(position).catelogyList);
 

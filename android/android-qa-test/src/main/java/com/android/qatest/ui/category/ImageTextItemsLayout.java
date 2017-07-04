@@ -91,7 +91,6 @@ public abstract class ImageTextItemsLayout<T> extends LinearLayout {
 
     public void setScrollState(boolean isSCrolling){
         adapter.isScrolling = isSCrolling;
-        L.v(adapter.isScrolling);
     }
 
     public void setData(ArrayList<T> data) {

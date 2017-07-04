@@ -3,9 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".ui.MainActivity">
 
     <LinearLayout
+        android:id="@+id/homeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -19,17 +21,17 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="#ff0000">
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_gravity="center"
-                android:background="#ff0000"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center" />
 
             <com.viewpagerindicator.CirclePageIndicator
                 android:id="@+id/indicator"
@@ -40,11 +42,6 @@
                 android:padding="10dip" />
         </RelativeLayout>
 
-        <FrameLayout
-            android:id="@+id/appActionsLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#eee"
-            android:minHeight="50dp" />
+
     </LinearLayout>
 </ScrollView>

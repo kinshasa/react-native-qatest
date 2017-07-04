@@ -10,15 +10,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
 import com.android.log.L;
 import com.android.qatest.R;
 import com.android.qatest.ui.category.CateModel;
-import com.android.qatest.ui.category.ImageTextItemsLayout;
 import com.android.qatest.ui.home.model.HomePage;
 import com.android.qatest.ui.widget.BannerLayout;
+import com.android.qatest.ui.widget.NestGridView;
+import com.blankj.utilcode.utils.ConvertUtils;
 import com.viewpagerindicator.CirclePageIndicator;
+import com.zhy.adapter.abslistview.CommonAdapter;
+import com.zhy.adapter.abslistview.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +30,7 @@ import java.util.List;
 public class HomeFragment extends Fragment implements HomeView {
 
     private View mView;
+    private LinearLayout homeLayout;
     private Context mContext;
     private HomePresenter mPresenter;
 
@@ -37,11 +41,10 @@ public class HomeFragment extends Fragment implements HomeView {
 
     //金刚位
     private ViewPager mViewPager;
-    private GridViewPageAdapter mGridViewPageAdapter;
-    private List<View> viewList;
+    private ActionsPagerAdapter mGridViewPageAdapter;
     private CirclePageIndicator mIndicator;
-    private ImageTextItemsLayout mImageTextLayout;
-    private FrameLayout mAppActionsLayout;
+    private List<View> ActionsViewList;
+    private ArrayList<CateModel> mActionsData;
 
     public static HomeFragment instance() {
         HomeFragment view = new HomeFragment();
@@ -60,7 +63,7 @@ public class HomeFragment extends Fragment implements HomeView {
     private void initViews() {
 
         mContext = getContext();
-
+        homeLayout = (LinearLayout) mView.findViewById(R.id.homeLayout);
         //Banner图
         mBannerFrameLayout = (FrameLayout) mView.findViewById(R.id.bannerLayout);
         mBannerLayout = new BannerLayout(mContext) {
@@ -77,36 +80,36 @@ public class HomeFragment extends Fragment implements HomeView {
 
         //金刚位
         mViewPager = (ViewPager) mView.findViewById(R.id.viewPager);
-        mAppActionsLayout = (FrameLayout) mView.findViewById(R.id.appActionsLayout);
-        mImageTextLayout = new ImageTextItemsLayout<CateModel>(mContext) {
-            @Override
-            public String getTextName(CateModel data) {
-                return data.name;
-            }
-
-            @Override
-            public String getImageStr(CateModel data) {
-                return data.icon;
-            }
-        };
-        ArrayList<CateModel> data = CateModel.initArrayData(10);
-        mImageTextLayout.setData(data);
-        mAppActionsLayout.addView(mImageTextLayout, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-
-        viewList = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            FrameLayout view = new FrameLayout(mContext);
-            TextView textView = new TextView(mContext);
-            textView.setText("测试" + i);
-            view.addView(textView);
-            viewList.add(view);
+        mActionsData = CateModel.initArrayData(45);
+        int size = 8;
+        int pageNum = (int) Math.ceil(mActionsData.size() / size);
+        L.v(pageNum);
+        ActionsViewList = new ArrayList<>();
+        for (int i = 0; i < pageNum; i++) {
+            NestGridView mActionsGridView = new NestGridView(mContext);
+            mActionsGridView.setBackgroundColor(0XFFAAAAAA);
+            mActionsGridView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, ConvertUtils.dp2px(400)));
+            mActionsGridView.setNumColumns(4);
+            mActionsGridView.setStretchMode(NestGridView.STRETCH_COLUMN_WIDTH);
+            mActionsGridView.setAdapter(new CommonAdapter<CateModel>(mContext,
+                    R.layout.item_image_text_vertical,
+                    mActionsData.subList(i*size, (i+1)*size<mActionsData.size()?(i+1)*size:mActionsData.size())) {
+                @Override
+                protected void convert(ViewHolder viewHolder, CateModel item, int position) {
+                    viewHolder.setText(R.id.textView, item.name);
+                }
+            });
+            ActionsViewList.add(mActionsGridView);
         }
-        mGridViewPageAdapter = new GridViewPageAdapter(mContext, viewList);
+        mGridViewPageAdapter = new ActionsPagerAdapter(mContext, ActionsViewList);
         mViewPager.setAdapter(mGridViewPageAdapter);
-        mPresenter = new HomePresenterImpl(this);
-        mPresenter.fetch(mContext);
+
         mIndicator = (CirclePageIndicator) mView.findViewById(R.id.indicator);
         mIndicator.setViewPager(mViewPager);
+
+        //网络请求
+        mPresenter = new HomePresenterImpl(this);
+        mPresenter.fetch(mContext);
 
     }
 

@@ -34,5 +34,5 @@ dependencies {
     //EventBus
     compile 'org.greenrobot:eventbus:3.0.0'
     //react native
-    compile 'com.facebook.react:react-native:0.20.+'
+    compile "com.facebook.react:react-native:+"
 }
