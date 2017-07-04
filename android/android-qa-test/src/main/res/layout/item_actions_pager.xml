@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.android.qatest.ui.widget.NestViewPager
+        android:id="@+id/actions_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="#eee"
+        android:minHeight="200dp" />
+
+    <com.viewpagerindicator.CirclePageIndicator
+        android:id="@+id/actions_pager_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_alignBottom="@+id/viewPager"
+        android:background="#33EEEEEE"
+        android:padding="10dp" />
+</RelativeLayout>
