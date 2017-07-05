@@ -80,7 +80,7 @@ public class Response<T> {
         };
         Response<T> res = JSONObject.parseObject(values, type);
         //Assert.assertFalse(res.getData() instanceof T);
-        return res;
+        return (Response<T>)res;
     }
 
 

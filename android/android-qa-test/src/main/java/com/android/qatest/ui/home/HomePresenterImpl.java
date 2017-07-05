@@ -81,7 +81,7 @@ public class HomePresenterImpl implements HomePresenter {
                 || mHomePageResponse.floorLists == null
                 || mHomePageResponse.floorLists.appCenterContentFloor == null
                 || mHomePageResponse.floorLists.appCenterContentFloor.content == null
-                || mHomePageResponse.floorLists.appCenterContentFloor.content.data != null
+                || mHomePageResponse.floorLists.appCenterContentFloor.content.data == null
                 || mHomePageResponse.floorLists.appCenterContentFloor.content.data.size() == 0) {
             return null;
         }

@@ -2,9 +2,11 @@ package com.android.qatest.ui.home;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.android.log.L;
 import com.android.qatest.R;
@@ -28,7 +30,7 @@ public abstract class ActionsGridViewPagerLayout<T> extends LinearLayout {
     private Context mContext;
     private LinearLayout mView;
 
-    public int mActionPageNum = 8;
+    public int mActionPageNum = 10;
 
     public NestViewPager mActionsPager;
     public ActionsPagerAdapter mActionsPagerAdapter;
@@ -83,12 +85,13 @@ public abstract class ActionsGridViewPagerLayout<T> extends LinearLayout {
         mActionsData.clear();
         mActionsData.addAll(data);
         double pageNum = mActionsData.size() / (double) mActionPageNum;
-        L.v(pageNum);
         for (int i = 0; i < pageNum; i++) {
             NestGridView mActionsGridView = new NestGridView(mContext);
             mActionsGridView.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-            mActionsGridView.setNumColumns(4);
+            mActionsGridView.setNumColumns(mActionPageNum/2);
             mActionsGridView.setStretchMode(NestGridView.STRETCH_COLUMN_WIDTH);
+            mActionsGridView.setGravity(Gravity.CENTER_VERTICAL);
+            mActionsGridView.setForegroundGravity(Gravity.CENTER_VERTICAL);
             int start = i * mActionPageNum;
             int end = (i + 1) * mActionPageNum;
             if (end > mActionsData.size()) {
@@ -100,8 +103,9 @@ public abstract class ActionsGridViewPagerLayout<T> extends LinearLayout {
                 @Override
                 protected void convert(ViewHolder viewHolder, T item, int position) {
                     viewHolder.setText(R.id.textView, getName(item));
+                    SimpleDraweeView simpleDraweeView = viewHolder.getView(R.id.imageView);
                     //SimpleDraweeView simpleDraweeView = (SimpleDraweeView)viewHolder.getConvertView().findViewById(R.id.imageView);
-                    //simpleDraweeView.setImageURI(getImageUrl(item));
+                    simpleDraweeView.setImageURI(getImageUrl(item));
                 }
             });
             mActionsViewList.add(mActionsGridView);
