@@ -3,9 +3,8 @@ package com.android.qatest.ui.home;
 import android.content.Context;
 
 import com.android.http.Http;
-import com.android.log.L;
 
-import com.android.qatest.ui.home.model.HomePage;
+import com.android.qatest.ui.home.model.HomePageResponse;
 
 /**
  * Created by lshaobocsu@gmail.com on 2017.4.18.
@@ -23,11 +22,11 @@ public class HomePresenterImpl implements HomePresenter {
     }
 
     @Override
-    public void getHomeFloorList(Context context, final Http.onHttpListener<HomePage> listener) {
+    public void getHomeFloorList(Context context, final Http.onHttpListener<HomePageResponse> listener) {
 
-        interactor.fetchHomeFloorList(context, new Http.onHttpListener<HomePage>() {
+        interactor.fetchHomeFloorList(context, new Http.onHttpListener<HomePageResponse>() {
             @Override
-            public void onComplete(HomePage values) {
+            public void onComplete(HomePageResponse values) {
                 //取到数据模型后，根据当前业务环境，对数据做一定处理后返回
                 listener.onComplete(values);
             }

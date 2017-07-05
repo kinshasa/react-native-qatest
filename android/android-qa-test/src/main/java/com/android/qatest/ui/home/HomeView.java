@@ -1,7 +1,6 @@
 package com.android.qatest.ui.home;
 
-import com.android.qatest.ui.home.model.FloorList;
-import com.android.qatest.ui.home.model.HomePage;
+import com.android.qatest.ui.home.model.HomePageResponse;
 
 /**
  * Created by lshaobocsu@gmail.com on 2017.4.17.
@@ -17,6 +16,6 @@ public interface HomeView {
 
     void onPullUpToRefresh();
 
-    void getHomeData(HomePage homePage);
+    void getHomeData(HomePageResponse homePage);
 
 }

@@ -13,12 +13,13 @@ import com.android.http.Http;
 import com.android.log.L;
 import com.android.qatest.R;
 import com.android.qatest.ui.category.CateModel;
-import com.android.qatest.ui.category.SectionModel;
-import com.android.qatest.ui.home.model.HomePage;
+import com.android.qatest.ui.home.model.HomePageResponse;
 import com.android.qatest.ui.widget.BannerLayout;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 
 public class HomeFragment extends Fragment implements HomeView {
@@ -109,6 +110,13 @@ public class HomeFragment extends Fragment implements HomeView {
      * 数据处理
      */
     private void initData(){
+
+        List data = new ArrayList<>();
+        data.add(1);
+        data.add((float)2);
+        data.add(new ArrayList<>());
+        data.add(new HashMap<String,String>());
+
         //初始化Banner数据
         mImgList.add("http://img.ds.cn/none.png");
         mImgList.add("http://img.ds.cn/none.png");
@@ -121,9 +129,9 @@ public class HomeFragment extends Fragment implements HomeView {
 
         //网络请求
         mPresenter = new HomePresenterImpl(this);
-        mPresenter.getHomeFloorList(mContext, new Http.onHttpListener<HomePage>() {
+        mPresenter.getHomeFloorList(mContext, new Http.onHttpListener<HomePageResponse>() {
             @Override
-            public void onComplete(HomePage values) {
+            public void onComplete(HomePageResponse values) {
 
             }
 
@@ -155,7 +163,7 @@ public class HomeFragment extends Fragment implements HomeView {
     }
 
     @Override
-    public void getHomeData(HomePage homePage) {
+    public void getHomeData(HomePageResponse homePage) {
         List<View> pageList = new ArrayList<>();
         /*for(int i=0;i<homePage.floorList.bannerContentFloor.content.size();i++){
             String img = "https://m.360buyimg.com/mobilecms/s720x351_jfs/t4936/90/1261251670/94339/a0a0d32b/58eee702N5669681d.jpg!q70.jpg.webp";

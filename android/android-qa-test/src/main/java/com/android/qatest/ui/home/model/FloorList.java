@@ -13,10 +13,13 @@ public class FloorList {
     //京东首页Banner图片轮播图
     public Floor<BannerContent> bannerContentFloor;
 
+    //京东首页Actions功能区
     public Floor<AppContent> appContentFloor;
 
+    //京东首页AppCenter
     public Floor<AnnouncementContent> announcementContentFloor;
 
+    //京东首页Banner图片轮播图
     public Floor<HybridContent> hybridContentFloor;
 
 

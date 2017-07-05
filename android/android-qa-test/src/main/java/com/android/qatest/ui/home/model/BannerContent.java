@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 /**
  * Created by lshaobocsu@gmail.com on 2017.4.18.
+ * 图片轮播
  */
 
 public class BannerContent extends Content{
