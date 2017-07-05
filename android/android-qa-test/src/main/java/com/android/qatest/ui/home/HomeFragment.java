@@ -13,13 +13,12 @@ import com.android.http.Http;
 import com.android.log.L;
 import com.android.qatest.R;
 import com.android.qatest.ui.category.CateModel;
+import com.android.qatest.ui.home.model.AppCenterContent;
+import com.android.qatest.ui.home.model.Floor;
 import com.android.qatest.ui.home.model.HomePageResponse;
 import com.android.qatest.ui.widget.BannerLayout;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
 
 
 public class HomeFragment extends Fragment implements HomeView {
@@ -28,14 +27,14 @@ public class HomeFragment extends Fragment implements HomeView {
 
     private View mView;
     private LinearLayout mHomeLayout;
-
+    private HomePageResponse mHomePageResponse;
 
     //Banner图
     private BannerLayout mBannerLayout;
     private ArrayList<String> mImgList;
 
     //金刚位
-    private ArrayList<CateModel> mActionsData;
+    private Floor<AppCenterContent> mAppCenterContentFloor;
     private ActionsGridViewPagerLayout mActionsGridViewPagerLayout;
 
     //咨询头条
@@ -76,25 +75,27 @@ public class HomeFragment extends Fragment implements HomeView {
         mBannerLayout = new BannerLayout(mContext) {
             @Override
             public void OnBannerLayoutClick(int pos) {
+
             }
         };
         //添加Banner到视图中
         mHomeLayout.addView(mBannerLayout);
 
         //金刚位
-        mActionsGridViewPagerLayout = new ActionsGridViewPagerLayout<CateModel>(mContext) {
+        mActionsGridViewPagerLayout = new ActionsGridViewPagerLayout<AppCenterContent.Data>(mContext) {
+
             @Override
-            public String getName(CateModel o) {
+            public String getName(AppCenterContent.Data o) {
                 return o.name;
             }
 
             @Override
-            public String getImageUrl(CateModel o) {
+            public String getImageUrl(AppCenterContent.Data o) {
                 return o.icon;
             }
 
             @Override
-            public String onClick(CateModel o) {
+            public String onClick(AppCenterContent.Data o) {
                 return null;
             }
         };
@@ -102,37 +103,29 @@ public class HomeFragment extends Fragment implements HomeView {
         //添加金刚位到视图中
         mHomeLayout.addView(mActionsGridViewPagerLayout);
 
-
-
     }
 
     /**
      * 数据处理
      */
-    private void initData(){
-
-        List data = new ArrayList<>();
-        data.add(1);
-        data.add((float)2);
-        data.add(new ArrayList<>());
-        data.add(new HashMap<String,String>());
-
-        //初始化Banner数据
-        mImgList.add("http://img.ds.cn/none.png");
-        mImgList.add("http://img.ds.cn/none.png");
-        mImgList.add("http://img.ds.cn/none.png");
-        mBannerLayout.addData(mImgList);
+    private void initData() {
 
         //初始化Actions数据
-        mActionsData = CateModel.initArrayData(12);
-        mActionsGridViewPagerLayout.initData(mActionsData);
 
         //网络请求
         mPresenter = new HomePresenterImpl(this);
         mPresenter.getHomeFloorList(mContext, new Http.onHttpListener<HomePageResponse>() {
             @Override
             public void onComplete(HomePageResponse values) {
+                mHomePageResponse = values;
 
+                //初始化Banner数据
+                mBannerLayout.addData(mPresenter.getBannerImageList());
+                //初始化AppCenter数据
+                ArrayList<AppCenterContent.Data> dataList = mPresenter.getAppContent();
+                if (dataList != null) {
+                    mActionsGridViewPagerLayout.initData(dataList);
+                }
             }
 
             @Override
@@ -141,6 +134,7 @@ public class HomeFragment extends Fragment implements HomeView {
             }
         });
     }
+
 
     @Override
     public void showLoading() {
@@ -164,13 +158,6 @@ public class HomeFragment extends Fragment implements HomeView {
 
     @Override
     public void getHomeData(HomePageResponse homePage) {
-        List<View> pageList = new ArrayList<>();
-        /*for(int i=0;i<homePage.floorList.bannerContentFloor.content.size();i++){
-            String img = "https://m.360buyimg.com/mobilecms/s720x351_jfs/t4936/90/1261251670/94339/a0a0d32b/58eee702N5669681d.jpg!q70.jpg.webp";
-            homePage.floorList.bannerContentFloor.content.get(i);
-            pageList.add(createPageView(img));
-
-        }*/
     }
 
     @Override

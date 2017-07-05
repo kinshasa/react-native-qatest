@@ -1,18 +1,21 @@
 package com.android.qatest.ui.widget;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.android.qatest.R;
-import com.android.qatest.ui.home.FrescoImageLoader;
 import com.blankj.utilcode.utils.ConvertUtils;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.listener.OnBannerListener;
+import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +71,7 @@ public abstract class BannerLayout extends FrameLayout {
         }
         mImageList.addAll(data);
         mBanner.setImages(mImageList)
-                .isAutoPlay(false)
+                .isAutoPlay(true)
                 .setIndicatorGravity(BannerConfig.CENTER)
                 .setImageLoader(new FrescoImageLoader())
                 .setOnBannerListener(new OnBannerListener() {
@@ -92,6 +95,20 @@ public abstract class BannerLayout extends FrameLayout {
     public void stopAutoPlay() {
         if (mBanner != null) {
             mBanner.stopAutoPlay();
+        }
+    }
+    public class FrescoImageLoader extends ImageLoader {
+
+        @Override
+        public void displayImage(Context context, Object path, ImageView imageView) {
+            Uri uri = Uri.parse((String) path);
+            imageView.setImageURI(uri);
+        }
+
+        @Override
+        public ImageView createImageView(Context context) {
+            SimpleDraweeView simpleDraweeView = new SimpleDraweeView(context);
+            return simpleDraweeView;
         }
     }
 

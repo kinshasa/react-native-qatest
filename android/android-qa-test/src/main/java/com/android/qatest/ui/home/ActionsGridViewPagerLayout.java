@@ -11,6 +11,7 @@ import com.android.qatest.R;
 import com.android.qatest.ui.widget.NestGridView;
 import com.android.qatest.ui.widget.NestViewPager;
 import com.blankj.utilcode.utils.ConvertUtils;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.viewpagerindicator.CirclePageIndicator;
 import com.zhy.adapter.abslistview.CommonAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;
@@ -99,6 +100,8 @@ public abstract class ActionsGridViewPagerLayout<T> extends LinearLayout {
                 @Override
                 protected void convert(ViewHolder viewHolder, T item, int position) {
                     viewHolder.setText(R.id.textView, getName(item));
+                    //SimpleDraweeView simpleDraweeView = (SimpleDraweeView)viewHolder.getConvertView().findViewById(R.id.imageView);
+                    //simpleDraweeView.setImageURI(getImageUrl(item));
                 }
             });
             mActionsViewList.add(mActionsGridView);
@@ -109,6 +112,12 @@ public abstract class ActionsGridViewPagerLayout<T> extends LinearLayout {
         mActionsPager.setAdapter(mActionsPagerAdapter);
         //绑定ViewPager到Indicator上
         mActionPagerIndicator.setViewPager(mActionsPager);
+        //如果没有App数据，则隐藏小圆点
+        if(mActionsViewList.size() == 0){
+            mActionPagerIndicator.setVisibility(View.GONE);
+        }else{
+            mActionPagerIndicator.setVisibility(View.VISIBLE);
+        }
     }
 
     public abstract String getName(T o);

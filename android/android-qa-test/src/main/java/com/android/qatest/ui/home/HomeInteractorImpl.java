@@ -35,8 +35,11 @@ public class HomeInteractorImpl implements HomeInteractor{
 
             @Override
             public void onComplete(String values) {
-                //HomePageResponse res = Response.parseObject(values, new TypeReference<HomePageResponse>() {});
-                HomePageResponse res = new HomePageResponse(values);
+                L.v();
+                HomePageResponse res = Response.parseObject(values, new TypeReference<HomePageResponse>() {});
+                res.parseFloorArr();
+                L.v();
+                //HomePageResponse res = new HomePageResponse(values);
 
                 //可以统一做错误代码处理
                 //TODO 后期可以通过@linker{HttpResponseHelper}在Http中统一处理

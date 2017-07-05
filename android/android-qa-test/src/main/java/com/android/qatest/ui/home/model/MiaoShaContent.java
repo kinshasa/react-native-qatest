@@ -8,19 +8,19 @@ import java.util.Objects;
  * Created by lshaobocsu@gmail.com on 2017.4.18.
  */
 
-public class HybridContent extends Content {
+public class MiaoShaContent extends Content {
 
-    ArrayList<SubFloor> subFloors;
+    ArrayList<Data> data;
+    public String tpl;
 
     public String subFloorNum;
 
-    HybridContent(String str) {
-        super(str);
+    public MiaoShaContent() {
+
     }
 
-    public class SubFloor {
-        ArrayList<Data> data;
-        public String tpl;
+    public MiaoShaContent(String str) {
+        super(str);
     }
 
     public class Data {

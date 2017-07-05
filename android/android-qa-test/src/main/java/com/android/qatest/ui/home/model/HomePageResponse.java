@@ -3,14 +3,12 @@ package com.android.qatest.ui.home.model;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.android.qatest.model.Response;
-import com.facebook.react.bridge.SupportsWebWorkers;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by lshaobocsu@gmail.com on 2017.4.18.
@@ -39,7 +37,8 @@ public class HomePageResponse {
     public int tipsShowType;
 
     public FloorList floorLists;
-    public ArrayList<Floor> floorList;
+    //public Map<Integer, Object> floorListss;
+    public ArrayList<String> floorList;//ArrayList<JSONObject> JSONObject.getString("type");
 
     public int lazy;
     public String toBottomBtnImg;
@@ -74,17 +73,21 @@ public class HomePageResponse {
             return;
         }
 
-        for (int i = 0; i < floorList.size(); i++) {
-            switch (floorList.get(i).type) {
-                case "banner":
-                    floorLists.bannerContentFloor = Response.parseObject(floorList.get(i).toString(),
-                            new TypeReference<Floor<BannerContent>>() {
-                            });
-                    /*(Floor<BannerContent>)floorList.get(i) = Response.parseObject(floorList.get(i).toString(),
-                            new TypeReference<Floor<BannerContent>>() {
-                            });*/
-                    break;
-            }
+        try {
+            //0 京东首页-Banner banner
+            floorLists.bannerContentFloor = Response.parseObject(floorList.get(0), new TypeReference<Floor<BannerContent>>() {
+            });
+            //1 京东首页-功能区 appcenter
+            floorLists.appCenterContentFloor = Response.parseObject(floorList.get(1), new TypeReference<FloorObjContent<AppCenterContent>>() {
+            });
+            //2 京东首页-京东快报 announcement
+            floorLists.announcementContentFloor = Response.parseObject(floorList.get(2), new TypeReference<Floor<AnnouncementContent>>() {
+            });
+            //3 京东首页-京东秒杀 hybrid
+            floorLists.miaoShaContentFloor = Response.parseObject(floorList.get(3), new TypeReference<FloorMiaoshaContent<MiaoShaContent>>() {
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

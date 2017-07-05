@@ -34,7 +34,7 @@ public class Config {
         };
 
         //首页数据
-        public static final String HomeFloorList = "http://api.m.jd.com/client.action?functionId=welcomeHome&clientVersion=6.0.0&build=45473&client=android&d_brand=Xiaomi&d_model=Redmi3S&osVersion=6.0.1&screen=1280*720&partner=xiaomi001&uuid=862212031900200-742344d8eba4&area=19_1601_3633_0&networkType=wifi&st=1492417616055&sign=b295ee284c614e85ae7e62ec22116b34&sv=121&body=%7B%22geo%22%3A%7B%22lng%22%3A%22113.241462%22%2C%22lat%22%3A%2223.100102%22%7D%2C%22poz%22%3A%7B%22time%22%3A1492417605693%2C%22city%22%3A%22%E5%B9%BF%E4%B8%9C%3A%E5%B9%BF%E5%B7%9E%22%7D%2C%22identity%22%3A%22862212031900200-742344d8eba4%22%2C%22allLastTime%22%3A%220%22%2C%22cycFirstTimeStamp%22%3A%221492417605689%22%2C%22cycNum%22%3A1%7D&";
+        public static final String HomeFloorList = "http://api.m.jd.com/client.action?functionId=welcomeHome&area=19_1601_3633_0&body=%7B%22identity%22%3A%227394f89a346949e58908ae7b0f63a4dbba4b6e3e%22%2C%22cycNum%22%3A2%2C%22poz%22%3A%7B%22city%22%3A%22%E5%B9%BF%E4%B8%9C%3A%E5%B9%BF%E5%B7%9E%22%2C%22time%22%3A1495190247674%7D%2C%22cycFirstTimeStamp%22%3A%221499243226272%22%2C%22geo%22%3A%7B%22lng%22%3A%220.000000%22%2C%22lat%22%3A%220.000000%22%7D%7D&build=139045&client=apple&clientVersion=6.1.0&d_brand=apple&d_model=iPhone7%2C2&isBackground=N&networkType=wifi&networklibtype=JDNetworkBaseAF&openudid=7394f89a346949e58908ae7b0f63a4dbba4b6e3e&osVersion=10.3.2&partner=apple&screen=750%2A1334&sign=c042303e5e7ef35405e923010eb6921c&st=1499243372901&sv=102&uuid=hjudwgohxzVu96krv/T6Hg%3D%3D";
 
 
     }

@@ -10,24 +10,34 @@ import org.json.JSONObject;
 
 public class FloorList {
 
-    //京东首页Banner图片轮播图
+    //0 京东首页-Banner banner
     public Floor<BannerContent> bannerContentFloor;
 
-    //京东首页Actions功能区
-    public Floor<AppContent> appContentFloor;
+    //1 京东首页-功能区 appcenter
+    public FloorObjContent<AppCenterContent> appCenterContentFloor;
 
-    //京东首页AppCenter
+    //2 京东首页-京东快报 announcement
     public Floor<AnnouncementContent> announcementContentFloor;
 
-    //京东首页Banner图片轮播图
-    public Floor<HybridContent> hybridContentFloor;
+    //3 京东首页-京东秒杀 hybrid
+    //https://m.360buyimg.com/mobilecms/jfs/t3841/79/4441552211/15788/da4b5eb5/58eddf3aN194e2a22.png
+    public FloorMiaoshaContent<MiaoShaContent> miaoShaContentFloor;
+
+    //4 京东首页-促销楼层 hybrid
+
+    //5 京东首页-战略通栏(广告栏) hybrid
+
+    //6 京东首页-爱生活-新版 hybrid
+    //7 京东首页-6.0二楼通栏 hybrid
+    //8~17 京东首页
+    //18 京东首页-为你推荐(标题)
 
 
-    FloorList(){
+    public FloorList(){
 
     }
 
-    FloorList(String str){
+    public FloorList(String str){
         try {
             JSONArray jsonArray = new JSONArray(str);
             setBannerContentFloor(jsonArray.getString(0));
@@ -59,7 +69,7 @@ public class FloorList {
     }
 
     public void setAppContentFloor(String str) {
-        this.appContentFloor = new Floor<>(str);
+        this.appCenterContentFloor = new FloorObjContent<>(str);
         try {
             String appStr = new JSONObject(str).getString("content");
             //this.appContentFloor.content = new AppContent(appStr);

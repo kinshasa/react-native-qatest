@@ -34,8 +34,9 @@ public class Floor<T extends Content> {
 
     public Jump moreJump;
 
+    public Floor(){}
 
-    Floor(String str) {
+    public Floor(String str) {
         try {
             JSONObject jsonObject = new JSONObject(str);
             JSONArray jsonArray1 = new JSONObject(str).getJSONArray("content");

@@ -14,17 +14,21 @@ import java.util.ArrayList;
  */
 
 public class BannerContent extends Content{
-    private String activityId;
-    private String sortno;
-    private String abt;
-    private String title;
-    private String wareDisplayType;
-    private String horizontalImag;
-    private String exposalUrl;
-    private String clickUrl;
-    private Jump jump;
+    public String activityId;
+    public String sortno;
+    public String abt;
+    public String title;
+    public String wareDisplayType;
+    public String horizontalImag;
+    public String exposalUrl;
+    public String clickUrl;
+    public Jump jump;
 
-    BannerContent(String str){
+    public BannerContent(){
+
+    }
+
+    public BannerContent(String str){
         super(str);
         try {
             JSONObject jsonObject = new JSONObject(str);

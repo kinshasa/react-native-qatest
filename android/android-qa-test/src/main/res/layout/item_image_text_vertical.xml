@@ -2,25 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="100dp"
     android:layout_height="100dp"
-    android:padding="10dp"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="10dp">
 
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/imageView"
+        fresco:placeholderImage="@mipmap/ic_launcher"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_gravity="center"
-        android:src="@mipmap/ic_launcher" />
+        android:layout_gravity="center" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:maxLines="1"
         android:ellipsize="end"
-        android:text="测试啊啊啊啊啊啊啊"/>
+        android:maxLines="1"
+        android:text="测试啊啊啊啊啊啊啊" />
 
 </LinearLayout>

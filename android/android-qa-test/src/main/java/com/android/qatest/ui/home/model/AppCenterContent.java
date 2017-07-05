@@ -11,10 +11,10 @@ import java.util.ArrayList;
  * Created by lshaobocsu@gmail.com on 2017.4.18.
  */
 
-public class AppContent extends Content {
+public class AppCenterContent extends Content {
 
-    Position poz;
-    ArrayList<Data> data;
+    public Position poz;
+    public ArrayList<Data> data;
 
     public String fontColor;
     public Long time;
@@ -24,12 +24,15 @@ public class AppContent extends Content {
     public String ynSpace;
     public int isReplace;
 
-    AppContent(String str) {
-        super(str);
+    public AppCenterContent() {
+
+    }
+
+    public AppCenterContent(String str) {
         try {
             JSONObject jsonObject = new JSONObject(str);
             JSONArray jsonArray = jsonObject.getJSONArray("data");
-            for(int i=0;i<jsonArray.length();i++){
+            for (int i = 0; i < jsonArray.length(); i++) {
                 Data data = new Data(jsonArray.getString(i));
                 this.data.add(data);
             }
@@ -59,7 +62,11 @@ public class AppContent extends Content {
 
         public Jump jump;
 
-        Data(String str){
+        public Data() {
+
+        }
+
+        public Data(String str) {
             try {
                 JSONObject jsonObject = new JSONObject(str);
                 this.id = jsonObject.getInt("id");

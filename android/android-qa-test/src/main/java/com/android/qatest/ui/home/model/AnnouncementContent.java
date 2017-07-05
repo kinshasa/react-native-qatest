@@ -13,9 +13,8 @@ public class AnnouncementContent extends Content {
 
     public String img;
     public int rotate;
-
-    AnnouncementContent(String str) {
-        super(str);
+    public AnnouncementContent(){}
+    public AnnouncementContent(String str) {
     }
 
     public class Announcement {

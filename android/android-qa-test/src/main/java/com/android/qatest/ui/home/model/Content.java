@@ -6,7 +6,8 @@ package com.android.qatest.ui.home.model;
 
 public class Content {
 
-    Content(String str){
+    public Content(){}
+    public Content(String str){
 
     }
 }
