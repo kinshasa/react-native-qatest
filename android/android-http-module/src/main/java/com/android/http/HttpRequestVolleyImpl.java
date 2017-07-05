@@ -54,13 +54,15 @@ public class HttpRequestVolleyImpl extends HttpRequestImpl {
                     @Override
                     public void onResponse(String response) {
                         L.v(response);
-
-                        try {
-                            listener.onComplete(response);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            listener.onException(e);
+                        if (listener != null) {
+                            try {
+                                listener.onComplete(response);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                listener.onException(e);
+                            }
                         }
+
                     }
                 },
 
@@ -69,7 +71,9 @@ public class HttpRequestVolleyImpl extends HttpRequestImpl {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         L.v(error);
-                        listener.onException(error.getMessage());
+                        if (listener != null) {
+                            listener.onException(error.getMessage());
+                        }
                     }
                 });
 

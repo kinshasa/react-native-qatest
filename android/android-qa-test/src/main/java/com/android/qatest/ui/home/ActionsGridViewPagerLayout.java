@@ -27,6 +27,8 @@ public abstract class ActionsGridViewPagerLayout<T> extends LinearLayout {
     private Context mContext;
     private LinearLayout mView;
 
+    public int mActionPageNum = 8;
+
     public NestViewPager mActionsPager;
     public ActionsPagerAdapter mActionsPagerAdapter;
     public CirclePageIndicator mActionPagerIndicator;
@@ -56,8 +58,11 @@ public abstract class ActionsGridViewPagerLayout<T> extends LinearLayout {
         //通过new初始化组件
         mActionsPager = new NestViewPager(mContext);
         mActionsPager.setId(R.id.actions_pager);
+        mActionsPager.setBackgroundColor(0XFFEEEEEE);
         mActionPagerIndicator = new CirclePageIndicator(mContext);
-        mActionPagerIndicator.setBackgroundColor(0X33EEEEEE);
+        mActionPagerIndicator.setBackgroundColor(0XFFEEEEEE);
+        mActionPagerIndicator.setPageColor(0xFF999999);
+        mActionPagerIndicator.setFillColor(0xFF000000);
         mActionPagerIndicator.setPadding(ConvertUtils.dp2px(10), ConvertUtils.dp2px(10), ConvertUtils.dp2px(10), ConvertUtils.dp2px(10));
 
         mActionsViewList = new ArrayList<>();
@@ -76,18 +81,21 @@ public abstract class ActionsGridViewPagerLayout<T> extends LinearLayout {
         mActionsViewList.clear();
         mActionsData.clear();
         mActionsData.addAll(data);
-        int size = 8;
-        double pageNum = mActionsData.size() / (double) size;
+        double pageNum = mActionsData.size() / (double) mActionPageNum;
         L.v(pageNum);
         for (int i = 0; i < pageNum; i++) {
             NestGridView mActionsGridView = new NestGridView(mContext);
-            mActionsGridView.setBackgroundColor(0XFF990AAA);
             mActionsGridView.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
             mActionsGridView.setNumColumns(4);
             mActionsGridView.setStretchMode(NestGridView.STRETCH_COLUMN_WIDTH);
+            int start = i * mActionPageNum;
+            int end = (i + 1) * mActionPageNum;
+            if (end > mActionsData.size()) {
+                end = mActionsData.size();
+            }
             mActionsGridView.setAdapter(new CommonAdapter<T>(mContext,
                     R.layout.item_image_text_vertical,
-                    mActionsData.subList(i * size, (i + 1) * size < mActionsData.size() ? (i + 1) * size : mActionsData.size())) {
+                    mActionsData.subList(start, end)) {
                 @Override
                 protected void convert(ViewHolder viewHolder, T item, int position) {
                     viewHolder.setText(R.id.textView, getName(item));

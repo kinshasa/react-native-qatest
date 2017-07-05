@@ -2,9 +2,13 @@ package com.android.qatest.ui.home;
 
 import android.content.Context;
 
+import com.alibaba.fastjson.TypeReference;
 import com.android.http.Http;
 import com.android.http.HttpBase;
-
+import com.android.http.HttpResponseHelper;
+import com.android.log.L;
+import com.android.qatest.Config;
+import com.android.qatest.model.Response;
 import com.android.qatest.ui.home.model.HomePage;
 
 /**
@@ -13,26 +17,56 @@ import com.android.qatest.ui.home.model.HomePage;
 
 public class HomeInteractorImpl implements HomeInteractor{
 
-    String url = "http://api.m.jd.com/client.action?functionId=welcomeHome&clientVersion=6.0.0&build=45473&client=android&d_brand=Xiaomi&d_model=Redmi3S&osVersion=6.0.1&screen=1280*720&partner=xiaomi001&uuid=862212031900200-742344d8eba4&area=19_1601_3633_0&networkType=wifi&st=1492417616055&sign=b295ee284c614e85ae7e62ec22116b34&sv=121&body=%7B%22geo%22%3A%7B%22lng%22%3A%22113.241462%22%2C%22lat%22%3A%2223.100102%22%7D%2C%22poz%22%3A%7B%22time%22%3A1492417605693%2C%22city%22%3A%22%E5%B9%BF%E4%B8%9C%3A%E5%B9%BF%E5%B7%9E%22%7D%2C%22identity%22%3A%22862212031900200-742344d8eba4%22%2C%22allLastTime%22%3A%220%22%2C%22cycFirstTimeStamp%22%3A%221492417605689%22%2C%22cycNum%22%3A1%7D&";
-    private HomePage homePage;
-
     HomeInteractorImpl(){
     }
 
     @Override
-    public void request(Context context, final onFetchListener listener) {
-        HttpBase.getDefaultInstance().request(context, url, null, new Http.onHttpListener<String>() {
+    public void fetchHomeFloorList(final Context context, final Http.onHttpListener<HomePage> listener) {
+
+
+        //如果有缓存数据，取缓存
+        if(isCachedData()){
+            listener.onComplete(getCacheData());
+            return;
+        }
+
+        //如果没有缓存数据，则需要网络请求
+        HttpBase.getDefaultInstance().request(context, Config.CallAPIs.HomeFloorList, null, new Http.onHttpListener<String>() {
+
             @Override
             public void onComplete(String values) {
-                homePage = new HomePage(values);
-                listener.onSuccess(homePage);
+                Response<HomePage> res = Response.parseObject(values, new TypeReference<Response<HomePage>>() {});
+
+                //可以统一做错误代码处理
+                //TODO 后期可以通过@linker{HttpResponseHelper}在Http中统一处理
+                if(HttpResponseHelper.isEspecialCode(context,res.getCode())){
+                    //如果是特殊错误信息，统一处理后不需要返回
+                    return;
+                }
+                if (Response.RES_CODE_SUCCESS.equals(res.getCode())) {
+                    L.v("请求成功");
+                    //如果成功，保存起来
+                    listener.onComplete(res.getData());
+                } else {
+                    onException(res);
+                }
+
             }
 
             @Override
             public void onException(Object exceptionInfo) {
-                listener.onFail(exceptionInfo);
+                listener.onException(exceptionInfo);
             }
         });
+    }
+
+    public boolean isCachedData(){
+        return false;
+    }
+
+    public HomePage getCacheData(){
+        HomePage data = new HomePage();
+        return  data;
     }
 
 }

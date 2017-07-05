@@ -2,6 +2,7 @@ package com.android.qatest.ui.home;
 
 import android.content.Context;
 
+import com.android.http.Http;
 import com.android.qatest.ui.home.model.HomePage;
 
 /**
@@ -10,12 +11,5 @@ import com.android.qatest.ui.home.model.HomePage;
 
 public interface HomeInteractor {
 
-    interface onFetchListener {
-
-        void onSuccess(HomePage homePage);
-
-        void onFail(Object exceptionInfo);
-    }
-
-    void request(Context context, onFetchListener listener);
+    void fetchHomeFloorList(Context context, Http.onHttpListener<HomePage> listener);
 }

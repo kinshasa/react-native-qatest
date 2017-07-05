@@ -4,19 +4,18 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import com.android.http.Http;
 import com.android.log.L;
 import com.android.qatest.R;
 import com.android.qatest.ui.category.CateModel;
+import com.android.qatest.ui.category.SectionModel;
 import com.android.qatest.ui.home.model.HomePage;
 import com.android.qatest.ui.widget.BannerLayout;
-import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,19 +23,29 @@ import java.util.List;
 
 public class HomeFragment extends Fragment implements HomeView {
 
-    private View mView;
-    private LinearLayout homeLayout;
     private Context mContext;
-    private HomePresenter mPresenter;
+
+    private View mView;
+    private LinearLayout mHomeLayout;
+
 
     //Banner图
-    private FrameLayout mBannerFrameLayout;
     private BannerLayout mBannerLayout;
     private ArrayList<String> mImgList;
 
     //金刚位
     private ArrayList<CateModel> mActionsData;
     private ActionsGridViewPagerLayout mActionsGridViewPagerLayout;
+
+    //咨询头条
+
+    //京东秒杀
+
+    //发现好货
+
+    //爱生活 品质时尚 特色推荐 逛商场 东家小店
+
+    private HomePresenter mPresenter;
 
     public static HomeFragment instance() {
         HomeFragment view = new HomeFragment();
@@ -49,30 +58,29 @@ public class HomeFragment extends Fragment implements HomeView {
         L.v();
         mView = inflater.inflate(R.layout.fragment_home, null);
         initViews();
+        initData();
         return mView;
     }
 
+    /**
+     * 视图处理
+     */
     private void initViews() {
 
         mContext = getContext();
-        homeLayout = (LinearLayout) mView.findViewById(R.id.homeLayout);
+        mHomeLayout = (LinearLayout) mView.findViewById(R.id.homeLayout);
 
         //Banner图
-        mBannerFrameLayout = (FrameLayout) mView.findViewById(R.id.bannerLayout);
+        mImgList = new ArrayList<>();
         mBannerLayout = new BannerLayout(mContext) {
             @Override
             public void OnBannerLayoutClick(int pos) {
             }
         };
-        mBannerFrameLayout.addView(mBannerLayout);
-        mImgList = new ArrayList<>();
-        mImgList.add("http://img.ds.cn/none.png");
-        mImgList.add("http://img.ds.cn/none.png");
-        mImgList.add("http://img.ds.cn/none.png");
-        mBannerLayout.addData(mImgList);
+        //添加Banner到视图中
+        mHomeLayout.addView(mBannerLayout);
 
         //金刚位
-        mActionsData = CateModel.initArrayData(12);
         mActionsGridViewPagerLayout = new ActionsGridViewPagerLayout<CateModel>(mContext) {
             @Override
             public String getName(CateModel o) {
@@ -89,15 +97,41 @@ public class HomeFragment extends Fragment implements HomeView {
                 return null;
             }
         };
-        mActionsGridViewPagerLayout.initData(mActionsData);
-        //添加金刚位到视图中
-        homeLayout.addView(mActionsGridViewPagerLayout);
 
+        //添加金刚位到视图中
+        mHomeLayout.addView(mActionsGridViewPagerLayout);
+
+
+
+    }
+
+    /**
+     * 数据处理
+     */
+    private void initData(){
+        //初始化Banner数据
+        mImgList.add("http://img.ds.cn/none.png");
+        mImgList.add("http://img.ds.cn/none.png");
+        mImgList.add("http://img.ds.cn/none.png");
+        mBannerLayout.addData(mImgList);
+
+        //初始化Actions数据
+        mActionsData = CateModel.initArrayData(12);
+        mActionsGridViewPagerLayout.initData(mActionsData);
 
         //网络请求
         mPresenter = new HomePresenterImpl(this);
-        mPresenter.fetch(mContext);
+        mPresenter.getHomeFloorList(mContext, new Http.onHttpListener<HomePage>() {
+            @Override
+            public void onComplete(HomePage values) {
 
+            }
+
+            @Override
+            public void onException(Object exceptionInfo) {
+
+            }
+        });
     }
 
     @Override

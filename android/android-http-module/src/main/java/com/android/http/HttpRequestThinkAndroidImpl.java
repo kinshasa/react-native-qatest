@@ -47,7 +47,7 @@ public class HttpRequestThinkAndroidImpl extends HttpRequestImpl {
     @Override
     public void get(final Context context, final String str, final HashMap<String, String> params, final onHttpListener listener) {
 
-        String url = new StrUtil().encodeUrl(str,params).toString();
+        String url = new StrUtil().encodeUrl(str, params).toString();
 
         StringRequest stringRequest = new StringRequest(url,
 
@@ -57,12 +57,15 @@ public class HttpRequestThinkAndroidImpl extends HttpRequestImpl {
                     public void onResponse(String response) {
                         L.v(response);
 
-                        try {
-                            listener.onComplete(response);
-                        }catch (Exception e){
-                            e.printStackTrace();
-                            listener.onException(e);
+                        if (listener != null) {
+                            try {
+                                listener.onComplete(response);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                listener.onException(e);
+                            }
                         }
+
                     }
                 },
 
@@ -71,7 +74,8 @@ public class HttpRequestThinkAndroidImpl extends HttpRequestImpl {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         L.v(error);
-                        listener.onException(error.getMessage());
+                        if (listener != null)
+                            listener.onException(error.getMessage());
                     }
                 });
 
@@ -83,7 +87,7 @@ public class HttpRequestThinkAndroidImpl extends HttpRequestImpl {
     @Override
     public void post(final Context context, String str, final HashMap<String, String> params, final onHttpListener listener) {
 
-        String temp = new StrUtil().encodeUrl(str,params).toString();
+        String temp = new StrUtil().encodeUrl(str, params).toString();
 
         StringRequest stringRequest = new StringRequest(com.android.volley.Request.Method.POST, str,
 
@@ -94,7 +98,7 @@ public class HttpRequestThinkAndroidImpl extends HttpRequestImpl {
                         L.v(response);
                         try {
                             listener.onComplete(response);
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                             listener.onException(response);
                         }
@@ -108,8 +112,7 @@ public class HttpRequestThinkAndroidImpl extends HttpRequestImpl {
                         L.v(error.getMessage());
                         listener.onException(error.getMessage());
                     }
-                })
-        {
+                }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 return params;

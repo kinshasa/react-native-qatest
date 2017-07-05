@@ -1,10 +1,7 @@
 package com.android.qatest.ui.home.model;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 /**
  * Created by lshaobocsu@gmail.com on 2017.4.18.

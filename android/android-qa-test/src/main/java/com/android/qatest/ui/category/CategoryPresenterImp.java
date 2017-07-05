@@ -31,12 +31,11 @@ public class CategoryPresenterImp implements CategoryPresenter {
 
     @Override
     public void getSectionDataById(Context context, int cateId, final Http.onHttpListener<ArrayList<SectionModel>> listener) {
-        categoryInteractor.fetchCateDataById(context, cateId, new Http.onHttpListener<String>() {
+        categoryInteractor.fetchCateDataById(context, cateId, new Http.onHttpListener<ArrayList<SectionModel>>() {
+
             @Override
-            public void onComplete(String values) {
-                L.v();
-                ArrayList<SectionModel> res = CategoryInteractorImp.parseArray(values);
-                listener.onComplete(res);
+            public void onComplete(ArrayList<SectionModel> values) {
+                listener.onComplete(values);
                 categoryView.updateSectionList();
             }
 

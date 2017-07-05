@@ -26,5 +26,5 @@ public interface CategoryInteractor {
      * @param context
      * @param listener
      */
-    void fetchCateDataById(Context context,int cateId, Http.onHttpListener listener);
+    void fetchCateDataById(Context context,int cateId, Http.onHttpListener<ArrayList<SectionModel>> listener);
 }

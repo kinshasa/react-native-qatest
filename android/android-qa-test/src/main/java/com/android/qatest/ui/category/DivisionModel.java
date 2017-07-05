@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.android.qatest.Config.UrlList.categoryList;
+import static com.android.qatest.Config.CallAPIs.categoryList;
 
 /**
  * Created by lshaobocsu@gmail.com on 2017.6.22.
