@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <com.android.qatest.ui.widget.NestViewPager
         android:id="@+id/actions_pager"
@@ -15,7 +16,6 @@
         android:id="@+id/actions_pager_indicator"
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:layout_alignBottom="@+id/actions_pager"
-        android:background="#33EEEEEE"
+        android:background="#33990000"
         android:padding="10dp" />
-</RelativeLayout>
+</LinearLayout>

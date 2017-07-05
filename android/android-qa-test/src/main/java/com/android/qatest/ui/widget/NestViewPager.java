@@ -22,6 +22,7 @@ public class NestViewPager extends ViewPager {
 
     /**
      * 根据测量的子view设置pager高度
+     *
      * @param widthMeasureSpec
      * @param heightMeasureSpec
      */
@@ -44,8 +45,10 @@ public class NestViewPager extends ViewPager {
 
     private float mPointX;
     private float mPointY;
+
     /**
      * 解决嵌套后滑动不灵敏问题
+     *
      * @param ev
      * @return
      */

@@ -23,8 +23,8 @@ public class CateModel {
 
     public static ArrayList<CateModel> initArrayData(int length) {
         ArrayList<CateModel> cateModels = new ArrayList<>();
-        for (int i = 6; i < length; i++) {
-            cateModels.add(new CateModel("img" + length, "Cate" + length + "" + i));
+        for (int i = 0; i < length; i++) {
+            cateModels.add(new CateModel("img" + length, "Cate" + i));
         }
         return cateModels;
     }

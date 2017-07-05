@@ -9,20 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.FrameLayout.LayoutParams;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.android.log.L;
 import com.android.qatest.R;
 import com.android.qatest.ui.category.CateModel;
 import com.android.qatest.ui.home.model.HomePage;
 import com.android.qatest.ui.widget.BannerLayout;
-import com.android.qatest.ui.widget.NestGridView;
-import com.blankj.utilcode.utils.ConvertUtils;
 import com.viewpagerindicator.CirclePageIndicator;
-import com.zhy.adapter.abslistview.CommonAdapter;
-import com.zhy.adapter.abslistview.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,11 +35,8 @@ public class HomeFragment extends Fragment implements HomeView {
     private ArrayList<String> mImgList;
 
     //金刚位
-    private ViewPager mActionsPager;
-    private ActionsPagerAdapter mActionsPagerAdapter;
-    private CirclePageIndicator mActionPagerIndicator;
-    private List<View> mActionsViewList;
     private ArrayList<CateModel> mActionsData;
+    private ActionsGridViewPagerLayout mActionsGridViewPagerLayout;
 
     public static HomeFragment instance() {
         HomeFragment view = new HomeFragment();
@@ -81,35 +72,10 @@ public class HomeFragment extends Fragment implements HomeView {
         mBannerLayout.addData(mImgList);
 
         //金刚位
-        mActionsPager = (ViewPager) mView.findViewById(R.id.viewPager);
-        mActionsData = CateModel.initArrayData(45);
-        int size = 8;
-        int pageNum = (int) Math.ceil(mActionsData.size() / size);
-        L.v(pageNum);
-        mActionsViewList = new ArrayList<>();
-        for (int i = 0; i < pageNum; i++) {
-            NestGridView mActionsGridView = new NestGridView(mContext);
-            mActionsGridView.setBackgroundColor(0XFFAAAAAA);
-            mActionsGridView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            mActionsGridView.setNumColumns(4);
-            mActionsGridView.setStretchMode(NestGridView.STRETCH_COLUMN_WIDTH);
-            mActionsGridView.setAdapter(new CommonAdapter<CateModel>(mContext,
-                    R.layout.item_image_text_vertical,
-                    mActionsData.subList(i * size, (i + 1) * size < mActionsData.size() ? (i + 1) * size : mActionsData.size())) {
-                @Override
-                protected void convert(ViewHolder viewHolder, CateModel item, int position) {
-                    viewHolder.setText(R.id.textView, item.name);
-                }
-            });
-            mActionsViewList.add(mActionsGridView);
-        }
-        mActionsPagerAdapter = new ActionsPagerAdapter(mContext, mActionsViewList);
-        mActionsPager.setAdapter(mActionsPagerAdapter);
+        mActionsGridViewPagerLayout = new ActionsGridViewPagerLayout(mContext);
+        homeLayout.addView(mActionsGridViewPagerLayout);
+        mActionsGridViewPagerLayout.initData();
 
-        mActionPagerIndicator = (CirclePageIndicator) mView.findViewById(R.id.indicator);
-        mActionPagerIndicator.setViewPager(mActionsPager);
-
-        homeLayout.addView(new ActionsGridViewPagerLayout(mContext));
 
         //网络请求
         mPresenter = new HomePresenterImpl(this);
