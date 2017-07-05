@@ -5,10 +5,9 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
+import com.android.log.L;
 import com.android.qatest.R;
-import com.android.qatest.ui.category.CateModel;
 import com.android.qatest.ui.widget.NestGridView;
 import com.android.qatest.ui.widget.NestViewPager;
 import com.blankj.utilcode.utils.ConvertUtils;
@@ -23,7 +22,7 @@ import java.util.List;
  * Created by lshaobocsu@gmail.com on 2017.7.4.
  */
 
-public class ActionsGridViewPagerLayout extends LinearLayout {
+public abstract class ActionsGridViewPagerLayout<T> extends LinearLayout {
 
     private Context mContext;
     private LinearLayout mView;
@@ -32,7 +31,7 @@ public class ActionsGridViewPagerLayout extends LinearLayout {
     public ActionsPagerAdapter mActionsPagerAdapter;
     public CirclePageIndicator mActionPagerIndicator;
     public List<View> mActionsViewList;
-    public ArrayList<CateModel> mActionsData;
+    public List<T> mActionsData;
 
     public ActionsGridViewPagerLayout(Context context) {
         this(context, null);
@@ -56,17 +55,13 @@ public class ActionsGridViewPagerLayout extends LinearLayout {
 
         //通过new初始化组件
         mActionsPager = new NestViewPager(mContext);
-        mActionsPager.setBackgroundColor(0XFF999999);
         mActionsPager.setId(R.id.actions_pager);
         mActionPagerIndicator = new CirclePageIndicator(mContext);
-        mActionPagerIndicator.setBackgroundColor(0x11990000);
+        mActionPagerIndicator.setBackgroundColor(0X33EEEEEE);
         mActionPagerIndicator.setPadding(ConvertUtils.dp2px(10), ConvertUtils.dp2px(10), ConvertUtils.dp2px(10), ConvertUtils.dp2px(10));
 
         mActionsViewList = new ArrayList<>();
-        mActionsPagerAdapter = new ActionsPagerAdapter(mContext, mActionsViewList);
-        mActionsPager.setAdapter(mActionsPagerAdapter);
-        //绑定ViewPager到Indicator上
-        mActionPagerIndicator.setViewPager(mActionsPager);
+        mActionsData = new ArrayList<>();
 
         //通过XLM文件初始化组件
         //addView(mView);
@@ -76,31 +71,42 @@ public class ActionsGridViewPagerLayout extends LinearLayout {
         addView(mActionPagerIndicator, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
     }
 
-    public void initData() {
-        mActionsData = CateModel.initArrayData(50);
-        if (mActionsViewList == null) {
-            mActionsViewList = new ArrayList<>();
-        } else {
-            mActionsViewList.clear();
-        }
+    public void initData(ArrayList<T> data) {
+        //初始化数据
+        mActionsViewList.clear();
+        mActionsData.clear();
+        mActionsData.addAll(data);
         int size = 8;
-        int pageNum = (int) Math.ceil(mActionsData.size() / size);
+        double pageNum = mActionsData.size() / (double) size;
+        L.v(pageNum);
         for (int i = 0; i < pageNum; i++) {
             NestGridView mActionsGridView = new NestGridView(mContext);
             mActionsGridView.setBackgroundColor(0XFF990AAA);
             mActionsGridView.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
             mActionsGridView.setNumColumns(4);
             mActionsGridView.setStretchMode(NestGridView.STRETCH_COLUMN_WIDTH);
-            mActionsGridView.setAdapter(new CommonAdapter<CateModel>(mContext,
+            mActionsGridView.setAdapter(new CommonAdapter<T>(mContext,
                     R.layout.item_image_text_vertical,
                     mActionsData.subList(i * size, (i + 1) * size < mActionsData.size() ? (i + 1) * size : mActionsData.size())) {
                 @Override
-                protected void convert(ViewHolder viewHolder, CateModel item, int position) {
-                    viewHolder.setText(R.id.textView, item.name);
+                protected void convert(ViewHolder viewHolder, T item, int position) {
+                    viewHolder.setText(R.id.textView, getName(item));
                 }
             });
             mActionsViewList.add(mActionsGridView);
         }
-        mActionsPagerAdapter.notifyDataSetChanged();
+        //拿到数据后再初始化适配器，可以解决无法notifyDataChanged的更新问题
+        //初始化适配器并绑定到ViewPager
+        mActionsPagerAdapter = new ActionsPagerAdapter(mContext, mActionsViewList);
+        mActionsPager.setAdapter(mActionsPagerAdapter);
+        //绑定ViewPager到Indicator上
+        mActionPagerIndicator.setViewPager(mActionsPager);
     }
+
+    public abstract String getName(T o);
+
+    public abstract String getImageUrl(T o);
+
+    public abstract String onClick(T o);
+
 }

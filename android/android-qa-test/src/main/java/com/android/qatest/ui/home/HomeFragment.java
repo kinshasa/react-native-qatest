@@ -72,9 +72,26 @@ public class HomeFragment extends Fragment implements HomeView {
         mBannerLayout.addData(mImgList);
 
         //金刚位
-        mActionsGridViewPagerLayout = new ActionsGridViewPagerLayout(mContext);
+        mActionsData = CateModel.initArrayData(12);
+        mActionsGridViewPagerLayout = new ActionsGridViewPagerLayout<CateModel>(mContext) {
+            @Override
+            public String getName(CateModel o) {
+                return o.name;
+            }
+
+            @Override
+            public String getImageUrl(CateModel o) {
+                return o.icon;
+            }
+
+            @Override
+            public String onClick(CateModel o) {
+                return null;
+            }
+        };
+        mActionsGridViewPagerLayout.initData(mActionsData);
+        //添加金刚位到视图中
         homeLayout.addView(mActionsGridViewPagerLayout);
-        mActionsGridViewPagerLayout.initData();
 
 
         //网络请求
