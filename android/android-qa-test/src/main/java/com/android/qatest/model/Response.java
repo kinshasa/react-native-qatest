@@ -57,7 +57,12 @@ public class Response<T> {
      */
     //Response<String> res = Response.parseObject(values, new TypeReference<Response<String>>() {});
     public static <T> Response<T> parseResponseObj(String values, TypeReference<Response<T>> type) {
-        Response<T> res = JSONObject.parseObject(values, type);
+        Response<T> res = null;
+        try{
+            JSONObject.parseObject(values, type);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         //Assert.assertFalse(res.getData() instanceof T);
         return res;
     }
@@ -69,8 +74,13 @@ public class Response<T> {
      * @return
      */
     public static Response<String> getResponseStr(String values) {
-        Response<String> res = JSONObject.parseObject(values, new TypeReference<Response<String>>() {
-        });
+        Response<String> res = null;
+        try{
+            JSONObject.parseObject(values, new TypeReference<Response<String>>() {
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return res;
     }
 
@@ -102,6 +112,12 @@ public class Response<T> {
      * @return
      */
     public static <T> T parseObject(String str, TypeReference<T> type) {
-        return JSONObject.parseObject(str, type);
+        T res = null;
+        try{
+            JSONObject.parseObject(str, type);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return res;
     }
 }

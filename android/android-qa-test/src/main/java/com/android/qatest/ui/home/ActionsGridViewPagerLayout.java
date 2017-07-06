@@ -61,9 +61,7 @@ public abstract class ActionsGridViewPagerLayout<T> extends LinearLayout {
         //通过new初始化组件
         mActionsPager = new NestViewPager(mContext);
         mActionsPager.setId(R.id.actions_pager);
-        mActionsPager.setBackgroundColor(0XFFEEEEEE);
         mActionPagerIndicator = new CirclePageIndicator(mContext);
-        mActionPagerIndicator.setBackgroundColor(0XFFEEEEEE);
         mActionPagerIndicator.setPageColor(0xFF999999);
         mActionPagerIndicator.setFillColor(0xFF000000);
         mActionPagerIndicator.setPadding(ConvertUtils.dp2px(10), ConvertUtils.dp2px(10), ConvertUtils.dp2px(10), ConvertUtils.dp2px(10));

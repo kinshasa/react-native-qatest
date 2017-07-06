@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import com.android.http.Http;
 import com.android.log.L;
 import com.android.qatest.R;
-import com.android.qatest.ui.category.CateModel;
 import com.android.qatest.ui.home.model.AppCenterContent;
 import com.android.qatest.ui.home.model.Floor;
 import com.android.qatest.ui.home.model.HomePageResponse;
@@ -68,7 +67,7 @@ public class HomeFragment extends Fragment implements HomeView {
     private void initViews() {
 
         mContext = getContext();
-        mHomeLayout = (LinearLayout) mView.findViewById(R.id.homeLayout);
+        mHomeLayout = (LinearLayout) mView.findViewById(R.id.home_layout);
 
         //Banner图
         mImgList = new ArrayList<>();

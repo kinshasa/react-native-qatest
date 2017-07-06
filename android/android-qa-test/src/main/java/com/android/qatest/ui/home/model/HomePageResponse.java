@@ -2,6 +2,7 @@ package com.android.qatest.ui.home.model;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.android.log.L;
 import com.android.qatest.model.Response;
 
 import org.json.JSONArray;
@@ -72,8 +73,46 @@ public class HomePageResponse {
         if (floorList == null) {
             return;
         }
+        int floorId = 0;
+        for (String floor : floorList) {
+            String type = "";
+            try {
+                JSONObject jsonObj = new JSONObject(floor);
+                if (jsonObj.has("type")) type = jsonObj.getString("type");
+                if (jsonObj.has("jsonObj")) floorId = jsonObj.getInt("floorId");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            switch (type) {
+                case "banner":
+                    //0 京东首页-Banner banner
+                    floorLists.bannerContentFloor = Response.parseObject(floor, new TypeReference<Floor<BannerContent>>() {
+                    });
+                    break;
+                //1 京东首页-功能区 appcenter
+                case "appcenter":
+                    floorLists.appCenterContentFloor = Response.parseObject(floor, new TypeReference<FloorObjContent<AppCenterContent>>() {
+                    });
+                    break;
+                case "announcement":
+                    //2 京东首页-京东快报 announcement
+                    floorLists.announcementContentFloor = Response.parseObject(floor, new TypeReference<Floor<AnnouncementContent>>() {
+                    });
+                    break;
+                case "hybrid":
+                    if (floorId == 2796){
+                        //3 京东首页-京东秒杀 hybrid
+                        floorLists.miaoShaContentFloor = Response.parseObject(floor, new TypeReference<FloorMiaoshaContent<MiaoShaContent>>() {
+                        });
+                    }
+                    break;
+                default:
+                    L.v(type);
+                    break;
+            }
+        }
 
-        try {
+        /*try {
             //0 京东首页-Banner banner
             floorLists.bannerContentFloor = Response.parseObject(floorList.get(0), new TypeReference<Floor<BannerContent>>() {
             });
@@ -88,6 +127,6 @@ public class HomePageResponse {
             });
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 }
