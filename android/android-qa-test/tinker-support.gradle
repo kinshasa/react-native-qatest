@@ -1,5 +1,6 @@
 apply plugin: 'com.tencent.bugly.tinker-support'
 
+buildDir = "$rootDir/build/$project.name"
 def bakPath = file("${buildDir}/bakApk/")
 
 /**
