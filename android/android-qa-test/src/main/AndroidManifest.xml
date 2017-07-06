@@ -42,10 +42,10 @@
         <activity
             android:name=".ui.ListSamples"
             android:label="@string/app_name">
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
         <!--MainActivity程序入口-->
         <activity
@@ -67,6 +67,10 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:label="react首页入口"
             android:launchMode="singleTask">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

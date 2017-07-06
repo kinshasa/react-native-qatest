@@ -248,19 +248,19 @@ dependencies {
     compile project(':react-native-update')
     /** Fresco from facebook @https://github.com/facebook/fresco**/
 
-    //facebook Fresco.
-    compile 'com.facebook.fresco:fresco:1.3.0'
+    //facebook Fresco. react需要0.11.0版本 最新1.3版本不支持
+    compile 'com.facebook.fresco:fresco:0.11.0'
 
     // 在 API < 14 上的机器支持 WebP 时，需要添加
-    compile 'com.facebook.fresco:animated-base-support:1.3.0'
+    compile 'com.facebook.fresco:animated-base-support:0.11.0'
 
-    // 支持 GIF 动图，需要添加
-    compile 'com.facebook.fresco:animated-gif:1.3.0'
+    // 支持 GIF 动图，需要添加 1.3
+    compile 'com.facebook.fresco:animated-gif:0.11.0'
 
-    // 支持 WebP 动图
-    compile 'com.facebook.fresco:animated-webp:1.3.0'
+    // 支持 WebP 动图 1.3
+    compile 'com.facebook.fresco:animated-webp:0.11.0'
     // 支持 WebP 静态图
-    compile 'com.facebook.fresco:webpsupport:1.3.0'
+    compile 'com.facebook.fresco:webpsupport:0.11.0'
 
 
 }
