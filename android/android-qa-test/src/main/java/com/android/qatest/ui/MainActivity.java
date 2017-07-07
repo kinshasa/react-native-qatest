@@ -97,7 +97,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         });
 
         // call this method anywhere to update splash view data
-        SplashView.updateSplashData(this, "http://ww2.sinaimg.cn/large/72f96cbagw1f5mxjtl6htj20g00sg0vn.jpg", "http://jkyeo.com");
+        SplashView.updateSplashData(this, "https://m.360buyimg.com/mobilecms/s444x788_jfs/t6109/29/4021247820/46845/55ffc1a5/595deb55Nccd179b6.png!q70.jpg", "http://jkyeo.com");
 
     }
 

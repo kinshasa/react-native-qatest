@@ -1,0 +1,225 @@
+{
+  "data": [
+    {
+      "name": "常用分类",
+      "catelogyList": [
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t2794/343/2027506498/10192/ba2fdb26/57527a35N2ca90c89.jpg.webp",
+          "name": "台式机",
+          "path": "0_99994444_673",
+          "isMerger": false,
+          "columNum": 3,
+          "cid": 673
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t298/165/1489755604/3438/61c24af/543c9037N116abba2.jpg.webp",
+          "name": "服务器/工作站",
+          "path": "0_99994444_674",
+          "isMerger": false,
+          "columNum": 3,
+          "cid": 674
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t6379/52/691164147/4715/39998862/5943b3f1Ne61ce48d.jpg.webp",
+          "searchKey": "coach",
+          "name": "COACH",
+          "path": "0_99994444_300015322",
+          "isMerger": false,
+          "virtualFlag": 1,
+          "columNum": 3,
+          "cid": 300015322
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t5089/83/1769607582/10955/5f641659/5914061dN66ebdca9.jpg.webp",
+          "searchKey": "商用台式机",
+          "name": "商用台式机",
+          "path": "0_99994444_300015187",
+          "isMerger": false,
+          "virtualFlag": 1,
+          "columNum": 3,
+          "cid": 300015187
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t3112/80/5387959912/8511/4853d94/586e2308N431f84e3.jpg.webp",
+          "name": "游戏台式机",
+          "action": "https://poplist.m.jd.com/qt/list.html?cate1=0&cate2=0&cate3=1000118&page=1&pagesize=10",
+          "path": "0_99994444_300013470",
+          "isMerger": false,
+          "virtualFlag": 3,
+          "columNum": 3,
+          "cid": 300013470,
+          "destination": "car_to"
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t2947/317/2138598173/6371/7047973c/579b50f8Ne5829009.jpg.webp",
+          "name": "瑞表",
+          "path": "0_99994444_13673",
+          "isMerger": false,
+          "columNum": 3,
+          "cid": 13673
+        }
+      ],
+      "hideClearIcon": false,
+      "columNum": 3,
+      "cid": 99994444
+    },
+    {
+      "name": "专场推荐",
+      "catelogyList": [
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t5881/247/5110269220/14624/2fc3229a/5959e697N00911dfb.jpg.webp",
+          "name": "7.7车厘子超级单品",
+          "action": " https://pro.m.jd.com/mall/active/214sdXQZ31gNwxojDPEKGUYL5Q96/index.html",
+          "path": "0_99999999_300000001",
+          "virtualFlag": 3,
+          "columNum": 3,
+          "cid": 300000001,
+          "destination": "car_to"
+        }
+      ],
+      "columNum": 3,
+      "cid": 99999999
+    },
+    {
+      "name": "热门分类",
+      "catelogyList": [
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t5230/193/2382087236/7416/2254576a/591baf4eN44f5b6d2.jpg.webp",
+          "name": "手机",
+          "path": "0_44449999_655",
+          "isMerger": false,
+          "columNum": 3,
+          "cid": 655
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t355/8/1537990392/4535/fc9624f9/543c8f91Nc72ce80f.jpg.webp",
+          "name": "笔记本",
+          "path": "0_44449999_672",
+          "isMerger": false,
+          "columNum": 3,
+          "cid": 672
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t1036/25/1478729436/6331/21075b96/5732d23eNaa7c6917.jpg.webp",
+          "name": "空调",
+          "path": "0_44449999_870",
+          "isMerger": false,
+          "columNum": 3,
+          "cid": 870
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t322/147/1505662488/3566/461716a8/543c8a6eNed7b6c7b.jpg.webp",
+          "name": "炒锅",
+          "path": "0_44449999_6199",
+          "isMerger": false,
+          "virtualFlag": 0,
+          "columNum": 3,
+          "cid": 6199
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t979/98/194032793/11082/e3dd8c46/5507c2dbN67c0b7f8.jpg.webp",
+          "name": "啤酒",
+          "path": "0_44449999_9439",
+          "isMerger": false,
+          "columNum": 3,
+          "cid": 9439
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t3649/51/409154956/7531/59b1f0a/5808846bN73e6b94a.png.webp",
+          "level_f": [
+            {
+              "catalogId": "3399",
+              "getCatalogName": "科普/百科"
+            },
+            {
+              "catalogId": "4761",
+              "getCatalogName": "绘本"
+            },
+            {
+              "catalogId": "3396",
+              "getCatalogName": "手工/游戏"
+            },
+            {
+              "catalogId": "3395",
+              "getCatalogName": "幼儿启蒙"
+            },
+            {
+              "catalogId": "3398",
+              "getCatalogName": "智力开发"
+            },
+            {
+              "catalogId": "3391",
+              "getCatalogName": "动漫/卡通"
+            },
+            {
+              "catalogId": "12081",
+              "getCatalogName": "玩具书"
+            },
+            {
+              "catalogId": "3400",
+              "getCatalogName": "励志/成长"
+            },
+            {
+              "catalogId": "3393",
+              "getCatalogName": "儿童教育"
+            },
+            {
+              "catalogId": "3397",
+              "getCatalogName": "音乐/舞蹈"
+            },
+            {
+              "catalogId": "4762",
+              "getCatalogName": "美术/书法"
+            },
+            {
+              "catalogId": "3392",
+              "getCatalogName": "少儿国学"
+            },
+            {
+              "catalogId": "3401",
+              "getCatalogName": "少儿英语"
+            },
+            {
+              "catalogId": "4760",
+              "getCatalogName": "笑话/幽默"
+            },
+            {
+              "catalogId": "4763",
+              "getCatalogName": "入园准备及教材"
+            },
+            {
+              "catalogId": "12411",
+              "getCatalogName": "儿童期刊"
+            },
+            {
+              "catalogId": "13675",
+              "getCatalogName": "AR立体书"
+            }
+          ],
+          "name": "儿童文学",
+          "path": "0_44449999_3394",
+          "isMerger": false,
+          "virtualFlag": 0,
+          "columNum": 3,
+          "cid": 3394,
+          "YNlevelF": 1
+        },
+        {
+          "icon": "https://m.360buyimg.com/mobile/s130x130_jfs/t1951/140/2866224626/11637/e9bb1b7a/571dc6a2N823c97f7.jpg.webp",
+          "name": "火车票",
+          "action": "https://train.m.jd.com/",
+          "path": "0_44449999_100008434",
+          "isMerger": false,
+          "virtualFlag": 3,
+          "columNum": 3,
+          "cid": 100008434,
+          "destination": "car_to"
+        }
+      ],
+      "columNum": 3,
+      "cid": 44449999,
+      "rankingFlag": true
+    }
+  ],
+  "code": "0"
+}
