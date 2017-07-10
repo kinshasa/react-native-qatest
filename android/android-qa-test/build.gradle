@@ -94,6 +94,12 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+        externalNativeBuild {
+            cmake {
+                abiFilters 'armeabi-v7a','x86'//, 'x86_64', 'armeabi',  'arm64-v8a'
+                //cppFlags ""
+            }
+        }
     }
     splits {
         abi {
@@ -126,6 +132,13 @@ android {
             signingConfig signingConfigs.release
         }
     }
+    //使用cmake编译ndk
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->

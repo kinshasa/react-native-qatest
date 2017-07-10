@@ -55,7 +55,7 @@ public class HomeFragment extends Fragment implements HomeView {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         L.v();
-        mView = inflater.inflate(R.layout.fragment_home, null);
+        mView = inflater.inflate(R.layout.fragment_home, container,false);
         initViews();
         initData();
         return mView;

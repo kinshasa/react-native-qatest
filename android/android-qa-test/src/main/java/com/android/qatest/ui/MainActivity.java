@@ -18,7 +18,7 @@ import com.lhh.apst.library.AdvancedPagerSlidingTabStrip;
 
 import com.android.qatest.ui.cart.CartFragment;
 import com.android.qatest.ui.category.CategoryFragment;
-import com.android.qatest.ui.fragment.MineFragment;
+import com.android.qatest.ui.user.MineFragment;
 import com.android.qatest.ui.fragment.NewsFragment;
 import com.android.qatest.ui.home.HomeFragment;
 import com.android.qatest.ui.view.SplashView;

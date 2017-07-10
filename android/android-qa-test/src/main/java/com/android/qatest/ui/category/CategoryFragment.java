@@ -70,7 +70,7 @@ public class CategoryFragment extends LazyFragment implements CategoryView,ILazy
         // 建立左侧数据适配
         divisionListView.setAdapter(divisionAdapter);
         // 默认选中第一个选项
-        divisionListView.setSelection(0);
+        //divisionListView.setSelection(0);
 
         // 建立右侧数据适配
         //sectionAdapter = new SectionAdapter(getContext(), sectionData);
@@ -174,11 +174,13 @@ public class CategoryFragment extends LazyFragment implements CategoryView,ILazy
                 values.add(0,new DivisionModel("常用分类"));
 
                 divisionData.clear();
-                divisionData.addAll(values.subList(0,5));
+                divisionData.addAll(values);
                 divisionAdapter.notifyDataSetChanged();
+                //默认选中第一个
+                divisionListView.requestFocusFromTouch();//获取焦点
+                divisionListView.setSelection(0);//默认选中第一个选项
 
                 updateSectionAdapter(0);
-                //divisionListView.performItemClick(divisionListView.getAdapter().getView(0, null, null), 0, divisionListView.getItemIdAtPosition(0));
             }
 
             @Override
