@@ -14,17 +14,12 @@ import java.util.Map;
 
 public interface CategoryInteractor {
 
-    interface onCategoryRequestListener{
-        void onFail();
-        void onSuccess(ArrayList<DivisionModel> list);
-    }
-
-    void onRequest(Context context, onCategoryRequestListener listener);
+    void fetchCategoryData(Context context, Http.onHttpListener<ArrayList<DivisionModel>> listener);
 
     /**
      * 通过数据库，文件，网络等方式获取类型数据
      * @param context
      * @param listener
      */
-    void fetchCateDataById(Context context,int cateId, Http.onHttpListener<ArrayList<SectionModel>> listener);
+    void fetchSectionDataById(Context context, int cateId, Http.onHttpListener<ArrayList<SectionModel>> listener);
 }

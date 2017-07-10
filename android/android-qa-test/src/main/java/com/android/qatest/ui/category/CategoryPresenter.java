@@ -15,7 +15,7 @@ import java.util.Map;
 
 public interface CategoryPresenter {
 
-    public void getCategoryData(Context context, int cateId, CategoryInteractor.onCategoryRequestListener listener);
+    public void getCategoryData(Context context, Http.onHttpListener<ArrayList<DivisionModel>> listener);
 
     void getSectionDataById(Context context, int cateId, Http.onHttpListener<ArrayList<SectionModel>> listener);
 

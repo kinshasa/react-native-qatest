@@ -66,13 +66,13 @@ public class CategoryFragment extends LazyFragment implements CategoryView,ILazy
 
     private void initView() {
         L.v();
-        // 默认选中第一个选项
-        divisionListView.setSelection(0);
         // 建立左侧数据适配
         divisionListView.setAdapter(divisionAdapter);
+        // 默认选中第一个选项
+        divisionListView.setSelection(0);
 
         // 建立右侧数据适配
-        //sectionAdapter = new SectionAdapter(getContext(), sectionData);
+        sectionAdapter = new SectionAdapter(getContext(), sectionData);
         sectionListView.setAdapter(sectionAdapter);
 
         // 设置listView当中的每个单项点击的事件变化逻辑处理
@@ -106,7 +106,7 @@ public class CategoryFragment extends LazyFragment implements CategoryView,ILazy
             public void onScrollStateChanged(AbsListView view, int scrollState) {
                 //0离开并停止，1触摸并滚动，2离开并滚动
                 sectionAdapter.isScrolling = scrollState != 0;
-                L.v("setScrollState:"+sectionAdapter.isScrolling);
+                //L.v("setScrollState:"+sectionAdapter.isScrolling);
                 switch (scrollState) {
                     case AbsListView.OnScrollListener.SCROLL_STATE_FLING:
                         //syncImageLoader.lock();
@@ -161,21 +161,21 @@ public class CategoryFragment extends LazyFragment implements CategoryView,ILazy
         presenter = new CategoryPresenterImp(this);
 
 
-        presenter.getCategoryData(getContext(), 0, new CategoryInteractor.onCategoryRequestListener() {
+        presenter.getCategoryData(getContext(), new Http.onHttpListener<ArrayList<DivisionModel>>() {
             @Override
-            public void onFail() {
-
-            }
-
-            @Override
-            public void onSuccess(ArrayList<DivisionModel> list) {
-                L.v(list);
+            public void onComplete(ArrayList<DivisionModel> values) {
+                values.add(0,new DivisionModel("常用分类"));
                 divisionData.clear();
-                divisionData.addAll(list);
+                divisionData.addAll(values);
                 divisionAdapter.notifyDataSetChanged();
 
                 updateSectionAdapter(0);
                 //divisionListView.performItemClick(divisionListView.getAdapter().getView(0, null, null), 0, divisionListView.getItemIdAtPosition(0));
+            }
+
+            @Override
+            public void onException(Object exceptionInfo) {
+
             }
         });
     }

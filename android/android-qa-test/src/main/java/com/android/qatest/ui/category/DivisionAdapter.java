@@ -85,7 +85,7 @@ public class DivisionAdapter extends BaseAdapter {
         }
 
 
-        hoder.textView.setText(list.get(position).title);
+        hoder.textView.setText(list.get(position).name);
         /*if (position == selectPosition) {
             hoder.layout.setBackgroundColor(0xFF999999);
         }else{

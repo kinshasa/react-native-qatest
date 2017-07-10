@@ -3,8 +3,6 @@ package com.android.qatest.ui.category;
 import android.content.Context;
 
 import com.android.http.Http;
-import com.android.log.L;
-import com.android.qatest.model.Response;
 
 import java.util.ArrayList;
 
@@ -25,13 +23,23 @@ public class CategoryPresenterImp implements CategoryPresenter {
 
 
     @Override
-    public void getCategoryData(Context context, int cateId, CategoryInteractor.onCategoryRequestListener listener) {
-        categoryInteractor.onRequest(context, listener);
+    public void getCategoryData(final Context context, final Http.onHttpListener<ArrayList<DivisionModel>> listener) {
+        categoryInteractor.fetchCategoryData(context, new Http.onHttpListener<ArrayList<DivisionModel>>() {
+            @Override
+            public void onComplete(ArrayList<DivisionModel> values) {
+                listener.onComplete(values);
+            }
+
+            @Override
+            public void onException(Object exceptionInfo) {
+
+            }
+        });
     }
 
     @Override
-    public void getSectionDataById(Context context, int cateId, final Http.onHttpListener<ArrayList<SectionModel>> listener) {
-        categoryInteractor.fetchCateDataById(context, cateId, new Http.onHttpListener<ArrayList<SectionModel>>() {
+    public void getSectionDataById(final Context context, int cateId, final Http.onHttpListener<ArrayList<SectionModel>> listener) {
+        categoryInteractor.fetchSectionDataById(context, cateId, new Http.onHttpListener<ArrayList<SectionModel>>() {
 
             @Override
             public void onComplete(ArrayList<SectionModel> values) {
