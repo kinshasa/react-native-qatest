@@ -32,6 +32,7 @@ import butterknife.ButterKnife;
 public class CategoryFragment extends LazyFragment implements CategoryView,ILazyLayout.OnVisibleListener {
 
     private View view;
+    private int divisionPos = -1;
     private ArrayList<DivisionModel> divisionData;
     private ArrayList<SectionModel> sectionData;
     private SectionAdapter sectionAdapter;
@@ -72,7 +73,7 @@ public class CategoryFragment extends LazyFragment implements CategoryView,ILazy
         divisionListView.setSelection(0);
 
         // 建立右侧数据适配
-        sectionAdapter = new SectionAdapter(getContext(), sectionData);
+        //sectionAdapter = new SectionAdapter(getContext(), sectionData);
         sectionListView.setAdapter(sectionAdapter);
 
         // 设置listView当中的每个单项点击的事件变化逻辑处理
@@ -131,6 +132,11 @@ public class CategoryFragment extends LazyFragment implements CategoryView,ILazy
     }
 
     private void updateSectionAdapter(final int pos) {
+        if(divisionPos == pos){
+            return;
+        }
+        divisionPos = pos;
+
         // 更新右侧数据,使用addAll是不希望更改sectionData的内存地址，不然会解绑sectionAdapter数据。
         //获取数据
         presenter.getSectionDataById(getContext(), pos, new Http.onHttpListener<ArrayList<SectionModel>>() {
@@ -143,7 +149,8 @@ public class CategoryFragment extends LazyFragment implements CategoryView,ILazy
 
             @Override
             public void onException(Object exceptionInfo) {
-
+                //如果更新失败，重置下标
+                divisionPos = -1;
             }
         });
 
@@ -165,8 +172,9 @@ public class CategoryFragment extends LazyFragment implements CategoryView,ILazy
             @Override
             public void onComplete(ArrayList<DivisionModel> values) {
                 values.add(0,new DivisionModel("常用分类"));
+
                 divisionData.clear();
-                divisionData.addAll(values);
+                divisionData.addAll(values.subList(0,5));
                 divisionAdapter.notifyDataSetChanged();
 
                 updateSectionAdapter(0);

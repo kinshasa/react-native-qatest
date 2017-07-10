@@ -22,6 +22,11 @@ public class CategoryInteractorImp implements CategoryInteractor {
     @Override
     public void fetchCategoryData(final Context context, final Http.onHttpListener<ArrayList<DivisionModel>> listener) {
 
+        //如果有缓存数据，取缓存
+        if (isCachedCategoryData()) {
+            listener.onComplete(cacheCategoryData());
+            return;
+        }
         HttpBase.getDefaultInstance().request(context, CallAPIs.CategoryList, null, new Http.onHttpListener<String>() {
             @Override
             public void onComplete(String values) {
@@ -60,8 +65,8 @@ public class CategoryInteractorImp implements CategoryInteractor {
         }
 
         //如果有缓存数据，取缓存
-        if (isCachedData()) {
-            listener.onComplete(getCacheData());
+        if (isCachedSectionData(cateId)) {
+            listener.onComplete(cacheSectionDataById());
             return;
         }
         //如果没有缓存数据，则需要网络请求
@@ -106,11 +111,20 @@ public class CategoryInteractorImp implements CategoryInteractor {
         return res;
     }
 
-    public boolean isCachedData() {
+    public boolean isCachedCategoryData() {
         return false;
     }
 
-    public ArrayList<SectionModel> getCacheData() {
+    public ArrayList<DivisionModel> cacheCategoryData() {
+        ArrayList<DivisionModel> data = DivisionModel.initArrayData(10);
+        return data;
+    }
+
+    public boolean isCachedSectionData(int id) {
+        return false;
+    }
+
+    public ArrayList<SectionModel> cacheSectionDataById() {
         ArrayList<SectionModel> data = new ArrayList<>();
         return data;
     }
