@@ -76,7 +76,7 @@ public class Response<T> {
     public static Response<String> getResponseStr(String values) {
         Response<String> res = null;
         try{
-            JSONObject.parseObject(values, new TypeReference<Response<String>>() {
+            res = JSONObject.parseObject(values, new TypeReference<Response<String>>() {
             });
         }catch (Exception e){
             e.printStackTrace();
@@ -114,7 +114,7 @@ public class Response<T> {
     public static <T> T parseObject(String str, TypeReference<T> type) {
         T res = null;
         try{
-            JSONObject.parseObject(str, type);
+            res = JSONObject.parseObject(str, type);
         }catch (Exception e){
             e.printStackTrace();
         }

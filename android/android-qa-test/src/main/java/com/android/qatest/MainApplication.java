@@ -16,6 +16,7 @@ import com.facebook.soloader.SoLoader;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.pay.module.PayReactPackage;
 import com.react.rnspinkit.RNSpinkitPackage;
+import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 
@@ -70,6 +71,13 @@ public class MainApplication extends Application implements ReactApplication {
 
         //初始化工具类
         Utils.init(this);
+
+        if (!LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            LeakCanary.install(this);
+        }
+
     }
 
     @Override

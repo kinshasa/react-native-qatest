@@ -72,7 +72,7 @@ public class CategoryFragment extends LazyFragment implements CategoryView,ILazy
         divisionListView.setAdapter(divisionAdapter);
 
         // 建立右侧数据适配
-        sectionAdapter = new SectionAdapter(getContext(), sectionData);
+        //sectionAdapter = new SectionAdapter(getContext(), sectionData);
         sectionListView.setAdapter(sectionAdapter);
 
         // 设置listView当中的每个单项点击的事件变化逻辑处理

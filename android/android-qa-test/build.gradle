@@ -180,7 +180,10 @@ dependencies {
     //bugly upgrade and tinker native hotFix module.
     compile project(':android-upgrade-module')
 
+    //日志系统
     compile project(':android-log-module')
+    //https://github.com/orhanobut/logger
+    compile 'com.orhanobut:logger:2.1.1'
 
     compile project(':android-http-module')
 
@@ -229,6 +232,13 @@ dependencies {
 
     //原生JOSN解析
     compile 'com.alibaba:fastjson:1.1.58.android'
+
+    //内存泄漏工具LeakCanary@https://github.com/square/leakcanary
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+
+    //
 
     /***************************************************
      *                                                 *
