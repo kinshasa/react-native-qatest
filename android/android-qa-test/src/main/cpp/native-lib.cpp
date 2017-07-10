@@ -1,16 +1,16 @@
 #include <jni.h>
 #include <string>
 
+extern "C" {
 JNIEXPORT jstring JNICALL
 Java_com_android_qatest_ui_user_MineFragment_getSignStr(JNIEnv *env, jobject instance) {
 
     // TODO
-    const char *sign = "params with md5 sign.";
+    std::string sign = "params with md5 sign.";
 
-    return env->NewStringUTF(sign);
+    return env->NewStringUTF(sign.c_str());
 }
 
-extern "C"
 JNIEXPORT jstring JNICALL
 Java_com_android_qatest_ui_user_MineFragment_stringFromJNI(
         JNIEnv *env,
@@ -18,3 +18,6 @@ Java_com_android_qatest_ui_user_MineFragment_stringFromJNI(
     std::string hello = "Hello from C++";
     return env->NewStringUTF(hello.c_str());
 }
+
+}
+
