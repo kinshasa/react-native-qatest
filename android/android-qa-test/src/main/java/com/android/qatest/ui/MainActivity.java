@@ -1,11 +1,15 @@
 package com.android.qatest.ui;
 
+import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -61,10 +65,15 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         // call after setContentView(R.layout.activity_sample);
         StatusBarUtil.setTranslucent(this);
 
-        //增加读写文件权限
-        ActivityCompat.requestPermissions(MainActivity.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-    }
+        //判断用户是否已经授权，未授权则向用户申请授权，已授权则直接进行呼叫操作
+        if (ContextCompat.checkSelfPermission(MainActivity.this, "Manifest.permission.WRITE_EXTERNAL_STORAGE")
+                != PackageManager.PERMISSION_GRANTED) {
+            //增加读写文件权限
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            //requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        }
 
+    }
 
     private void initViews() {
 
