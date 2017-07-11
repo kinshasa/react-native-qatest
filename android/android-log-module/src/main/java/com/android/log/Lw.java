@@ -14,91 +14,51 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Lw {
+
     // 日志类型标识符(优先级：由低到高排列，取值越小优先级越高)
-    private static final char SHOW_VERBOSE_LOG = 0x01;//0000 0001
-    private static final char SHOW_DEBUG_LOG = 0x02;//0000 0010	0x01 << 1
-    private static final char SHOW_INFO_LOG = 0x04;//0000 0100	0x01 << 2
-    private static final char SHOW_WARN_LOG = 0x08;//0000 1000	0x01 << 3
-    private static final char SHOW_ERROR_LOG = 0x16;//0001 0000	0x01 << 4
-    private static final char SHOW_NONE_LOG = 0x32;//0000 0000
+    private static final char SHOW_VERBOSE_LOG = 0x01;  //0000 0001
+    private static final char SHOW_DEBUG_LOG = 0x02;    //0000 0010	0x01 << 1
+    private static final char SHOW_INFO_LOG = 0x04;     //0000 0100	0x01 << 2
+    private static final char SHOW_WARN_LOG = 0x08;     //0000 1000	0x01 << 3
+    private static final char SHOW_ERROR_LOG = 0x16;    //0001 0000	0x01 << 4
+    private static final char SHOW_NONE_LOG = 0x32;     //0000 0000
+
+    //日志保存时间
     private static final int SDCARD_LOG_FILE_SAVE_DAYS = SHOW_NONE_LOG;
-    private static final boolean _APP_ROUTE = false;
-   
-    /*
-     * 逻辑运算:
-     * 
-     * !;&&;||;();
-     * 
-     * 
-     * Java/C/Pascal位运算:
-     * 
-     * 按位与		&		相同位的两个数字都为1，则为1；若有一个不为1，则为0。 
-     * 					and运算通常用于二进制取位操作，例如一个数 and 1的结果就是取二进制的最末位。
-     * 					这可以用来判断一个整数的奇偶，二进制的最末位为0表示该数为偶数，最末位为1表示该数为奇数。
-     * 按位或		|		相同位只要一个为1即为1。
-     * 					or运算通常用于二进制特定位上的无条件赋值，例如一个数or 1的结果就是把二进制最末位强行变成1。
-     * 					如果需要把二进制最末位变成0，对这个数or 1之后再减一就可以了，其实际意义就是把这个数强行变成最接近的偶数。
-     * 按位异或	^		相同位不同则为1，相同则为0。
-     * 					xor运算的逆运算是它本身，也就是说两次异或同一个数最后结果不变，即（a xor b) xor b = a。
-     * 					xor运算可以用于简单的加密
-     * 按位取反	~
-     * 左移		<<		a shl b的值实际上就是a乘以2的b次方，因为在二进制数后添一个0就相当于该数乘以2
-     * 带符号右移	>> 		a shr b表示二进制右移b位（去掉末b位），相当于a除以2的b次方（取整）。比如二分查找、堆的插入操作等等。
-     * 无符号右移	>>>
-     * 
-     * C语言中位运算符之间，按优先级顺序排列为
-     * 1 ~
-     * 2 <<、>>
-     * 3 &
-     * 4 ^
-     * 5 |
-     * 6 &=、^=、|=、<<=、>>=
-     */
-    /**
-     * 获取TAG
-     */
+    // App 名称
+    private static String mAppName = "TEST";
+
+    private static Context mContext;
+
     private static final String POINT = ":";
     private static final String SEPARATOR = " ";
-    private static String TAG = "v160624";
-    private static Context ctx;
     // 默认为五种日志类型均在 LogCat 中输出显示
-    private static char m_cLogCatShowLogType = SHOW_VERBOSE_LOG |
-            SHOW_DEBUG_LOG |
-            SHOW_INFO_LOG |
-            SHOW_WARN_LOG |
-            SHOW_ERROR_LOG;// 0001 1111
-    // 默认为五种日志类型均在 日志文件 中输出保存
-    //public static char m_cFileSaveLogType = 0;
-    // 以下注释不要删除，以便日后开启指定日志类型输出到日志文件中
-//    public static char m_cFileSaveLogType =
-//    										SHOW_NONE_LOG	 |
-//    										SHOW_VERBOSE_LOG |
-//                                            SHOW_DEBUG_LOG   |
-//                                            SHOW_INFO_LOG    |
-//                                            SHOW_WARN_LOG    |
-//                                            SHOW_ERROR_LOG;
-    // App 名称
-    private static String m_strAppName;
-    // 存放日志文件的目录全路径
-    private static String m_strLogFolderPath = Environment.getExternalStorageDirectory() + "/_temp/log";
-    private static String m_strLogName = "custom.txt";
-    // 得到当前日期时间的指定格式字符串
-    private static SimpleDateFormat m_sdfFileName = new SimpleDateFormat("yyyyMMddHH");// 日志名称格式
-    private static String m_strDateTimeFileName = m_sdfFileName.format(new Date());
+    private static char mLogCatShowLogType = SHOW_VERBOSE_LOG | SHOW_DEBUG_LOG | SHOW_INFO_LOG | SHOW_WARN_LOG | SHOW_ERROR_LOG;
 
-    public static void init(Context context) {
-        // TODOf Auto-generated constructor stub
-        ctx = context;
-        TAG = ctx.getPackageName();
-        SetLogFilePath();
+    // 存放日志文件的目录全路径
+    private static String mLogFilePath = "";
+    private static String mLogFileName = "";
+    // 得到当前日期时间的指定格式字符串
+    private static SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("yyyyMMddHH");// 日志名称格式
+    private static String mDateFormatStr = mSimpleDateFormat.format(new Date());
+
+    private static String SetLogFilePath() {
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {// 优先保存到SD卡中
+            mLogFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + mAppName;
+        } else if (mContext != null) {// 如果SD卡不存在，就保存到本应用的目录下
+            mLogFilePath = mContext.getFilesDir().getAbsolutePath() + File.separator + mAppName;
+        }
+        Log.e(mAppName, mLogFilePath);
+        return mLogFilePath;
     }
 
-    private static void SetLogFilePath() {
-        if (ctx != null) {
-            m_strAppName = ctx.getPackageName();
-            m_strLogFolderPath = Environment.getExternalStorageDirectory() + "/" +m_strAppName;
-        }
-        Log.e(TAG, m_strLogFolderPath);
+    public static void setPrintLevel(char level) {
+        mLogCatShowLogType = level;
+    }
+
+    public static void init(Context context) {
+        mAppName = context.getPackageName();
+        mContext = context;
     }
 
     private static void SaveLog2File(String strMsg) {
@@ -111,40 +71,41 @@ public class Lw {
             // 未安装 SD 卡
             if (true != Environment.MEDIA_MOUNTED.equals(state)) {
 
-                Log.d(TAG, "Not mount SD card!");
+                Log.d(mAppName, "Not mount SD card!");
                 break;
             }
 
             // SD 卡不可写
             if (true == Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
-                Log.d(TAG, "Not allow write SD card!");
+                Log.d(mAppName, "Not allow write SD card!");
                 break;
             }
 
             // 只有存在外部 SD 卡且可写入的情况下才允许保存日志文件到指定目录路径下
             // 没有指定日志文件存放位置的话，就写到默认位置，即 SD 卡根目录下的 custom_android_log 目录中
             // 指定日志文件保存的路径，文件名由内部按日期时间形式
-            m_strLogFolderPath = m_strLogFolderPath.trim();
-            if (true == m_strLogFolderPath.equals("")) {
-                m_strLogFolderPath = Environment.getExternalStorageDirectory() +
-                        "/icar/log";
+            mLogFilePath = mLogFilePath.trim();
+            if (true == mLogFilePath.equals("")) {
+                SetLogFilePath();
             }
 
-            File fileSaveLogFolderPath = new File(m_strLogFolderPath);
+            File fileSaveLogFolderPath = new File(mLogFilePath);
+            Log.d(mAppName, "fileSaveLogFolderPath.canWrite():" + fileSaveLogFolderPath.canWrite());
+
             // 保存日志文件的路径不存在的话，就创建它
-            if (true != fileSaveLogFolderPath.exists()) {
-                fileSaveLogFolderPath.mkdirs();
+            if (!fileSaveLogFolderPath.exists()) {
+                if (!fileSaveLogFolderPath.mkdirs()) {
+                    // 如果这里保存日志文件的路径还不存在的话，则要提醒用户了
+                    Log.d(mAppName, "Create log folder failed! please add this code below in MainActivity.java");
+                    Log.d(mAppName, "ActivityCompat.requestPermissions(MainActivity.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);");
+                    //增加读写文件权限
+                    //ActivityCompat.requestPermissions(MainActivity.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+
+                }
             }
 
-            // 如果这里保存日志文件的路径还不存在的话，则要提醒用户了
-            if (true != fileSaveLogFolderPath.exists()) {
-                Log.d(TAG, "Create log folder failed!");
-                break;
-            }
-
-
-            m_strLogName = /*m_sAppName+*/m_strDateTimeFileName + ".custom.txt";
-            File fileLogFilePath = new File(m_strLogFolderPath, m_strLogName);
+            mLogFileName = /*m_sAppName+*/mDateFormatStr + ".custom.txt";
+            File fileLogFilePath = new File(mLogFilePath, mLogFileName);
             // 如果日志文件不存在，则创建它
             if (true != fileLogFilePath.exists()) {
                 try {
@@ -157,7 +118,7 @@ public class Lw {
 
             // 如果执行到这步日志文件还不存在，就不写日志到文件了
             if (true != fileLogFilePath.exists()) {
-                Log.d(TAG, "Create log file failed!");
+                Log.d(mAppName, "Create log file failed!");
                 break;
             }
 
@@ -165,7 +126,7 @@ public class Lw {
                 objFilerWriter = new FileWriter(fileLogFilePath, //
                         true);          // 续写不覆盖
             } catch (IOException e1) {
-                Log.d(TAG, "New FileWriter Instance failed");
+                Log.d(mAppName, "New FileWriter Instance failed");
                 e1.printStackTrace();
                 break;
             }
@@ -182,7 +143,7 @@ public class Lw {
                 objBufferedWriter.write(strMsg);
                 objBufferedWriter.flush();
             } catch (IOException e) {
-                Log.d(TAG, "objBufferedWriter.write or objBufferedWriter.flush failed");
+                Log.d(mAppName, "objBufferedWriter.write or objBufferedWriter.flush failed");
                 e.printStackTrace();
             }
 
@@ -251,7 +212,7 @@ public class Lw {
         if ((null == msg) || (true == msg.trim().equals(""))) {
             return;
         }
-        if (0 != (level & m_cLogCatShowLogType))//如果level在LogType里
+        if (0 != (level & mLogCatShowLogType))//如果level在LogType里
         {
             StackTraceElement stackTraceElement = Thread.currentThread().getStackTrace()[4];
             String tag = getDefaultTag(stackTraceElement);
@@ -268,7 +229,7 @@ public class Lw {
         if ((null == msg) || (true == msg.trim().equals(""))) {
             return;
         }
-        if (0 != (level & m_cLogCatShowLogType)) {
+        if (0 != (level & mLogCatShowLogType)) {
             msg = tag + msg;
             SaveLog2File(msg);
         }
@@ -325,13 +286,13 @@ public class Lw {
      * 删除内存下过期的日志，在app中判断 每天调用一次删除log
      */
     private static void deleteSDcardExpiredLog() {
-        File file = new File(m_strLogFolderPath);
+        File file = new File(mLogFilePath);
         if (file.isDirectory()) {
             File[] allFiles = file.listFiles();
             for (File logFile : allFiles) {
                 String fileName = logFile.getName();
                 //Lr.v(fileName);
-                if (m_strLogName.equals(fileName)) {
+                if (mLogFileName.equals(fileName)) {
                     continue;
                 }
                 String createDateInfo = getFileNameWithoutExtension(fileName);
@@ -361,7 +322,7 @@ public class Lw {
         Date expiredDate = calendar.getTime();
 
         try {
-            Date createDate = m_sdfFileName.parse(createDateStr);
+            Date createDate = mSimpleDateFormat.parse(createDateStr);
 
             canDel = createDate.before(expiredDate);
         } catch (ParseException e) {
@@ -381,3 +342,35 @@ public class Lw {
         return fileName.substring(0, fileName.indexOf("."));
     }
 }
+
+
+    /*
+     * 逻辑运算:
+     *
+     * !;&&;||;();
+     *
+     *
+     * Java/C/Pascal位运算:
+     *
+     * 按位与		&		相同位的两个数字都为1，则为1；若有一个不为1，则为0。
+     * 					and运算通常用于二进制取位操作，例如一个数 and 1的结果就是取二进制的最末位。
+     * 					这可以用来判断一个整数的奇偶，二进制的最末位为0表示该数为偶数，最末位为1表示该数为奇数。
+     * 按位或		|		相同位只要一个为1即为1。
+     * 					or运算通常用于二进制特定位上的无条件赋值，例如一个数or 1的结果就是把二进制最末位强行变成1。
+     * 					如果需要把二进制最末位变成0，对这个数or 1之后再减一就可以了，其实际意义就是把这个数强行变成最接近的偶数。
+     * 按位异或	^		相同位不同则为1，相同则为0。
+     * 					xor运算的逆运算是它本身，也就是说两次异或同一个数最后结果不变，即（a xor b) xor b = a。
+     * 					xor运算可以用于简单的加密
+     * 按位取反	~
+     * 左移		<<		a shl b的值实际上就是a乘以2的b次方，因为在二进制数后添一个0就相当于该数乘以2
+     * 带符号右移	>> 		a shr b表示二进制右移b位（去掉末b位），相当于a除以2的b次方（取整）。比如二分查找、堆的插入操作等等。
+     * 无符号右移	>>>
+     *
+     * C语言中位运算符之间，按优先级顺序排列为
+     * 1 ~
+     * 2 <<、>>
+     * 3 &
+     * 4 ^
+     * 5 |
+     * 6 &=、^=、|=、<<=、>>=
+     */

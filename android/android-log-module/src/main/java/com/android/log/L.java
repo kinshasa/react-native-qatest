@@ -26,19 +26,17 @@ public class L {
 	public static final int NOLOG = 6;
 	
 	private static int LEVEL_PRINTF = VERBOSE;//<LEVEL_PRINTF,打印Log等级
-	private static int LEVEL_WRITE = NOLOG;//>LEVEL_WRITE,写入Log文件等级
+	private static int LEVEL_WRITE = VERBOSE;//>LEVEL_WRITE,写入Log文件等级
 
 	private static final String SEPARATOR = " ";
 
 	/**
 	 * 初始化日志，设置打印，写入日志level
 	 * @param print 打印日志level
-	 * @param write 写入日志level
 	 */
-	public static void init(int print,int write) {
+	public static void init(int print) {
 		// TODO Auto-generated constructor stub
     	LEVEL_PRINTF = print;
-    	LEVEL_WRITE = write;
 	}
 
     
@@ -132,10 +130,8 @@ public class L {
 		default:
 			break;
 		}
-		
-		if (level >= LEVEL_WRITE) {
-			Lw.v(getLogInfo(stackTraceElement), msg);
-		}
+
+		Lw.v(getLogInfo(stackTraceElement), msg);
 	}
 	
 	/**

@@ -14,6 +14,11 @@ public class Response<T> {
     public boolean success;
     public T data;
 
+    //发起请求的数据
+    public String url;
+    public String body;
+    public String header;
+
     public static final String RES_CODE_SUCCESS = "0";
 
 

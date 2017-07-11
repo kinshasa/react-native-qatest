@@ -185,7 +185,7 @@ public class SplashView extends FrameLayout {
         if (null == contentView || 0 == contentView.getChildCount()) {
             throw new IllegalStateException("You should call showSplashView() after setContentView() in Activity instance");
         }
-        IMG_PATH = activity.getFilesDir().getAbsolutePath().toString() + "/splash_img.jpg";
+        IMG_PATH = activity.getFilesDir().getAbsolutePath() + "/splash_img.jpg";
         SplashView splashView = new SplashView(activity);
         RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         splashView.setOnSplashImageClickListener(listener);

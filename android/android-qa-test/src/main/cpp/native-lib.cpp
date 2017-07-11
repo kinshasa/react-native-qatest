@@ -5,7 +5,6 @@ extern "C" {
 JNIEXPORT jstring JNICALL
 Java_com_android_qatest_ui_user_MineFragment_getSignStr(JNIEnv *env, jobject instance) {
 
-    // TODO
     std::string sign = "params with md5 sign.";
 
     return env->NewStringUTF(sign.c_str());

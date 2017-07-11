@@ -2,8 +2,10 @@ package com.android.qatest.ui.home;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import com.android.qatest.ui.home.model.Floor;
 import com.android.qatest.ui.home.model.HomePageResponse;
 import com.android.qatest.ui.widget.BannerLayout;
 
+import java.io.File;
 import java.util.ArrayList;
 
 

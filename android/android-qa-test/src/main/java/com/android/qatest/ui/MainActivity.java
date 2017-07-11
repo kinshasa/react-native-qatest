@@ -2,6 +2,7 @@ package com.android.qatest.ui;
 
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -59,6 +60,9 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         initViews();
         // call after setContentView(R.layout.activity_sample);
         StatusBarUtil.setTranslucent(this);
+
+        //增加读写文件权限
+        ActivityCompat.requestPermissions(MainActivity.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
     }
 
 
@@ -142,6 +146,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     public void onPageScrollStateChanged(int state) {
 
     }
+
 
     public class FragmentAdapter extends FragmentStatePagerAdapter implements AdvancedPagerSlidingTabStrip.IconTabProvider {
 

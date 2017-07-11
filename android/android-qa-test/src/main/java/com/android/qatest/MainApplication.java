@@ -4,6 +4,9 @@ import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 
+import com.android.log.L;
+import com.android.log.LogCrashHandler;
+import com.android.log.Lw;
 import com.android.qatest.rct.RCTImagePackage;
 import com.android.qatest.rct.RCTViewPackage;
 import com.blankj.utilcode.utils.Utils;
@@ -61,6 +64,17 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+
+
+        L.init(L.VERBOSE);
+
+        Lw.init(this);
+
+        //初始化工具类
+        Utils.init(this);
+
+        LogCrashHandler.getInstance().init(this);
+
         SoLoader.init(this, /* native exopackage */ false);
 
         // 这里实现SDK初始化，appId替换成你的在Bugly平台申请的appId
@@ -68,9 +82,6 @@ public class MainApplication extends Application implements ReactApplication {
         Bugly.init(this, "f130c8d4d9", false);
 
         Fresco.initialize(this);
-
-        //初始化工具类
-        Utils.init(this);
 
         if (!LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.

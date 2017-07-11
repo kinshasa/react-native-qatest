@@ -44,37 +44,35 @@ public class LogCrashHandler implements UncaughtExceptionHandler {
 
 	public static final String TAG = "CrashHandler";
 
+	//CrashHandler实例
+	private static LogCrashHandler instance;
+
 	//系统默认的UncaughtException处理类
 	private UncaughtExceptionHandler mDefaultHandler;
-	//CrashHandler实例
-	private static LogCrashHandler INSTANCE = new LogCrashHandler();
 	//程序的Context对象
-	private static Context ctx;
+	private Context mContext;
 	//用来存储设备信息和异常信息
 	private Map<String, String> infos = new HashMap<String, String>();
 
 	//用于格式化日期,作为日志文件名的一部分yyyy-MMdd-HH
 	private DateFormat formatter = new SimpleDateFormat("yyyyMMddHH.mmss");
 
-    // App 名称
-    public static String m_sAppName = "iCar";
+	// App 名称
+	public String mAppName = "TEST";
 	// 存放日志文件的目录全路径
-	public static String m_strLogFolderPath = Environment.getExternalStorageDirectory()+"/icar/log/";
+	public String mLogFilePath = "";
 
-	private static boolean crashSystemMethod = true;
-	private static boolean crashLogSave = true;
-    private static final boolean _APP_ROUTE = false;
+	public boolean crashSystemMethod = true;
+	public boolean crashLogSave = true;
 
 
-    private static void SetLogFilePath(){
-    	if(ctx != null){
-    		if(_APP_ROUTE){
-    			m_strLogFolderPath = ctx.getFilesDir().getAbsolutePath()+"/log/";
-    		}else{
-    			m_strLogFolderPath = Environment.getExternalStorageDirectory()+"/icar/log/";
-    		}
-    	}
-    	L.v(m_strLogFolderPath);
+    private void SetLogFilePath(){
+		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {// 优先保存到SD卡中
+			mLogFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + mContext.getPackageName();
+		} else if (mContext != null) {// 如果SD卡不存在，就保存到本应用的目录下
+			mLogFilePath = mContext.getFilesDir().getAbsolutePath() + File.separator + mContext.getPackageName();
+		}
+		Log.v(mAppName,mLogFilePath);
     }
 
 	/** 保证只有一个CrashHandler实例 */
@@ -83,7 +81,10 @@ public class LogCrashHandler implements UncaughtExceptionHandler {
 
 	/** 获取CrashHandler实例 ,单例模式 */
 	public static LogCrashHandler getInstance() {
-		return INSTANCE;
+		if (instance == null) {
+			instance = new LogCrashHandler();
+		}
+		return instance;
 	}
 
 	/**
@@ -92,8 +93,9 @@ public class LogCrashHandler implements UncaughtExceptionHandler {
 	 * @param context
 	 */
 	public void init(Context context) {
-		ctx = context;
-		SetLogFilePath();
+		mContext = context;
+		mAppName = context.getPackageName();
+
 		//获取系统默认的UncaughtException处理器
 		mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
 		//设置该CrashHandler为程序的默认处理器
@@ -131,18 +133,18 @@ public class LogCrashHandler implements UncaughtExceptionHandler {
 		if (ex == null) {
 			return false;
 		}
-		L.i(ex);
+		Log.i(mAppName,ex.getMessage());
 		//使用Toast来显示异常信息
 		new Thread() {
 			@Override
 			public void run() {
 				Looper.prepare();
-				Toast.makeText(ctx, "很抱歉,程序出现异常,即将退出.", Toast.LENGTH_LONG).show();
+				Toast.makeText(mContext, "很抱歉,程序出现异常,即将退出.", Toast.LENGTH_LONG).show();
 				Looper.loop();
 			}
 		}.start();
 		//收集设备参数信息 
-		collectDeviceInfo(ctx);
+		collectDeviceInfo(mContext);
 		//保存日志文件 
 		saveCrashInfo2File(ex);
 		return true;
@@ -216,11 +218,14 @@ public class LogCrashHandler implements UncaughtExceptionHandler {
 			
 			if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
 				//String path = "/sdcard/crash/";
-				File dir = new File(m_strLogFolderPath);
+				if(mLogFilePath == null || mLogFilePath == ""){
+					SetLogFilePath();
+				}
+				File dir = new File(mLogFilePath);
 				if (!dir.exists()) {
 					dir.mkdirs();
 				}
-				FileOutputStream fos = new FileOutputStream(m_strLogFolderPath + fileName);
+				FileOutputStream fos = new FileOutputStream(mLogFilePath + fileName);
 				fos.write(sb.toString().getBytes());
 				fos.close();
 			}
