@@ -66,11 +66,11 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         StatusBarUtil.setTranslucent(this);
 
         //判断用户是否已经授权，未授权则向用户申请授权，已授权则直接进行呼叫操作
-        if (ContextCompat.checkSelfPermission(MainActivity.this, "Manifest.permission.WRITE_EXTERNAL_STORAGE")
+        if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             //增加读写文件权限
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-            //requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            //ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
 
     }
