@@ -23,7 +23,7 @@ import cn.reactnative.modules.update.UpdatePackage;
  * Created by lshaobocsu@gmail.com on 2017.5.25.
  */
 
-public class ReactRootActivity extends AppCompatActivity implements DefaultHardwareBackBtnHandler {
+public abstract class ReactRootActivity extends AppCompatActivity implements DefaultHardwareBackBtnHandler {
 
     //  Caused by: com.facebook.react.devsupport.JSException:
     // Could not get BatchedBridge, make sure your bundle is packaged correctly
@@ -36,7 +36,7 @@ public class ReactRootActivity extends AppCompatActivity implements DefaultHardw
         super.onCreate(savedInstanceState);
 
         mReactRootView = new ReactRootView(this);
-        mReactInstanceManager = ReactInstanceManager.builder()
+        /*mReactInstanceManager = ReactInstanceManager.builder()
                 .setApplication(getApplication())//如果在lib module中可能获取不到。
                 .setBundleAssetName("index.android.bundle")
                 .setJSMainModuleName("index.android")
@@ -48,12 +48,13 @@ public class ReactRootActivity extends AppCompatActivity implements DefaultHardw
                 .addPackage(new RNSpinkitPackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
-                .build();
+                .build();*/
+        mReactInstanceManager = getReactInstanceManager();
 
         // 注意这里的HelloWorld必须对应“index.android.js”中的
         // “AppRegistry.registerComponent()”的第一个参数
         Bundle bundle = new Bundle();
-        bundle.putString("key1","value1");
+        bundle.putString("key1", "value1");
         mReactRootView.startReactApplication(mReactInstanceManager, "QATest", bundle);
 
         setContentView(mReactRootView);
@@ -67,6 +68,7 @@ public class ReactRootActivity extends AppCompatActivity implements DefaultHardw
         }
     }
 
+    abstract ReactInstanceManager getReactInstanceManager();
 
     @Override
     public void invokeDefaultOnBackPressed() {

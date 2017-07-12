@@ -62,32 +62,6 @@
             </intent-filter>
         </activity>
         <!--ReactNative 首页入口-->
-       <!-- <activity
-            android:name="com.android.qatest.ui.ReactMainActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:label="React首页"
-            android:launchMode="singleTask">
-            &lt;!&ndash;<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>&ndash;&gt;
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                &lt;!&ndash;<a href="qatest://www.ds.cn/rn?username=root&password=123456">启动应用程序</a> &ndash;&gt;
-                <data
-                    android:host="liushaobo.xicp.net"
-                    android:pathPrefix="/rn"
-                    android:scheme="qatest" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.qatest.list" />
-            </intent-filter>
-        </activity>
-        -->
         <activity
             android:name=".ui.ReactRootViewActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
@@ -129,17 +103,6 @@
                 <category android:name="com.android.qatest.list" />
             </intent-filter>
         </activity>
-
-        <!--React Native.-->
-       <!-- <activity
-            android:name="com.facebook.react.devsupport.DevSettingsActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:label="DevSettingsActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.qatest.list" />
-            </intent-filter>
-        </activity>-->
 
         <!--第三方支付-->
         <!--微信支付-->
