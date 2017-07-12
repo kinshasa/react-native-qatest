@@ -21,12 +21,12 @@ import cn.reactnative.modules.update.UpdatePackage;
 
 /**
  * Created by lshaobocsu@gmail.com on 2017.5.25.
+ *     java.lang.RuntimeException: com.facebook.react.devsupport.JSException: Could not get BatchedBridge, make sure your bundle is packaged correctly
+ *     at com.facebook.react.bridge.DefaultNativeModuleCallExceptionHandler.handleException(DefaultNativeModuleCallExceptionHandler.java:24)
  */
 
 public abstract class ReactRootActivity extends AppCompatActivity implements DefaultHardwareBackBtnHandler {
 
-    //  Caused by: com.facebook.react.devsupport.JSException:
-    // Could not get BatchedBridge, make sure your bundle is packaged correctly
     private static final int OVERLAY_PERMISSION_REQ_CODE = 1;
     private ReactRootView mReactRootView;
     private ReactInstanceManager mReactInstanceManager;
@@ -68,7 +68,7 @@ public abstract class ReactRootActivity extends AppCompatActivity implements Def
         }
     }
 
-    abstract ReactInstanceManager getReactInstanceManager();
+    protected abstract ReactInstanceManager getReactInstanceManager();
 
     @Override
     public void invokeDefaultOnBackPressed() {
