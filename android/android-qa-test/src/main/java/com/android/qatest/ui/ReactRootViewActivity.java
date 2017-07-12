@@ -1,4 +1,4 @@
-package com.android.qatest.ui.home;
+package com.android.qatest.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,7 +21,7 @@ import cn.reactnative.modules.update.UpdatePackage;
  * Created by lshaobocsu@gmail.com on 2017.5.25.
  */
 
-public class HomePageActivity extends AppCompatActivity implements DefaultHardwareBackBtnHandler {
+public class ReactRootViewActivity extends AppCompatActivity implements DefaultHardwareBackBtnHandler {
 
     private ReactRootView mReactRootView;
     private ReactInstanceManager mReactInstanceManager;

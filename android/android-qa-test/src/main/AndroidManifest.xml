@@ -63,9 +63,9 @@
         </activity>
         <!--ReactNative 首页入口-->
         <activity
-            android:name="com.android.qatest.ui.ReactNativeMainActivity"
+            android:name="com.android.qatest.ui.ReactMainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:label="react首页入口"
+            android:label="React首页"
             android:launchMode="singleTask">
             <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -82,6 +82,15 @@
                     android:pathPrefix="/rn"
                     android:scheme="qatest" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.qatest.list" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.ReactRootViewActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:label="ReactRootView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.qatest.list" />
@@ -104,15 +113,6 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:label="垂直ViewPager2"
             android:launchMode="singleTop">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.qatest.list" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.home.HomePageActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:label="HomePageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.qatest.list" />

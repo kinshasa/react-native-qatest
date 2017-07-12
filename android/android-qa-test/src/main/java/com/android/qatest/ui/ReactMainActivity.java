@@ -6,7 +6,7 @@ import android.widget.Toast;
 
 import com.facebook.react.ReactActivity;
 
-public class ReactNativeMainActivity extends ReactActivity {
+public class ReactMainActivity extends ReactActivity {
 
     private Context context = this;
 
