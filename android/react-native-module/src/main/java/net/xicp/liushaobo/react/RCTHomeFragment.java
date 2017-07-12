@@ -7,13 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
-
 /**
  * Created by lshaobocsu@gmail.com on 2017.7.12.
  */
 
-public class RCTHomeFragment extends Fragment implements DefaultHardwareBackBtnHandler {
+public class RCTHomeFragment extends Fragment {
 
     private RCTRootManager mRCTRootManager;
 
@@ -21,7 +19,6 @@ public class RCTHomeFragment extends Fragment implements DefaultHardwareBackBtnH
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         mRCTRootManager = new RCTRootManager(getActivity(), "QATest");
-
         return mRCTRootManager.getReactRootView();
     }
 
@@ -29,31 +26,18 @@ public class RCTHomeFragment extends Fragment implements DefaultHardwareBackBtnH
     public void onPause() {
         super.onPause();
 
-        if (mRCTRootManager.getReactInstanceManager() != null) {
-            mRCTRootManager.getReactInstanceManager().onHostPause(getActivity());
-        }
+        mRCTRootManager.onPause();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
-        if (mRCTRootManager.getReactInstanceManager() != null) {
-            mRCTRootManager.getReactInstanceManager().onHostResume(getActivity(), this);
-        }
+        mRCTRootManager.onResume();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-
-        if (mRCTRootManager.getReactInstanceManager() != null) {
-            mRCTRootManager.getReactInstanceManager().onHostDestroy(getActivity());
-        }
-    }
-
-    @Override
-    public void invokeDefaultOnBackPressed() {
-        getActivity().onBackPressed();
+        mRCTRootManager.onDestroy();
     }
 }

@@ -17,7 +17,7 @@ import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
  *     at com.facebook.react.bridge.DefaultNativeModuleCallExceptionHandler.handleException(DefaultNativeModuleCallExceptionHandler.java:24)
  */
 
-public abstract class RCTRootActivity extends AppCompatActivity implements DefaultHardwareBackBtnHandler {
+public abstract class RCTRootActivity extends AppCompatActivity{
 
     protected static final int OVERLAY_PERMISSION_REQ_CODE = 1;
     protected RCTRootManager mRCTRootManager;
@@ -40,53 +40,35 @@ public abstract class RCTRootActivity extends AppCompatActivity implements Defau
     }
 
     @Override
-    public void invokeDefaultOnBackPressed() {
-        super.onBackPressed();
-    }
-
-    @Override
     protected void onPause() {
         super.onPause();
-
-        if (mRCTRootManager.getReactInstanceManager() != null) {
-            mRCTRootManager.getReactInstanceManager().onHostPause(this);
-        }
+        mRCTRootManager.onPause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        if (mRCTRootManager.getReactInstanceManager() != null) {
-            mRCTRootManager.getReactInstanceManager().onHostResume(this, this);
-        }
+        mRCTRootManager.onResume();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
-        if (mRCTRootManager.getReactInstanceManager() != null) {
-            mRCTRootManager.getReactInstanceManager().onHostDestroy(this);
-        }
+        mRCTRootManager.onDestroy();
     }
 
     @Override
     public void onBackPressed() {
-        if (mRCTRootManager.getReactInstanceManager() != null) {
-            mRCTRootManager.getReactInstanceManager().onBackPressed();
-        } else {
-            super.onBackPressed();
-        }
+        mRCTRootManager.onBackPressed();
     }
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_MENU && mRCTRootManager.getReactInstanceManager() != null) {
-            mRCTRootManager.getReactInstanceManager().showDevOptionsDialog();
-            return true;
+        if (keyCode == KeyEvent.KEYCODE_MENU) {
+            return mRCTRootManager.onKeyUp(keyCode,event);
         }
-        return super.onKeyUp(keyCode, event);
+        return super.onKeyUp(keyCode,event);
+
     }
 
     @Override
