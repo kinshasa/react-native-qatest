@@ -18,6 +18,8 @@
 11. JNI实例开发
 12. AIDL实例开发
 13. RecyclerView实例开发
+14. 自定义组件`(onMeather,onLayout,onTouch时间传递)`
+15. 动画实现`(onDraw,Paint,invadite)`
 
 
 
