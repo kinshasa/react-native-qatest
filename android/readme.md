@@ -18,3 +18,13 @@
 11. JNI实例开发
 12. AIDL实例开发
 13. RecyclerView实例开发
+
+
+
+**`备注`**
+
+6. 实现ReactNative多模块异步加载`(仿京东多RN组件并存方案)`
+实现方式为：
+    1. 创建一个react项目分多个index.js文件
+    2. 在Activity中通过ReactInstanceManager创建对应的index.js文件
+    3. 对应的Activity加载ReactRootView
