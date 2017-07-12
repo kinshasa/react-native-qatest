@@ -14,6 +14,7 @@ include ':android-upgrade-module'
 //react-native module
 include ':react-native-spinkit'
 include ':react-native-update'
+include ':react-native-module'
 
 project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vector-icons/android')
 project(':react-native-update').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-update/android')

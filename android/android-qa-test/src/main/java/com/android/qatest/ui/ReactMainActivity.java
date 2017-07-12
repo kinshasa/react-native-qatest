@@ -1,19 +1,15 @@
 package com.android.qatest.ui;
 
-import android.content.Context;
-import android.os.Bundle;
-import android.widget.Toast;
+import android.app.Activity;
 
-import com.facebook.react.ReactActivity;
+public class ReactMainActivity extends Activity {
 
-public class ReactMainActivity extends ReactActivity {
+    /*private Context context = this;
 
-    private Context context = this;
-
-    /**
+    *//**
      * Returns the name of the main component registered from JavaScript.
      * This is used to schedule rendering of the component.
-     */
+     *//*
     @Override
     protected String getMainComponentName() {
         return "QATest";
@@ -23,15 +19,15 @@ public class ReactMainActivity extends ReactActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /*Intent intent = new Intent();
+        *//*Intent intent = new Intent();
         intent.setClass(this, VerticalPagerActivity.class);
-        context.startActivity(intent);*/
+        context.startActivity(intent);*//*
 
         //bugly自动升级初始化
         //Bugly.init(getApplicationContext(), "f130c8d4d9", false);
 
         Toast.makeText(this, "onCreate", Toast.LENGTH_LONG).show();
-        /*Intent intent = getIntent();
+        *//*Intent intent = getIntent();
         String action = intent.getAction();
         if(Intent.ACTION_VIEW.equals(action)) {
             Uri uri = intent.getData();
@@ -41,7 +37,7 @@ public class ReactMainActivity extends ReactActivity {
                 Log.v("MainActivity age", username);
                 Log.v("MainActivity name", password);
             }
-        }*/
+        }*//*
     }
 
 
@@ -51,5 +47,5 @@ public class ReactMainActivity extends ReactActivity {
         super.onDestroy();
 
         Toast.makeText(getApplicationContext(), "onDestroy", Toast.LENGTH_LONG).show();
-    }
+    }*/
 }

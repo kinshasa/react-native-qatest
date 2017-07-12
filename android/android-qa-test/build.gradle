@@ -154,13 +154,7 @@ android {
     }
 }
 
-apply from: "../../node_modules/react-native/react.gradle"
 
-project.ext.vectoricons = [
-        iconFontNames: ['MaterialIcons.ttf', 'EvilIcons.ttf'] // Name of the font files you want to copy
-]
-
-apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 // 依赖插件脚本
 //apply from: 'tinker-support.gradle'
@@ -170,7 +164,6 @@ dependencies {
 
     compile 'com.android.support:appcompat-v7:25.0.0'
     compile 'com.android.support:support-annotations:25.0.0'
-    compile 'com.facebook.react:react-native:+'
 
     //
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -204,6 +197,8 @@ dependencies {
 
     //Pay Module
     compile project(path: ':android-pay-module')
+
+    compile project(path: ':react-native-module')
 
     //verticalViewPager
     compile 'me.kaelaela:verticalviewpager:1.0.0@aar'
@@ -251,24 +246,7 @@ dependencies {
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
 
-    //
 
-    /***************************************************
-     *                                                 *
-     *                                                 *
-     *                  ReactNative 依赖库              *
-     *                                                 *
-     *                                                 *
-     *                                                 *
-     ***************************************************/
-    compile project(':react-native-vector-icons')
-
-    //A collection of animated loading indicators for React Native
-    //@https://github.com/maxs15/react-native-spinkit
-    compile project(':react-native-spinkit')
-
-    //react-native-pushy
-    compile project(':react-native-update')
     /** Fresco from facebook @https://github.com/facebook/fresco**/
 
     //facebook Fresco. react需要0.11.0版本 最新1.3版本不支持
@@ -284,7 +262,6 @@ dependencies {
     compile 'com.facebook.fresco:animated-webp:0.11.0'
     // 支持 WebP 静态图
     compile 'com.facebook.fresco:webpsupport:0.11.0'
-
 
 }
 

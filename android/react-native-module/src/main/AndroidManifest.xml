@@ -1,0 +1,28 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="net.xicp.liushaobo.react">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application>
+        <activity
+            android:name=".ReactRootActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:label="ReactRoot">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.qatest.list" />
+            </intent-filter>
+        </activity>
+        <!--React Native.-->
+        <activity
+            android:name="com.facebook.react.devsupport.DevSettingsActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:label="DevSettingsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.qatest.list" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

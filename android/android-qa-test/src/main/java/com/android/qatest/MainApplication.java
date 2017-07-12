@@ -8,8 +8,6 @@ import android.support.multidex.MultiDex;
 import com.android.log.L;
 import com.android.log.LogCrashHandler;
 import com.android.log.Lw;
-import com.android.qatest.rct.RCTImagePackage;
-import com.android.qatest.rct.RCTViewPackage;
 import com.blankj.utilcode.utils.Utils;
 import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.common.internal.Supplier;
@@ -17,27 +15,14 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.cache.MemoryCacheParams;
 import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
-import com.facebook.react.ReactApplication;
-import com.facebook.react.ReactNativeHost;
-import com.facebook.react.ReactPackage;
-import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.oblador.vectoricons.VectorIconsPackage;
-import com.pay.module.PayReactPackage;
-import com.react.rnspinkit.RNSpinkitPackage;
 import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 
-import java.util.Arrays;
-import java.util.List;
+public class MainApplication extends Application  {
 
-import cn.reactnative.modules.update.UpdateContext;
-import cn.reactnative.modules.update.UpdatePackage;
-
-public class MainApplication extends Application implements ReactApplication {
-
-    private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
+    /*private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
         @Override
         protected boolean getUseDeveloperSupport() {
             return BuildConfig.DEBUG;
@@ -62,10 +47,9 @@ public class MainApplication extends Application implements ReactApplication {
         }
     };
 
-    @Override
     public ReactNativeHost getReactNativeHost() {
         return mReactNativeHost;
-    }
+    }*/
 
     @Override
     public void onCreate() {
