@@ -9,25 +9,21 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 
-import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
-
 /**
  * Created by lshaobocsu@gmail.com on 2017.5.25.
- *     java.lang.RuntimeException: com.facebook.react.devsupport.JSException: Could not get BatchedBridge, make sure your bundle is packaged correctly
- *     at com.facebook.react.bridge.DefaultNativeModuleCallExceptionHandler.handleException(DefaultNativeModuleCallExceptionHandler.java:24)
+ * java.lang.RuntimeException: com.facebook.react.devsupport.JSException: Could not get BatchedBridge, make sure your bundle is packaged correctly
+ * at com.facebook.react.bridge.DefaultNativeModuleCallExceptionHandler.handleException(DefaultNativeModuleCallExceptionHandler.java:24)
  */
 
-public abstract class RCTRootActivity extends AppCompatActivity{
+public abstract class RCTRootActivity extends AppCompatActivity {
 
-    protected static final int OVERLAY_PERMISSION_REQ_CODE = 1;
-    protected RCTRootManager mRCTRootManager;
+    public static final int OVERLAY_PERMISSION_REQ_CODE = 1;
+    public RCTRootManager mRCTRootManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mRCTRootManager = new RCTRootManager(this,"QATest");
-        setContentView(mRCTRootManager.getReactRootView());
 
         //打开悬浮窗口权限
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -42,19 +38,22 @@ public abstract class RCTRootActivity extends AppCompatActivity{
     @Override
     protected void onPause() {
         super.onPause();
+        if(mRCTRootManager!=null)
         mRCTRootManager.onPause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mRCTRootManager.onResume();
+        if(mRCTRootManager!=null)
+            mRCTRootManager.onResume();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mRCTRootManager.onDestroy();
+        if(mRCTRootManager!=null)
+            mRCTRootManager.onDestroy();
     }
 
     @Override
@@ -65,9 +64,10 @@ public abstract class RCTRootActivity extends AppCompatActivity{
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_MENU) {
-            return mRCTRootManager.onKeyUp(keyCode,event);
+            if(mRCTRootManager!=null)
+                return mRCTRootManager.onKeyUp(keyCode, event);
         }
-        return super.onKeyUp(keyCode,event);
+        return super.onKeyUp(keyCode, event);
 
     }
 

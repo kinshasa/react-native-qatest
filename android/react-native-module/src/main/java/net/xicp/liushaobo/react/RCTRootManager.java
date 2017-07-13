@@ -18,8 +18,8 @@ import com.facebook.react.shell.MainReactPackage;
 
 public class RCTRootManager extends FrameLayout implements DefaultHardwareBackBtnHandler {
 
-    private ReactInstanceManager mReactInstanceManager;
-    private ReactRootView mReactRootView;
+    public ReactInstanceManager mReactInstanceManager;
+    public ReactRootView mReactRootView;
 
     private Activity mActivity;
 
