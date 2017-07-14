@@ -38,7 +38,7 @@ export default class App extends Component {
     }
 
     componentWillMount() {
-        Loggers.s('App::componentWillMount()',global.onerror);
+        Loggers.s('App::componentWillMount()',globalConfig.getWidth());
         //AppController.init();
     }
 

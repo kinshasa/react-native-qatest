@@ -1,4 +1,4 @@
-package com.android.qatest.ui;
+package com.android.qatest.ui.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,10 +18,10 @@ import net.xicp.liushaobo.react.ReactRootActivity;
 import cn.reactnative.modules.update.UpdatePackage;
 
 /**
- * Created by lshaobocsu@gmail.com on 2017.5.25.
+ * Created by lshaobocsu@gmail.com on 2017.7.14.
  */
 
-public class ReactRootViewActivity extends ReactRootActivity {
+public class ReactHomeActivity extends ReactRootActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class ReactRootViewActivity extends ReactRootActivity {
 
         Bundle bundle = new Bundle();
         bundle.putString("key1", "value1");
-        mReactRootView.startReactApplication(mReactInstanceManager, "QATest", bundle);
+        mReactRootView.startReactApplication(mReactInstanceManager, "ReactHome", bundle);
         setContentView(mReactRootView);
     }
 
@@ -40,8 +40,8 @@ public class ReactRootViewActivity extends ReactRootActivity {
                 .setApplication(getApplication())
                 //设置打包后的bundle文件名
                 .setBundleAssetName("index.android.bundle")
-                //设置入口文件名
-                .setJSMainModuleName("index.android")
+                //设置调试时入口文件名
+                .setJSMainModuleName("index.home")
                 .addPackage(new MainReactPackage())
                 .addPackage(new VectorIconsPackage())
                 .addPackage(new UpdatePackage())
@@ -54,4 +54,3 @@ public class ReactRootViewActivity extends ReactRootActivity {
         return manager;
     }
 }
-

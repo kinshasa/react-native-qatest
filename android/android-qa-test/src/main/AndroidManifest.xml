@@ -63,14 +63,25 @@
         </activity>
         <!--ReactNative 首页入口-->
         <activity
-            android:name=".ui.ReactRootViewActivity"
+            android:name=".ui.ReactQAActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:label="ReactRootView">
+            android:label="ReactQAActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.qatest.list" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.home.ReactHomeActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:label="ReactHomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.qatest.list" />
+            </intent-filter>
+        </activity>
+
+
         <!--垂直ViewPager-->
         <activity
             android:name=".ui.VerticalViewPagerActivity"

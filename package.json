@@ -7,7 +7,7 @@
     "start8082": "node node_modules/react-native/local-cli/cli.js start --port 8082",
     "test": "jest"
   },
-  "main": "./src/App2.js",
+  "main": "./index.js",
   "组件注释": {
     "react": "15.4.2",
     "react-native": "0.40.0",

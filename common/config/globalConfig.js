@@ -114,3 +114,5 @@ globalConfig.init = function () {
 };
 
 Loggers.s('globalConfig init success',1234567);
+
+export default globalConfig;
