@@ -19,18 +19,17 @@ import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
  * at com.facebook.react.bridge.DefaultNativeModuleCallExceptionHandler.handleException(DefaultNativeModuleCallExceptionHandler.java:24)
  */
 
-public abstract class RCTRootActivity extends AppCompatActivity implements DefaultHardwareBackBtnHandler {
+public abstract class ReactRootActivity extends AppCompatActivity implements DefaultHardwareBackBtnHandler {
 
     protected static final int OVERLAY_PERMISSION_REQ_CODE = 1;
-    public ReactInstanceManager mReactInstanceManager;
-    public ReactRootView mReactRootView;
-
+    protected ReactRootView mReactRootView;
+    protected ReactInstanceManager mReactInstanceManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //打开悬浮窗口权限
+        //设置悬浮框请求权限
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!Settings.canDrawOverlays(this)) {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
@@ -40,54 +39,54 @@ public abstract class RCTRootActivity extends AppCompatActivity implements Defau
         }
     }
 
-    public ReactRootView getReactRootView() {
-
-        return mReactRootView;
-    }
-
-    public ReactInstanceManager getReactInstanceManager() {
-        return mReactInstanceManager;
+    @Override
+    public void invokeDefaultOnBackPressed() {
+        super.onBackPressed();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if (getReactInstanceManager() != null) {
-            getReactInstanceManager().onHostPause(this);
+
+        if (mReactInstanceManager != null) {
+            mReactInstanceManager.onHostPause(this);
         }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (getReactInstanceManager() != null) {
-            getReactInstanceManager().onHostResume(this, this);
+
+        if (mReactInstanceManager != null) {
+            mReactInstanceManager.onHostResume(this, this);
         }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (getReactInstanceManager() != null) {
-            getReactInstanceManager().onHostDestroy(this);
+
+        if (mReactInstanceManager != null) {
+            mReactInstanceManager.onHostDestroy(this);
         }
     }
 
     @Override
     public void onBackPressed() {
-        if (getReactInstanceManager() != null) {
-            getReactInstanceManager().onBackPressed();
+        if (mReactInstanceManager != null) {
+            mReactInstanceManager.onBackPressed();
+        } else {
+            super.onBackPressed();
         }
-
     }
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_MENU && getReactInstanceManager() != null) {
-            getReactInstanceManager().onBackPressed();
+        if (keyCode == KeyEvent.KEYCODE_MENU && mReactInstanceManager != null) {
+            mReactInstanceManager.showDevOptionsDialog();
+            return true;
         }
         return super.onKeyUp(keyCode, event);
-
     }
 
     @Override
@@ -99,11 +98,5 @@ public abstract class RCTRootActivity extends AppCompatActivity implements Defau
                 }
             }
         }
-    }
-
-
-    @Override
-    public void invokeDefaultOnBackPressed() {
-        this.onBackPressed();
     }
 }
