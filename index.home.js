@@ -21,7 +21,7 @@ export default class HomeIndex extends Component {
         
         return (
             <View style={HomeIndexStyles.container}>
-
+                <Text>sssss</Text>
             </View>
         );
     }

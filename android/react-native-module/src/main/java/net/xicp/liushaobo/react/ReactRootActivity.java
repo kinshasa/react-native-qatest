@@ -19,7 +19,7 @@ import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
  * at com.facebook.react.bridge.DefaultNativeModuleCallExceptionHandler.handleException(DefaultNativeModuleCallExceptionHandler.java:24)
  */
 
-public abstract class ReactRootActivity extends AppCompatActivity implements DefaultHardwareBackBtnHandler {
+public class ReactRootActivity extends AppCompatActivity implements DefaultHardwareBackBtnHandler {
 
     protected static final int OVERLAY_PERMISSION_REQ_CODE = 1;
     protected ReactRootView mReactRootView;
