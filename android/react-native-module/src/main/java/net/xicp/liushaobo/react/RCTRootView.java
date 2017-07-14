@@ -13,7 +13,7 @@ import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
  * Created by lshaobocsu@gmail.com on 2017.7.14.
  */
 
-public class ReactRootView implements DefaultHardwareBackBtnHandler {
+public class RCTRootView implements DefaultHardwareBackBtnHandler {
 
     protected static final int OVERLAY_PERMISSION_REQ_CODE = 1;
     protected com.facebook.react.ReactRootView mReactRootView;
@@ -21,7 +21,7 @@ public class ReactRootView implements DefaultHardwareBackBtnHandler {
     protected Activity mActivity;
 
 
-    ReactRootView(Activity activity) {
+    RCTRootView(Activity activity) {
         mActivity = activity;
     }
 

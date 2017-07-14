@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.android.log.L;
 import com.android.qatest.R;
 import com.android.qatest.ui.base.BaseActivity;
+import com.android.qatest.ui.home.ReactHomeFragment;
 import com.jaeger.library.StatusBarUtil;
 import com.lhh.apst.library.AdvancedPagerSlidingTabStrip;
 
@@ -53,6 +54,9 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     private Fragment mNewsFragment = null;
     private Fragment mCartFragment = null;
     private Fragment mMineFragment = null;
+    private Fragment mReactHomeFragment = null;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -192,9 +196,9 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
 
                     case VIEW_MINE:
                     default:
-                        if (null == mMineFragment)
-                            mMineFragment = MineFragment.instance();
-                        return mMineFragment;
+                        if (null == mReactHomeFragment)
+                            mReactHomeFragment = ReactHomeFragment.instance();
+                        return mReactHomeFragment;
                 }
             }
             return null;
