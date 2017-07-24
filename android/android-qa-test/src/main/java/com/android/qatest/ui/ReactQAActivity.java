@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.android.qatest.BuildConfig;
-import com.facebook.infer.annotation.Assertions;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactRootView;
 import com.facebook.react.common.LifecycleState;
@@ -49,7 +48,7 @@ public class ReactQAActivity extends ReactRootActivity {
         mReactRootView.startReactApplication(mReactInstanceManager, "QATest", bundle);
         setContentView(mReactRootView);
 
-        //手动加载js
+        //手动加载js,目前是在debug实现多模块加载启动startReactApplication
         mReactInstanceManager.getDevSupportManager().handleReloadJS();
 
         //String bundleURL = mDevServerHelper.getDevServerBundleURL(Assertions.assertNotNull(mJSAppBundleName));

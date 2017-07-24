@@ -30,3 +30,9 @@
     1. 创建一个react项目分多个index.js文件
     2. 在Activity中通过ReactInstanceManager创建对应的index.js文件
     3. 对应的Activity加载ReactRootView
+    
+    1. 通过react-native bundle打包不同模块的bundleJS文件
+    2. 通过getDevServerBundleURL获取不同的bundleJS文件启动相应的模块
+    
+    1. 通过MainApplication中注入mReactNativeHost数组
+    2. 通过每个页面的不同key去取相应的Host
