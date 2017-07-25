@@ -30,7 +30,7 @@ public class ReactRootActivity extends AppCompatActivity implements DefaultHardw
         super.onCreate(savedInstanceState);
 
         //设置悬浮框请求权限
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && BuildConfig.DEBUG) {
             if (!Settings.canDrawOverlays(this)) {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                         Uri.parse("package:" + getPackageName()));

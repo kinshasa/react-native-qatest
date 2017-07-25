@@ -27,7 +27,7 @@ public class ReactRootFragment extends Fragment implements DefaultHardwareBackBt
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //设置悬浮框请求权限
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && BuildConfig.DEBUG) {
             if (!Settings.canDrawOverlays(getActivity())) {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                         Uri.parse("package:" + getActivity().getPackageName()));

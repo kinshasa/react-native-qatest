@@ -97,7 +97,8 @@ public class MainApplication extends Application implements ReactApplication {
         @Override
         protected String getJSMainModuleName() {
             //定义js入口文件名称
-            return super.getJSMainModuleName();
+            //return super.getJSMainModuleName();
+            return "index.android";
         }
 
         @Override
@@ -110,7 +111,8 @@ public class MainApplication extends Application implements ReactApplication {
         @Override
         protected String getBundleAssetName() {
             //定义存放在项目asset文件夹下的bundle文件名称
-            return super.getBundleAssetName();
+            //return super.getBundleAssetName();
+            return "index.android.bundle";
         }
     };
 

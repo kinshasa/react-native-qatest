@@ -30,7 +30,7 @@ public class QAReactRootActivity extends ReactRootActivity {
         mReactInstanceManager = ReactInstanceManager.builder()
                 .setApplication(getApplication())
                 //设置打包后的bundle文件名
-                .setBundleAssetName("index.android.bundle")
+                .setBundleAssetName("index.qatest.bundle")
                 //设置入口文件名
                 .setJSMainModuleName("index.android")
                 .addPackage(new MainReactPackage())
@@ -44,7 +44,7 @@ public class QAReactRootActivity extends ReactRootActivity {
                 .build();
 
         Bundle bundle = new Bundle();
-        bundle.putString("key1", "value1");
+        bundle.putString("type", "qatest");
         mReactRootView.startReactApplication(mReactInstanceManager, "QATest", bundle);
         setContentView(mReactRootView);
 

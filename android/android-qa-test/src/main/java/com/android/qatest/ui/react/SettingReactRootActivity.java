@@ -30,7 +30,7 @@ public class SettingReactRootActivity extends ReactRootActivity {
         mReactInstanceManager = ReactInstanceManager.builder()
                 .setApplication(getApplication())
                 //设置打包后的bundle文件名
-                .setBundleAssetName("react-setting.android.bundle")
+                .setBundleAssetName("index.setting.bundle")
                 //设置调试时入口文件名
                 .setJSMainModuleName("index.setting")
                 .addPackage(new MainReactPackage())

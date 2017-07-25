@@ -74,7 +74,7 @@
         <activity
             android:name=".ui.react.SettingReactRootActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:label="HomeReactRootActivity">
+            android:label="SettingReactRootActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.qatest.list" />

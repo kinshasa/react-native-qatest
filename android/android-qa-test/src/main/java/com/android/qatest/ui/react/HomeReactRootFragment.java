@@ -57,7 +57,7 @@ public class HomeReactRootFragment extends ReactRootFragment {
                 .build();
 
         Bundle bundle = new Bundle();
-        bundle.putString("key1", "value1");
+        bundle.putString("type", "home");
         mReactRootView.startReactApplication(mReactInstanceManager, "ReactHome", bundle);
         //手动加载js
         //mReactInstanceManager.getDevSupportManager().handleReloadJS();
