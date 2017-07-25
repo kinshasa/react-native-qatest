@@ -1,4 +1,4 @@
-package com.android.qatest.ui.home;
+package com.android.qatest.ui.react;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,7 +21,7 @@ import cn.reactnative.modules.update.UpdatePackage;
  * Created by lshaobocsu@gmail.com on 2017.7.14.
  */
 
-public class ReactHomeActivity extends ReactRootActivity {
+public class HomeReactRootActivity extends ReactRootActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,8 +44,10 @@ public class ReactHomeActivity extends ReactRootActivity {
                 .build();
 
         Bundle bundle = new Bundle();
-        bundle.putString("key1", "value1");
-        mReactRootView.startReactApplication(mReactInstanceManager, "ReactHome", bundle);
+        bundle.putString("type", "home");
+        try{
+            mReactRootView.startReactApplication(mReactInstanceManager, "ReactHome", bundle);
+        }catch (Exception e){}
         setContentView(mReactRootView);
     }
 

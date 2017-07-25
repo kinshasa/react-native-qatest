@@ -63,7 +63,7 @@
         </activity>
         <!--ReactNative 首页入口-->
         <activity
-            android:name=".ui.ReactQAActivity"
+            android:name=".ui.react.QAReactRootActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:label="ReactQAActivity">
             <intent-filter>
@@ -72,7 +72,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.home.ReactHomeActivity"
+            android:name=".ui.react.HomeReactRootActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:label="ReactHomeActivity">
             <intent-filter>

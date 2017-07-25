@@ -1,4 +1,4 @@
-package com.android.qatest.ui;
+package com.android.qatest.ui.react;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,7 +21,7 @@ import cn.reactnative.modules.update.UpdatePackage;
  * Created by lshaobocsu@gmail.com on 2017.5.25.
  */
 
-public class ReactQAActivity extends ReactRootActivity {
+public class QAReactRootActivity extends ReactRootActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

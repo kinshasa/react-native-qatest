@@ -15,47 +15,42 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.cache.MemoryCacheParams;
 import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
+import com.facebook.react.ReactApplication;
+import com.facebook.react.ReactNativeHost;
+import com.facebook.react.ReactPackage;
+import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.pay.module.PayReactPackage;
+import com.react.rnspinkit.RNSpinkitPackage;
 import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 
-public class MainApplication extends Application  {
+import net.xicp.liushaobo.react.RCTImagePackage;
+import net.xicp.liushaobo.react.RCTViewPackage;
 
-    /*private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
-        @Override
-        protected boolean getUseDeveloperSupport() {
-            return BuildConfig.DEBUG;
-        }
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
-        @Override
-        protected List<ReactPackage> getPackages() {
-            return Arrays.<ReactPackage>asList(
-                    new MainReactPackage(),
-                    new VectorIconsPackage(),
-                    new UpdatePackage(),//react-native-pushy
-                    new RCTImagePackage(),
-                    new RCTViewPackage(),
-                    new RNSpinkitPackage(),
-                    new PayReactPackage()
-            );
-        }
+import javax.annotation.Nullable;
 
-        @Override
-        protected String getJSBundleFile() {
-            return UpdateContext.getBundleUrl(MainApplication.this);
-        }
-    };
+import cn.reactnative.modules.update.UpdateContext;
+import cn.reactnative.modules.update.UpdatePackage;
 
-    public ReactNativeHost getReactNativeHost() {
-        return mReactNativeHost;
-    }*/
+public class MainApplication extends Application implements ReactApplication {
+
+    public String gReactNativeBundlePath = "myBundlePath...";
+    public HashMap<String, ReactNativeHost> mReactHostMap = new HashMap<>();
+    private static MainApplication instance;
+
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-
+        instance = MainApplication.this;
         L.init(L.VERBOSE);
 
         Lw.init(this);
@@ -79,6 +74,90 @@ public class MainApplication extends Application  {
             LeakCanary.install(this);
         }
 
+    }
+
+    private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
+        @Override
+        protected boolean getUseDeveloperSupport() {
+            return BuildConfig.DEBUG;
+        }
+
+        @Override
+        protected List<ReactPackage> getPackages() {
+            return Arrays.<ReactPackage>asList(
+                    new MainReactPackage(),
+                    new VectorIconsPackage(),
+                    new UpdatePackage(),//react-native-pushy
+                    new RCTImagePackage(),
+                    new RCTViewPackage(),
+                    new RNSpinkitPackage(),
+                    new PayReactPackage()
+            );
+        }
+
+        @Override
+        protected String getJSMainModuleName() {
+            //定义js入口文件名称
+            return super.getJSMainModuleName();
+        }
+
+        @Override
+        protected String getJSBundleFile() {
+            //自定义bundle文件路径
+            return UpdateContext.getBundleUrl(MainApplication.this);
+        }
+
+        @Nullable
+        @Override
+        protected String getBundleAssetName() {
+            //定义存放在项目asset文件夹下的bundle文件名称
+            return super.getBundleAssetName();
+        }
+    };
+
+    public static MainApplication getInstance() {
+
+        return instance;
+    }
+
+    public ReactNativeHost getReactNativeHost2() {
+        //return mReactNativeHost;
+        synchronized (gReactNativeBundlePath) {
+
+            if (!mReactHostMap.containsKey(gReactNativeBundlePath)) {
+                ReactNativeHost host = new ReactNativeHost(this) {
+                    @Override
+                    protected boolean getUseDeveloperSupport() {
+                        return BuildConfig.DEBUG;
+                    }
+
+                    @Override
+                    protected List<ReactPackage> getPackages() {
+                        return Arrays.<ReactPackage>asList(
+                                new MainReactPackage(),
+                                new VectorIconsPackage(),
+                                new UpdatePackage(),//react-native-pushy
+                                new RCTImagePackage(),
+                                new RCTViewPackage(),
+                                new RNSpinkitPackage(),
+                                new PayReactPackage()
+                        );
+                    }
+
+//                    @Override
+//                    protected String getJSBundleFile() {
+//                        return gReactNativeBundlePath;
+//                    }
+                };
+                mReactHostMap.put(gReactNativeBundlePath, host);
+            }
+            return mReactHostMap.get(gReactNativeBundlePath);
+        }
+    }
+
+    @Override
+    public ReactNativeHost getReactNativeHost() {
+        return mReactNativeHost;
     }
 
 
@@ -160,15 +239,14 @@ public class MainApplication extends Application  {
     protected void attachBaseContext(Context context) {
         super.attachBaseContext(context);
         // you must install multiDex whatever tinker is installed!
-        //Dalvik 可执行文件分包，用于Instant Run,Tinker
+        // 方法超出了64k限制，需要拆分dex,Dalvik 可执行文件分包
+        // 用于Instant Run,Tinker,react
         MultiDex.install(context);
 
 
         // 安装tinker
         Beta.installTinker();
     }
-
-
 
 
     @Override
