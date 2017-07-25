@@ -41,7 +41,6 @@ import cn.reactnative.modules.update.UpdatePackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
-    public String gReactNativeBundlePath = "myBundlePath...";
     public HashMap<String, ReactNativeHost> mReactHostMap = new HashMap<>();
     private static MainApplication instance;
 
@@ -120,40 +119,6 @@ public class MainApplication extends Application implements ReactApplication {
         return instance;
     }
 
-    public ReactNativeHost getReactNativeHost2() {
-        //return mReactNativeHost;
-        synchronized (gReactNativeBundlePath) {
-
-            if (!mReactHostMap.containsKey(gReactNativeBundlePath)) {
-                ReactNativeHost host = new ReactNativeHost(this) {
-                    @Override
-                    protected boolean getUseDeveloperSupport() {
-                        return BuildConfig.DEBUG;
-                    }
-
-                    @Override
-                    protected List<ReactPackage> getPackages() {
-                        return Arrays.<ReactPackage>asList(
-                                new MainReactPackage(),
-                                new VectorIconsPackage(),
-                                new UpdatePackage(),//react-native-pushy
-                                new RCTImagePackage(),
-                                new RCTViewPackage(),
-                                new RNSpinkitPackage(),
-                                new PayReactPackage()
-                        );
-                    }
-
-//                    @Override
-//                    protected String getJSBundleFile() {
-//                        return gReactNativeBundlePath;
-//                    }
-                };
-                mReactHostMap.put(gReactNativeBundlePath, host);
-            }
-            return mReactHostMap.get(gReactNativeBundlePath);
-        }
-    }
 
     @Override
     public ReactNativeHost getReactNativeHost() {

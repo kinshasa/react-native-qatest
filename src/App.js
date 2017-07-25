@@ -13,7 +13,7 @@ import globalConfig from '../common/config/globalConfig'
 
 // import * as AppController from "./AppController";
 import MainProvider from "./MainProvider";
-import HomeIndex from "../HomeIndex";
+import IndexHome from "../index.home";
 import FloatButton from './components/bar/FloatButton';
 import DropDownAlert from "react-native-dropdownalert";
 export default class App extends Component {
@@ -124,4 +124,4 @@ const AppStyles = StyleSheet.create({
     },
 });
 AppRegistry.registerComponent('QATest', () => App);
-AppRegistry.registerComponent('ReactHome', () => HomeIndex);
+AppRegistry.registerComponent('ReactHome', () => IndexHome);

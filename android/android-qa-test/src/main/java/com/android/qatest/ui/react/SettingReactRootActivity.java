@@ -21,7 +21,7 @@ import cn.reactnative.modules.update.UpdatePackage;
  * Created by lshaobocsu@gmail.com on 2017.7.14.
  */
 
-public class HomeReactRootActivity extends ReactRootActivity {
+public class SettingReactRootActivity extends ReactRootActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,9 +30,9 @@ public class HomeReactRootActivity extends ReactRootActivity {
         mReactInstanceManager = ReactInstanceManager.builder()
                 .setApplication(getApplication())
                 //设置打包后的bundle文件名
-                .setBundleAssetName("index.android.bundle")
+                .setBundleAssetName("react-setting.android.bundle")
                 //设置调试时入口文件名
-                .setJSMainModuleName("index.home")
+                .setJSMainModuleName("index.setting")
                 .addPackage(new MainReactPackage())
                 .addPackage(new VectorIconsPackage())
                 .addPackage(new UpdatePackage())
@@ -44,9 +44,9 @@ public class HomeReactRootActivity extends ReactRootActivity {
                 .build();
 
         Bundle bundle = new Bundle();
-        bundle.putString("type", "home");
+        bundle.putString("type", "setting");
         try{
-            mReactRootView.startReactApplication(mReactInstanceManager, "ReactHome", bundle);
+            mReactRootView.startReactApplication(mReactInstanceManager, "ReactSetting", bundle);
         }catch (Exception e){}
         setContentView(mReactRootView);
     }

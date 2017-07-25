@@ -72,7 +72,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.react.HomeReactRootActivity"
+            android:name=".ui.react.SettingReactRootActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:label="HomeReactRootActivity">
             <intent-filter>
