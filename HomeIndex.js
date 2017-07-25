@@ -11,7 +11,6 @@ import {
     StyleSheet,
     View,
     Text,
-    AppRegistry
 } from 'react-native';
 
 export default class HomeIndex extends Component {
@@ -34,4 +33,3 @@ const HomeIndexStyles = StyleSheet.create({
     },
 });
 
-AppRegistry.registerComponent('ReactHome', () => HomeIndex);

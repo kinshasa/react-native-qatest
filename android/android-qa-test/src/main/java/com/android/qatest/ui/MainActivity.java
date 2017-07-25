@@ -4,13 +4,9 @@ import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -19,13 +15,12 @@ import android.widget.Toast;
 import com.android.log.L;
 import com.android.qatest.R;
 import com.android.qatest.ui.base.BaseActivity;
-import com.android.qatest.ui.home.ReactHomeFragment;
+import com.android.qatest.ui.react.HomeReactRootFragment;
 import com.jaeger.library.StatusBarUtil;
 import com.lhh.apst.library.AdvancedPagerSlidingTabStrip;
 
 import com.android.qatest.ui.cart.CartFragment;
 import com.android.qatest.ui.category.CategoryFragment;
-import com.android.qatest.ui.user.MineFragment;
 import com.android.qatest.ui.fragment.NewsFragment;
 import com.android.qatest.ui.home.HomeFragment;
 import com.android.qatest.ui.view.SplashView;
@@ -197,7 +192,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
                     case VIEW_MINE:
                     default:
                         if (null == mReactHomeFragment)
-                            mReactHomeFragment = ReactHomeFragment.instance();
+                            mReactHomeFragment = HomeReactRootFragment.instance();
                         return mReactHomeFragment;
                 }
             }

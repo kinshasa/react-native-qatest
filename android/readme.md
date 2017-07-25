@@ -26,7 +26,7 @@
 
 **`实现ReactNative多模块开发方案`**
 
-1. （实现中）同一个bundleJs文件，多个AppRegistry入口实现多模块开发：
+1. 同一个bundleJs文件，多个AppRegistry入口实现多模块开发：
     1. 创建一个react项目注册多个AppRegistry组件模块
     2. 对应的Activity加载对应的AppRegistry组件模块名称
     3. 优点：入门简单，容易开发

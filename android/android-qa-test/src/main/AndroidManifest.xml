@@ -65,7 +65,7 @@
         <activity
             android:name=".ui.react.QAReactRootActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:label="ReactQAActivity">
+            android:label="QAReactRootActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.qatest.list" />
@@ -74,7 +74,7 @@
         <activity
             android:name=".ui.react.HomeReactRootActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:label="ReactHomeActivity">
+            android:label="HomeReactRootActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.qatest.list" />

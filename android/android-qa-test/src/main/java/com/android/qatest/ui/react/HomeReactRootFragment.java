@@ -1,4 +1,4 @@
-package com.android.qatest.ui.home;
+package com.android.qatest.ui.react;
 
 /**
  * Created by lshaobocsu@gmail.com on 2017.7.14.
@@ -26,11 +26,11 @@ import net.xicp.liushaobo.react.ReactRootFragment;
 import cn.reactnative.modules.update.UpdatePackage;
 
 
-public class ReactHomeFragment extends ReactRootFragment {
+public class HomeReactRootFragment extends ReactRootFragment {
 
 
-    public static ReactHomeFragment instance() {
-        ReactHomeFragment view = new ReactHomeFragment();
+    public static HomeReactRootFragment instance() {
+        HomeReactRootFragment view = new HomeReactRootFragment();
         return view;
     }
 
@@ -60,7 +60,7 @@ public class ReactHomeFragment extends ReactRootFragment {
         bundle.putString("key1", "value1");
         mReactRootView.startReactApplication(mReactInstanceManager, "ReactHome", bundle);
         //手动加载js
-        mReactInstanceManager.getDevSupportManager().handleReloadJS();
+        //mReactInstanceManager.getDevSupportManager().handleReloadJS();
         return mReactRootView;
     }
 
