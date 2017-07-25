@@ -1,0 +1,53 @@
+
+"D:\Program Files\Java\jdk1.8.0_91\jre\bin\keytool.exe" -genkey -v -keystore dskjclient.keystore  -alias dskjclient -keyalg RSA -keysize 2048 -validity 10000
+
+"D:\Program Files\Java\jdk1.8.0_91\jre\bin\keytool.exe" -genkey -v -keystore dskjshop.keystore  -alias dskjshop -keyalg RSA -keysize 2048 -validity 10000
+https://registry.npmjs.org/
+
+https://registry.npm.taobao.org
+
+npm config set registry https://registry.npm.taobao.org --global
+
+npm config set registry https://registry.npmjs.org/ --global
+gradlew assembleRelease
+
+gradlew assembleApp_a360 - Assembles all App_a360 builds.
+gradlew assembleApp_baidu - Assembles all App_baidu builds.
+gradlew assembleApp_chuizi - Assembles all App_chuizi builds.
+gradlew assembleApp_default - Assembles all App_default builds.
+gradlew assembleApp_huawei - Assembles all App_huawei builds.
+gradlew assembleApp_jinli - Assembles all App_jinli builds.
+gradlew assembleApp_lenovo - Assembles all App_lenovo builds.
+gradlew assembleApp_leshi - Assembles all App_leshi builds.
+gradlew assembleApp_meizu - Assembles all App_meizu builds.
+gradlew assembleApp_oppo - Assembles all App_oppo builds.
+gradlew assembleApp_pp - Assembles all App_pp builds.
+gradlew assembleApp_sougou - Assembles all App_sougou builds.
+gradlew assembleApp_tencent - Assembles all App_tencent builds.
+gradlew assembleApp_vivo - Assembles all App_vivo builds.
+gradlew assembleApp_wandoujia - Assembles all App_wandoujia builds.
+gradlew assembleApp_xiaomi - Assembles all App_xiaomi builds.
+
+编译脚本：
+gradlew assembleDevRelease
+
+gradlew assembleRelease
+
+gradlew buildTinkerPatchRelease
+
+热更新：
+code-push release-react CodePushCilent-android android -d Production #android版
+
+react-native 离线打包：
+react-native bundle --platform android --dev false --entry-file index.setting.js --bundle-output android/com/your-company-name/app-package-name/src/main/assets/index.android.bundle --assets-dest android/com/your-company-name/app-package-name/src/main/res/
+
+react-native 在线打包：
+http://localhost:8081/index.ios.bundle?platform=android&dev=true
+
+moles-packer --input ./ --entry index.android.js --output ./build --bundle bu.jsbundle --common true
+
+
+
+
+
+
