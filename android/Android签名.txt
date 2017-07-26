@@ -28,12 +28,37 @@ gradlew assembleApp_vivo - Assembles all App_vivo builds.
 gradlew assembleApp_wandoujia - Assembles all App_wandoujia builds.
 gradlew assembleApp_xiaomi - Assembles all App_xiaomi builds.
 
-
+编译Debug脚本：
 gradlew assembleRelease
+编译Debug脚本：
+gradlew assembleDevRelease
 
+编译TinkerPatch脚本：
 gradlew buildTinkerPatchRelease
 
+热更新：
 code-push release-react CodePushCilent-android android -d Production #android版
 
 
-react-native bundle --platform android --dev false --entry-file index.android.js --bundle-output android/android-qa-test/src/main/assets/index.android.bundle --assets-dest android/android-qa-test/src/main/assets/
+react-native 离线打包 index.android
+react-native bundle --platform android --dev false --entry-file index.android.js --bundle-output android/android-qa-test/src/main/assets/index.android.bundle --assets-dest android/android-qa-test/src/main/res/
+
+react-native 离线打包 index.qatest
+react-native bundle --platform android --dev false --entry-file index.android.js --bundle-output android/android-qa-test/src/main/assets/index.qatest.bundle --assets-dest android/android-qa-test/src/main/res/
+
+react-native 离线打包 index.setting
+react-native bundle --platform android --dev false --entry-file index.setting.js --bundle-output android/android-qa-test/src/main/assets/index.setting.bundle --assets-dest android/android-qa-test/src/main/res/
+
+react-native 离线打包 index.home
+react-native bundle --platform android --dev false --entry-file index.home.js --bundle-output android/android-qa-test/src/main/assets/index.home.bundle --assets-dest android/android-qa-test/src/main/res/
+
+react-native 在线打包：
+http://localhost:8081/index.ios.bundle?platform=android&dev=true
+
+moles-packer --input ./ --entry index.android.js --output ./build --bundle bu.jsbundle --common true
+
+
+
+
+
+
