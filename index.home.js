@@ -13,13 +13,23 @@ import {
     Text,
 } from 'react-native';
 
-export default class IndexHome extends Component {
+import globalConfig from './common/config/globalConfig'
+import TitleBar from "./src/components/bar/TitleBar";
 
+export default class IndexHome extends Component {
+    componentWillMount() {
+        Loggers.s('App::componentWillMount()',globalConfig.getWidth());
+        //AppController.init();
+    }
 
     render() {
         
         return (
             <View style={IndexHomeStyles.container}>
+                <TitleBar
+                    label="首页"
+                    labelStyle={{backgroundColor: "transparent", color: "black"}}
+                    style={{height: 45}}/>
                 <Text>IndexHome</Text>
             </View>
         );
