@@ -13,6 +13,8 @@ import {
     Text,
 } from 'react-native';
 
+import ExportSimple from './ExportSimple'
+
 export default class ExportsSimpleContainer extends Component {
 
     static propTypes = {
@@ -70,8 +72,9 @@ export default class ExportsSimpleContainer extends Component {
     }
 
     render() {
+        ExportSimple.changeValue();
         this.count++;
-        console.log("ExportsSimpleContainer render() count:", this.count);
+        console.log("ExportsSimpleContainer render() ExportSimple:", ExportSimple.getValues());
         return (
             <View style={ExportsSimpleContainerStyles.container}>
 

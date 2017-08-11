@@ -49,7 +49,7 @@ public class QAReactRootActivity extends ReactRootActivity {
         setContentView(mReactRootView);
 
         //手动加载js,目前是在debug实现多模块加载启动startReactApplication
-        //mReactInstanceManager.getDevSupportManager().handleReloadJS();
+        mReactInstanceManager.getDevSupportManager().handleReloadJS();
 
         //String bundleURL = mDevServerHelper.getDevServerBundleURL(Assertions.assertNotNull(mJSAppBundleName));
         //mReactInstanceManager.getDevSupportManager().reloadJSFromServer();

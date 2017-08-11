@@ -12,6 +12,7 @@ import JSONTree from "react-native-json-tree";
 import TitleBar from "../../../components/bar/TitleBar";
 import FlatList from "../../../components/listview/flatList/FlatList";
 import LoadingView from "../../../components/view/LoadingView";
+import ExportSimple from './ExportSimple'
 
 export default class LoggerContainer extends Component {
 
@@ -86,7 +87,7 @@ export default class LoggerContainer extends Component {
 
     render() {
         this.count++;
-        console.log("LoggerContainer::render() count:", this.count);
+        console.log("LoggerContainer::render() ExportSimple:", ExportSimple.getValues());
         return (
             <View style={LoggerContainerStyles.container}>
                 <TitleBar label="日志系统"/>
