@@ -41,7 +41,6 @@ import cn.reactnative.modules.update.UpdatePackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
-    public HashMap<String, ReactNativeHost> mReactHostMap = new HashMap<>();
     private static MainApplication instance;
 
 
