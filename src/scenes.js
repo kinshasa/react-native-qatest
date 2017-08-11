@@ -26,6 +26,7 @@ import drawer_navigator from "./containers/home/list/drawer_navigator";
 import FlatListContainer from "./containers/home/list/FlatListContainer";
 import LoggerContainer from "./containers/home/list/LoggerContainer";
 import TextInputScrollViewContainer from "./containers/home/list/TextInputScrollViewContainer";
+import ExportsSimpleContainer from "./containers/home/list/ExportsSimpleContainer";
 
 import CustomListViewContainer from "./containers/test/list/CustomListViewContainer";
 import InheritanceBaseContainer from "./containers/test/list/InheritanceBaseContainer";
@@ -54,6 +55,7 @@ export default  scenes = Actions.create(
         <Scene role="home" key="FlatListContainer" component={FlatListContainer} des="FlatListContainer"/>
         <Scene role="home" key="LoggerContainer" component={LoggerContainer} des="LoggerContainer"/>
         <Scene role="home" key="TextInputContainer" component={TextInputScrollViewContainer} des="TextInputContainer"/>
+        <Scene role="home" key="ExportsSimpleContainer" component={ExportsSimpleContainer} des="module.exports与exports的区别"/>
 
 
         <Scene role="QATest" key="CustomListView" component={CustomListViewContainer} des="大数据量的ListView"/>
