@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 
 import config from './common/config'
-import HomeNewCarContainer from './src/containers/home/homepage/HomeNewCarContainer'
+import HomeNewCarContainer from './src/containers/home/newcarpage/HomeNewCarContainer'
 
 export default class IndexHome extends Component {
 

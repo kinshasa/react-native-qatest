@@ -14,11 +14,19 @@ import {
     StatusBar,
     Image,
     TouchableHighlight,
+    ScrollView
 } from 'react-native';
 
 const icon_focus = require('./icon_focus.png');
 const icon_arrows_down = require('./icon_arrows_down.png');
 const icon_search = require('./icon_search.png');
+
+const icon_4item_title = require('./icon_4item_title.png');
+const icon_4item = require('./icon_4item.png');
+const icon_loop_item = require('./icon_loop_item.png');
+const icon_loop_title = require('./icon_loop_title.png');
+
+
 import BannerReact from '../../../components/BannerReact'
 export default class HomeNewCarContainer extends Component {
 
@@ -108,12 +116,39 @@ export default class HomeNewCarContainer extends Component {
         )
     }
 
+    render4Item(){
+        return (
+            <View style={{}}>
+                <Image style={{height:px2dp(100),width:getWidth()}} source={icon_4item_title}/>
+                <View style={{flexDirection:'row'}}>
+                    <Image resizeMode='contain' style={{height:px2dp(270),width:px2dp(320),flex:1}} source={icon_4item}/>
+                    <Image resizeMode='contain' style={{height:px2dp(270),width:px2dp(320),flex:1}} source={icon_4item}/>
+                    <Image resizeMode='contain' style={{height:px2dp(270),width:px2dp(320),flex:1}} source={icon_4item}/>
+                    <Image resizeMode='contain' style={{height:px2dp(270),width:px2dp(320),flex:1}} source={icon_4item}/>
+                </View>
+            </View>
+        );
+    }
+
+    renderLoopItem(){
+        return (
+            <View style={{}}>
+                <Image style={{height:px2dp(100),width:getWidth()}} source={icon_loop_title}/>
+                <BannerReact height={px2dp(700)} data={['http://img.ds.cn/none.png','http://img.ds.cn/none.png']} imgStyle={{height:px2dp(700)}}/>
+            </View>
+        );
+    }
+
     render() {
 
         return (
             <View style={HomeNewCarContainerStyles.container}>
                 {this.renderTitleView()}
-                <BannerReact height={px2dp(700)} data={['http://img.ds.cn/none.png','http://img.ds.cn/none.png']} imgStyle={{height:px2dp(700)}}/>
+                <ScrollView>
+                    <BannerReact height={px2dp(700)} data={['http://img.ds.cn/none.png','http://img.ds.cn/none.png']} imgStyle={{height:px2dp(700)}}/>
+                    {this.render4Item()}
+                    {this.renderLoopItem()}
+                </ScrollView>
             </View>
         );
     }

@@ -1,0 +1,221 @@
+{
+  "code": "0000",
+  "data": {
+    "pageSize": 3,
+    "currPage": 1,
+    "floors": [
+      {
+        "name": "C_BANNER_LIST",
+        "titleIcon": "http://chuantu.biz/t5/128/1499411720x3524607604.png",
+        "titlePos": "center",
+        "bottomLineHeight": 20,
+        "data": [
+          {
+            "img": "http://img.ds.cn/none.png?/threepage/1.banner.png",
+            "link": {},
+            "renderData": {},
+            "des": ""
+          },
+          {
+            "img": "http://img.ds.cn/none.png?/threepage/1.banner.png",
+            "link": {},
+            "renderData": {},
+            "des": ""
+          },
+          {
+            "img": "http://img.ds.cn/none.png?/threepage/1.banner.png",
+            "link": {},
+            "renderData": {},
+            "des": ""
+          },
+          {
+            "img": "http://img.ds.cn/none.png?/threepage/1.banner.png",
+            "link": {},
+            "renderData": {},
+            "des": ""
+          }
+        ]
+      },
+      {
+        "name": "C_8_1_3_4",
+        "titleIcon": "http://img.ds.cn/none.png?/threepage/5.1titleby.png",
+        "titlePos": "center",
+        "bottomLineHeight": 20,
+        "data": [
+          {
+            "img": "http://img.ds.cn/none.png?/threepage/5.2bannerny.png",
+            "link": {},
+            "renderData": {},
+            "des": ""
+          },
+          {
+            "img": "http://img.ds.cn/none.png?/threepage/5.3prby.png",
+            "link": {},
+            "renderData": {},
+            "des": ""
+          },
+          {
+            "img": "http://img.ds.cn/none.png?/threepage/5.4prby.png",
+            "link": {},
+            "renderData": {},
+            "des": ""
+          },
+          {
+            "img": "http://img.ds.cn/none.png?/threepage/5.5prby.png",
+            "link": {},
+            "renderData": {},
+            "des": ""
+          },
+          {
+            "img": "http://img.ds.cn/none.png?/threepage/5.6prby.png",
+            "link": {},
+            "renderData": {},
+            "des": ""
+          },
+          {
+            "img": "http://img.ds.cn/none.png?/threepage/5.7prby.png",
+            "link": {},
+            "renderData": {},
+            "des": ""
+          },
+          {
+            "img": "http://img.ds.cn/none.png?/threepage/5.8prby.png",
+            "link": {},
+            "renderData": {},
+            "des": ""
+          },
+          {
+            "img": "http://img.ds.cn/none.png?/threepage/5.9prby.png",
+            "link": {},
+            "renderData": {},
+            "des": ""
+          }
+        ]
+      },
+      {
+        "name": "C_SCROLL__1",
+        "titleIcon": "http://chuantu.biz/t5/128/1499411720x3524607604.png",
+        "titlePos": "center",
+        "bottomLineHeight": 20,
+        "data": [
+          {
+            "img": "http://img.ds.cn/none.png?/threepage/3.2pr.png",
+            "link": {},
+            "renderData": {},
+            "des": ""
+          },
+          {
+            "img": "http://img.ds.cn/none.png?/threepage/3.3pr.png",
+            "link": {},
+            "renderData": {},
+            "des": ""
+          },
+          {
+            "img": "http://img.ds.cn/none.png?/threepage/3.4pr.png",
+            "link": {},
+            "renderData": {},
+            "des": ""
+          },
+          {
+            "img": "http://img.ds.cn/none.png?/threepage/3.2pr.png",
+            "link": {},
+            "renderData": {},
+            "des": ""
+          }
+        ]
+      },
+      {
+        "name": "C_1_ITEM_LIST__2",
+        "titleIcon": "http://chuantu.biz/t5/128/1499411720x3524607604.png",
+        "titlePos": "center",
+        "bottomLineHeight": 20,
+        "data": [
+          {
+            "img": "/threepage/7.8banner.png",
+            "link": {},
+            "renderData": {
+              "price": 17.18,
+              "name": "自由光2016款 2.4L领先版",
+              "stock": 10
+            },
+            "des": ""
+          },
+          {
+            "img": "http://img.ds.cn/none.png?/threepage/7.9banner.png",
+            "link": {},
+            "renderData": {
+              "price": 17.18,
+              "name": "传祺GA6 2017款 235T 自由光",
+              "stock": 10
+            },
+            "des": ""
+          }
+        ]
+      },
+      {
+        "name": "C_1_ITEM_LIST__1",
+        "titleIcon": "http://chuantu.biz/t5/128/1499411720x3524607604.png",
+        "titlePos": "center",
+        "bottomLineHeight": 20,
+        "data": [
+          {
+            "img": "http://img.ds.cn/none.png?/threepage/12.2banner.png",
+            "link": {},
+            "renderData": {},
+            "des": ""
+          },
+          {
+            "img": "http://img.ds.cn/none.png?/threepage/12.2banner.png",
+            "link": {},
+            "renderData": {},
+            "des": ""
+          }
+        ]
+      },
+      {
+        "name": "C_9_1_8",
+        "titleIcon": "http://chuantu.biz/t5/128/1499411720x3524607604.png",
+        "titlePos": "center",
+        "bottomLineHeight": 20,
+        "data": [
+          {
+            "img": "http://chuantu.biz/t5/128/1499411777x3524607604.png",
+            "link": {},
+            "renderData": {},
+            "des": ""
+          },
+          {
+            "img": "http://chuantu.biz/t5/128/1499411795x3524607604.png",
+            "link": {},
+            "renderData": {},
+            "des": ""
+          },
+          {
+            "img": "http://chuantu.biz/t5/128/1499411795x3524607604.png",
+            "link": {},
+            "renderData": {},
+            "des": ""
+          },
+          {
+            "img": "http://chuantu.biz/t5/128/1499411795x3524607604.png",
+            "link": {},
+            "renderData": {},
+            "des": ""
+          },
+          {
+            "img": "http://chuantu.biz/t5/128/1499411795x3524607604.png",
+            "link": {},
+            "renderData": {},
+            "des": ""
+          },
+          {
+            "img": "http://chuantu.biz/t5/128/1499411795x3524607604.png",
+            "link": {},
+            "renderData": {},
+            "des": ""
+          }
+        ]
+      }
+    ]
+  }
+}
