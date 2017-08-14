@@ -58,6 +58,10 @@ export default class JDHomeTitleBarReact extends Component {
         console.log("JDHomeTitleBarReact componentDidMount()", new Date());
     }
 
+    onSearchPress(){
+        alert(1111)
+    }
+
 
     /**
      * 组件即将卸载前调用
@@ -76,7 +80,7 @@ export default class JDHomeTitleBarReact extends Component {
                 </View>
                 <View style={{height:px2dp(170),width:getWidth(),flexDirection:'row',}}>
                     {/*标题*/}
-                    <Text style={{width:getWidth(),padding:px2dp(50),color:'#666',fontSize:px2dp(46),position:'absolute',textAlign:'center',fontWeight:'bold',}}>大圣新车</Text>
+                    <Text style={{width:getWidth(),padding:px2dp(50),color:'#666',fontSize:px2dp(46),position:'absolute',textAlign:'center',fontWeight:'bold',}}>京东首页</Text>
                     {/*右边的选车按钮*/}
                     <TouchableHighlight
                         hitSlop={{top:50,left: 50, bottom: 50, right:50}}
@@ -84,8 +88,8 @@ export default class JDHomeTitleBarReact extends Component {
                         underlayColor='#f0f0f0'
                         onPress={()=>this.onSearchPress()}>
                         <View style={{flexDirection:'row',alignItems:'center',}}>
-                            <Image style={{width:px2dp(50),height:px2dp(50)}} source={icon_focus}/>
-                            <Text style={{color:'#666',fontSize:px2dp(46)}}>选车中心</Text>
+                            <Image style={{width:px2dp(50),height:px2dp(50),marginRight:px2dp(20)}} source={icon_focus}/>
+                            <Text style={{color:'#666',fontSize:px2dp(46)}}>扫一扫</Text>
                         </View>
                     </TouchableHighlight>
                     {/*中间填充物*/}
