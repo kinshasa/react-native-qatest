@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 
 import config from './common/config'
-import HomeNewCarContainer from './src/containers/home/newcarpage/HomeNewCarContainer'
+import JDHomePageContainer from './src/containers/home/jd_home/JDHomePageContainer'
 
 export default class IndexHome extends Component {
 
@@ -27,7 +27,7 @@ export default class IndexHome extends Component {
         
         return (
             <View style={IndexHomeStyles.container}>
-                <HomeNewCarContainer/>
+                <JDHomePageContainer/>
             </View>
         );
     }

@@ -1,8 +1,8 @@
 /**
  * @Author: liushaobo2005@163.com
  * @Date: 2017.8.14 下午 2:35
- * @Desc: 公共组件 - HomeNewCarContainer
- * @Name: HomeNewCarContainer.js
+ * @Desc: 公共组件 - NewCarPageContainer
+ * @Name: NewCarPageContainer.js
  * @LifeCycle：https://github.com/kinshasa/react-native-qatest
  */
 
@@ -25,10 +25,12 @@ const icon_4item_title = require('./icon_4item_title.png');
 const icon_4item = require('./icon_4item.png');
 const icon_loop_item = require('./icon_loop_item.png');
 const icon_loop_title = require('./icon_loop_title.png');
+const bg_bar_ccc = require('./bg_bar_ccc.png');
+const bg_bar_fff = require('./bg_bar_fff.png');
 
 
 import BannerReact from '../../../components/BannerReact'
-export default class HomeNewCarContainer extends Component {
+export default class NewCarPageContainer extends Component {
 
     static propTypes = {
     };
@@ -38,7 +40,7 @@ export default class HomeNewCarContainer extends Component {
     };
 
     constructor(props, context) {
-        console.log("HomeNewCarContainer constructor()");
+        console.log("NewCarPageContainer constructor()");
         super(props, context);
         this.state = {};
     }
@@ -50,15 +52,15 @@ export default class HomeNewCarContainer extends Component {
     count = 0;
 
     componentWillMount() {
-        console.log("HomeNewCarContainer componentWillMount()", new Date());
+        console.log("NewCarPageContainer componentWillMount()", new Date());
     }
 
     componentDidMount() {
-        console.log("HomeNewCarContainer componentDidMount()", new Date());
+        console.log("NewCarPageContainer componentDidMount()", new Date());
     }
 
     componentWillUnmount() {
-        console.log("HomeNewCarContainer componentWillUnmount()");
+        console.log("NewCarPageContainer componentWillUnmount()");
     }
 
     renderTitleBar(){
@@ -142,11 +144,14 @@ export default class HomeNewCarContainer extends Component {
     render() {
 
         return (
-            <View style={HomeNewCarContainerStyles.container}>
+            <View style={NewCarPageContainerStyles.container}>
                 {this.renderTitleView()}
                 <ScrollView>
                     <BannerReact height={px2dp(700)} data={['http://img.ds.cn/none.png','http://img.ds.cn/none.png']} imgStyle={{height:px2dp(700)}}/>
                     {this.render4Item()}
+                    {this.renderLoopItem()}
+                    {this.renderLoopItem()}
+                    {this.renderLoopItem()}
                     {this.renderLoopItem()}
                 </ScrollView>
             </View>
@@ -155,7 +160,7 @@ export default class HomeNewCarContainer extends Component {
 
 }
 
-const HomeNewCarContainerStyles = StyleSheet.create({
+const NewCarPageContainerStyles = StyleSheet.create({
     container: {
         flex: 1,
     },

@@ -27,6 +27,7 @@ import FlatListContainer from "./containers/home/list/FlatListContainer";
 import LoggerContainer from "./containers/home/list/LoggerContainer";
 import TextInputScrollViewContainer from "./containers/home/list/TextInputScrollViewContainer";
 import ExportsSimpleContainer from "./containers/home/list/ExportsSimpleContainer";
+import JDHomePageContainer from "./containers/home/jd_home/JDHomePageContainer";
 
 import CustomListViewContainer from "./containers/test/list/CustomListViewContainer";
 import InheritanceBaseContainer from "./containers/test/list/InheritanceBaseContainer";
@@ -56,6 +57,7 @@ export default  scenes = Actions.create(
         <Scene role="home" key="LoggerContainer" component={LoggerContainer} des="LoggerContainer"/>
         <Scene role="home" key="TextInputContainer" component={TextInputScrollViewContainer} des="TextInputContainer"/>
         <Scene role="home" key="ExportsSimpleContainer" component={ExportsSimpleContainer} des="module.exports与exports的区别"/>
+        <Scene role="home" key="JDHomePageContainer" component={JDHomePageContainer} des="JD首页"/>
 
 
         <Scene role="QATest" key="CustomListView" component={CustomListViewContainer} des="大数据量的ListView"/>
