@@ -90,7 +90,10 @@ public class Lw {
             }
 
             File fileSaveLogFolderPath = new File(mLogFilePath);
-            Log.d(mAppName, "fileSaveLogFolderPath.canWrite():" + fileSaveLogFolderPath.canWrite());
+            if(!fileSaveLogFolderPath.canWrite()){
+                Log.d(mAppName, "fileSaveLogFolderPath.canWrite(): false. cannot write logs.");
+            }
+
 
             // 保存日志文件的路径不存在的话，就创建它
             if (!fileSaveLogFolderPath.exists()) {

@@ -54,24 +54,6 @@ export default class LoggerContainer extends Component {
         });
     }
 
-    componentWillReceiveProps(newProps) {
-        console.log("LoggerContainer::componentWillReceiveProps()", newProps);
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        let isUpdate = (this.props != nextProps) || (this.state != nextState);
-        console.log("LoggerContainer::shouldComponentUpdate()", isUpdate);
-        return isUpdate;
-    }
-
-    componentWillUpdate(nextProps, nextState) {
-        console.log("LoggerContainer::componentWillUpdate()", new Date());
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        console.log("LoggerContainer::componentDidUpdate()", new Date());
-    }
-
     componentWillUnmount() {
         console.log("LoggerContainer::componentWillUnmount()");
     }

@@ -28,6 +28,7 @@ public class ReactRootActivity extends AppCompatActivity implements DefaultHardw
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        L.v();
         super.onCreate(savedInstanceState);
 
         //如果 BuildConfig.DEBUG为false的话，需要在module的gradle中配置默认编译方式：defaultPublishConfig "debug"
@@ -50,6 +51,7 @@ public class ReactRootActivity extends AppCompatActivity implements DefaultHardw
 
     @Override
     protected void onPause() {
+        L.v();
         super.onPause();
 
         if (mReactInstanceManager != null) {
@@ -59,6 +61,7 @@ public class ReactRootActivity extends AppCompatActivity implements DefaultHardw
 
     @Override
     protected void onResume() {
+        L.v();
         super.onResume();
 
         if (mReactInstanceManager != null) {
@@ -68,8 +71,8 @@ public class ReactRootActivity extends AppCompatActivity implements DefaultHardw
 
     @Override
     protected void onDestroy() {
+        L.v();
         super.onDestroy();
-
         if (mReactInstanceManager != null) {
             mReactInstanceManager.onHostDestroy(this);
         }

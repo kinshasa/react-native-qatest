@@ -13,7 +13,7 @@
  */
 
 let globalLogger = global;
-let config = require('../config');
+let config = require('../config/Values');
 const KEY = 'logger';
 
 
@@ -35,8 +35,12 @@ const v = function (...args) {
     console.log(...args)
 };
 
+/**
+ * 打印并保存日志
+ * @param args
+ */
 const s = function (...args) {
-    v('Logger.s():',...args);
+    v('Loggers:',...args);
     let msg = '';
     let id = new Date().getTime();
     msg += args.map((item,i)=>{return item});

@@ -6,6 +6,6 @@ import { NativeModules } from 'react-native';
 
 const Pay = NativeModules.Pay||{};
 
-module.exports = {
+export default{
     Pay,
 };

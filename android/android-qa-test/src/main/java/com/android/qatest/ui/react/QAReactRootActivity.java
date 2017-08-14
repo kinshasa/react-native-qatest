@@ -48,11 +48,13 @@ public class QAReactRootActivity extends ReactRootActivity {
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
 
+        L.v(mReactRootView);
         Bundle bundle = new Bundle();
         bundle.putString("type", "qatest");
         mReactRootView.startReactApplication(mReactInstanceManager, "QATest", bundle);
+        L.v(mReactRootView);
         setContentView(mReactRootView);
-
+        L.v(mReactRootView);
         //手动加载js,目前是在debug实现多模块加载启动startReactApplication
         //mReactInstanceManager.getDevSupportManager().handleReloadJS();
 

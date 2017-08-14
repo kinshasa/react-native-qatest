@@ -53,7 +53,7 @@ export default class ${NAME} extends Component {
      * @param newProps
      */
     componentWillReceiveProps(newProps) {
-        console.log("${NAME} componentWillReceiveProps()",newProps);
+        console.log("${NAME} componentWillReceiveProps()");
     }
 
     /**

@@ -6,31 +6,28 @@
  * @LifeCycle：https://github.com/kinshasa/react-native-qatest
  */
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component, PropTypes,} from 'react';
 import {
     StyleSheet,
     View,
     Text,
+    AppRegistry,
 } from 'react-native';
 
-import globalConfig from './common/config/globalConfig'
-import TitleBar from "./src/components/bar/TitleBar";
+import config from './common/config'
+import HomeNewCarContainer from './src/containers/home/homepage/HomeNewCarContainer'
 
 export default class IndexHome extends Component {
+
     componentWillMount() {
-        Loggers.s('App::componentWillMount()',globalConfig.getWidth());
-        //AppController.init();
+        Loggers.s('App::componentWillMount()',config.getWidth());
     }
 
     render() {
         
         return (
             <View style={IndexHomeStyles.container}>
-                <TitleBar
-                    label="首页"
-                    labelStyle={{backgroundColor: "transparent", color: "black"}}
-                    style={{height: 45}}/>
-                <Text>IndexHome</Text>
+                <HomeNewCarContainer/>
             </View>
         );
     }
@@ -43,3 +40,4 @@ const IndexHomeStyles = StyleSheet.create({
     },
 });
 
+AppRegistry.registerComponent('ReactHome', () => IndexHome);

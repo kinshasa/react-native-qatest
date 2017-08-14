@@ -9,7 +9,7 @@
 import React, {Component} from "react";
 import {AppRegistry, InteractionManager, Linking, StyleSheet, View} from "react-native";
 
-import globalConfig from '../common/config/globalConfig'
+import config from '../common/config'
 
 // import * as AppController from "./AppController";
 import MainProvider from "./MainProvider";
@@ -39,7 +39,8 @@ export default class App extends Component {
     }
 
     componentWillMount() {
-        Loggers.s('App::componentWillMount()',globalConfig.getWidth());
+        Loggers.s('App::componentWillMount()',config.getWidth());
+        Loggers.s('App::componentWillMount()',getWidth());
         //AppController.init();
     }
 
