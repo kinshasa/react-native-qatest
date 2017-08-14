@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 
+import com.android.log.L;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactRootView;
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
@@ -29,8 +30,11 @@ public class ReactRootActivity extends AppCompatActivity implements DefaultHardw
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //如果 BuildConfig.DEBUG为false的话，需要在module的gradle中配置默认编译方式：defaultPublishConfig "debug"
+        L.v(BuildConfig.DEBUG);
         //设置悬浮框请求权限
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && BuildConfig.DEBUG) {
+            L.v();
             if (!Settings.canDrawOverlays(this)) {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                         Uri.parse("package:" + getPackageName()));

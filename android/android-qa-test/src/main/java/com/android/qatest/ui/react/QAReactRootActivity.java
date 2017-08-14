@@ -1,8 +1,13 @@
 package com.android.qatest.ui.react;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 
+import com.android.log.L;
 import com.android.qatest.BuildConfig;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactRootView;
@@ -49,7 +54,7 @@ public class QAReactRootActivity extends ReactRootActivity {
         setContentView(mReactRootView);
 
         //手动加载js,目前是在debug实现多模块加载启动startReactApplication
-        mReactInstanceManager.getDevSupportManager().handleReloadJS();
+        //mReactInstanceManager.getDevSupportManager().handleReloadJS();
 
         //String bundleURL = mDevServerHelper.getDevServerBundleURL(Assertions.assertNotNull(mJSAppBundleName));
         //mReactInstanceManager.getDevSupportManager().reloadJSFromServer();

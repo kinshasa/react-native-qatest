@@ -3,6 +3,7 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion 25
     buildToolsVersion "26.0.0"
+    defaultPublishConfig "debug"
 
     defaultConfig {
         minSdkVersion 16
@@ -38,6 +39,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
 
+    compile project(path: ':android-log-module')
 
     /***************************************************
      *                                                 *

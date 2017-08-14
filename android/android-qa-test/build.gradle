@@ -127,6 +127,13 @@ android {
     }
     buildTypes {
         release {
+            buildConfigField ("boolean", "API_ENV","true")
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
+        }
+        debug {
+            buildConfigField ("boolean", "API_ENV","false")
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             signingConfig signingConfigs.release

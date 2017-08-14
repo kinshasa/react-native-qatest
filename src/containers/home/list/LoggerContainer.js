@@ -48,7 +48,9 @@ export default class LoggerContainer extends Component {
     componentDidMount() {
         InteractionManager.runAfterInteractions(() => {
             // ...耗时较长的同步的任务...
-            this.initData()
+            this.initData().then((data)=>{
+                console.log("LoggerContainer::componentDidMount()",data);
+            })
         });
     }
 
@@ -147,7 +149,8 @@ export default class LoggerContainer extends Component {
 
     async initData() {
         let data = await LocalStorage.getAllDataForKey('logger');
-        this.setState({data})
+        this.setState({data});
+        return data;
     }
 
     async clear() {
