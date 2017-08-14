@@ -6,6 +6,10 @@
  * @Refer：https://github.com/yangjiayu/react-native-fetch/blob/master/fetch.js
  */
 
+
+import * as Constant from "./Constant"
+
+
 /**
  * 请求方式类型
  * @type {{GET: string, POST: string}}
@@ -145,14 +149,14 @@ class Http {
      * @param url
      * @param success
      * @param fail
-     * @param data
-     * @param type data数据类型
+     * @param params
+     * @param data_type data数据类型
      */
     get(url, success, fail, params, data_type = HTTP_DATA_TYPE.JSON) {
 
         let headers = {
             method: HTTP_METHOD.GET,
-            headers: data_type == HTTP_DATA_TYPE.JSON ? HTTP_HEADERS.JSON : HTTP_HEADERS.FORM,
+            headers: data_type === HTTP_DATA_TYPE.JSON ? HTTP_HEADERS.JSON : HTTP_HEADERS.FORM,
             body: {}
         };
         url = url + (url.indexOf("?") >= 0 ? "&" : "?") + this.JsonToRows(params);
@@ -164,14 +168,14 @@ class Http {
      * @param url
      * @param json 必须为JSON对象，可以使用@addParamsToJson(key,value):React.PropTypes.object
      * @param success
-     * @param fail
-     * @return Json
+     * @param params
+     * @return data_type
      */
     post(url, success, fail, params, data_type = HTTP_DATA_TYPE.JSON) {
 
         let option = {
             method: HTTP_METHOD.POST,
-            headers: data_type == HTTP_DATA_TYPE.JSON ? HTTP_HEADERS.JSON : HTTP_HEADERS.FORM,
+            headers: data_type === HTTP_DATA_TYPE.JSON ? HTTP_HEADERS.JSON : HTTP_HEADERS.FORM,
             body: params
         };
         url = url + (url.indexOf("?") >= 0 ? "&" : "?") + this.JsonToRows(params);
@@ -234,8 +238,8 @@ class Http {
 
     setOption(method, header, body) {
         //如果是POST请求
-        if (method == this.const.METHOD_POST) {
-            let params = (header == this.const.HEADERS_JSON) ? JSON.stringify(body) : this.JsonToRows(body);
+        if (method === this.const.METHOD_POST) {
+            let params = (header === this.const.HEADERS_JSON) ? JSON.stringify(body) : this.JsonToRows(body);
             this.state.OPTION = {
                 headers: header,
                 method: method,
@@ -260,7 +264,7 @@ class Http {
         for (let item in json) {
             res += item + "=" + json[item] + "&";
         }
-        if (res.length > 0 && res[res.length - 1] == "&") {
+        if (res.length > 0 && res[res.length - 1] === "&") {
             res = res.substr(0, res.length - 1);
         }
         return res;
