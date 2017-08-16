@@ -16,8 +16,18 @@ import {
     TouchableHighlight,
     ScrollView
 } from 'react-native';
-import Swiper from 'react-native-swiper'
 
+//引入业务逻辑
+import JDHomePageController from './JDHomePageController'
+
+//引入第三方组件
+import Swiper from 'react-native-swiper'
+//引入公共组件
+import BannerReact from '../../../components/BannerReact'
+//引入自身组件
+import JDHomeTitleBarReact from './JDHomeTitleBarReact'
+
+//引入资源文件
 const icon_focus = require('./icon_focus.png');
 const icon_arrows_down = require('./icon_arrows_down.png');
 const icon_search = require('./icon_search.png');
@@ -27,9 +37,6 @@ const icon_4item = require('./icon_4item.png');
 const icon_loop_item = require('./icon_loop_item.png');
 const icon_loop_title = require('./icon_loop_title.png');
 
-import JDHomeTitleBarReact from './JDHomeTitleBarReact'
-
-import BannerReact from '../../../components/BannerReact'
 export default class JDHomePageContainer extends Component {
 
     static propTypes = {
@@ -42,7 +49,7 @@ export default class JDHomePageContainer extends Component {
     constructor(props, context) {
         console.log("JDHomePageContainer constructor()");
         super(props, context);
-        this.state = {};
+        this.state = {refresh:true};
     }
 
     /**
@@ -57,6 +64,14 @@ export default class JDHomePageContainer extends Component {
 
     componentDidMount() {
         console.log("JDHomePageContainer componentDidMount()", new Date());
+        this.getData();
+    }
+
+    getData(){
+        JDHomePageController.getHomeData(data=>{
+            this.data = data;
+            this.setState({refresh:false})
+        },fail=>{})
     }
 
     componentWillUnmount() {
@@ -117,7 +132,12 @@ export default class JDHomePageContainer extends Component {
             <View style={JDHomePageContainerStyles.container}>
                 <JDHomeTitleBarReact/>
                 <ScrollView>
-                    <BannerReact height={px2dp(700)} data={['http://img.ds.cn/none.png','http://img.ds.cn/none.png']} imgStyle={{height:px2dp(700)}}/>
+                    <BannerReact
+                        height={px2dp(700)}
+                        data={JDHomePageController.getBannerData()}
+                        imgStyle={{height:px2dp(700)}}
+                        onPress={index=>{alert(index)}}
+                    />
                     {this.renderAppCenter()}
                     {this.render4Item()}
                     {this.renderLoopItem()}

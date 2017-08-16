@@ -22,18 +22,14 @@ const {height, width} = Dimensions.get('window');
 export default class BannerReact extends Component {
 
     static propTypes = {
-        style: View.propTypes.style,
-        account: PropTypes.number,
-        name: PropTypes.string,
-        isTrue: PropTypes.bool,
-        callback: PropTypes.func,
+
     };
 
     static defaultProps = {
         data: ['http://img.ds.cn/none.png'],
         style:{},
         imgStyle:{},
-        onPress:null,
+        onPress:(index)=>{},
     };
 
     constructor(props, context) {

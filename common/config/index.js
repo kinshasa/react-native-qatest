@@ -144,6 +144,8 @@ Config.init = function () {
     console.log('globalConfig:init() success','GLOBAL','err');
 };
 
+Config.LOGO_URI = 'http://img.ds.cn/none.png';
+
 Loggers.s('globalConfig init success',1234567);
 
 Config.Configs = Configs;
