@@ -14,10 +14,11 @@ import {
     StatusBar,
     Image,
     TouchableHighlight,
+    TouchableWithoutFeedback,
     ScrollView
 } from 'react-native';
 
-const icon_focus = require('./icon_focus.png');
+const icon_scan = require('./icon_scan.png');
 const icon_arrows_down = require('./icon_arrows_down.png');
 const icon_search = require('./icon_search.png');
 
@@ -41,7 +42,7 @@ export default class JDHomeTitleBarReact extends Component {
     constructor(props, context) {
         console.log("JDHomeTitleBarReact constructor()");
         super(props, context);
-        this.state = {};
+        this.state = {refresh:true};
     }
 
     /**
@@ -74,43 +75,37 @@ export default class JDHomeTitleBarReact extends Component {
 
     render(){
         return(
-            <View style={{backgroundColor:'#fff',}}>
+            <View style={{position:'absolute',borderBottomWidth:StyleSheet.hairlineWidth,borderColor:'#ccc'}}>
                 <StatusBar translucent animated backgroundColor="transparent" barStyle="dark-content"/>
-                <View style={{height:getStatusBarHeight(),width:getWidth()}}>
-                </View>
-                <View style={{height:px2dp(170),width:getWidth(),flexDirection:'row',}}>
-                    {/*标题*/}
-                    <Text style={{width:getWidth(),padding:px2dp(50),color:'#666',fontSize:px2dp(46),position:'absolute',textAlign:'center',fontWeight:'bold',}}>京东首页</Text>
+                <Image style={{position: 'absolute', height: px2dp(170) + getStatusBarHeight(),width:getWidth()}} source={bg_bar_ccc}/>
+                <View  style={{height:px2dp(170),width:getWidth(),marginTop:getStatusBarHeight(),flexDirection:'row',}}>
                     {/*右边的选车按钮*/}
-                    <TouchableHighlight
+                    <TouchableWithoutFeedback
                         hitSlop={{top:50,left: 50, bottom: 50, right:50}}
-                        style={{padding:px2dp(50)}}
+                        onPress={()=>this.onSearchPress()}>
+                        <View style={{height:px2dp(170),width:px2dp(150),alignItems:'center',justifyContent:'center',paddingLeft:px2dp(20),paddingRight:px2dp(20)}}>
+                            <Image style={{width:px2dp(60),height:px2dp(60)}} source={{uri:LOGO_URI}}/>
+                            <Text style={{color:'#fff',fontSize:px2dp(36)}}>扫啊扫</Text>
+                        </View>
+                    </TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback
+                        hitSlop={{top:50,left: 50, bottom: 50, right:50}}
+                        onPress={()=>this.onSearchPress()}>
+                        <View style={{flex:1,height:px2dp(170),alignItems:'center',justifyContent:'center',paddingLeft:px2dp(20),paddingRight:px2dp(20)}}>
+                            <Text style={{color:'#666',fontSize:px2dp(27)}}>扫啊扫</Text>
+                        </View>
+                    </TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback
+                        hitSlop={{top:50,left: 50, bottom: 50, right:50}}
+                        style={{backgroundColor:'#fff'}}
                         underlayColor='#f0f0f0'
                         onPress={()=>this.onSearchPress()}>
-                        <View style={{flexDirection:'row',alignItems:'center',}}>
-                            <Image style={{width:px2dp(50),height:px2dp(50),marginRight:px2dp(20)}} source={icon_focus}/>
-                            <Text style={{color:'#666',fontSize:px2dp(46)}}>扫一扫</Text>
+                        <View style={{height:px2dp(170),width:px2dp(150),alignItems:'center',justifyContent:'center',paddingLeft:px2dp(20),paddingRight:px2dp(20)}}>
+                            <Image style={{width:px2dp(55),height:px2dp(55)}} source={{uri:LOGO_URI}}/>
+                            <Text style={{color:'#666',fontSize:px2dp(27)}}>消息</Text>
                         </View>
-                    </TouchableHighlight>
-                    {/*中间填充物*/}
-                    <View style={{flex:1}}/>
-                    {/*右边*/}
-                    <View style={{flexDirection:'row',alignItems:'center',width:getWidth()/2,}}>
-                        <Text style={{color:'#333',fontSize:px2dp(36),marginLeft:px2dp(100)}}>&nbsp;&nbsp;广州市</Text>
-                        <Image resizeMode='contain' style={{width:px2dp(30),height:px2dp(20),marginLeft:px2dp(10)}} source={icon_arrows_down}/>
-                        <View style={{flex:1}}/>
-                        {/*右边的搜索按钮*/}
-                        <TouchableHighlight
-                            hitSlop={{top:50,left: 50, bottom: 50, right:50}}
-                            style={{padding:px2dp(50)}}
-                            underlayColor='#f0f0f0'
-                            onPress={()=>this.onSearchPress()}>
-                            <Image resizeMode='contain' style={{width:px2dp(50),height:px2dp(50)}} source={icon_search}/>
-                        </TouchableHighlight>
-                    </View>
+                    </TouchableWithoutFeedback>
                 </View>
-
-
             </View>
         )
     }

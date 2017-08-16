@@ -56,9 +56,9 @@ class JDHomePageController {
 
     static getBannerData() {
         let image = [];
-        let banner = this.getFloorListByType('banner');
-        for (let i = 0; i < banner.length; i++) {
-            image.push(banner[i].horizontalImag)
+        let content = this.getFloorListByType('banner').content||[];
+        for (let i = 0; i < content.length; i++) {
+            image.push(content[i].horizontalImag)
         }
         if(image.length === 0){
             image.push(LOGO_URI);

@@ -28,7 +28,7 @@ import BannerReact from '../../../components/BannerReact'
 import JDHomeTitleBarReact from './JDHomeTitleBarReact'
 
 //引入资源文件
-const icon_focus = require('./icon_focus.png');
+const icon_focus = require('./icon_scan.png');
 const icon_arrows_down = require('./icon_arrows_down.png');
 const icon_search = require('./icon_search.png');
 
@@ -130,7 +130,6 @@ export default class JDHomePageContainer extends Component {
 
         return (
             <View style={JDHomePageContainerStyles.container}>
-                <JDHomeTitleBarReact/>
                 <ScrollView>
                     <BannerReact
                         height={px2dp(700)}
@@ -145,6 +144,7 @@ export default class JDHomePageContainer extends Component {
                     {this.renderLoopItem()}
                     {this.renderLoopItem()}
                 </ScrollView>
+                <JDHomeTitleBarReact/>
             </View>
         );
     }
