@@ -51,6 +51,8 @@ export default class JDHomeTitleBarReact extends Component {
      */
     count = 0;
 
+    opacity = 1;
+
     componentWillMount() {
         console.log("JDHomeTitleBarReact componentWillMount()", new Date());
     }
@@ -63,6 +65,17 @@ export default class JDHomeTitleBarReact extends Component {
         alert(1111)
     }
 
+    setTitleBarBackgroundImage(transparent) {
+        if (this.state.refresh === transparent)
+            return;
+        console.log("JDHomeTitleBarReact setTitleBarBackgroundImage()", transparent);
+        this.setState({refresh: transparent});
+    }
+
+    onBaseViewScrolling(nativeEvent){
+        let transparent  = (nativeEvent.contentOffset.y < px2dp(170));
+        this.setTitleBarBackgroundImage(transparent);
+    }
 
     /**
      * 组件即将卸载前调用
@@ -74,10 +87,14 @@ export default class JDHomeTitleBarReact extends Component {
     }
 
     render(){
+        let source = this.state.refresh ? bg_bar_ccc:bg_bar_fff;
+        let color  = this.state.refresh ? '#fff':'#666';
         return(
-            <View style={{position:'absolute',borderBottomWidth:StyleSheet.hairlineWidth,borderColor:'#ccc'}}>
-                <StatusBar translucent animated backgroundColor="transparent" barStyle="dark-content"/>
-                <Image style={{position: 'absolute', height: px2dp(170) + getStatusBarHeight(),width:getWidth()}} source={bg_bar_ccc}/>
+            <View style={{position:'absolute',borderBottomWidth:StyleSheet.hairlineWidth,borderColor:'#ccc', }}>
+                <StatusBar translucent animated backgroundColor="transparent" barStyle="default"/>
+                <Image
+                    style={{position: 'absolute', height: px2dp(170) + getStatusBarHeight(),width:getWidth(),opacity:0.7}}
+                    source={source}/>
                 <View  style={{height:px2dp(170),width:getWidth(),marginTop:getStatusBarHeight(),flexDirection:'row',}}>
                     {/*右边的选车按钮*/}
                     <TouchableWithoutFeedback
@@ -85,15 +102,16 @@ export default class JDHomeTitleBarReact extends Component {
                         onPress={()=>this.onSearchPress()}>
                         <View style={{height:px2dp(170),width:px2dp(150),alignItems:'center',justifyContent:'center',paddingLeft:px2dp(20),paddingRight:px2dp(20)}}>
                             <Image style={{width:px2dp(60),height:px2dp(60)}} source={{uri:LOGO_URI}}/>
-                            <Text style={{color:'#fff',fontSize:px2dp(36)}}>扫啊扫</Text>
+                            <Text style={{color,fontSize:px2dp(36)}}>扫啊扫</Text>
                         </View>
                     </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback
                         hitSlop={{top:50,left: 50, bottom: 50, right:50}}
                         onPress={()=>this.onSearchPress()}>
-                        <View style={{flex:1,height:px2dp(170),alignItems:'center',justifyContent:'center',paddingLeft:px2dp(20),paddingRight:px2dp(20)}}>
-                            <Text style={{color:'#666',fontSize:px2dp(27)}}>扫啊扫</Text>
-                        </View>
+                            <View style={{flex:1,flexDirection:'row',alignItems:'center',backgroundColor:'#eee',height:px2dp(100),borderRadius:px2dp(50),shadowColor:'red',alignSelf:'center',}}>
+                                <Image style={{width:px2dp(48),height:px2dp(48),marginLeft:px2dp(40),marginRight:px2dp(20)}} source={icon_search}/>
+                                <Text style={{color:'#666',fontSize:px2dp(38)}}>海豚运动，816全场好物</Text>
+                            </View>
                     </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback
                         hitSlop={{top:50,left: 50, bottom: 50, right:50}}
@@ -101,8 +119,8 @@ export default class JDHomeTitleBarReact extends Component {
                         underlayColor='#f0f0f0'
                         onPress={()=>this.onSearchPress()}>
                         <View style={{height:px2dp(170),width:px2dp(150),alignItems:'center',justifyContent:'center',paddingLeft:px2dp(20),paddingRight:px2dp(20)}}>
-                            <Image style={{width:px2dp(55),height:px2dp(55)}} source={{uri:LOGO_URI}}/>
-                            <Text style={{color:'#666',fontSize:px2dp(27)}}>消息</Text>
+                            <Image style={{width:px2dp(60),height:px2dp(60)}} source={{uri:LOGO_URI}}/>
+                            <Text style={{color,fontSize:px2dp(36)}}>消息</Text>
                         </View>
                     </TouchableWithoutFeedback>
                 </View>

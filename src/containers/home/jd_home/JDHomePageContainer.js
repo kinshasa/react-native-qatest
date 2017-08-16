@@ -26,6 +26,7 @@ import Swiper from 'react-native-swiper'
 import BannerReact from '../../../components/BannerReact'
 //引入自身组件
 import JDHomeTitleBarReact from './JDHomeTitleBarReact'
+import GridViewPagerReact from './GridViewPagerReact'
 
 //引入资源文件
 const icon_focus = require('./icon_scan.png');
@@ -74,6 +75,11 @@ export default class JDHomePageContainer extends Component {
         },fail=>{})
     }
 
+    onScroll(nativeEvent){
+        console.log("JDHomePageContainer onScroll()",nativeEvent);
+        this.refs['refJDHomeTitleBarReact'] && this.refs['refJDHomeTitleBarReact'].onBaseViewScrolling(nativeEvent);
+    }
+
     componentWillUnmount() {
         console.log("JDHomePageContainer componentWillUnmount()");
     }
@@ -111,17 +117,21 @@ export default class JDHomePageContainer extends Component {
 
     renderItem(){
         return(
-            <View></View>
+            <View style={{padding:px2dp(20)}}>
+
+            </View>
         )
     }
     renderAppCenter(){
         return(
             <Swiper
-                height={px2dp(700)}
+                height={px2dp(500)}
                 loop autoplay
                 {...this.props}
             >
-                {this.renderItem()}
+                <View style={{padding:px2dp(20)}}>
+                    {this.renderItem()}
+                </View>
             </Swiper>
         )
     }
@@ -130,21 +140,23 @@ export default class JDHomePageContainer extends Component {
 
         return (
             <View style={JDHomePageContainerStyles.container}>
-                <ScrollView>
+                <ScrollView
+                    onScroll={(e)=>{this.onScroll(e.nativeEvent)}}
+                >
                     <BannerReact
                         height={px2dp(700)}
                         data={JDHomePageController.getBannerData()}
                         imgStyle={{height:px2dp(700)}}
                         onPress={index=>{alert(index)}}
                     />
-                    {this.renderAppCenter()}
+                    <GridViewPagerReact data={JDHomePageController.getAppCenterData()}/>
                     {this.render4Item()}
                     {this.renderLoopItem()}
                     {this.renderLoopItem()}
                     {this.renderLoopItem()}
                     {this.renderLoopItem()}
                 </ScrollView>
-                <JDHomeTitleBarReact/>
+                <JDHomeTitleBarReact ref="refJDHomeTitleBarReact"/>
             </View>
         );
     }

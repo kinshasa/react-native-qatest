@@ -55,16 +55,22 @@ class JDHomePageController {
     }
 
     static getBannerData() {
-        let image = [];
+        let data = [];
         let content = this.getFloorListByType('banner').content||[];
         for (let i = 0; i < content.length; i++) {
-            image.push(content[i].horizontalImag)
+            data.push(content[i].horizontalImag)
         }
-        if(image.length === 0){
-            image.push(LOGO_URI);
+        if(data.length === 0){
+            data.push(LOGO_URI);
         }
-        Loggers.s('JDHomePageController$getHomeData()',image);
-        return image;
+        Loggers.s('JDHomePageController$getHomeData()',data);
+        return data;
+    }
+
+    static getAppCenterData(){
+        let content = this.getFloorListByType('appcenter').content||{};
+        Loggers.v('JDHomePageController$getAppCenterData()',content.data);
+        return content.data;
     }
 }
 

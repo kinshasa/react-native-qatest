@@ -11,6 +11,7 @@ import {
     StyleSheet,
     View,
     Text,
+    Image,
 } from 'react-native';
 
 import Swiper from 'react-native-swiper'
@@ -21,14 +22,31 @@ export default class GridViewPagerReact extends Component {
     };
 
     static defaultProps = {
-        data: [1,2,3,4,5,6,7,8,9,10,11,12,13],
-        count:8,
+        data: [
+            {name:'京东超市',icon:LOGO_URI},
+            {name:'京东超市',icon:LOGO_URI},
+            {name:'京东超市',icon:LOGO_URI},
+            {name:'京东超市',icon:LOGO_URI},
+            {name:'京东超市',icon:LOGO_URI},
+            {name:'京东超市',icon:LOGO_URI},
+            {name:'京东超市',icon:LOGO_URI},
+            {name:'京东超市',icon:LOGO_URI},
+            {name:'京东超市',icon:LOGO_URI},
+            {name:'京东超市',icon:LOGO_URI},
+            {name:'京东超市',icon:LOGO_URI},
+            {name:'京东超市',icon:LOGO_URI},
+            {name:'京东超市',icon:LOGO_URI},
+            {name:'京东超市',icon:LOGO_URI},
+            {name:'京东超市',icon:LOGO_URI},
+            {name:'京东超市',icon:LOGO_URI},
+        ],
+        pageCount:8,
     };
 
     constructor(props, context) {
         console.log("GridViewPagerReact constructor()");
         super(props, context);
-        this.state = {};
+        this.state = {refresh:true};
     }
 
     /**
@@ -36,33 +54,31 @@ export default class GridViewPagerReact extends Component {
      * @type {number}
      */
     count = 0;
-    data = [];
-    pageData = [[1,2,3,4,5,6,7,8],[9,10,11,12,13]];
-    pageNum = 0;
+    data = [{name:'京东超市',icon:LOGO_URI}];
+    pageData = [this.data,this.data];
     componentWillMount() {
         console.log("GridViewPagerReact componentWillMount()", new Date());
     }
 
     componentDidMount() {
-        console.log("GridViewPagerReact componentDidMount()", new Date());
+        console.log("GridViewPagerReact componentDidMount()", this.props.data);
         this.getData();
     }
 
     getData() {
 
-        //取数据
-        if(typeof this.props.data === 'array'){
-            this.data = this.props.data;
-        }
+        let data = this.props.data||[];
+        let pageCount = this.props.pageCount || 8;
+        let length = data.length || 0;
+        let pageNum = Math.floor(length / pageCount);
         //转换为pageData
-
-        //遍历组件
-        let length = this.props.data.length || 0;
-        let count = this.props.count || 1;
-        let pageNum = length / count;
-        for(let i=0;i<pageNum;i++){
-            this.data.push(this.props.data)
+        this.pageData = [];
+        for (let i = 0; i < pageNum; i++) {
+            let end = pageCount*(i+1);
+            end = end > data.length ? data.length : end;
+            this.pageData.push(data.slice(i, end));
         }
+        this.setState({refresh:false});
     }
     /**
      * 组件即将卸载前调用
@@ -73,10 +89,27 @@ export default class GridViewPagerReact extends Component {
 
     }
 
-    renderItem(){
-        return(
-            <View></View>
-        )
+    renderItem(items){
+        console.log("GridViewPagerReact renderItem()",items);
+        return items.map((item,index)=>{
+            return (
+                <View key={index} style={{borderWidth:StyleSheet.hairlineWidth,height:getWidth()/4,width:getWidth()/4,justifyContent:'center',alignItems:'center'}}>
+                    <Image style={{width:px2dp(200),height:px2dp(200),marginLeft:px2dp(40),marginRight:px2dp(20)}} source={{uri:LOGO_URI}}/>
+                    <Text style={{color:'#666',fontSize:px2dp(38)}}>{item.name}</Text>
+                </View>
+            )
+        })
+    }
+
+    renderPagerView(){
+        console.log("GridViewPagerReact renderPagerView()",this.pageData);
+        return this.pageData.map((items,index)=>{
+            return (
+                <View key={index} style={{height:getWidth()/2,width:getWidth(),flexDirection:'row',flexWrap: 'wrap',paddingTop:px2dp(20),paddingBottom:px2dp(20)}}>
+                    {this.renderItem(items)}
+                </View>
+            )
+        })
     }
 
     render() {
@@ -84,11 +117,11 @@ export default class GridViewPagerReact extends Component {
         console.log("GridViewPagerReact render() count:", this.count);
         return (
             <Swiper
-                height={px2dp(700)}
+                height={getWidth()/2+px2dp(40)}
                 loop autoplay
                 {...this.props}
             >
-                {this.renderItem()}
+                {this.renderPagerView()}
             </Swiper>
         );
     }
