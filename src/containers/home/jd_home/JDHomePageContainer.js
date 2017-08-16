@@ -149,7 +149,7 @@ export default class JDHomePageContainer extends Component {
                         imgStyle={{height:px2dp(700)}}
                         onPress={index=>{alert(index)}}
                     />
-                    <GridViewPagerReact data={JDHomePageController.getAppCenterData()}/>
+                    <GridViewPagerReact pageCount={10} data={JDHomePageController.getAppCenterData()}/>
                     {this.render4Item()}
                     {this.renderLoopItem()}
                     {this.renderLoopItem()}

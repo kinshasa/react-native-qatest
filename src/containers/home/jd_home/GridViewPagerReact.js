@@ -58,11 +58,11 @@ export default class GridViewPagerReact extends Component {
     pageData = [this.data,this.data];
     componentWillMount() {
         console.log("GridViewPagerReact componentWillMount()", new Date());
+
     }
 
     componentDidMount() {
         console.log("GridViewPagerReact componentDidMount()", this.props.data);
-        this.getData();
     }
 
     getData() {
@@ -75,10 +75,11 @@ export default class GridViewPagerReact extends Component {
         this.pageData = [];
         for (let i = 0; i < pageNum; i++) {
             let end = pageCount*(i+1);
+            let start = pageCount*(i);
             end = end > data.length ? data.length : end;
-            this.pageData.push(data.slice(i, end));
+            this.pageData.push(data.slice(start, end));
         }
-        this.setState({refresh:false});
+        //this.setState({refresh:false});
     }
     /**
      * 组件即将卸载前调用
@@ -91,11 +92,13 @@ export default class GridViewPagerReact extends Component {
 
     renderItem(items){
         console.log("GridViewPagerReact renderItem()",items);
+        let width = getWidth()/(this.props.pageCount/2);
+        let height = width;
         return items.map((item,index)=>{
             return (
-                <View key={index} style={{borderWidth:StyleSheet.hairlineWidth,height:getWidth()/4,width:getWidth()/4,justifyContent:'center',alignItems:'center'}}>
-                    <Image style={{width:px2dp(200),height:px2dp(200),marginLeft:px2dp(40),marginRight:px2dp(20)}} source={{uri:LOGO_URI}}/>
-                    <Text style={{color:'#666',fontSize:px2dp(38)}}>{item.name}</Text>
+                <View key={index} style={{height,width,justifyContent:'center',alignItems:'center'}}>
+                    <Image style={{width:px2dp(150),height:px2dp(150),marginLeft:px2dp(40),marginRight:px2dp(20)}} source={{uri:item.icon}}/>
+                    <Text style={{color:'#777',fontSize:px2dp(38),marginTop:px2dp(10)}}>{item.name}</Text>
                 </View>
             )
         })
@@ -115,10 +118,11 @@ export default class GridViewPagerReact extends Component {
     render() {
         this.count++;
         console.log("GridViewPagerReact render() count:", this.count);
+        this.getData();
         return (
             <Swiper
                 height={getWidth()/2+px2dp(40)}
-                loop autoplay
+                loop
                 {...this.props}
             >
                 {this.renderPagerView()}
